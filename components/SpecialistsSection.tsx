@@ -1,14 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 const specialists = [
-	{ name: "Rajeev", role: "Lead Developer", color: "from-blue-600 to-cyan-500" },
-	{ name: "Camille", role: "Design Expert", color: "from-cyan-500 to-blue-600" },
-	{ name: "James", role: "SEO Specialist", color: "from-blue-500 to-indigo-500" },
-	{ name: "Priya", role: "Content Writer", color: "from-indigo-500 to-blue-500" },
-	{ name: "Amit", role: "Digital Marketer", color: "from-blue-600 to-cyan-500" },
-	{ name: "Sarah", role: "UI/UX Designer", color: "from-cyan-500 to-blue-600" },
+  { name: "Rohit Tiwari", role: "Founder & CEO", image: "/rohittiwari.png", color: "from-blue-600 to-cyan-500" },
+  { name: "Vishnu Sharma", role: "Co-Founder", image: "/vishnusharma.png", color: "from-cyan-500 to-blue-600" },
+  { name: "Akash Tiwari", role: "Digital Marketer", image: "/akashtiwari.png", color: "from-blue-500 to-indigo-500" },
+  { name: "Rajeev Ranjan", role: "Web Developer", image: "/rajeevranjan.png", color: "from-indigo-500 to-blue-500" },
+  { name: "Ankit Tiwari", role: "Digital Marketer", image: "/ankittiwari.png", color: "from-blue-600 to-cyan-500" },
+  { name: "Shubham", role: "Manager", image: "/shubham.png", color: "from-cyan-500 to-blue-600" },
 ];
 
 export default function SpecialistsSection() {
@@ -38,11 +39,11 @@ export default function SpecialistsSection() {
 						</div>
 
 						<h2 className="text-4xl lg:text-6xl font-bold mb-4 animate-slide-up text-white" style={{ animationDelay: "0.1s" }}>
-							<span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">20k+ Specialists</span>
+							<span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">Meet Our Experts</span>
 						</h2>
 
 						<p className="text-xl lg:text-2xl text-slate-400 mb-8 animate-fade-in" style={{ animationDelay: "0.3s" }}>
-							Empowering your business with expert talent
+							Find a team of Web Developers you can rely on.
 						</p>
 
 						{/* Stats row */}
@@ -93,10 +94,13 @@ export default function SpecialistsSection() {
 
 								<div className="relative z-10">
 									{/* Avatar */}
-									<div
-										className={`w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br ${specialist.color} flex items-center justify-center text-white text-3xl font-bold shadow-lg group-hover:scale-110 transition-transform duration-300`}
-									>
-										{specialist.name[0]}
+									<div className="w-24 h-24 mx-auto mb-4 relative rounded-full overflow-hidden border-2 border-slate-600 group-hover:border-blue-500 transition-colors duration-300 shadow-lg group-hover:scale-110 transform">
+                                        <Image
+                                            src={specialist.image}
+                                            alt={specialist.name}
+                                            fill
+                                            className="object-cover"
+                                        />
 									</div>
 
 									<div className="text-center">
@@ -109,12 +113,12 @@ export default function SpecialistsSection() {
 									</div>
 
 									{/* Status indicator */}
-									<div className="mt-4 flex items-center justify-center gap-2">
+									{/* <div className="mt-4 flex items-center justify-center gap-2">
 										<div className="w-2 h-2 bg-green-500 rounded-full animate-pulse-glow" />
 										<span className="text-xs text-slate-500 group-hover:text-slate-400 transition-colors">
 											Available Now
 										</span>
-									</div>
+									</div> */}
 								</div>
 							</div>
 						))}

@@ -57,13 +57,15 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-blue-600/10"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl lg:text-6xl font-bold mb-6 animate-fade-in">
+            <h1 className="text-4xl lg:text-6xl font-bold animate-fade-in">
               About <span className="text-blue-500">Webdesino</span>
             </h1>
             <p className="text-xl text-slate-300 mb-8 leading-relaxed animate-slide-up">
               Building Your Online Presence. Find a team of Web Developers you can rely on. Every day, we build trust through communication, transparency, and results.
             </p>
-            
+            </div>
+            </div>
+            </section>
             <div className="relative w-full aspect-[4/1] mt-12 rounded-xl overflow-hidden shadow-2xl animate-fade-in border border-slate-700">
               <Image
                 src="/rohittiwaribanner.png"
@@ -73,9 +75,7 @@ export default function AboutPage() {
                 priority
               />
             </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* Meet The Team Section */}
       <section className="py-16 lg:py-24 bg-slate-50">
