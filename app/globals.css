@@ -16,7 +16,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: #F5F5DC;
+  background: #F8FAFC;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -44,12 +44,12 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #FF6B35;
+  background: #3B82F6;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #e55a2b;
+  background: #2563EB;
 }
 
 /* Hide scrollbar for category bar */
@@ -145,10 +145,10 @@ html {
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
   }
   50% {
-    box-shadow: 0 0 40px rgba(255, 107, 53, 0.6);
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
   }
 }
 
@@ -233,21 +233,21 @@ html {
 
 /* Gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, #FF6B35 0%, #004E64 100%);
+  background: linear-gradient(135deg, #3B82F6 0%, #0F172A 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-orange {
-  background: linear-gradient(135deg, #FF6B35 0%, #ff8c5a 100%);
+  background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-teal {
-  background: linear-gradient(135deg, #004E64 0%, #006b85 100%);
+  background: linear-gradient(135deg, #0F172A 0%, #1e293b 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -255,15 +255,15 @@ html {
 
 /* Gradient backgrounds */
 .bg-gradient-orange {
-  background: linear-gradient(135deg, #FF6B35 0%, #ff8c5a 100%);
+  background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);
 }
 
 .bg-gradient-teal {
-  background: linear-gradient(135deg, #004E64 0%, #006b85 100%);
+  background: linear-gradient(135deg, #0F172A 0%, #1e293b 100%);
 }
 
 .bg-gradient-radial {
-  background: radial-gradient(circle at center, #FF6B35 0%, #004E64 100%);
+  background: radial-gradient(circle at center, #3B82F6 0%, #0F172A 100%);
 }
 
 /* Hover effects */
@@ -289,7 +289,7 @@ html {
 }
 
 .hover-glow:hover {
-  box-shadow: 0 0 30px rgba(255, 107, 53, 0.5);
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
 }
 
 /* Parallax */

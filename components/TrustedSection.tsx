@@ -36,38 +36,18 @@ export default function TrustedSection() {
     <section className="py-16 lg:py-24 bg-white relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 opacity-50">
-        <div className="absolute top-10 right-10 w-72 h-72 bg-orange/10 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-10 left-10 w-96 h-96 bg-teal/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-10 right-10 w-72 h-72 bg-blue-600/5 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-10 left-10 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="text-3xl lg:text-5xl font-bold text-teal mb-6 animate-fade-in">
+          <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-6 animate-fade-in">
             Trusted Web Development Company in Delhi NCR
           </h2>
-          <p className="text-lg text-gray-600 leading-relaxed animate-fade-in" style={{ animationDelay: '0.1s' }}>
-            At WebDesino, we are trusted by 50+ clients across Delhi NCR for delivering modern websites, SEO strategies, and digital marketing solutions. Recognized by global leaders like{" "}
-            <Link href="https://www.google.com/partners/" target="_blank" rel="noopener noreferrer" className="text-orange font-semibold hover:underline">
-              Google
-            </Link>
-            ,{" "}
-            <Link href="https://wordpress.org/" target="_blank" rel="noopener noreferrer" className="text-orange font-semibold hover:underline">
-              WordPress
-            </Link>
-            ,{" "}
-            <Link href="https://www.shopify.com/partners" target="_blank" rel="noopener noreferrer" className="text-orange font-semibold hover:underline">
-              Shopify
-            </Link>
-            ,{" "}
-            <Link href="https://www.semrush.com/" target="_blank" rel="noopener noreferrer" className="text-orange font-semibold hover:underline">
-              SEMRush
-            </Link>
-            , and{" "}
-            <Link href="https://www.designrush.com/" target="_blank" rel="noopener noreferrer" className="text-orange font-semibold hover:underline">
-              DesignRush
-            </Link>
-            , we ensure every project is SEO-optimized, professional, and result-driven.
+          <p className="text-lg text-slate-600 leading-relaxed animate-fade-in" style={{ animationDelay: '0.1s' }}>
+            At WebDesino, we are trusted by 50+ clients across Delhi NCR for delivering modern websites, SEO strategies, and digital marketing solutions. Recognized by global leaders, we ensure every project is SEO-optimized, professional, and result-driven.
           </p>
         </div>
 
@@ -78,12 +58,12 @@ export default function TrustedSection() {
             return (
               <div
                 key={idx}
-                className="p-8 rounded-3xl glass-strong text-center hover-lift transition-all duration-300 animate-fade-in"
+                className="p-8 rounded-3xl bg-white border border-slate-100 shadow-lg hover:shadow-xl hover:border-blue-100 text-center hover-lift transition-all duration-300 animate-fade-in"
                 style={{ animationDelay: `${idx * 0.1 + 0.2}s` }}
               >
-                <Icon className="mx-auto mb-4 text-orange" size={48} />
-                <div className="text-4xl font-bold text-teal mb-2">{stat.value}</div>
-                <div className="text-gray-600 font-medium">{stat.label}</div>
+                <Icon className="mx-auto mb-4 text-blue-600" size={48} />
+                <div className="text-4xl font-bold text-slate-900 mb-2">{stat.value}</div>
+                <div className="text-slate-600 font-medium">{stat.label}</div>
               </div>
             );
           })}

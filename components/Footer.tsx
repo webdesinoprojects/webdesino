@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Phone, Mail, MapPin, Facebook, Linkedin, Twitter, Instagram, Youtube, ArrowRight } from "lucide-react";
+import { servicesData } from "@/lib/services-data";
 
 export default function Footer() {
   return (
@@ -116,6 +117,8 @@ export default function Footer() {
                 { label: "About Us", href: "/about" },
                 { label: "Services", href: "/services" },
                 { label: "Portfolio", href: "/portfolio" },
+                { label: "Our Clients", href: "/our-clients" },
+                { label: "Blog", href: "/blog" },
                 { label: "Contact", href: "/contact" },
               ].map((link, idx) => (
                 <li key={idx}>
@@ -138,24 +141,21 @@ export default function Footer() {
               Our Services
             </h3>
             <ul className="space-y-3">
-              {[
-                { label: "Web Development", href: "/services" },
-                { label: "Web Design", href: "/services" },
-                { label: "SEO Optimization", href: "/services" },
-                { label: "Digital Marketing", href: "/services" },
-                { label: "Content Writing", href: "/services" },
-                { label: "E-commerce Solutions", href: "/services" },
-              ].map((service, idx) => (
-                <li key={idx}>
-                  <Link
-                    href={service.href}
-                    className="text-gray-200 hover:text-orange transition-all duration-300 flex items-center gap-2 group"
-                  >
-                    <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 -ml-5 group-hover:ml-0 transition-all" />
-                    {service.label}
-                  </Link>
-                </li>
-              ))}
+              {servicesData.flatMap(cat => cat.subtypes).slice(0, 6).map((service, idx) => {
+                // Find parent category for slug construction
+                const parentCategory = servicesData.find(cat => cat.subtypes.includes(service));
+                return (
+                  <li key={idx}>
+                    <Link
+                      href={`/services/${parentCategory?.slug}/${service.slug}`}
+                      className="text-gray-200 hover:text-orange transition-all duration-300 flex items-center gap-2 group"
+                    >
+                      <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 -ml-5 group-hover:ml-0 transition-all" />
+                      {service.title}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 

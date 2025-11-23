@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import { getPortfolioProjects } from '@/lib/data';
 import { getAllCaseSlugs } from '@/lib/case-studies';
+import { servicesData } from '@/lib/services-data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // 1. Get all dynamic project routes
@@ -21,7 +22,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
-  // 3. Define static routes
+  // 3. Get all service routes
+  const serviceCategoryEntries: MetadataRoute.Sitemap = servicesData.map((category) => ({
+    url: `https://webdesino.com/services/${category.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.9,
+  }));
+
+  const serviceSubtypeEntries: MetadataRoute.Sitemap = servicesData.flatMap((category) => 
+    category.subtypes.map((subtype) => ({
+      url: `https://webdesino.com/services/${category.slug}/${subtype.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
+    }))
+  );
+
+  // 4. Define static routes
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: 'https://webdesino.com',
@@ -61,9 +79,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // 4. Combine and return
+  // 5. Combine and return
   return [
     ...staticRoutes,
+    ...serviceCategoryEntries,
+    ...serviceSubtypeEntries,
     ...projectEntries,
     ...caseStudyEntries,
   ];

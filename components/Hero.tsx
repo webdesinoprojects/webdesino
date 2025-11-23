@@ -3,7 +3,7 @@
 import Link from "next/link";
 import NextImage from "next/image";
 import { useRouter } from "next/navigation";
-import { useState, FormEvent } from "react";
+import { useState, useEffect, FormEvent } from "react";
 import { ArrowRight, Search, Award, Briefcase, BarChart, Store, Code, Star } from "lucide-react";
 import Google from "@/public/google.jpg";
 import WordPress from "@/public/wordpress.jpg";
@@ -25,11 +25,11 @@ const trustedBrands = [
 
 // Certification Badges
 const certifications = [
-	{ name: "Google Partner", logo: Google, icon: <Search /> },
-	{ name: "WordPress Certified", logo: WordPress, icon: <Code /> },
-	{ name: "Shopify Partner", logo: Shopify, icon: <Store /> },
-	{ name: "SEMRush Certified", logo: SEMRush, icon: <BarChart /> },
-	{ name: "DesignRush Accredited", logo: DesignRush, icon: <Award /> },
+	{ name: "Google Partner", logo: Google, icon: <Search />, url: "https://www.google.com/partners/" },
+	{ name: "WordPress Certified", logo: WordPress, icon: <Code />, url: "https://wordpress.org/" },
+	{ name: "Shopify Partner", logo: Shopify, icon: <Store />, url: "https://www.shopify.com/partners" },
+	{ name: "SEMRush Certified", logo: SEMRush, icon: <BarChart />, url: "https://www.semrush.com/" },
+	{ name: "DesignRush Accredited", logo: DesignRush, icon: <Award />, url: "https://www.designrush.com/" },
 ];
 
 // Animated words that rotate - Web Development focused
@@ -45,6 +45,14 @@ const rotatingWords = [
 export default function Hero() {
 	const router = useRouter();
 	const [searchTerm, setSearchTerm] = useState("");
+	const [currentWordIndex, setCurrentWordIndex] = useState(0);
+
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setCurrentWordIndex((prev) => (prev + 1) % rotatingWords.length);
+		}, 2000);
+		return () => clearInterval(interval);
+	}, []);
 
 	const handleSearch = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -55,224 +63,173 @@ export default function Hero() {
 
 	return (
 		<section
-			className="relative bg-gradient-to-br from-cream via-white to-cream py-16 lg:py-24 overflow-hidden"
+			className="relative bg-slate-50 py-20 lg:py-32 overflow-hidden"
 			itemScope
 			itemType="https://schema.org/Organization"
 		>
 			{/* Floating background elements */}
-			<div className="absolute top-10 sm:top-20 left-5 sm:left-10 w-32 h-32 sm:w-64 sm:h-64 bg-orange/5 rounded-full blur-3xl animate-float" />
-			<div
-				className="absolute bottom-10 sm:bottom-20 right-5 sm:right-10 w-48 h-48 sm:w-96 sm:h-96 bg-teal/5 rounded-full blur-3xl animate-float"
-				style={{ animationDelay: "1s" }}
-			/>				<div className="container mx-auto px-4 sm:px-6 relative z-10">
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-start">
+			<div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+				<div className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-3xl animate-float" />
+				<div
+					className="absolute bottom-[-10%] right-[-5%] w-[600px] h-[600px] bg-slate-900/5 rounded-full blur-3xl animate-float"
+					style={{ animationDelay: "1s" }}
+				/>
+			</div>
+
+			<div className="container mx-auto px-4 sm:px-6 relative z-10">
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 					{/* Left Content */}
-					<div className="space-y-4 sm:space-y-6 md:space-y-8" itemScope itemType="https://schema.org/Service">
+					<div className="space-y-8" itemScope itemType="https://schema.org/Service">
 						{/* Rotating words ticker */}
-						<div className="overflow-hidden h-10 sm:h-12 mb-2 sm:mb-4">
-							<div className="flex gap-4 sm:gap-8 animate-scroll-horizontal">
-								{[...rotatingWords, ...rotatingWords, ...rotatingWords].map((word, idx) => (
-									<div key={idx} className="flex items-center gap-2 sm:gap-3 whitespace-nowrap">
-										<span className="text-sm sm:text-base md:text-lg font-bold text-orange">{word}</span>
-										<Star className="text-teal w-4 h-4 sm:w-5 sm:h-5" />
-									</div>
-								))}
-							</div>
+						<div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 shadow-sm mb-4 animate-fade-in">
+							<span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
+							<span className="text-sm font-medium text-slate-600 min-w-[140px] transition-all duration-300">
+								{rotatingWords[currentWordIndex]}
+							</span>
 						</div>
 
-						<h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
+						<h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight text-slate-900">
 							<span
-								className="block text-teal animate-slide-up"
+								className="block animate-slide-up"
 								style={{ animationDelay: "0.1s" }}
 							>
 								Stunning Websites By
 							</span>
 							<span
-								className="block gradient-text animate-slide-up"
+								className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 animate-slide-up"
 								style={{ animationDelay: "0.2s" }}
 							>
 								Top Web Development
 							</span>
 							<span
-								className="block gradient-text animate-slide-up"
+								className="block animate-slide-up"
 								style={{ animationDelay: "0.3s" }}
 							>
 								Agency
 							</span>
 						</h1>
 
-						<div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 animate-fade-in" style={{ animationDelay: "0.5s" }}>
-							<Link
-								href="/contact"
-								className="inline-flex items-center justify-center gap-2 bg-gradient-orange text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm sm:text-base font-semibold hover:shadow-xl transition-all duration-300 transform hover:scale-105 hover-lift"
-								aria-label="Browse Freelancers - Web Development Agency Delhi"
-							>
-								Start Your Project
-							</Link>
-							<Link
-								href="/portfolio"
-								className="inline-flex items-center justify-center gap-2 border-2 border-teal text-teal px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm sm:text-base font-semibold hover:bg-teal hover:text-white transition-all duration-300 transform hover:scale-105"
-								aria-label="See Past Projects"
-							>
-								See Our Work
-								<ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-							</Link>
-						</div>							{/* Search bar with glass effect */}
-						<form
-							onSubmit={handleSearch}
-							className="relative mt-4 sm:mt-6 md:mt-8 animate-fade-in"
-							style={{ animationDelay: "0.6s" }}
+						<p
+							className="text-lg sm:text-xl text-slate-600 max-w-xl leading-relaxed animate-slide-up"
+							style={{ animationDelay: "0.4s" }}
 						>
-							<div className="relative glass-strong rounded-full p-1">
+							We build high-performance websites and digital strategies that drive growth, engagement, and revenue for your business.
+						</p>
+
+						{/* Search Bar */}
+						<form onSubmit={handleSearch} className="relative max-w-md animate-slide-up" style={{ animationDelay: "0.45s" }}>
+							<div className="relative">
 								<input
 									type="text"
+									placeholder="Search services (e.g., SEO, Web Design)..."
 									value={searchTerm}
 									onChange={(e) => setSearchTerm(e.target.value)}
-									placeholder="Search for web design, SEO, or services in Delhi"
-									className="w-full px-4 sm:px-6 py-3 sm:py-4 pr-10 sm:pr-12 rounded-full bg-white/80 backdrop-blur border-none focus:outline-none focus:ring-2 focus:ring-orange/50 text-sm sm:text-base transition-all"
-									aria-label="Search for services in Delhi"
+									className="w-full px-6 py-4 rounded-full bg-white border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all shadow-sm pr-12 text-slate-700 placeholder:text-slate-400"
 								/>
 								<button
 									type="submit"
-									className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 p-2 sm:p-3 bg-orange text-white rounded-full hover:bg-orange/90 transition-all hover:scale-110"
+									className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors"
 									aria-label="Search"
 								>
-									<Search size={18} className="sm:w-5 sm:h-5" />
+									<Search size={20} />
 								</button>
 							</div>
-						</form>							{/* Team avatars */}
+						</form>
+
 						<div
-							className="flex items-center gap-3 sm:gap-4 animate-fade-in"
-							style={{ animationDelay: "0.7s" }}
+							className="flex flex-col sm:flex-row gap-4 animate-slide-up"
+							style={{ animationDelay: "0.5s" }}
 						>
-							<div className="flex -space-x-2 sm:-space-x-3">
-								{[1, 2, 3].map((_, idx) => (
-									<div
+							<Link
+								href="/contact"
+								className="px-8 py-4 bg-blue-600 text-white rounded-full font-bold hover:bg-blue-700 transition-all hover:scale-105 shadow-lg shadow-blue-600/25 flex items-center justify-center gap-2 group"
+							>
+								Start Your Project
+								<ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
+							</Link>
+							<Link
+								href="/portfolio"
+								className="px-8 py-4 bg-white text-slate-900 border border-slate-200 rounded-full font-bold hover:bg-slate-50 transition-all hover:border-slate-300 flex items-center justify-center gap-2"
+							>
+								View Our Work
+								<Briefcase size={20} className="text-slate-400" />
+							</Link>
+						</div>
+
+						{/* Trust Indicators */}
+						<div className="pt-8 border-t border-slate-200 animate-fade-in" style={{ animationDelay: "0.6s" }}>
+							<p className="text-sm text-slate-500 font-medium mb-4">Certified Partners</p>
+							<div className="grid grid-cols-3 gap-y-4 gap-x-4 md:flex md:gap-8 items-center">
+								{certifications.map((cert, idx) => (
+									<a
 										key={idx}
-										className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-orange border-2 sm:border-4 border-white hover:scale-110 transition-transform cursor-pointer hover-lift"
-										style={{ animationDelay: `${idx * 0.1}s` }}
-									/>
+										href={cert.url}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="relative group flex justify-center md:block"
+										title={cert.name}
+									>
+										<div className="w-24 h-24 relative transition-all duration-300 hover:scale-105">
+											<NextImage
+												src={cert.logo}
+												alt={cert.name}
+												fill
+												className="object-contain object-center md:object-left"
+											/>
+										</div>
+									</a>
 								))}
-							</div>
-							<div className="text-xs sm:text-sm">
-								<p className="font-bold text-teal">20k+ Specialists</p>
-								<p className="text-gray-600">Ready to help you succeed</p>
 							</div>
 						</div>
 					</div>
 
-					{/* Right - Client Success Stories & Certifications */}
-					<div className="relative mt-8 lg:mt-0">
-						<div className="flex items-center justify-between mb-4 animate-fade-in">
-							<div>
-								<h3 className="text-base sm:text-lg font-bold text-teal mb-1">
-									Trusted By 50+ Businesses
-								</h3>
-								<p className="text-xs sm:text-sm text-gray-600">Generating ₹6.3 Cr+ in Sales</p>
+					{/* Right Content - Hero Image/Graphic */}
+					<div className="relative lg:h-[600px] hidden lg:block animate-scale-in">
+						<div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-cyan-500/5 rounded-3xl transform rotate-3"></div>
+						<div className="absolute inset-0 bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden transform -rotate-3 hover:rotate-0 transition-transform duration-700">
+							{/* Abstract UI Representation */}
+							<div className="absolute top-0 left-0 right-0 h-12 bg-slate-50 border-b border-slate-100 flex items-center px-4 gap-2">
+								<div className="w-3 h-3 rounded-full bg-red-400"></div>
+								<div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+								<div className="w-3 h-3 rounded-full bg-green-400"></div>
+								<div className="ml-4 w-64 h-6 bg-white rounded-md border border-slate-200"></div>
 							</div>
-						</div>
-
-						{/* Client Brands Ticker */}
-						<div className="relative h-[300px] sm:h-[350px] md:h-[380px] overflow-hidden rounded-2xl bg-gradient-to-br from-white to-cream/50 glass-strong p-4 sm:p-6 shadow-xl mb-4 sm:mb-6">
-							<div className="absolute inset-0 flex flex-col gap-3 sm:gap-4 animate-scroll-vertical p-4 sm:p-6">
-								{[...trustedBrands, ...trustedBrands, ...trustedBrands].map((brand, idx) => (
-									<div
-										key={idx}
-										className="bg-white rounded-xl shadow-md hover:shadow-xl p-3 sm:p-4 hover-lift transition-all cursor-pointer hover:scale-105 border border-orange/10"
-									>
-										<div className="flex items-start justify-between gap-2 sm:gap-3">
-											<div className="flex-1 min-w-0">
-												<h4 className="font-bold text-teal text-sm sm:text-base mb-1 truncate">
-													{brand.name}
-												</h4>
-												<p className="text-xs text-gray-500 mb-1 sm:mb-2">
-													{brand.category}
-												</p>
-													{brand.sales && (
-														<div className="flex items-center gap-1">
-															<BarChart className="w-3 h-3 text-orange" />
-															<span className="text-xs font-semibold text-orange">
-																{brand.sales}
-															</span>
-														</div>
-													)}
-													{brand.achievement && (
-														<div className="flex items-center gap-1">
-															<Award className="w-3 h-3 text-teal" />
-															<span className="text-xs font-semibold text-teal">
-																{brand.achievement}
-															</span>
-														</div>
-													)}
+							<div className="p-8 pt-20 h-full bg-slate-50/50">
+								<div className="grid grid-cols-2 gap-6 h-full">
+									<div className="space-y-6">
+										<div className="h-40 bg-white rounded-xl shadow-sm p-4 animate-pulse">
+											<div className="w-12 h-12 bg-blue-100 rounded-lg mb-4"></div>
+											<div className="h-4 bg-slate-100 rounded w-3/4 mb-2"></div>
+											<div className="h-4 bg-slate-100 rounded w-1/2"></div>
+										</div>
+										<div className="h-56 bg-white rounded-xl shadow-sm p-4 animate-pulse" style={{ animationDelay: "0.2s" }}>
+											<div className="w-full h-32 bg-slate-100 rounded-lg mb-4"></div>
+											<div className="h-4 bg-slate-100 rounded w-full mb-2"></div>
+											<div className="h-4 bg-slate-100 rounded w-2/3"></div>
+										</div>
+									</div>
+									<div className="space-y-6 mt-12">
+										<div className="h-56 bg-white rounded-xl shadow-sm p-4 animate-pulse" style={{ animationDelay: "0.4s" }}>
+											<div className="w-full h-32 bg-slate-100 rounded-lg mb-4"></div>
+											<div className="h-4 bg-slate-100 rounded w-full mb-2"></div>
+											<div className="h-4 bg-slate-100 rounded w-2/3"></div>
+										</div>
+										<div className="h-40 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-xl shadow-lg p-6 text-white flex flex-col justify-between animate-float">
+											<div className="w-10 h-10 bg-white/20 rounded-lg backdrop-blur-sm flex items-center justify-center">
+												<BarChart size={20} />
 											</div>
-											<div className="w-2 h-2 bg-gradient-orange rounded-full animate-pulse-glow flex-shrink-0 mt-1" />
+											<div>
+												<div className="text-3xl font-bold mb-1">+150%</div>
+												<div className="text-white/80 text-sm">Growth Rate</div>
+											</div>
 										</div>
 									</div>
-								))}
-							</div>
-							<div className="absolute inset-0 bg-gradient-to-b from-white/80 via-transparent to-white/80 pointer-events-none z-10" />
-						</div>
-
-						{/* Certifications Strip */}
-						<div
-							className="glass-strong rounded-xl p-3 sm:p-4 animate-fade-in"
-							style={{ animationDelay: "0.8s" }}
-						>
-							<p className="text-xs font-semibold text-gray-600 mb-2 sm:mb-3 text-center">
-								Certified & Recognized By
-							</p>
-							<div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-3">
-								{certifications.map((cert, idx) => (
-									<div
-										key={idx}
-										className="flex flex-col justify-center h-full text-center hover:scale-110 transition-transform cursor-pointer glass-subtle rounded-xl p-1.5 sm:p-2"
-										title={cert.name}
-									>
-							<div>
-											<NextImage
-												src={cert.logo}
-												alt={cert.name}
-												width={80}
-												height={80}
-												className="h-auto object-contain max-w-[50px] sm:max-w-[60px] md:max-w-[70px] mx-auto"
-											/>
-										</div>
-
-										<div className="text-xs text-gray-600 my-0.5 transition-colors font-medium">
-											{cert.name}
-										</div>
-									</div>
-								))}
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-
-			<style jsx>{`
-				@keyframes scroll-vertical {
-					0% {
-						transform: translateY(0);
-					}
-					100% {
-						transform: translateY(-33.333%);
-					}
-				}
-				@keyframes scroll-horizontal {
-					0% {
-						transform: translateX(0);
-					}
-					100% {
-						transform: translateX(-33.333%);
-					}
-				}
-				.animate-scroll-vertical {
-					animation: scroll-vertical 20s linear infinite;
-				}
-				.animate-scroll-horizontal {
-					animation: scroll-horizontal 15s linear infinite;
-				}
-			`}</style>
 		</section>
 	);
 }

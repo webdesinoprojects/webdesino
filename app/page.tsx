@@ -21,7 +21,6 @@ import {
   getTestimonials,
   getFAQs,
   getFeatures,
-  getServices,
   getResults,
   getCaseStudies,
 } from "@/lib/data";
@@ -38,14 +37,13 @@ export default function Home() {
   const testimonials = getTestimonials();
   const faqs = getFAQs();
   const features = getFeatures();
-  const services = getServices();
   const results = getResults();
   const caseStudies = getCaseStudies();
 
   return (
     <>
       <Hero />
-      <ServicesPills services={services} />
+      <ServicesPills />
       <WhyChooseUs features={features} />
       <IndustriesSection />
       <Suspense fallback={<div>Loading portfolio...</div>}>

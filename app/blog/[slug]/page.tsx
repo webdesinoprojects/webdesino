@@ -1,0 +1,112 @@
+import { getBlogPosts } from "@/lib/data";
+import Image from "next/image";
+import Link from "next/link";
+import { Calendar, User, ArrowLeft } from "lucide-react";
+import BlogSidebar from "@/components/BlogSidebar";
+import { notFound } from "next/navigation";
+
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const post = getBlogPosts().find((p) => p.slug === params.slug);
+  if (!post) return { title: "Post Not Found" };
+  
+  return {
+    title: `${post.title} | WebDesino Blog`,
+    description: post.excerpt,
+  };
+}
+
+export default function BlogPostPage({ params }: { params: { slug: string } }) {
+  const post = getBlogPosts().find((p) => p.slug === params.slug);
+
+  if (!post) {
+    notFound();
+  }
+
+  return (
+    <main className="bg-slate-50 min-h-screen">
+      {/* Hero Section */}
+      <section className="bg-slate-900 text-white py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-blue-600/10"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <Link href="/blog" className="inline-flex items-center gap-2 text-slate-400 hover:text-white mb-8 transition-colors">
+            <ArrowLeft size={20} />
+            Back to Blog
+          </Link>
+          <div className="max-w-4xl">
+            <div className="flex items-center gap-4 text-sm text-blue-400 mb-4 font-semibold uppercase tracking-wider">
+              <span>{post.category}</span>
+              <span className="w-1 h-1 bg-slate-500 rounded-full"></span>
+              <span>{post.date}</span>
+            </div>
+            <h1 className="text-3xl lg:text-5xl font-bold mb-6 leading-tight">
+              {post.title}
+            </h1>
+            <div className="flex items-center gap-3 text-slate-300">
+              <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center font-bold text-white">
+                W
+              </div>
+              <div>
+                <div className="font-semibold text-white">WebDesino Team</div>
+                <div className="text-xs">Digital Marketing Experts</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Content Section */}
+      <div className="container mx-auto px-4 py-12 lg:py-20">
+        <div className="flex flex-col lg:flex-row gap-12">
+          
+          {/* Main Content */}
+          <div className="lg:w-2/3">
+            <article className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+              {/* Featured Image */}
+              <div className="aspect-video relative bg-slate-100">
+                <Image
+                  src={post.image || "https://api.microlink.io/?url=https://webdesino.com&screenshot=true&meta=false&embed=screenshot.url"}
+                  alt={post.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              
+              {/* Article Body */}
+              <div className="p-8 lg:p-12 prose prose-lg max-w-none prose-headings:text-slate-900 prose-p:text-slate-600 prose-a:text-blue-600 hover:prose-a:text-blue-700 prose-img:rounded-xl">
+                {post.content ? (
+                  <div dangerouslySetInnerHTML={{ __html: post.content }} />
+                ) : (
+                  <div>
+                    <p className="lead text-xl text-slate-600 mb-8">{post.excerpt}</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <h2>Why This Matters for Your Business</h2>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <ul>
+                      <li>Strategic Planning and Execution</li>
+                      <li>Data-Driven Decision Making</li>
+                      <li>Continuous Optimization</li>
+                    </ul>
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                    <blockquote>
+                      "Digital marketing is not just about visibility, it's about creating meaningful connections with your audience."
+                    </blockquote>
+                    <h3>Key Takeaways</h3>
+                    <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                  </div>
+                )}
+              </div>
+            </article>
+          </div>
+
+          {/* Sidebar */}
+          <div className="lg:w-1/3">
+            <div className="sticky top-24">
+              <BlogSidebar />
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  );
+}

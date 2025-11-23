@@ -18,9 +18,9 @@ const config: Config = {
         }
       },
       colors: {
-        cream: "#F5F5DC",
-        orange: "#FF6B35",
-        teal: "#004E64",
+        cream: "#F8FAFC", // Off-White/Slate-50
+        orange: "#3B82F6", // Changed from Cyan to Royal Blue
+        teal: "#0F172A", // Changed from Midnight Blue to Slate-900 (Rich Navy)
       },
       container: {
         center: true,
@@ -34,7 +34,9 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 };
 export default config;
 

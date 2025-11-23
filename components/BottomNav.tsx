@@ -2,47 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Home, ChevronDown, Menu, X, GraduationCap, BookOpen, Pill, ShoppingBag } from "lucide-react";
-
-// Services dropdown content
-const servicesDropdown = {
-  "Website Solutions": [
-    { name: "Web Development", href: "/services" },
-    { name: "Web Design", href: "/services" },
-    { name: "Web Optimisation", href: "/services" },
-    { name: "Website Maintenance Services", href: "/services" },
-    { name: "Website Security Services", href: "/services" },
-    { name: "E-commerce Development", href: "/services" },
-  ],
-  "Content Writing": [
-    { name: "Website Content", href: "/services" },
-    { name: "SEO Blog Writing", href: "/services" },
-    { name: "Social Media Content", href: "/services" },
-    { name: "Email Newsletters", href: "/services" },
-    { name: "Case Studies Writing", href: "/services" },
-    { name: "Product Descriptions", href: "/services" },
-    { name: "Editing and Proofreading", href: "/services" },
-  ],
-  "SEO": [
-    { name: "Keyword Research", href: "/services" },
-    { name: "On-Page SEO", href: "/services" },
-    { name: "Off-Page SEO", href: "/services" },
-    { name: "Technical SEO", href: "/services" },
-    { name: "Local SEO", href: "/services" },
-    { name: "Outreach & Link Building", href: "/services" },
-    { name: "SEO Audits", href: "/services" },
-    { name: "SEO Reporting and Analysis", href: "/services" },
-    { name: "GPT Search Optimization", href: "/services" },
-  ],
-  "Digital Marketing": [
-    { name: "Social Media Marketing", href: "/services" },
-    { name: "Content Marketing", href: "/services" },
-    { name: "Influencer Marketing", href: "/services" },
-    { name: "Online Reputation Management", href: "/services" },
-    { name: "Marketing Automation", href: "/services" },
-    { name: "Google & Meta Ads", href: "/services" },
-  ],
-};
+import { Home, ChevronDown, Menu, X, GraduationCap, BookOpen, Pill, ShoppingBag, Users } from "lucide-react";
+import { servicesData } from "@/lib/services-data";
 
 // Work dropdown content
 const workDropdown = [
@@ -52,10 +13,20 @@ const workDropdown = [
   { icon: <GraduationCap className="w-4 h-4" />, name: "Meritshot", href: "/case-studies/meritshot" },
 ];
 
+// Clients dropdown content
+const clientsDropdown = [
+  { name: "Our Websites", href: "/our-clients?category=Our%20Websites" },
+  { name: "Our Apps", href: "/our-clients?category=Our%20Apps" },
+  { name: "Digital Marketing", href: "/our-clients?category=Digital%20Marketing" },
+  { name: "Graphic Designing", href: "/our-clients?category=Graphic%20Designing" },
+];
+
 const navItems = [
   { label: "Home", href: "/", icon: Home },
   { label: "Our Services", href: "/services", hasDropdown: true },
   { label: "Our Work", href: "/portfolio", hasDropdown: true },
+  { label: "Our Clients", href: "/our-clients", hasDropdown: true, icon: Users },
+  { label: "Blog", href: "/blog", icon: BookOpen },
   { label: "About", href: "/about" },
   { label: "Contact Us", href: "/contact" },
 ];
@@ -70,7 +41,7 @@ export default function BottomNav() {
     <>
       {/* Desktop Navigation */}
       <nav className="hidden lg:block fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
-        <div className="bg-teal rounded-full shadow-2xl px-4 py-3 flex items-center gap-2">
+        <div className="bg-slate-900/90 backdrop-blur-md rounded-full shadow-2xl px-4 py-3 flex items-center gap-2 border border-slate-800">
           {navItems.map((item, idx) => {
             const Icon = item.icon;
             return (
@@ -82,10 +53,10 @@ export default function BottomNav() {
               >
                 <Link
                   href={item.href}
-                  className="flex items-center gap-1 px-4 py-2 rounded-full text-white hover:bg-white/20 transition-all duration-200 font-medium text-sm whitespace-nowrap"
+                  className="flex items-center gap-2 px-4 py-2 rounded-full text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-200 font-medium text-sm whitespace-nowrap"
                   aria-label={item.label}
                 >
-                  {Icon && <Icon size={20} />}
+                  {Icon && <Icon size={18} />}
                   {item.label && <span>{item.label}</span>}
                   {item.hasDropdown && (
                     <ChevronDown
@@ -98,21 +69,23 @@ export default function BottomNav() {
 
                 {/* Services Dropdown */}
                 {item.label === "Our Services" && hoveredItem === item.label && (
-                  <div className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-2xl p-6 w-[720px] border border-gray-100">
+                  <div className="absolute bottom-full mb-4 left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-2xl p-6 w-[720px] border border-slate-100 animate-fade-in-up">
                     <div className="grid grid-cols-3 gap-6">
-                      {Object.entries(servicesDropdown).map(([category, services]) => (
-                        <div key={category}>
-                          <h3 className="font-bold text-teal mb-3 text-sm uppercase tracking-wide">
-                            {category}
+                      {servicesData.map((category) => (
+                        <div key={category.slug}>
+                          <h3 className="font-bold text-slate-900 mb-3 text-sm uppercase tracking-wide border-b border-slate-100 pb-2">
+                            <Link href={`/services/${category.slug}`} className="hover:text-blue-600 transition-colors">
+                              {category.title}
+                            </Link>
                           </h3>
                           <ul className="space-y-2">
-                            {services.map((service) => (
-                              <li key={service.name}>
+                            {category.subtypes.map((subtype) => (
+                              <li key={subtype.slug}>
                                 <Link
-                                  href={service.href}
-                                  className="text-gray-700 hover:text-teal transition-colors text-sm block py-1 hover:translate-x-1 transform duration-200"
+                                  href={`/services/${category.slug}/${subtype.slug}`}
+                                  className="text-slate-600 hover:text-blue-600 transition-colors text-sm block py-1 hover:translate-x-1 transform duration-200"
                                 >
-                                  {service.name}
+                                  {subtype.title}
                                 </Link>
                               </li>
                             ))}
@@ -125,8 +98,8 @@ export default function BottomNav() {
 
                 {/* Work Dropdown */}
                 {item.label === "Our Work" && hoveredItem === item.label && (
-                  <div className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-2xl p-5 w-[280px] border border-gray-100">
-                    <h3 className="font-bold text-teal mb-3 text-sm uppercase tracking-wide">
+                  <div className="absolute bottom-full mb-4 left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-2xl p-5 w-[280px] border border-slate-100 animate-fade-in-up">
+                    <h3 className="font-bold text-slate-900 mb-3 text-sm uppercase tracking-wide border-b border-slate-100 pb-2">
                       Featured Projects
                     </h3>
                     <ul className="space-y-2">
@@ -134,9 +107,9 @@ export default function BottomNav() {
                         <li key={project.name}>
                           <Link
                             href={project.href}
-                            className="flex items-center gap-3 text-gray-700 hover:text-teal hover:bg-gray-50 transition-all text-sm p-2 rounded-lg group"
+                            className="flex items-center gap-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-all text-sm p-2 rounded-lg group"
                           >
-                            <span className="text-teal group-hover:scale-110 transition-transform">
+                            <span className="text-slate-900 group-hover:scale-110 transition-transform">
                               {project.icon}
                             </span>
                             <span className="font-medium">{project.name}</span>
@@ -146,10 +119,31 @@ export default function BottomNav() {
                     </ul>
                     <Link
                       href="/case-studies"
-                      className="mt-4 block text-center text-teal text-sm font-semibold hover:underline"
+                      className="mt-4 block text-center text-slate-900 text-sm font-semibold hover:underline"
                     >
                       View All Projects →
                     </Link>
+                  </div>
+                )}
+
+                {/* Clients Dropdown */}
+                {item.label === "Our Clients" && hoveredItem === item.label && (
+                  <div className="absolute bottom-full mb-4 left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-2xl p-5 w-[240px] border border-slate-100 animate-fade-in-up">
+                    <h3 className="font-bold text-slate-900 mb-3 text-sm uppercase tracking-wide border-b border-slate-100 pb-2">
+                      Categories
+                    </h3>
+                    <ul className="space-y-2">
+                      {clientsDropdown.map((client) => (
+                        <li key={client.name}>
+                          <Link
+                            href={client.href}
+                            className="block text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-all text-sm p-2 rounded-lg"
+                          >
+                            {client.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 )}
               </div>
@@ -162,7 +156,7 @@ export default function BottomNav() {
       <nav className="lg:hidden fixed bottom-6 right-6 z-50">
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="w-14 h-14 bg-teal text-white rounded-full shadow-2xl flex items-center justify-center hover-lift hover-glow transition-all"
+          className="w-14 h-14 bg-slate-900 text-white rounded-full shadow-2xl flex items-center justify-center hover-lift hover-glow transition-all border border-slate-800"
           aria-label="Toggle menu"
         >
           {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -170,19 +164,19 @@ export default function BottomNav() {
 
         {/* Mobile Menu Overlay */}
         {mobileMenuOpen && (
-          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)} />
+          <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)} />
         )}
 
         {/* Mobile Menu Panel */}
         {mobileMenuOpen && (
-          <div className="fixed bottom-24 right-6 left-6 bg-white rounded-3xl shadow-2xl p-6 max-h-[70vh] overflow-y-auto border border-white/20 animate-scale-in">
+          <div className="fixed bottom-24 right-6 left-6 bg-white rounded-3xl shadow-2xl p-6 max-h-[70vh] overflow-y-auto border border-slate-100 animate-scale-in">
             <div className="space-y-2">
               {navItems.map((item, idx) => (
                 <div key={idx}>
                   <div className="flex items-center justify-between">
                     <Link
                       href={item.href}
-                      className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-orange/10 hover:text-orange transition-all font-medium flex-1"
+                      className="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-all font-medium flex-1 whitespace-nowrap"
                       onClick={() => !item.hasDropdown && setMobileMenuOpen(false)}
                     >
                       {item.icon && <item.icon size={20} />}
@@ -191,7 +185,7 @@ export default function BottomNav() {
                     {item.hasDropdown && (
                       <button
                         onClick={() => setMobileExpandedItem(mobileExpandedItem === item.label ? null : item.label)}
-                        className="p-3 rounded-xl hover:bg-orange/10 transition-all"
+                        className="p-3 rounded-xl hover:bg-blue-50 text-slate-500 hover:text-blue-600 transition-all"
                       >
                         <ChevronDown
                           size={20}
@@ -203,19 +197,26 @@ export default function BottomNav() {
 
                   {/* Mobile Services Dropdown */}
                   {item.label === "Our Services" && mobileExpandedItem === item.label && (
-                    <div className="ml-4 mt-2 space-y-4 pl-4 border-l-2 border-orange/20">
-                      {Object.entries(servicesDropdown).map(([category, services]) => (
-                        <div key={category}>
-                          <h4 className="font-bold text-teal text-xs uppercase tracking-wide mb-2">{category}</h4>
+                    <div className="ml-4 mt-2 space-y-4 pl-4 border-l-2 border-blue-100">
+                      {servicesData.map((category) => (
+                        <div key={category.slug}>
+                          <h4 className="font-bold text-slate-900 text-xs uppercase tracking-wide mb-2">
+                            <Link 
+                              href={`/services/${category.slug}`}
+                              onClick={() => setMobileMenuOpen(false)}
+                            >
+                              {category.title}
+                            </Link>
+                          </h4>
                           <ul className="space-y-1">
-                            {services.map((service) => (
-                              <li key={service.name}>
+                            {category.subtypes.map((subtype) => (
+                              <li key={subtype.slug}>
                                 <Link
-                                  href={service.href}
-                                  className="text-sm text-gray-600 hover:text-orange transition-colors block py-1"
+                                  href={`/services/${category.slug}/${subtype.slug}`}
+                                  className="text-sm text-slate-600 hover:text-blue-600 transition-colors block py-1"
                                   onClick={() => setMobileMenuOpen(false)}
                                 >
-                                  {service.name}
+                                  {subtype.title}
                                 </Link>
                               </li>
                             ))}
@@ -227,16 +228,32 @@ export default function BottomNav() {
 
                   {/* Mobile Work Dropdown */}
                   {item.label === "Our Work" && mobileExpandedItem === item.label && (
-                    <div className="ml-4 mt-2 space-y-2 pl-4 border-l-2 border-orange/20">
+                    <div className="ml-4 mt-2 space-y-2 pl-4 border-l-2 border-blue-100">
                       {workDropdown.map((project) => (
                         <Link
                           key={project.name}
                           href={project.href}
-                          className="flex items-center gap-3 text-gray-700 hover:text-orange transition-all text-sm p-2 rounded-lg"
+                          className="flex items-center gap-3 text-slate-600 hover:text-blue-600 transition-all text-sm p-2 rounded-lg"
                           onClick={() => setMobileMenuOpen(false)}
                         >
-                          <span className="text-orange">{project.icon}</span>
+                          <span className="text-slate-900">{project.icon}</span>
                           <span className="font-medium">{project.name}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Mobile Clients Dropdown */}
+                  {item.label === "Our Clients" && mobileExpandedItem === item.label && (
+                    <div className="ml-4 mt-2 space-y-2 pl-4 border-l-2 border-blue-100">
+                      {clientsDropdown.map((client) => (
+                        <Link
+                          key={client.name}
+                          href={client.href}
+                          className="block text-slate-600 hover:text-blue-600 transition-all text-sm p-2 rounded-lg"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          {client.name}
                         </Link>
                       ))}
                     </div>
