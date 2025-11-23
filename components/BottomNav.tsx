@@ -130,7 +130,7 @@ export default function BottomNav() {
                 {item.label === "Our Clients" && hoveredItem === item.label && (
                   <div className="absolute bottom-full mb-4 left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-2xl p-5 w-[240px] border border-slate-100 animate-fade-in-up">
                     <h3 className="font-bold text-slate-900 mb-3 text-sm uppercase tracking-wide border-b border-slate-100 pb-2">
-                      Categories
+                      Our Clients
                     </h3>
                     <ul className="space-y-2">
                       {clientsDropdown.map((client) => (
