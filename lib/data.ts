@@ -24,7 +24,7 @@ export const getPortfolioProjects = (): PortfolioProject[] => {
       industry: "Ecommerce",
       description:
         "After just 3 months of SEO, marketing, and website optimization, they now generate ₹25,00,000+ monthly sales.",
-      image: "/portfolio/bookbuzzz.jpg",
+      image: "https://placehold.co/600x400?text=BookBuzzz",
       fullDescription:
         "BookBuzzz approached Webdesino with nearly zero website and marketplace sales. Through comprehensive SEO strategies, performance marketing, and website optimization, we transformed their online presence. Within just 3 months, they achieved ₹25,00,000+ in monthly sales across their website and marketplaces.",
       results: "Increased monthly sales from zero to ₹25,00,000+ through SEO and website optimization.",
@@ -40,7 +40,7 @@ export const getPortfolioProjects = (): PortfolioProject[] => {
       industry: "Ecommerce",
       description:
         "Within 2 months, with our SEO & performance marketing strategies, they now generate ₹10,00,000+ monthly sales.",
-      image: "/portfolio/luckynutra.jpg",
+      image: "https://placehold.co/600x400?text=LuckyNutra",
       fullDescription:
         "LuckyNutra started with only ₹3,000/month in website sales and zero marketplace presence. Our team implemented targeted SEO strategies and performance marketing campaigns. Within 2 months, they achieved ₹10,00,000+ in monthly sales.",
       results: "Boosted sales from ₹3,000/month to ₹10,00,000+ monthly with SEO & performance marketing.",
@@ -56,7 +56,7 @@ export const getPortfolioProjects = (): PortfolioProject[] => {
       industry: "Ecommerce",
       description:
         "After implementing our SEO campaigns and optimizing user experience, they now achieve ₹6,00,000/month in sales.",
-      image: "/portfolio/buykharibauli.jpg",
+      image: "https://placehold.co/600x400?text=BuyKhariBauli",
       fullDescription:
         "BuyKhariBauli began with ₹30,000/month in website sales. Through strategic SEO campaigns and comprehensive user experience optimization, we helped them achieve ₹6,00,000/month in sales directly from their website.",
       results: "Improved website sales from ₹30,000/month to ₹6,00,000/month with targeted SEO campaigns.",
@@ -72,7 +72,7 @@ export const getPortfolioProjects = (): PortfolioProject[] => {
       industry: "Healthcare",
       description:
         "Within months, we ranked their website on highly competitive global keywords... driving significant worldwide visibility.",
-      image: "/portfolio/meritshot.jpg",
+      image: "https://placehold.co/600x400?text=Meritshot",
       fullDescription:
         "Meritshot partnered with Webdesino for a focused SEO strategy targeting highly competitive global keywords. We successfully ranked their website for terms like 'Investment Banking Course', 'Best Institute for Investment Banking', and 'Indian No.1 Institute for Investment Banking', driving significant worldwide visibility and student enrollments.",
       results: "Ranked on highly competitive global keywords, driving significant worldwide visibility.",

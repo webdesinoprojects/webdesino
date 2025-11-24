@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, TrendingUp } from "lucide-react";
 import { notFound } from "next/navigation";
+import { generateBreadcrumbSchema, BASE_URL } from "@/lib/seo";
 
 // Helper function to get a single project
 const getProjectBySlug = (slug: string) => {
@@ -105,19 +106,21 @@ export default function PortfolioProjectPage({
       name: "Webdesino",
       url: "https://webdesino.com",
     },
-    about: {
-      "@type": "Thing",
-      name: project.industry,
-    },
+    dateCreated: new Date().toISOString(), // Ideally this should come from data
   };
 
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'Home', item: '/' },
+    { name: 'Portfolio', item: '/portfolio' },
+    { name: project.title, item: `/portfolio/${project.slug}` },
+  ]);
+
   return (
-    <>
+    <main className="min-h-screen bg-slate-50">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([projectSchema, breadcrumbSchema]) }}
       />
-      <main className="min-h-screen bg-cream">
         {/* Back Button */}
         <div className="container mx-auto px-4 pt-8">
           <Link
@@ -243,7 +246,6 @@ export default function PortfolioProjectPage({
           </div>
         </article>
       </main>
-    </>
   );
 }
 

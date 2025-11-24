@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { TrendingUp, ArrowUpRight } from "lucide-react";
 import type { Result } from "@/lib/data";
@@ -9,21 +10,34 @@ interface ResultsSectionProps {
 }
 
 export default function ResultsSection({ results }: ResultsSectionProps) {
+  const [particles, setParticles] = useState<Array<{ left: string; top: string; delay: string; duration: string }>>([]);
+
+  useEffect(() => {
+    setParticles(
+      [...Array(15)].map(() => ({
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        delay: `${Math.random() * 3}s`,
+        duration: `${3 + Math.random() * 4}s`,
+      }))
+    );
+  }, []);
+
   if (results.length === 0) return null;
 
   return (
     <section className="py-16 lg:py-24 bg-slate-50 relative overflow-hidden">
       {/* Animated background particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(15)].map((_, i) => (
+        {particles.map((p, i) => (
           <div
             key={i}
             className="absolute w-2 h-2 bg-blue-600/10 rounded-full animate-float"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${3 + Math.random() * 4}s`,
+              left: p.left,
+              top: p.top,
+              animationDelay: p.delay,
+              animationDuration: p.duration,
             }}
           />
         ))}

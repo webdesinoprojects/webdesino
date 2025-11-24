@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { servicesData } from "@/lib/services-data";
 import { ArrowRight, CheckCircle2, Star, ChevronRight } from "lucide-react";
+import { generateServiceSchema, generateBreadcrumbSchema, BASE_URL } from "@/lib/seo";
 
 interface PageProps {
   params: {
@@ -27,11 +28,27 @@ export function generateMetadata({ params }: PageProps) {
   const category = servicesData.find((c) => c.slug === params.category);
   const service = category?.subtypes.find((s) => s.slug === params.slug);
   
-  if (!service) return { title: "Service Not Found" };
+  if (!service) return null;
   
   return {
     title: `${service.title} Services in Delhi | Webdesino`,
     description: service.description,
+    openGraph: {
+      title: `${service.title} Services in Delhi | Webdesino`,
+      description: service.description,
+      url: `${BASE_URL}/services/${params.category}/${params.slug}`,
+      images: [
+        {
+          url: `${BASE_URL}/og-image.jpg`, // Ideally specific service image
+          width: 1200,
+          height: 630,
+          alt: service.title,
+        },
+      ],
+    },
+    alternates: {
+      canonical: `/services/${params.category}/${params.slug}`,
+    },
   };
 }
 
@@ -43,8 +60,20 @@ export default function ServicePage({ params }: PageProps) {
     notFound();
   }
 
+  const serviceSchema = generateServiceSchema(service);
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'Home', item: '/' },
+    { name: 'Services', item: '/services' },
+    { name: category.title, item: `/services/${category.slug}` },
+    { name: service.title, item: `/services/${category.slug}/${service.slug}` },
+  ]);
+
   return (
     <main className="min-h-screen bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([serviceSchema, breadcrumbSchema]) }}
+      />
       {/* Breadcrumb */}
       <div className="bg-slate-50 border-b border-slate-200 sticky top-0 z-30 backdrop-blur-md bg-slate-50/90">
         <div className="container mx-auto px-4 py-2">

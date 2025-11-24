@@ -4,14 +4,33 @@ import Link from "next/link";
 import { Calendar, User, ArrowLeft } from "lucide-react";
 import BlogSidebar from "@/components/BlogSidebar";
 import { notFound } from "next/navigation";
+import { generateBlogPostingSchema, BASE_URL } from "@/lib/seo";
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const post = getBlogPosts().find((p) => p.slug === params.slug);
-  if (!post) return { title: "Post Not Found" };
+  if (!post) return null;
   
   return {
     title: `${post.title} | WebDesino Blog`,
     description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: 'article',
+      publishedTime: post.date,
+      authors: ['Webdesino Team'],
+      images: [
+        {
+          url: post.image || `${BASE_URL}/og-image.jpg`,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    alternates: {
+      canonical: `/blog/${post.slug}`,
+    },
   };
 }
 
@@ -22,8 +41,14 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
     notFound();
   }
 
+  const jsonLd = generateBlogPostingSchema(post);
+
   return (
     <main className="bg-slate-50 min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Hero Section */}
       <section className="bg-slate-900 text-white py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-blue-600/10"></div>

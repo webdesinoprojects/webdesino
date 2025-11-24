@@ -1,12 +1,20 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BottomNav from "@/components/BottomNav";
 import {Analytics} from "@vercel/analytics/react";
+import { generateOrganizationSchema } from "@/lib/seo";
+import ContactWidget from "@/components/ContactWidget";
 
 const inter = Inter({ subsets: ["latin"] });
+
+export const viewport: Viewport = {
+  themeColor: '#ffffff',
+  width: 'device-width',
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://webdesino.com"),
@@ -71,24 +79,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'Webdesino',
-    url: 'https://webdesino.com',
-    logo: 'https://webdesino.com/logo.png',
-    contactPoint: {
-      '@type': 'ContactPoint',
-      telephone: '+91-YOUR-NUMBER',
-      contactType: 'customer service',
-    },
-    sameAs: [
-      'https://www.facebook.com/webdesino',
-      'https://twitter.com/webdesino',
-      'https://www.instagram.com/webdesino',
-      'https://www.linkedin.com/company/webdesino',
-    ],
-  };
+  const jsonLd = generateOrganizationSchema();
 
   return (
     <html lang="en">
@@ -104,6 +95,7 @@ export default function RootLayout({
         <Analytics />
         <Footer />
         <BottomNav />
+        <ContactWidget />
       </body>
     </html>
   );

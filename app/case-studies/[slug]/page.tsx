@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getCaseStudyBySlug, getAllCaseSlugs } from '@/lib/case-studies';
+import { generateArticleSchema, generateBreadcrumbSchema, BASE_URL } from '@/lib/seo';
 import { 
   ArrowLeft, 
   TrendingUp, 
@@ -42,6 +43,18 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       title: caseStudy.title,
       description: `${caseStudy.client} success story: ${caseStudy.heroMetrics.revenue} in ${caseStudy.heroMetrics.timeline}`,
       type: 'article',
+      url: `${BASE_URL}/case-studies/${params.slug}`,
+      images: [
+        {
+          url: `${BASE_URL}/og-image.jpg`, // Should be case study specific image if available
+          width: 1200,
+          height: 630,
+          alt: caseStudy.title,
+        },
+      ],
+    },
+    alternates: {
+      canonical: `/case-studies/${params.slug}`,
     },
   };
 }
@@ -54,32 +67,23 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
   }
 
   // JSON-LD Schema
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: caseStudy.title,
+  const articleSchema = generateArticleSchema({
+    title: caseStudy.title,
     description: caseStudy.background,
-    author: {
-      '@type': 'Organization',
-      name: 'WebDesino',
-      url: 'https://webdesino.com'
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'WebDesino',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://webdesino.com/logo.png'
-      }
-    },
-    datePublished: new Date().toISOString(),
-  };
+    date: new Date().toISOString(), // Ideally from caseStudy data
+  });
+
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'Home', item: '/' },
+    { name: 'Case Studies', item: '/case-studies' },
+    { name: caseStudy.title, item: `/case-studies/${params.slug}` },
+  ]);
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([articleSchema, breadcrumbSchema]) }}
       />
       
       <main className="min-h-screen bg-gradient-to-br from-cream via-white to-cream relative overflow-hidden">

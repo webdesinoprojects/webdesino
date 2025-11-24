@@ -8,13 +8,18 @@ import HoverSection from "@/components/HoverSection";
 import SpecialistsSection from "@/components/SpecialistsSection";
 import AwardsSection from "@/components/AwardsSection";
 import BeforeAfterSection from "@/components/BeforeAfterSection";
+import TrustedSection from "@/components/TrustedSection";
 import ResultsSection from "@/components/ResultsSection";
 import LocalAreasSection from "@/components/LocalAreasSection";
-import TrustedSection from "@/components/TrustedSection";
 import CaseStudiesList from "@/components/CaseStudiesList";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
+import SaaSSection from "@/components/SaaSSection";
+import SEOAuditSection from "@/components/SEOAuditSection";
+import BlogSection from "@/components/BlogSection";
 import { Suspense } from 'react';
+import Logo from "@/public/logo.png";
+import { generateWebSiteSchema } from "@/lib/seo";
 
 import {
   getPortfolioProjects,
@@ -27,6 +32,7 @@ import {
 
 export const metadata = {
   title: "Webdesino | Stunning Websites by Top Web Development Agency",
+  image: Logo,
   description:
     "Webdesino is a leading Digital Marketing Agency Delhi and web development company helping businesses grow online with creative websites, SEO, and digital marketing solutions. Trusted by 100+ businesses across Delhi NCR.",
 };
@@ -39,9 +45,15 @@ export default function Home() {
   const features = getFeatures();
   const results = getResults();
   const caseStudies = getCaseStudies();
+  
+  const jsonLd = generateWebSiteSchema();
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Hero />
       <ServicesPills />
       <WhyChooseUs features={features} />
@@ -52,11 +64,14 @@ export default function Home() {
       <MaximizeSection />
       <HoverSection />
       <SpecialistsSection />
+      <LocalAreasSection />
+      <BlogSection />
       <TrustedSection />
       <AwardsSection />
       <BeforeAfterSection />
+      <SaaSSection />
+      <SEOAuditSection />
       <ResultsSection results={results} />
-      <LocalAreasSection />
       <Suspense fallback={<div>Loading case studies...</div>}>
         <CaseStudiesList caseStudies={caseStudies} />
       </Suspense>

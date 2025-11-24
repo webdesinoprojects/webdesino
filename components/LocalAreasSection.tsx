@@ -7,6 +7,9 @@ const locations = [
   { name: "Krishan Vihar & Nearby Areas", link: "https://share.google/1oqOSK2n3UvhKbHu5" },
   { name: "Uttam Nagar & Nearby Areas", link: "https://share.google/7bfsoSDMcdKosq9H4" },
   { name: "Kamla Nagar & Nearby Areas", link: "https://share.google/HamoWu7AFPzS3TEoh" },
+  { name: "Karol Bagh & Nearby Areas", link: "https://www.google.com/maps/place/Karol+Bagh,+Delhi" },
+  { name: "Hauz Khas & Nearby Areas", link: "https://share.google/c7gS6rqXBDvqMimZ8" },
+  { name: "DLF Camellias & Nearby Areas", link: "https://share.google/OEllDuOFBQkSiWfF6" },
 ];
 
 const allAreas = [
