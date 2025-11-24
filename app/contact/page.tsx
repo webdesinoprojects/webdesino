@@ -149,9 +149,10 @@ export default function ContactPage() {
                       <MapPin size={24} className="text-orange" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-gray-900 mb-1">Service Areas</h3>
+                      <h3 className="font-bold text-gray-900 mb-1">Office Address</h3>
                       <p className="text-gray-600">
-                        Uttam Nagar, Karol Bagh, Kamla Nagar, Krishan Vihar, Dwarka, Janakpuri & all of Delhi NCR
+                        M, 54/H, Block Z, Krishan Vihar,<br />
+                        New Delhi, Delhi, 110086
                       </p>
                     </div>
                   </div>
@@ -194,26 +195,46 @@ export default function ContactPage() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl lg:text-4xl font-bold text-center text-teal mb-12">
-            Our Service Locations
+            Visit Our Office
           </h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { name: "Uttam Nagar", link: "https://share.google/7bfsoSDMcdKosq9H4" },
-              { name: "Kamla Nagar", link: "https://share.google/HamoWu7AFPzS3TEoh" },
-              { name: "Krishan Vihar", link: "https://share.google/1oqOSK2n3UvhKbHu5" },
-            ].map((location, idx) => (
-              <Link
-                key={idx}
-                href={location.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-6 rounded-2xl glass hover:glass-strong transition-all duration-300 hover-lift text-center"
-              >
-                <MapPin className="mx-auto mb-3 text-orange" size={32} />
-                <h3 className="font-bold text-teal text-lg">{location.name}</h3>
-                <p className="text-sm text-gray-600 mt-2">View on Google Maps →</p>
-              </Link>
-            ))}
+          <div className="w-full h-[450px] rounded-3xl overflow-hidden shadow-lg border border-gray-200">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d437.42263208577924!2d77.078731!3d28.708156!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d07a48393eb81%3A0x1ad6b22a2676a6e9!2sRohit%20Tiwari%20-%20Web%20Developer%20and%20designer!5e0!3m2!1sen!2sus!4v1763955823882!5m2!1sen!2sus" 
+              width="100%" 
+              height="100%" 
+              style={{ border: 0 }} 
+              allowFullScreen 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+          
+          <div className="mt-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-center text-teal mb-12">
+              Our Service Locations
+            </h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                { name: "Uttam Nagar", link: "https://share.google/7bfsoSDMcdKosq9H4" },
+                { name: "Kamla Nagar", link: "https://share.google/HamoWu7AFPzS3TEoh" },
+                { name: "Krishan Vihar", link: "https://share.google/1oqOSK2n3UvhKbHu5" },
+                { name: "Karol Bagh", link: "https://www.google.com/maps/place/Karol+Bagh,+Delhi" },
+                { name: "Hauz Khas", link: "https://share.google/c7gS6rqXBDvqMimZ8" },
+                { name: "DLF Camellias", link: "https://share.google/OEllDuOFBQkSiWfF6" },
+              ].map((location, idx) => (
+                <Link
+                  key={idx}
+                  href={location.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-6 rounded-2xl glass hover:glass-strong transition-all duration-300 hover-lift text-center"
+                >
+                  <MapPin className="mx-auto mb-3 text-orange" size={32} />
+                  <h3 className="font-bold text-teal text-lg">{location.name}</h3>
+                  <p className="text-sm text-gray-600 mt-2">View on Google Maps →</p>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>
