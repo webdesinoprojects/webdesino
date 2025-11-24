@@ -9,6 +9,14 @@ import WordPress from "@/public/wordpress.jpg";
 import Shopify from "@/public/shopify.jpg";
 import SEMRush from "@/public/semrush.png";
 import DesignRush from "@/public/designrush.jpg";
+import Aadiva from "@/public/aadiva.png";
+import Bookbuzz from "@/public/bookbuzz.png";
+import Bulkwala from "@/public/bulkwala.jpg";
+import BuyKhariBauli from "@/public/buykharibauli.png";
+import Landsaathi from "@/public/landsaathi.png";
+import Maxlift from "@/public/maxlift.png";
+import AmbassadorPerk from "@/public/image.png";
+import Uag from "@/public/uag.png";
 
 const stats = [
   { icon: Users, label: "Happy Clients", value: "50+" },
@@ -25,10 +33,14 @@ const certifications = [
 ];
 
 const logos = [
-  { src: "/path/to/logo1.png", alt: "Company Logo 1" },
-  { src: "/path/to/logo2.png", alt: "Company Logo 2" },
-  { src: "/path/to/logo3.png", alt: "Company Logo 3" },
-  // Add more logos as needed
+  { src: Aadiva, alt: "Company Logo 1" },
+  { src: Bookbuzz, alt: "Company Logo 2" },
+  { src: Bulkwala, alt: "Company Logo 3" },
+  { src: BuyKhariBauli, alt: "Company Logo 4" },
+  { src: AmbassadorPerk, alt: "Company Logo 5" },
+  { src: Landsaathi, alt: "Company Logo 6" },
+  { src: Maxlift, alt: "Company Logo 7" },
+  { src: Uag, alt: "Company Logo 8" },
 ];
 
 export default function TrustedSection() {
@@ -119,8 +131,8 @@ export default function TrustedSection() {
               <div className="flex animate-infinite-scroll">
                 {logos.map((logo, index) => (
                   <div key={index} className="flex-shrink-0 w-48 mx-6">
-                    <img
-                      className="h-12 mx-auto"
+                    <NextImage
+                      className="h-24 w-auto mx-auto"
                       src={logo.src}
                       alt={logo.alt}
                     />
@@ -128,8 +140,8 @@ export default function TrustedSection() {
                 ))}
                 {logos.map((logo, index) => (
                   <div key={`duplicate-${index}`} className="flex-shrink-0 w-48 mx-6">
-                    <img
-                      className="h-12 mx-auto"
+                    <NextImage
+                      className="h-24 w-auto mx-auto"
                       src={logo.src}
                       alt={logo.alt}
                     />
