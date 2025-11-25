@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+// import { ArrowRight } from "lucide-react";
 import { servicesData } from "@/lib/services-data";
 
 // Generate ticker categories from services data
@@ -21,7 +21,7 @@ export default function ServicesPills() {
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Horizontal scrolling ticker */}
-        <div className="mb-10 overflow-hidden">
+        <div className="overflow-hidden">
           <div className="flex gap-6 animate-scroll-horizontal-fast">
             {[...tickerCategories, ...tickerCategories, ...tickerCategories].map((item, idx) => (
               <Link
@@ -33,9 +33,10 @@ export default function ServicesPills() {
               </Link>
             ))}
           </div>
+          </div>
         </div>
 
-        <h2 className="text-3xl lg:text-5xl font-bold text-center mb-10 animate-scale-in" style={{ animationDelay: '0.2s' }}>
+        {/* <h2 className="text-3xl lg:text-5xl font-bold text-center mb-10 animate-scale-in" style={{ animationDelay: '0.2s' }}>
           <span className="text-slate-900">What do you want to </span>
           <span className="text-blue-600">achieve?</span>
         </h2>
@@ -63,16 +64,17 @@ export default function ServicesPills() {
               </div>
             </Link>
           ))}
-        </div>
+        </div> */}
 
         {/* Additional decorative element */}
-        <div className="mt-16 text-center animate-fade-in" style={{ animationDelay: '0.8s' }}>
+        {/* <div className="mt-16 text-center animate-fade-in" style={{ animationDelay: '0.8s' }}>
           <div className="inline-flex items-center gap-3 px-6 py-3 bg-white border border-slate-200 rounded-full shadow-sm">
             <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
             <span className="text-slate-600 font-medium text-sm">100+ Projects Delivered Successfully</span>
           </div>
         </div>
       </div>
+      */}
 
       <style jsx>{`
         @keyframes scroll-horizontal-fast {
@@ -80,7 +82,7 @@ export default function ServicesPills() {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(-25%);
+            transform: translateX(-33.33%);
           }
         }
         .animate-scroll-horizontal-fast {
