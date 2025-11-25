@@ -29,7 +29,7 @@ const allAreas = [
 
 export default function LocalAreasSection() {
   return (
-    <section className="py-12 lg:py-20 bg-gradient-to-br from-cream via-white to-cream relative overflow-hidden">
+    <section className="py-10 lg:py-16 bg-gradient-to-br from-cream via-white to-cream relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-full opacity-50">
         <div className="absolute top-20 left-10 w-64 h-64 bg-teal/10 rounded-full blur-3xl animate-float" />
@@ -38,7 +38,7 @@ export default function LocalAreasSection() {
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-4xl mx-auto mb-12 lg:mb-16">
+        <div className="text-center max-w-4xl mx-auto mb-10 lg:mb-12">
           <h2 className="text-3xl lg:text-5xl font-bold text-teal mb-6 animate-fade-in">
             Your Local Web Development Company in Delhi NCR
           </h2>

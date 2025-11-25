@@ -14,14 +14,14 @@ const tickerCategories = servicesData.flatMap(category =>
 
 export default function ServicesPills() {
   return (
-    <section className="py-12 lg:py-20 bg-slate-50 relative overflow-hidden">
+    <section className="py-10 lg:py-16 bg-slate-50 relative overflow-hidden">
       {/* Floating background elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/5 rounded-full blur-3xl animate-float" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-slate-900/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Horizontal scrolling ticker */}
-        <div className="mb-16 overflow-hidden">
+        <div className="mb-10 overflow-hidden">
           <div className="flex gap-6 animate-scroll-horizontal-fast">
             {[...tickerCategories, ...tickerCategories, ...tickerCategories].map((item, idx) => (
               <Link
@@ -35,7 +35,7 @@ export default function ServicesPills() {
           </div>
         </div>
 
-        <h2 className="text-3xl lg:text-5xl font-bold text-center mb-12 animate-scale-in" style={{ animationDelay: '0.2s' }}>
+        <h2 className="text-3xl lg:text-5xl font-bold text-center mb-10 animate-scale-in" style={{ animationDelay: '0.2s' }}>
           <span className="text-slate-900">What do you want to </span>
           <span className="text-blue-600">achieve?</span>
         </h2>

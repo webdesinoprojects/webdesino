@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function SpecialistsSection() {
 	return (
-		<section className="py-12 lg:py-20 bg-slate-900 relative overflow-hidden">
+		<section className="py-10 lg:py-16 bg-slate-900 relative overflow-hidden">
 			{/* Animated background */}
 			<div className="absolute inset-0 overflow-hidden pointer-events-none">
 				<div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl animate-float" />
@@ -19,7 +19,7 @@ export default function SpecialistsSection() {
 			<div className="container mx-auto px-4 relative z-10">
 				<div className="max-w-5xl mx-auto">
 					{/* Header */}
-					<div className="text-center mb-16">
+					<div className="text-center mb-10">
 						<div className="inline-flex items-center gap-4 mb-6 animate-scale-in">
 							<div className="w-16 h-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full" />
 							<span className="text-sm font-bold text-blue-400 uppercase tracking-wider">

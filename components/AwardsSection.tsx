@@ -47,8 +47,8 @@ export default function AwardsSection() {
 						<span className="text-blue-600">with Awards</span>
 					</h2>
 					<p
-						className="text-center text-slate-600 mb-16 text-lg max-w-3xl mx-auto animate-fade-in"
-						style={{ animationDelay: "0.3s" }}
+						className="text-center text-slate-600 mb-10 text-lg max-w-3xl mx-auto animate-fade-in"
+						style={{ animationDelay: "0.2s" }}
 					>
 						Recognized for professional work and high-quality digital solutions that set industry benchmarks. Award-winning web
 						development and SEO services trusted by 100+ businesses in Delhi NCR.

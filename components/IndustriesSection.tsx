@@ -71,14 +71,14 @@ const industries = [
 
 export default function IndustriesSection() {
   return (
-    <section className="py-12 lg:py-20 bg-white relative overflow-hidden">
+    <section className="py-10 lg:py-16 bg-white relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-10 right-0 w-96 h-96 bg-teal/5 rounded-full blur-3xl" />
       <div className="absolute bottom-10 left-0 w-96 h-96 bg-orange/5 rounded-full blur-3xl" />
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10 lg:mb-12">
           <h2 className="text-3xl lg:text-5xl font-bold text-teal mb-4 animate-fade-in">
             Industries We Serve
           </h2>

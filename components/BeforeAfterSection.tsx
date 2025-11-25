@@ -15,14 +15,14 @@ export default function BeforeAfterSection({ industries: propIndustries }: Befor
   const [sliderPosition, setSliderPosition] = useState(50);
 
   return (
-    <section className="py-12 lg:py-20 bg-slate-50 relative overflow-hidden">
+    <section className="py-10 lg:py-16 bg-slate-50 relative overflow-hidden">
       {/* Floating background elements */}
       <div className="absolute top-20 left-10 w-96 h-96 bg-blue-600/5 rounded-full blur-3xl animate-float" />
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Animated scrolling ticker */}
-        <div className="mb-12 overflow-hidden">
+        <div className="mb-10 overflow-hidden">
           <div className="flex gap-8 animate-scroll-horizontal-fast">
             {[
               { text: "eCommerce", href: "/services/website-solutions/ecommerce-development" },

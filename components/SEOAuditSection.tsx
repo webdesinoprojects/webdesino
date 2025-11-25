@@ -20,7 +20,7 @@ export default function SEOAuditSection() {
   };
 
   return (
-    <section className="py-12 bg-gradient-to-br from-blue-600 to-indigo-700 text-white relative overflow-hidden">
+    <section className="py-10 bg-gradient-to-br from-blue-600 to-indigo-700 text-white relative overflow-hidden">
       <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
       
       <div className="container mx-auto px-4 relative z-10">

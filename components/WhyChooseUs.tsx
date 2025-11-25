@@ -11,12 +11,12 @@ export default function WhyChooseUs({ features }: WhyChooseUsProps) {
   if (features.length === 0) return null;
 
   return (
-    <section className="py-12 lg:py-20 bg-white relative overflow-hidden">
+    <section className="py-10 lg:py-16 bg-white relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-slate-50 -skew-x-12 translate-x-20 z-0" />
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-6">
             Why Choose <span className="text-blue-600">WebDesino?</span>
           </h2>

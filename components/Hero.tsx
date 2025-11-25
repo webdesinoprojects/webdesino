@@ -94,7 +94,7 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 
 	return (
 		<section
-			className="relative bg-slate-50 py-12 lg:py-20 overflow-hidden"
+			className="relative bg-slate-50 py-10 lg:py-16 overflow-hidden"
 			itemScope
 			itemType="https://schema.org/Organization"
 		>

@@ -5,7 +5,7 @@ import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 export default function SaaSSection() {
   return (
-    <section className="py-12 bg-slate-900 text-white relative overflow-hidden">
+    <section className="py-10 bg-slate-900 text-white relative overflow-hidden">
       <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5"></div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">

@@ -45,7 +45,7 @@ const logos = [
 
 export default function TrustedSection() {
   return (
-    <section className="py-16 lg:py-24 bg-white relative overflow-hidden">
+    <section className="py-12 lg:py-20 bg-white relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 opacity-50">
         <div className="absolute top-10 right-10 w-72 h-72 bg-blue-600/5 rounded-full blur-3xl animate-float" />

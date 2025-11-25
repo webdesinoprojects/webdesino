@@ -16,7 +16,7 @@ export default function MaximizeSection() {
   const [hovered, setHovered] = useState(false);
 
   return (
-    <section className="py-12 lg:py-20 bg-gradient-to-br from-teal/5 via-white to-orange/5 relative overflow-hidden">
+    <section className="py-10 lg:py-16 bg-gradient-to-br from-teal/5 via-white to-orange/5 relative overflow-hidden">
       {/* Animated background shapes */}
       <div className="absolute top-10 left-10 w-72 h-72 bg-gradient-radial from-orange/10 to-transparent rounded-full blur-3xl animate-float" />
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-gradient-radial from-teal/10 to-transparent rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />

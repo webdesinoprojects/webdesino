@@ -14,9 +14,9 @@ export default function Footer() {
         <div className="absolute bottom-10 right-10 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
       </div>
 
-      <div className="container mx-auto px-4 py-16 relative z-10">
+      <div className="container mx-auto px-4 py-12 relative z-10">
         {/* Newsletter Section */}
-        <div className="mb-16 text-center animate-fade-in">
+        <div className="mb-10 text-center animate-fade-in">
           <h3 className="text-3xl lg:text-4xl font-bold mb-4 gradient-text-orange">
             Stay Updated with WebDesino
           </h3>
@@ -50,8 +50,7 @@ export default function Footer() {
           {/* Company Info - Spans 3 columns */}
           <div className="lg:col-span-3 animate-slide-in-left" style={{ animationDelay: '0.1s' }}>
             <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
-              <span>Webdesino</span>
-              <span className="text-orange">.com</span>
+              <span>Webdesino<span className="text-orange">.com</span></span>
             </h3>
             <p className="text-gray-200 mb-6 leading-relaxed text-sm">
               Leading Digital Marketing Agency Delhi and web development

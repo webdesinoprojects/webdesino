@@ -22,9 +22,9 @@ export default function Portfolio({ projects }: PortfolioProps) {
       : projects.filter((p) => p.industry === activeFilter);
 
   return (
-    <section className="py-12 lg:py-20 bg-white" itemScope itemType="https://schema.org/ItemList">
+    <section className="py-10 lg:py-16 bg-white" itemScope itemType="https://schema.org/ItemList">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12 lg:mb-16">
+        <div className="text-center mb-10 lg:mb-12">
           <h2 className="text-3xl lg:text-5xl font-bold text-teal mb-4">
             Our Success Stories
           </h2>
@@ -40,7 +40,7 @@ export default function Portfolio({ projects }: PortfolioProps) {
         </div>
 
         {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
+        <div className="flex flex-wrap justify-center gap-3 mb-10">
           {industries.map((industry) => (
             <button
               key={industry}

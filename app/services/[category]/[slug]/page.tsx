@@ -3,6 +3,10 @@ import Link from "next/link";
 import { servicesData } from "@/lib/services-data";
 import { ArrowRight, CheckCircle2, Star, ChevronRight } from "lucide-react";
 import { generateServiceSchema, generateBreadcrumbSchema, BASE_URL } from "@/lib/seo";
+import ServiceEnquiryForm from "@/components/ServiceEnquiryForm";
+import ServiceTechStack from "@/components/ServiceTechStack";
+import ServiceIndustries from "@/components/ServiceIndustries";
+import ServiceFAQ from "@/components/ServiceFAQ";
 
 interface PageProps {
   params: {
@@ -76,14 +80,14 @@ export default function ServicePage({ params }: PageProps) {
       />
       {/* Breadcrumb */}
       <div className="bg-slate-50 border-b border-slate-200 sticky top-0 z-30 backdrop-blur-md bg-slate-50/90">
-        <div className="container mx-auto px-4 py-2">
-          <div className="flex items-center gap-2 text-sm text-slate-600 overflow-x-auto whitespace-nowrap pb-1 scrollbar-hide">
+        <div className="container mx-auto px-4 py-1">
+          <div className="flex items-center gap-0.5 text-xs md:text-sm text-slate-600 overflow-x-auto whitespace-nowrap pb-1 scrollbar-hide">
             <Link href="/" className="hover:text-blue-600 transition-colors">Home</Link>
-            <ChevronRight size={14} className="text-slate-400 flex-shrink-0" />
+            <ChevronRight size={12} className="text-slate-400 flex-shrink-0" />
             <Link href="/services" className="hover:text-blue-600 transition-colors">Services</Link>
-            <ChevronRight size={14} className="text-slate-400 flex-shrink-0" />
+            <ChevronRight size={12} className="text-slate-400 flex-shrink-0" />
             <Link href={`/services/${category.slug}`} className="hover:text-blue-600 transition-colors">{category.title}</Link>
-            <ChevronRight size={14} className="text-slate-400 flex-shrink-0" />
+            <ChevronRight size={12} className="text-slate-400 flex-shrink-0" />
             <span className="text-blue-600 font-medium">{service.title}</span>
           </div>
         </div>
@@ -93,7 +97,7 @@ export default function ServicePage({ params }: PageProps) {
       <div className="relative bg-teal text-white overflow-hidden">
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-white/5 to-transparent"></div>
-        <div className="container mx-auto px-4 py-20 md:py-32 relative z-10">
+        <div className="container mx-auto px-4 py-16 md:py-24 relative z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="animate-slide-in-left">
               <span className="inline-block px-4 py-1.5 bg-orange/20 text-orange rounded-full text-sm font-bold mb-6 border border-orange/30 backdrop-blur-sm">
@@ -120,28 +124,18 @@ export default function ServicePage({ params }: PageProps) {
                 </Link>
               </div>
             </div>
-            <div className="hidden md:block relative animate-scale-in">
-              <div className="aspect-square rounded-3xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 backdrop-blur-md p-8 flex items-center justify-center relative overflow-hidden shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-teal-400/20 to-purple-500/20 animate-pulse-glow"></div>
-                {/* Abstract representation of the service */}
-                <div className="text-center relative z-10">
-                  <div className="w-24 h-24 bg-orange/20 rounded-2xl flex items-center justify-center mx-auto mb-6 text-orange backdrop-blur-sm border border-orange/30">
-                    <Star size={48} />
-                  </div>
-                  <h3 className="text-3xl font-bold mb-2">{service.title}</h3>
-                  <p className="text-white/70">Professional Services</p>
-                </div>
-              </div>
+            <div className="hidden md:block relative z-20 animate-scale-in">
+              <ServiceEnquiryForm serviceTitle={service.title} />
             </div>
           </div>
         </div>
       </div>
 
       {/* Features Section */}
-      <div id="features" className="py-24 bg-white relative overflow-hidden">
+      <div id="features" className="py-16 bg-white relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
         <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-10">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
               Key Features of Our <span className="text-teal">{service.title}</span>
             </h2>
@@ -167,10 +161,13 @@ export default function ServicePage({ params }: PageProps) {
         </div>
       </div>
 
+      {/* Tech Stack Section */}
+      <ServiceTechStack categorySlug={category.slug} />
+
       {/* Our Process Section (New Enhancement) */}
-      <div className="py-24 bg-gray-50">
+      <div className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-10">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
               Our Approach to <span className="text-orange">{service.title}</span>
             </h2>
@@ -190,7 +187,7 @@ export default function ServicePage({ params }: PageProps) {
               { title: "Optimization", desc: "Refining for maximum performance." }
             ].map((step, idx) => (
               <div key={idx} className="text-center bg-white md:bg-transparent p-6 md:p-0 rounded-xl shadow-sm md:shadow-none">
-                <div className="w-24 h-24 bg-white rounded-full border-4 border-gray-100 flex items-center justify-center mx-auto mb-6 shadow-sm relative z-10">
+                <div className="w-24 h-24 bg-white rounded-full border-4 border-gray-100 flex items-center justify-center mx-auto mb-4 shadow-sm relative z-10">
                   <span className="text-3xl font-bold text-teal/20">{idx + 1}</span>
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">{step.title}</h3>
@@ -201,8 +198,11 @@ export default function ServicePage({ params }: PageProps) {
         </div>
       </div>
 
+      {/* Industries Section */}
+      <ServiceIndustries />
+
       {/* Benefits Section */}
-      <div className="py-24 bg-teal text-white relative overflow-hidden">
+      <div className="py-16 bg-teal text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -248,10 +248,13 @@ export default function ServicePage({ params }: PageProps) {
         </div>
       </div>
 
+      {/* FAQ Section */}
+      <ServiceFAQ serviceTitle={service.title} />
+
       {/* Related Services */}
-      <div className="py-20 bg-gray-50">
+      <div className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Other {category.title} Services</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-10 text-center">Other {category.title} Services</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {category.subtypes
               .filter(s => s.slug !== service.slug)
