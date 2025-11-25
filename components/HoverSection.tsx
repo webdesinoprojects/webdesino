@@ -23,7 +23,7 @@ export default function HoverSection() {
   const subtitle = "And transform your digital presence with WebDesino";
   
   return (
-    <section className="py-16 lg:py-24 bg-gradient-to-br from-cream via-white to-cream relative overflow-hidden">
+    <section className="py-12 lg:py-20 bg-gradient-to-br from-cream via-white to-cream relative overflow-hidden">
       {/* Animated background particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {particles.map((p, i) => (

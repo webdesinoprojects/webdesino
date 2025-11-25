@@ -13,13 +13,23 @@ const locations = [
 ];
 
 const allAreas = [
-  "Dwarka", "Uttam Nagar", "Bawana", "Karol Bagh", "Kalkaji", "Govindpuri",
-  "Kamla Nagar", "Shakti Nagar", "Civil Lines", "Rajouri Garden", "Sabzi Mandi", "Krishan Vihar"
+  { name: "Dwarka", href: "https://share.google/1oqOSK2n3UvhKbHu5" },
+  { name: "Uttam Nagar", href: "https://share.google/1oqOSK2n3UvhKbHu5" },
+  { name: "Bawana", href: "https://share.google/1oqOSK2n3UvhKbHu5" },
+  { name: "Karol Bagh", href: "https://share.google/1oqOSK2n3UvhKbHu5" },
+  { name: "Kalkaji", href: "https://share.google/1oqOSK2n3UvhKbHu5" },
+  { name: "Govindpuri", href: "https://share.google/1oqOSK2n3UvhKbHu5" },
+  { name: "Kamla Nagar", href: "https://share.google/HamoWu7AFPzS3TEoh" },
+  { name: "Shakti Nagar", href: "https://share.google/1oqOSK2n3UvhKbHu5" },
+  { name: "Civil Lines", href: "https://share.google/1oqOSK2n3UvhKbHu5" },
+  { name: "Rajouri Garden", href: "https://share.google/1oqOSK2n3UvhKbHu5" },
+  { name: "Sabzi Mandi", href: "https://share.google/1oqOSK2n3UvhKbHu5" },
+  { name: "Krishan Vihar", href: "https://share.google/1oqOSK2n3UvhKbHu5" }
 ];
 
 export default function LocalAreasSection() {
   return (
-    <section className="py-16 lg:py-24 bg-gradient-to-br from-cream via-white to-cream relative overflow-hidden">
+    <section className="py-12 lg:py-20 bg-gradient-to-br from-cream via-white to-cream relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-full opacity-50">
         <div className="absolute top-20 left-10 w-64 h-64 bg-teal/10 rounded-full blur-3xl animate-float" />
@@ -34,7 +44,16 @@ export default function LocalAreasSection() {
           </h2>
           <div className="space-y-4 text-gray-700 text-lg leading-relaxed animate-fade-in" style={{ animationDelay: '0.1s' }}>
             <p>
-              At WebDesino, we are proud to be the trusted local web development and digital marketing company in Delhi NCR. We help businesses across <strong>{allAreas.join(", ")}</strong> establish a strong digital presence.
+              At WebDesino, we are proud to be the trusted local web development and digital marketing company in Delhi NCR. We help businesses across{" "}
+              {allAreas.map((area, idx) => (
+                <span key={idx}>
+                  <Link href={area.href} className="text-orange hover:underline font-medium">
+                    {area.name}
+                  </Link>
+                  {idx < allAreas.length - 1 ? ", " : ""}
+                </span>
+              ))}
+              {" "}establish a strong digital presence.
             </p>
             <p>
               Whether you run a small shop, a clinic, a real estate agency, or an ecommerce brand, our SEO-optimized websites and marketing strategies ensure higher visibility, more leads, and improved conversions. We focus on Google Maps SEO and hyperlocal strategies so your business shows up when customers in your neighborhood search online.

@@ -18,7 +18,7 @@ export default function FAQ({ faqs }: FAQProps) {
   if (faqs.length === 0) return null;
 
   return (
-    <section className="py-16 lg:py-24 bg-white" itemScope itemType="https://schema.org/FAQPage">
+    <section className="py-12 lg:py-20 bg-white" itemScope itemType="https://schema.org/FAQPage">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl lg:text-5xl font-bold text-center text-teal mb-12 lg:mb-16">
           Frequently Asked Questions

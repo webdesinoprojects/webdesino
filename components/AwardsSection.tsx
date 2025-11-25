@@ -11,7 +11,7 @@ const awards = [
 
 export default function AwardsSection() {
 	return (
-		<section className="py-16 lg:py-24 bg-slate-50 relative overflow-hidden">
+		<section className="py-2 lg:py-4 bg-slate-50 relative overflow-hidden">
 			{/* Animated background */}
 			<div className="absolute inset-0 overflow-hidden pointer-events-none">
 				<div className="absolute top-10 left-10 w-72 h-72 bg-blue-600/5 rounded-full blur-3xl animate-float" />
@@ -24,7 +24,7 @@ export default function AwardsSection() {
 			<div className="container mx-auto px-4 relative z-10">
 				<div className="max-w-6xl mx-auto">
 					{/* Animated scrolling ticker */}
-					<div className="mb-12 overflow-hidden">
+					<div className="my-6 overflow-hidden">
 						<div className="flex gap-8 animate-scroll-horizontal">
 							{["Awards", "Awards", "Awards", "Awards", "Awards", "Awards", "Awards", "Awards"].map((text, idx) => (
 								<div
@@ -55,50 +55,50 @@ export default function AwardsSection() {
 					</p>
 
 					{/* Awards Grid with 3D Effect */}
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-0">
 						{awards.map((award, idx) => {
 							const IconComponent = award.icon;
 							return (
 								<div
 									key={idx}
-									className="group relative bg-white border border-slate-200 rounded-3xl overflow-hidden hover-lift cursor-pointer transition-all duration-500 animate-scale-in hover:shadow-xl hover:border-blue-200"
+									className="group relative bg-white border border-slate-200 rounded-3xl overflow-hidden hover-lift cursor-pointer transition-all duration-500 animate-scale-in hover:shadow-2xl hover:border-blue-300"
 									style={{ animationDelay: `${0.4 + idx * 0.1}s` }}
 								>
 									{/* Gradient background on hover */}
 									<div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-									<div className="relative p-8">
+									<div className="relative p-8 flex flex-col items-center h-full">
 										{/* Icon/Image Container */}
-										<div className="aspect-square mb-6 bg-slate-50 rounded-2xl relative overflow-hidden group-hover:scale-105 transition-transform duration-500 group-hover:bg-white/10">
-											<div className="absolute inset-0 flex items-center justify-center">
-												<IconComponent className="w-20 h-20 text-blue-600 group-hover:text-white transition-colors" />
-											</div>
+										<div className="w-20 h-20 my-2 bg-slate-50 rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors duration-500 shadow-inner">
+											<IconComponent className="w-10 h-10 text-blue-600 group-hover:text-white transition-colors" />
 										</div>
 
-										<div className="text-center">
-											<p className="font-bold text-slate-900 group-hover:text-white transition-colors mb-2">
+										<div className="text-center mt-auto">
+											<h3 className="text-lg font-bold text-slate-900 group-hover:text-white transition-colors mb-2 leading-tight">
 												{award.title}
-											</p>
-											<p className="text-sm text-slate-500 group-hover:text-white/80 transition-colors">
+											</h3>
+											<div className="w-12 h-1 bg-blue-100 group-hover:bg-white/30 mx-auto my-3 rounded-full transition-colors" />
+											<p className="text-sm font-medium text-slate-500 group-hover:text-white/90 transition-colors uppercase tracking-wide">
 												{award.org}
 											</p>
 										</div>
 									</div>
 
 									{/* Corner decoration */}
-									<div className="absolute top-4 right-4 w-3 h-3 bg-blue-600 rounded-full opacity-0 group-hover:opacity-100 animate-pulse-glow transition-opacity group-hover:bg-white" />
+									<div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+										<Star className="w-6 h-6 text-yellow-300 fill-yellow-300 animate-pulse" />
+									</div>
 								</div>
 							);
 						})}
 					</div>
 
 					{/* Certifications Banner */}
-					<div
+					{/* <div
 						className="bg-white border border-slate-200 rounded-3xl p-8 lg:p-12 text-center animate-fade-in shadow-sm"
 						style={{ animationDelay: "0.8s" }}
-					>
-						{/* Content for certifications banner if needed, or remove if empty in original */}
-					</div>
+					> */}
+					{/* </div> */}
 				</div>
 			</div>
 			<style jsx>{`

@@ -22,7 +22,7 @@ export default function Portfolio({ projects }: PortfolioProps) {
       : projects.filter((p) => p.industry === activeFilter);
 
   return (
-    <section className="py-16 lg:py-24 bg-white" itemScope itemType="https://schema.org/ItemList">
+    <section className="py-12 lg:py-20 bg-white" itemScope itemType="https://schema.org/ItemList">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12 lg:mb-16">
           <h2 className="text-3xl lg:text-5xl font-bold text-teal mb-4">

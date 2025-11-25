@@ -28,6 +28,7 @@ import {
   getFeatures,
   getResults,
   getCaseStudies,
+  getHeroShowcaseItems,
 } from "@/lib/data";
 
 export const metadata = {
@@ -45,6 +46,7 @@ export default function Home() {
   const features = getFeatures();
   const results = getResults();
   const caseStudies = getCaseStudies();
+  const heroShowcaseItems = getHeroShowcaseItems();
   
   const jsonLd = generateWebSiteSchema();
 
@@ -54,7 +56,8 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Hero />
+      <Hero showcaseItems={heroShowcaseItems} />
+      <TrustedSection />
       <ServicesPills />
       <WhyChooseUs features={features} />
       <IndustriesSection />
@@ -66,7 +69,6 @@ export default function Home() {
       <SpecialistsSection />
       <LocalAreasSection />
       <BlogSection />
-      <TrustedSection />
       <AwardsSection />
       <BeforeAfterSection />
       <SaaSSection />

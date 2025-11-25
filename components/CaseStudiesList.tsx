@@ -11,7 +11,7 @@ export default function CaseStudiesList({ caseStudies }: CaseStudiesListProps) {
   if (caseStudies.length === 0) return null;
 
   return (
-    <section className="py-16 lg:py-24 bg-white">
+    <section className="py-12 lg:py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl lg:text-5xl font-bold text-center text-teal mb-12 animate-fade-in">

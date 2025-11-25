@@ -1,22 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { Linkedin, Globe, Award, CheckCircle } from "lucide-react";
 import Image from "next/image";
-
-const specialists = [
-  { name: "Rohit Tiwari", role: "Founder & CEO", image: "/rohittiwari.png", color: "from-blue-600 to-cyan-500" },
-  { name: "Vishnu Sharma", role: "Co-Founder", image: "/vishnusharma.png", color: "from-cyan-500 to-blue-600" },
-  { name: "Akash Tiwari", role: "Digital Marketer", image: "/akashtiwari.png", color: "from-blue-500 to-indigo-500" },
-  { name: "Rajeev Ranjan", role: "Web Developer", image: "/rajeevranjan.png", color: "from-indigo-500 to-blue-500" },
-  { name: "Ankit Tiwari", role: "Digital Marketer", image: "/ankittiwari.png", color: "from-blue-600 to-cyan-500" },
-  { name: "Shubham", role: "Manager", image: "/shubham.png", color: "from-cyan-500 to-blue-600" },
-];
+import Link from "next/link";
 
 export default function SpecialistsSection() {
-	const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-
 	return (
-		<section className="py-16 lg:py-24 bg-slate-900 relative overflow-hidden">
+		<section className="py-12 lg:py-20 bg-slate-900 relative overflow-hidden">
 			{/* Animated background */}
 			<div className="absolute inset-0 overflow-hidden pointer-events-none">
 				<div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl animate-float" />
@@ -27,129 +17,118 @@ export default function SpecialistsSection() {
 			</div>
 
 			<div className="container mx-auto px-4 relative z-10">
-				<div className="max-w-6xl mx-auto">
-					{/* Header with animated stats */}
+				<div className="max-w-5xl mx-auto">
+					{/* Header */}
 					<div className="text-center mb-16">
 						<div className="inline-flex items-center gap-4 mb-6 animate-scale-in">
 							<div className="w-16 h-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full" />
 							<span className="text-sm font-bold text-blue-400 uppercase tracking-wider">
-								Our Team
+								Leadership
 							</span>
 							<div className="w-16 h-1 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full" />
 						</div>
 
-						<h2 className="text-4xl lg:text-6xl font-bold mb-4 animate-slide-up text-white" style={{ animationDelay: "0.1s" }}>
-							<span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">Meet Our Experts</span>
+						<h2 className="text-4xl lg:text-6xl font-bold mb-4 animate-slide-up text-white">
+							<span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">
+								Meet The Founder
+							</span>
 						</h2>
+					</div>
 
-						<p className="text-xl lg:text-2xl text-slate-400 mb-8 animate-fade-in" style={{ animationDelay: "0.3s" }}>
-							Find a team of Web Developers you can rely on.
-						</p>
+					{/* Founder Card */}
+					<div className="bg-slate-800/50 backdrop-blur-md border border-slate-700 rounded-3xl p-8 lg:p-12 hover:border-blue-500/50 transition-all duration-500 shadow-2xl">
+						<div className="flex flex-col lg:flex-row items-center gap-12">
+							{/* Image Column */}
+							<div className="w-full lg:w-1/3">
+								<div className="relative group">
+									<div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-3xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-500" />
+									<div className="relative rounded-3xl overflow-hidden border-2 border-slate-600 group-hover:border-blue-500 transition-colors duration-300 aspect-[4/5]">
+										<Image
+											src="/rohittiwari.png"
+											alt="Rohit Tiwari - Founder & CEO"
+											fill
+											className="object-cover transform group-hover:scale-105 transition-transform duration-500"
+										/>
+									</div>
 
-						{/* Stats row */}
-						<div className="flex justify-center gap-8 flex-wrap mb-12 animate-fade-in" style={{ animationDelay: "0.5s" }}>
-							<div className="text-center">
-								<div className="text-3xl lg:text-5xl font-bold text-blue-500 mb-2">
-									100+
-								</div>
-								<div className="text-slate-400 font-medium">
-									Projects Completed
+									{/* Social Links Floating */}
+									<div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex gap-4">
+										<Link
+											href="https://www.linkedin.com/in/irohittiwari/"
+											target="_blank"
+											className="p-3 bg-slate-900 border border-slate-700 rounded-full text-white hover:bg-blue-600 hover:border-blue-500 transition-all duration-300 shadow-lg"
+										>
+											<Linkedin size={20} />
+										</Link>
+										<Link
+											href="https://www.google.com/search?q=Rohit+Tiwari+-+Web+Developer+and+designer&oq=ro&gs_lcrp=EgZjaHJvbWUqDggAEEUYJxg7GIAEGIoFMg4IABBFGCcYOxiABBiKBTIGCAEQRRg8Mg0IAhAuGIMBGLEDGIAEMggIAxBFGCcYOzIGCAQQRRg5MgYIBRBFGDwyBggGEEUYPDIGCAcQRRg80gEIMTg4M2owajeoAgCwAgA&sourceid=chrome&ie=UTF-8"
+											target="_blank"
+											className="p-3 bg-slate-900 border border-slate-700 rounded-full text-white hover:bg-blue-600 hover:border-blue-500 transition-all duration-300 shadow-lg"
+										>
+											<Globe size={20} />
+										</Link>
+									</div>
 								</div>
 							</div>
-							<div className="w-px bg-slate-800" />
-							<div className="text-center">
-								<div className="text-3xl lg:text-5xl font-bold text-cyan-400 mb-2">
-									₹6.3 Cr+
+
+							{/* Content Column */}
+							<div className="w-full lg:w-2/3 text-center lg:text-left">
+								<div className="mb-6">
+									<h3 className="text-3xl lg:text-4xl font-bold text-white mb-2">
+										Rohit Tiwari
+									</h3>
+									<p className="text-xl text-blue-400 font-medium">
+										Founder & CEO
+									</p>
 								</div>
-								<div className="text-slate-400 font-medium">
-									Sales Generated
+
+								<p className="text-slate-300 text-lg leading-relaxed mb-8">
+									"At WebDesino, we don't just build websites; we build
+									digital legacies. My mission is to empower businesses in
+									Delhi NCR and beyond with technology that drives real
+									growth. From a single line of code to a full-scale digital
+									transformation, we are committed to excellence."
+								</p>
+
+								<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+									<div className="flex items-center gap-4 p-4 bg-slate-900/50 rounded-xl border border-slate-700/50">
+										<div className="p-3 bg-blue-500/10 rounded-lg text-blue-400">
+											<Award size={24} />
+										</div>
+										<div className="text-left">
+											<div className="text-white font-bold">3+ Years</div>
+											<div className="text-slate-400 text-sm">
+												Industry Experience
+											</div>
+										</div>
+									</div>
+									<div className="flex items-center gap-4 p-4 bg-slate-900/50 rounded-xl border border-slate-700/50">
+										<div className="p-3 bg-cyan-500/10 rounded-lg text-cyan-400">
+											<CheckCircle size={24} />
+										</div>
+										<div className="text-left">
+											<div className="text-white font-bold">100+ Projects</div>
+											<div className="text-slate-400 text-sm">
+												Successfully Delivered
+											</div>
+										</div>
+									</div>
 								</div>
-							</div>
-							<div className="w-px bg-slate-800" />
-							<div className="text-center">
-								<div className="text-3xl lg:text-5xl font-bold text-blue-500 mb-2">
-									50+
-								</div>
-								<div className="text-slate-400 font-medium">
-									Happy Clients
+
+								<div className="flex flex-wrap justify-center lg:justify-start gap-3">
+									{["Web Development", "UI/UX Design", "Digital Strategy", "SEO Expert"].map(
+										(skill) => (
+											<span
+												key={skill}
+												className="px-4 py-2 bg-slate-800 border border-slate-700 rounded-full text-slate-300 text-sm"
+											>
+												{skill}
+											</span>
+										)
+									)}
 								</div>
 							</div>
 						</div>
-					</div>
-
-					{/* Featured Specialists Grid */}
-					<div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-12">
-						{specialists.map((specialist, idx) => (
-							<div
-								key={idx}
-								className="group relative p-6 bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-3xl hover:border-blue-500/50 cursor-pointer transition-all duration-500 animate-scale-in"
-								style={{ animationDelay: `${0.6 + idx * 0.1}s` }}
-								onMouseEnter={() => setHoveredCard(idx)}
-								onMouseLeave={() => setHoveredCard(null)}
-							>
-								{/* Animated gradient background */}
-								<div
-									className={`absolute inset-0 bg-gradient-to-br ${specialist.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-3xl`}
-								/>
-
-								<div className="relative z-10">
-									{/* Avatar */}
-									<div className="w-24 h-24 mx-auto mb-4 relative rounded-full overflow-hidden border-2 border-slate-600 group-hover:border-blue-500 transition-colors duration-300 shadow-lg group-hover:scale-110 transform">
-                                        <Image
-                                            src={specialist.image}
-                                            alt={specialist.name}
-                                            fill
-                                            className="object-cover"
-                                        />
-									</div>
-
-									<div className="text-center">
-										<h3 className="text-lg font-bold text-white mb-1 group-hover:text-blue-400 transition-colors">
-											{specialist.name}
-										</h3>
-										<p className="text-sm text-slate-400 group-hover:text-slate-300 transition-colors">
-											{specialist.role}
-										</p>
-									</div>
-
-									{/* Status indicator */}
-									{/* <div className="mt-4 flex items-center justify-center gap-2">
-										<div className="w-2 h-2 bg-green-500 rounded-full animate-pulse-glow" />
-										<span className="text-xs text-slate-500 group-hover:text-slate-400 transition-colors">
-											Available Now
-										</span>
-									</div> */}
-								</div>
-							</div>
-						))}
-					</div>
-
-					{/* Team Grid - Smaller avatars */}
-					{/* <div className="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-3 animate-fade-in" style={{ animationDelay: "1.2s" }}>
-						{Array.from({ length: 24 }).map((_, idx) => (
-							<div
-								key={idx}
-								className="aspect-square rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center overflow-hidden hover:scale-110 hover:border-blue-500 transition-all duration-300 cursor-pointer"
-								style={{ animationDelay: `${1.2 + idx * 0.02}s` }}
-							>
-								<div
-									className={`w-full h-full bg-gradient-to-br ${
-										idx % 2 === 0 ? "from-blue-600 to-cyan-500" : "from-cyan-500 to-blue-600"
-									} opacity-20`}
-								/>
-								<div className="absolute text-xl grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all">👤</div>
-							</div>
-						))}
-					</div> */}
-
-					{/* CTA */}
-					<div className="text-center mt-12 animate-fade-in" style={{ animationDelay: "1.4s" }}>
-						<p className="text-slate-400 mb-4">
-							Trusted by businesses across Delhi NCR for professional web development and digital marketing solutions
-						</p>
-						<button className="px-8 py-4 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-blue-600/25">
-							Join Our Success Stories
-						</button>
 					</div>
 				</div>
 			</div>

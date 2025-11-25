@@ -26,7 +26,7 @@ export default function ResultsSection({ results }: ResultsSectionProps) {
   if (results.length === 0) return null;
 
   return (
-    <section className="py-16 lg:py-24 bg-slate-50 relative overflow-hidden">
+    <section className="py-12 lg:py-20 bg-slate-50 relative overflow-hidden">
       {/* Animated background particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {particles.map((p, i) => (

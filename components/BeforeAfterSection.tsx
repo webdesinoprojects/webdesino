@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { getIndustries } from "@/lib/data";
 import { ArrowRight, TrendingUp, Users, DollarSign, BarChart, Rocket } from "lucide-react";
 
@@ -14,7 +15,7 @@ export default function BeforeAfterSection({ industries: propIndustries }: Befor
   const [sliderPosition, setSliderPosition] = useState(50);
 
   return (
-    <section className="py-16 lg:py-24 bg-slate-50 relative overflow-hidden">
+    <section className="py-12 lg:py-20 bg-slate-50 relative overflow-hidden">
       {/* Floating background elements */}
       <div className="absolute top-20 left-10 w-96 h-96 bg-blue-600/5 rounded-full blur-3xl animate-float" />
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
@@ -23,13 +24,23 @@ export default function BeforeAfterSection({ industries: propIndustries }: Befor
         {/* Animated scrolling ticker */}
         <div className="mb-12 overflow-hidden">
           <div className="flex gap-8 animate-scroll-horizontal-fast">
-            {["eCommerce", "Web Solutions", "Mobile Apps", "ERP/CRM", "Digital Marketing", "eCommerce", "Web Solutions", "Mobile Apps"].map((category, idx) => (
-              <div
+            {[
+              { text: "eCommerce", href: "/services/website-solutions/ecommerce-development" },
+              { text: "Web Solutions", href: "/services/website-solutions" },
+              { text: "Mobile Apps", href: "/services" },
+              { text: "ERP/CRM", href: "/services" },
+              { text: "Digital Marketing", href: "/services/digital-marketing" },
+              { text: "eCommerce", href: "/services/website-solutions/ecommerce-development" },
+              { text: "Web Solutions", href: "/services/website-solutions" },
+              { text: "Mobile Apps", href: "/services" }
+            ].map((item, idx) => (
+              <Link
                 key={idx}
-                className="flex-shrink-0 px-6 py-3 bg-white border border-slate-200 rounded-full text-blue-600 font-bold text-lg whitespace-nowrap hover:shadow-md transition-all cursor-pointer"
+                href={item.href}
+                className="flex-shrink-0 px-6 py-3 bg-white border border-slate-200 rounded-full text-blue-600 font-bold text-lg whitespace-nowrap hover:shadow-md transition-all cursor-pointer hover:bg-blue-50"
               >
-                {category}
-              </div>
+                {item.text}
+              </Link>
             ))}
           </div>
         </div>

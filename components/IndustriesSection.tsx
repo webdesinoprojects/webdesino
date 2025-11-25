@@ -71,7 +71,7 @@ const industries = [
 
 export default function IndustriesSection() {
   return (
-    <section className="py-16 lg:py-24 bg-white relative overflow-hidden">
+    <section className="py-12 lg:py-20 bg-white relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-10 right-0 w-96 h-96 bg-teal/5 rounded-full blur-3xl" />
       <div className="absolute bottom-10 left-0 w-96 h-96 bg-orange/5 rounded-full blur-3xl" />

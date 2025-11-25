@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Home, ChevronDown, Menu, X, GraduationCap, BookOpen, Pill, ShoppingBag, Users } from "lucide-react";
 import { servicesData } from "@/lib/services-data";
@@ -35,12 +35,26 @@ export default function BottomNav() {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileExpandedItem, setMobileExpandedItem] = useState<string | null>(null);
+  const navRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setHoveredItem(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
 
     <>
       {/* Desktop Navigation */}
-      <nav className="hidden lg:block fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+      <nav ref={navRef} className="hidden lg:block fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
         <div className="bg-slate-900/90 backdrop-blur-md rounded-full shadow-2xl px-4 py-3 flex items-center gap-2 border border-slate-800">
           {navItems.map((item, idx) => {
             const Icon = item.icon;
@@ -48,13 +62,23 @@ export default function BottomNav() {
               <div
                 key={idx}
                 className="relative"
-                onMouseEnter={() => item.hasDropdown && setHoveredItem(item.label)}
-                onMouseLeave={() => setHoveredItem(null)}
               >
                 <Link
                   href={item.href}
-                  className="flex items-center gap-2 px-4 py-2 rounded-full text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-200 font-medium text-sm whitespace-nowrap"
+                  className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-200 font-medium text-sm whitespace-nowrap ${
+                    hoveredItem === item.label 
+                      ? "text-white bg-white/10" 
+                      : "text-slate-300 hover:text-white hover:bg-white/10"
+                  }`}
                   aria-label={item.label}
+                  onClick={(e) => {
+                    if (item.hasDropdown) {
+                      e.preventDefault();
+                      setHoveredItem(hoveredItem === item.label ? null : item.label);
+                    } else {
+                      setHoveredItem(null);
+                    }
+                  }}
                 >
                   {Icon && <Icon size={18} />}
                   {item.label && <span>{item.label}</span>}

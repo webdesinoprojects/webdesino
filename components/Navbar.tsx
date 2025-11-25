@@ -49,8 +49,7 @@ export default function Navbar() {
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2 font-bold text-xl hover:text-blue-400 transition">
-              <span>Webdesino</span>
-              <span className="text-blue-500">.com</span>
+              <span>Webdesino<span className="text-blue-500">.com</span></span>
             </Link>
             <div className="hidden md:flex items-center gap-6 text-sm text-slate-300">
               <a href="tel:+919310851557" className="flex items-center gap-2 hover:text-blue-400 transition">

@@ -428,7 +428,7 @@ export const getClients = (): Client[] => {
     { name: "ShopHipV", url: "https://shophipv.com/", image: "https://api.microlink.io/?url=https://shophipv.com/&screenshot=true&embed=screenshot.url", category: "Shopify Websites" },
 
     // Our Apps
-    { name: "Fancee User", url: "https://play.google.com/store/apps/details?id=com.fancee.user", image: "https://play-lh.googleusercontent.com/8P2P5j2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k", category: "Our Apps" },
+    { name: "Fancee User", url: "https://play.google.com/store/apps/details?id=com.fancee.user", image: "https://play-lh.googleusercontent.com/8P2P5j2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k", category: "Our Apps" },
     { name: "Fancee Celebrity", url: "https://play.google.com/store/apps/details?id=com.fancee.celebrity", image: "https://play-lh.googleusercontent.com/8P2P5j2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k", category: "Our Apps" },
     { name: "CityExpressKart Delivery", url: "https://play.google.com/store/apps/details?id=com.cityexpresskart.delivery", image: "https://play-lh.googleusercontent.com/8P2P5j2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k", category: "Our Apps" },
     { name: "Oorkart", url: "https://apps.apple.com/in/app/oorkart/id6475118165", image: "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/df/2f/3f/df2f3f3f-3f3f-3f3f-3f3f-3f3f3f3f3f3f/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/246x0w.webp", category: "Our Apps" },
@@ -1205,6 +1205,84 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "April 22, 2024",
       category: "Blog",
       excerpt: "Qui sapiente illo repellendus vel vero In ut inventore animi perspiciatis. Deserunt ipsam consequatur exercitationem quibusdam ipsa odit eius. Nesciunt et illum sit animi Nulla",
+    },
+  ];
+};
+
+export interface HeroShowcaseItem {
+  name: string;
+  category: string;
+  stat: string;
+  description: string;
+  iconName: "Store" | "Smartphone" | "Megaphone" | "Palette" | "Globe" | "TrendingUp";
+  iconColor: string;
+}
+
+export const getHeroShowcaseItems = (): HeroShowcaseItem[] => {
+  return [
+    { 
+      name: "BookBuzzz", 
+      category: "E-commerce Website", 
+      stat: "₹25L+ Sales", 
+      description: "Scaled from zero to ₹25L+ monthly sales in 3 months",
+      iconName: "Store",
+      iconColor: "text-blue-600"
+    },
+    { 
+      name: "Fitness Pro", 
+      category: "Mobile App", 
+      stat: "50k+ Downloads", 
+      description: "Cross-platform fitness tracking app with real-time analytics",
+      iconName: "Smartphone",
+      iconColor: "text-green-600"
+    },
+    { 
+      name: "Growth Campaign", 
+      category: "Digital Marketing", 
+      stat: "500% ROI", 
+      description: "Data-driven ad campaigns delivering massive returns",
+      iconName: "Megaphone",
+      iconColor: "text-purple-600"
+    },
+    { 
+      name: "Brand Identity", 
+      category: "Graphic Designing", 
+      stat: "Viral Content", 
+      description: "Stunning visuals and reels that captured millions of views",
+      iconName: "Palette",
+      iconColor: "text-pink-600"
+    },
+    { 
+      name: "Meritshot", 
+      category: "Education Platform", 
+      stat: "Global Rank #1", 
+      description: "Ranked #1 globally for Investment Banking courses",
+      iconName: "Globe",
+      iconColor: "text-cyan-600"
+    },
+    { 
+      name: "Foodie Express", 
+      category: "Food Delivery App", 
+      stat: "4.8 Star Rating", 
+      description: "Seamless food ordering experience with live tracking",
+      iconName: "Smartphone",
+      iconColor: "text-orange-600"
+    },
+    { 
+      name: "SEO Dominance", 
+      category: "SEO Services", 
+      stat: "1st Page Rank", 
+      description: "Ranking businesses on top for competitive keywords",
+      iconName: "TrendingUp",
+      iconColor: "text-indigo-600"
+    },
+    { 
+      name: "Social Reels", 
+      category: "Video Editing", 
+      stat: "1M+ Views", 
+      description: "High-retention video edits for social media growth",
+      iconName: "Palette",
+      iconColor: "text-red-600"
     },
   ];
 };

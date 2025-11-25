@@ -7,7 +7,7 @@ export default function BlogSection() {
   const posts = getBlogPosts().slice(0, 3); // Get latest 3 posts
 
   return (
-    <section className="py-20 bg-slate-50">
+    <section className="py-12 bg-slate-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <span className="text-blue-600 font-bold tracking-wider uppercase text-sm mb-2 block">

@@ -16,7 +16,7 @@ export default function MaximizeSection() {
   const [hovered, setHovered] = useState(false);
 
   return (
-    <section className="py-16 lg:py-24 bg-gradient-to-br from-teal/5 via-white to-orange/5 relative overflow-hidden">
+    <section className="py-12 lg:py-20 bg-gradient-to-br from-teal/5 via-white to-orange/5 relative overflow-hidden">
       {/* Animated background shapes */}
       <div className="absolute top-10 left-10 w-72 h-72 bg-gradient-radial from-orange/10 to-transparent rounded-full blur-3xl animate-float" />
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-gradient-radial from-teal/10 to-transparent rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
@@ -24,7 +24,7 @@ export default function MaximizeSection() {
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-6xl mx-auto">
           {/* Main Heading with Animated Gradient Text */}
-          <div className="mb-12 text-center lg:text-left">
+          <div className="mb-0 text-center lg:text-left">
             <div className="inline-block px-4 py-2 bg-orange/10 rounded-full mb-6 animate-fade-in">
               <span className="text-sm font-bold text-orange uppercase tracking-wide flex items-center gap-2">
                 <Rocket className="w-4 h-4" />
@@ -76,7 +76,7 @@ export default function MaximizeSection() {
 
           {/* Trusted Certifications & Recognition */}
           <div className="relative animate-scale-in" style={{ animationDelay: '0.6s' }}>
-            <div className="text-center mb-6">
+            {/* <div className="text-center mb-6">
               <h3 className="text-xl font-bold text-teal mb-2">Trusted Web Development Company in Delhi NCR</h3>
               <p className="text-sm text-gray-600">Recognized by global leaders and trusted by 50+ clients</p>
             </div>
@@ -99,28 +99,28 @@ export default function MaximizeSection() {
                   <div className="text-xs text-gray-600">{cert.description}</div>
                 </a>
               ))}
-            </div>
+            </div> */}
 
             {/* Quick Stats Banner */}
             <div className="glass-strong rounded-2xl p-6 text-center">
-              <p className="text-sm text-gray-600 mb-3">Recognized for professional work and high-quality digital solutions</p>
+              <p className="text-md text-gray-600 mb-3">Recognized for professional work and high-quality digital solutions</p>
               <div className="flex flex-wrap justify-center gap-6">
                 <div className="flex items-center gap-2">
-                  <Star className="w-8 h-8 text-orange" />
+                  <Star className="w-10 h-10 text-orange" />
                   <div>
                     <div className="font-bold text-orange">4.9/5</div>
                     <div className="text-xs text-gray-600">Client Rating</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Trophy className="w-8 h-8 text-orange" />
+                  <Trophy className="w-10 h-10 text-orange" />
                   <div>
                     <div className="font-bold text-teal">10+</div>
                     <div className="text-xs text-gray-600">Certifications</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Rocket className="w-8 h-8 text-orange" />
+                  <Rocket className="w-10 h-10 text-orange" />
                   <div>
                     <div className="font-bold text-orange">100%</div>
                     <div className="text-xs text-gray-600">Success Rate</div>

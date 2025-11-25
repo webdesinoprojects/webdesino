@@ -11,7 +11,7 @@ export default function WhyChooseUs({ features }: WhyChooseUsProps) {
   if (features.length === 0) return null;
 
   return (
-    <section className="py-20 lg:py-32 bg-white relative overflow-hidden">
+    <section className="py-12 lg:py-20 bg-white relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-slate-50 -skew-x-12 translate-x-20 z-0" />
       

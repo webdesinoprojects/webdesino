@@ -10,11 +10,16 @@ const config: Config = {
     extend: {
       animation: {
         'infinite-scroll': 'infinite-scroll 25s linear infinite',
+        'scroll-y': 'scroll-y 40s linear infinite',
       },
       keyframes: {
         'infinite-scroll': {
           from: { transform: 'translateX(0)' },
           to: { transform: 'translateX(-100%)' },
+        },
+        'scroll-y': {
+          from: { transform: 'translateY(0)' },
+          to: { transform: 'translateY(-33.33%)' },
         }
       },
       colors: {

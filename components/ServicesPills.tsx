@@ -6,12 +6,15 @@ import { servicesData } from "@/lib/services-data";
 
 // Generate ticker categories from services data
 const tickerCategories = servicesData.flatMap(category => 
-  category.subtypes.map(subtype => subtype.title)
+  category.subtypes.map(subtype => ({
+    title: subtype.title,
+    href: `/services/${category.slug}/${subtype.slug}`
+  }))
 ).slice(0, 10); // Take first 10 to avoid too long list
 
 export default function ServicesPills() {
   return (
-    <section className="py-20 lg:py-32 bg-slate-50 relative overflow-hidden">
+    <section className="py-12 lg:py-20 bg-slate-50 relative overflow-hidden">
       {/* Floating background elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/5 rounded-full blur-3xl animate-float" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-slate-900/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
@@ -20,13 +23,14 @@ export default function ServicesPills() {
         {/* Horizontal scrolling ticker */}
         <div className="mb-16 overflow-hidden">
           <div className="flex gap-6 animate-scroll-horizontal-fast">
-            {[...tickerCategories, ...tickerCategories, ...tickerCategories].map((category, idx) => (
-              <div
+            {[...tickerCategories, ...tickerCategories, ...tickerCategories].map((item, idx) => (
+              <Link
                 key={idx}
-                className="flex-shrink-0 px-6 py-3 bg-white border border-slate-200 rounded-full shadow-sm text-slate-600 font-medium text-sm whitespace-nowrap hover:border-blue-400 hover:text-blue-600 transition-colors cursor-default"
+                href={item.href}
+                className="flex-shrink-0 px-6 py-3 bg-white border border-slate-200 rounded-full shadow-sm text-slate-600 font-medium text-sm whitespace-nowrap hover:border-blue-400 hover:text-blue-600 transition-colors cursor-pointer"
               >
-                {category}
-              </div>
+                {item.title}
+              </Link>
             ))}
           </div>
         </div>
