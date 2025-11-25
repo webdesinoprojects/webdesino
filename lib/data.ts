@@ -352,24 +352,25 @@ export const getCaseStudies = (): CaseStudy[] => {
       slug: "buykharibauli",
     },
     {
-      title: "Performance Marketing for E-commerce",
-      result: "Implemented multi-channel campaigns, resulting in a 510% rise in referral traffic.",
+      title: "Global SEO for Meritshot",
+      result: "Ranked on highly competitive global keywords, driving significant worldwide visibility.",
+      slug: "meritshot",
     },
     {
-      title: "Content Marketing for B2B Clients",
-      result: "Produced high-converting blog content that drove a 320% increase in inbound inquiries.",
+      title: "Website Development for Local Business",
+      result: "Monthly sales increased from ₹30,000 to over ₹6,00,000 through custom development.",
     },
     {
-      title: "Email Automation Setup for Healthcare",
-      result: "Created personalized automation sequences that increased client retention by 30%.",
+      title: "Education SEO Strategies",
+      result: "Admissions doubled for a coaching institute after implementing targeted education SEO strategies.",
     },
     {
-      title: "UI/UX Optimization for Retail Portals",
-      result: "Enhanced customer experience with intuitive UI, improving time on site by 28%.",
+      title: "Digital Marketing for E-commerce",
+      result: "Store performing 5x better with excellent ROI and comprehensive reporting.",
     },
     {
-      title: "PPC Advertising for Local Businesses",
-      result: "Reduced cost-per-click by 18% while increasing lead volume by 62%.",
+      title: "Local SEO in Uttam Nagar",
+      result: "Boosted calls and lead generation by 3x for a local business.",
     },
   ];
 };

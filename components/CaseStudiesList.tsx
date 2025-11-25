@@ -31,7 +31,7 @@ export default function CaseStudiesList({ caseStudies }: CaseStudiesListProps) {
               );
 
               return study.slug ? (
-                <Link key={idx} href={`/case-studies/${study.slug}`}>
+                <Link key={idx} href={`/case-studies/${study.slug}`} className="block">
                   {content}
                 </Link>
               ) : (
