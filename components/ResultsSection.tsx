@@ -26,7 +26,7 @@ export default function ResultsSection({ results }: ResultsSectionProps) {
   if (results.length === 0) return null;
 
   return (
-    <section className="py-10 lg:py-16 bg-slate-50 relative overflow-hidden">
+    <section className="py-16 lg:py-24 bg-slate-50 relative overflow-hidden">
       {/* Animated background particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {particles.map((p, i) => (
@@ -45,10 +45,10 @@ export default function ResultsSection({ results }: ResultsSectionProps) {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-10">
+          <div className="text-center mb-16">
             <div className="inline-flex items-center gap-4 mb-6 animate-scale-in">
               <div className="w-16 h-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full" />
-              <span className="text-sm font-bold text-blue-600 uppercase tracking-wider">Success Stories</span>
+              <span className="text-sm font-bold text-blue-600 uppercase tracking-wider">Proven Impact</span>
               <div className="w-16 h-1 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full" />
             </div>
 
@@ -56,75 +56,71 @@ export default function ResultsSection({ results }: ResultsSectionProps) {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Remarkable Results</span>
             </h2>
             <p className="text-xl text-slate-600 max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: '0.3s' }}>
-              Discover the most iconic travel locations with real-time growth indicators. See how we've helped Delhi NCR businesses achieve 100%+ growth in traffic, leads, and sales.
+              See how we've helped businesses achieve 100%+ growth in traffic, leads, and sales through our data-driven strategies.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {results.map((result, idx) => {
-              const content = (
-                <div
-                  className="group relative bg-white border border-slate-200 rounded-3xl overflow-hidden hover:shadow-xl hover:border-blue-200 transition-all duration-500 animate-scale-in"
-                  style={{ animationDelay: `${0.4 + idx * 0.1}s` }}
-                >
-                  {/* Gradient overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600/0 via-blue-600/0 to-cyan-500/0 group-hover:from-blue-600/5 group-hover:via-blue-600/5 group-hover:to-cyan-500/5 transition-all duration-500" />
-                  
-                  <div className="aspect-video bg-slate-100 relative overflow-hidden">
-                    {/* Animated background pattern */}
-                    <div className="absolute inset-0 opacity-10">
-                      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white to-transparent animate-gradient" />
-                    </div>
-                    
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <TrendingUp className="w-24 h-24 text-blue-100 group-hover:text-blue-200 group-hover:scale-110 transition-all duration-500" />
-                    </div>
-                    
-                    {/* Industry Badge */}
-                    <div className="absolute top-4 left-4 px-4 py-2 bg-white/80 backdrop-blur-xl rounded-full text-sm font-bold text-blue-600 border border-white/50 shadow-sm">
+            {results.map((result, idx) => (
+              <div
+                key={idx}
+                className="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl border border-slate-100 hover:border-blue-200 transition-all duration-500 animate-scale-in overflow-hidden"
+                style={{ animationDelay: `${0.2 + idx * 0.1}s` }}
+              >
+                {/* Background Decoration */}
+                <div className="absolute -right-20 -top-20 w-64 h-64 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700 opacity-50" />
+                
+                <div className="relative z-10">
+                  <div className="flex justify-between items-start mb-8">
+                    <div className="px-4 py-1.5 bg-slate-100 text-slate-600 rounded-full text-sm font-bold border border-slate-200 group-hover:bg-blue-50 group-hover:text-blue-600 group-hover:border-blue-100 transition-colors">
                       {result.industry}
                     </div>
-
-                    {/* Growth Badge */}
-                    <div className="absolute top-4 right-4 px-4 py-2 bg-blue-600 backdrop-blur-xl rounded-full text-sm font-bold text-white shadow-lg flex items-center gap-2 animate-pulse-glow">
-                      <TrendingUp size={16} />
-                      {result.growth}
+                    <div className="flex items-center gap-2 text-green-600 font-bold bg-green-50 px-4 py-2 rounded-full border border-green-100 shadow-sm">
+                      <TrendingUp size={18} />
+                      {result.growth} Growth
                     </div>
                   </div>
 
-                  <div className="p-8 relative z-10">
-                    <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">{result.title}</h3>
-                    <p className="text-slate-600 mb-6 leading-relaxed">{result.description}</p>
-                    
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold shadow-lg">
-                          {result.growth}
+                  <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors">
+                    {result.title}
+                  </h3>
+                  
+                  <p className="text-slate-600 mb-8 leading-relaxed">
+                    {result.description}
+                  </p>
+                  
+                  {/* Visual Data Representation */}
+                  <div className="bg-slate-50 rounded-xl p-6 border border-slate-100 group-hover:border-blue-100 transition-colors">
+                    <div className="flex items-end justify-between gap-2 h-24">
+                      {[35, 55, 45, 70, 60, 85, 75, 95, 80, 100].map((h, i) => (
+                        <div 
+                          key={i} 
+                          className="w-full bg-blue-200 rounded-t-sm relative overflow-hidden group-hover:bg-blue-500 transition-colors duration-500"
+                          style={{ height: `${h}%`, opacity: 0.3 + (i * 0.07) }}
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
                         </div>
-                        <div>
-                          <div className="text-sm text-slate-500">Growth Rate</div>
-                          <div className="font-bold text-blue-600">Verified Results</div>
-                        </div>
-                      </div>
-                      <ArrowUpRight className="text-slate-400 group-hover:text-blue-600 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" size={24} />
+                      ))}
+                    </div>
+                    <div className="flex justify-between mt-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                      <span>Before</span>
+                      <span>After Optimization</span>
                     </div>
                   </div>
 
-                  {/* Corner decoration */}
-                  <div className="absolute bottom-4 right-4 w-3 h-3 bg-blue-600 rounded-full opacity-0 group-hover:opacity-100 animate-pulse-glow transition-opacity" />
-                </div>
-              );
-              
-              return (
-                <div key={idx}>
-                  {(result as any).link ? (
-                    <Link href={(result as any).link}>{content}</Link>
-                  ) : (
-                    content
+                  {result.slug && (
+                    <div className="mt-8 flex justify-end">
+                      <Link 
+                        href={`/case-studies/${result.slug}`}
+                        className="inline-flex items-center gap-2 text-blue-600 font-bold hover:gap-3 transition-all"
+                      >
+                        View Case Study <ArrowUpRight size={18} />
+                      </Link>
+                    </div>
                   )}
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
       </div>
