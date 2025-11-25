@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import ServicesOverview from "@/components/ServicesOverview";
 import ServicesPills from "@/components/ServicesPills";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Portfolio from "@/components/Portfolio";
@@ -58,6 +59,7 @@ export default function Home() {
       />
       <Hero showcaseItems={heroShowcaseItems} />
       <TrustedSection />
+      <ServicesOverview />
       <ServicesPills />
       <WhyChooseUs features={features} />
       <IndustriesSection />
