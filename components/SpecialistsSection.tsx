@@ -1,6 +1,6 @@
 "use client";
 
-import { Linkedin, Globe, Award, CheckCircle } from "lucide-react";
+import { Linkedin, Globe, Award, CheckCircle, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -126,6 +126,15 @@ export default function SpecialistsSection() {
 											</span>
 										)
 									)}
+								</div>
+
+								<div className="mt-8 flex justify-center lg:justify-start">
+									<Link 
+										href="/rohit-tiwari" 
+										className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition-all hover:-translate-y-1 shadow-lg shadow-blue-900/20"
+									>
+										Read Full Story <ArrowRight size={18} />
+									</Link>
 								</div>
 							</div>
 						</div>
