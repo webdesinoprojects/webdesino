@@ -5,7 +5,7 @@ import { BASE_URL } from "@/lib/seo";
 
 export const metadata = {
   title: "Rohit Tiwari | Founder & CEO of WebDesino | Top Web Developer in Delhi",
-  description: "Meet Rohit Tiwari, the visionary founder of WebDesino. With 3+ years of experience, Rohit helps businesses in Delhi NCR grow with cutting-edge web development and SEO strategies.",
+  description: "Meet Rohit Tiwari, the visionary founder of WebDesino. With 5+ years of experience, Rohit helps businesses in Delhi NCR grow with cutting-edge web development and SEO strategies.",
   openGraph: {
     title: "Rohit Tiwari | Founder & CEO of WebDesino",
     description: "Meet Rohit Tiwari, the visionary founder of WebDesino. Expert Web Developer and Digital Strategist.",
@@ -25,7 +25,7 @@ export default function FounderPage() {
   return (
     <main className="bg-white">
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-28 bg-black overflow-hidden">
+      <section className="relative py-20 lg:py-28 bg-slate-50 overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#02066F]/20 to-transparent" />
@@ -68,7 +68,7 @@ export default function FounderPage() {
                     </div>
                     <div>
                       <div className="text-sm text-gray-500 font-medium">Experience</div>
-                      <div className="text-xl font-bold text-gray-900">3+ Years</div>
+                      <div className="text-xl font-bold text-gray-900">5+ Years</div>
                     </div>
                   </div>
                 </div>
@@ -77,19 +77,19 @@ export default function FounderPage() {
 
             {/* Content Column */}
             <div className="w-full lg:w-2/3 order-1 lg:order-2 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full text-white font-medium text-sm mb-6 border border-white/20">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full text-[#02066F] font-medium text-sm mb-6 border border-[#02066F]/20">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#02066F]"></span>
                 </span>
                 Founder & CEO
               </div>
               
-              <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-                Hi, I'm <span className="text-white">Rohit Tiwari</span>
+              <h1 className="text-4xl lg:text-6xl font-bold text-black mb-6 leading-tight">
+                Hi, I'm <span className="text-[#02066F]">Rohit Tiwari</span>
               </h1>
               
-              <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+              <p className="text-xl text-slate-600 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
                 "I help businesses transform their digital presence. My mission is to empower brands in Delhi NCR and beyond with technology that drives real growth, not just traffic."
               </p>
 
@@ -145,7 +145,7 @@ export default function FounderPage() {
       <section className="py-16 bg-slate-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">My Expertise</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#02066F] mb-4">My Expertise</h2>
             <p className="text-slate-600">Core competencies that drive project success</p>
           </div>
 
@@ -180,11 +180,11 @@ export default function FounderPage() {
       </section>
 
       {/* Connect Section */}
-      <section className="py-20 bg-[#02066F] text-white relative overflow-hidden">
+      <section className="py-20 bg-slate-50 text-[#02066F] relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <h2 className="text-3xl lg:text-5xl font-bold mb-8">Let's Build Something Amazing Together</h2>
-          <p className="text-xl text-gray-200 mb-10 max-w-2xl mx-auto">
+          <p className="text-xl text-slate-600 mb-10 max-w-2xl mx-auto">
             Whether you have a specific project in mind or just want to discuss your digital strategy, I'm always open to a conversation.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -197,7 +197,7 @@ export default function FounderPage() {
             <Link 
               href="https://www.linkedin.com/in/irohittiwari/"
               target="_blank"
-              className="px-8 py-4 bg-black text-white border border-white rounded-full font-bold hover:bg-[#02066F] transition-all"
+              className="px-8 py-4 bg-[#02066F] text-white border border-white rounded-full font-bold hover:bg-black transition-all"
             >
               Follow on LinkedIn
             </Link>
