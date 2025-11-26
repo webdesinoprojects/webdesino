@@ -82,43 +82,43 @@ export default function ServicePage({ params }: PageProps) {
       <div className="bg-slate-50 border-b border-slate-200 sticky top-0 z-30 backdrop-blur-md bg-slate-50/90">
         <div className="container mx-auto px-4 py-1">
           <div className="flex items-center gap-0.5 text-xs md:text-sm text-slate-600 overflow-x-auto whitespace-nowrap pb-1 scrollbar-hide">
-            <Link href="/" className="hover:text-blue-600 transition-colors">Home</Link>
+            <Link href="/" className="hover:text-[#02066F] transition-colors">Home</Link>
             <ChevronRight size={12} className="text-slate-400 flex-shrink-0" />
-            <Link href="/services" className="hover:text-blue-600 transition-colors">Services</Link>
+            <Link href="/services" className="hover:text-[#02066F] transition-colors">Services</Link>
             <ChevronRight size={12} className="text-slate-400 flex-shrink-0" />
-            <Link href={`/services/${category.slug}`} className="hover:text-blue-600 transition-colors">{category.title}</Link>
+            <Link href={`/services/${category.slug}`} className="hover:text-[#02066F] transition-colors">{category.title}</Link>
             <ChevronRight size={12} className="text-slate-400 flex-shrink-0" />
-            <span className="text-blue-600 font-medium">{service.title}</span>
+            <span className="text-[#02066F] font-medium">{service.title}</span>
           </div>
         </div>
       </div>
 
       {/* Hero Section */}
-      <div className="relative bg-teal text-white overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-white/5 to-transparent"></div>
+      <div className="relative bg-slate-50 text-slate-900 overflow-hidden border-b border-slate-200">
+        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5"></div>
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#02066F]/5 to-transparent"></div>
         <div className="container mx-auto px-4 py-16 md:py-24 relative z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="animate-slide-in-left">
-              <span className="inline-block px-4 py-1.5 bg-orange/20 text-orange rounded-full text-sm font-bold mb-6 border border-orange/30 backdrop-blur-sm">
+              <span className="inline-block px-4 py-1.5 bg-white text-[#02066F] rounded-full text-sm font-bold mb-6 border border-[#02066F]/20 shadow-sm">
                 {category.title}
               </span>
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-slate-900">
                 {service.title}
               </h1>
-              <p className="text-xl text-gray-200 mb-8 leading-relaxed">
+              <p className="text-xl text-slate-600 mb-8 leading-relaxed">
                 {service.description}
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link 
                   href="/contact"
-                  className="px-8 py-4 bg-orange text-white rounded-full font-bold hover:bg-orange/90 transition-all hover:scale-105 shadow-lg shadow-orange/20 flex items-center gap-2"
+                  className="px-8 py-4 bg-[#02066F] text-white rounded-full font-bold hover:bg-black transition-all hover:scale-105 shadow-lg shadow-[#02066F]/20 flex items-center gap-2"
                 >
                   Get Started <ArrowRight size={20} />
                 </Link>
                 <Link 
                   href="#features"
-                  className="px-8 py-4 bg-white/10 text-white rounded-full font-bold hover:bg-white/20 transition-all backdrop-blur-sm border border-white/20"
+                  className="px-8 py-4 bg-white text-slate-700 rounded-full font-bold hover:bg-slate-50 transition-all border border-slate-200 hover:border-[#02066F]"
                 >
                   Explore Features
                 </Link>
@@ -137,7 +137,7 @@ export default function ServicePage({ params }: PageProps) {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-10">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              Key Features of Our <span className="text-teal">{service.title}</span>
+              Key Features of Our <span className="text-[#02066F]">{service.title}</span>
             </h2>
             <p className="text-lg text-gray-600">
               We deliver comprehensive solutions designed to meet your specific business requirements.
@@ -146,9 +146,9 @@ export default function ServicePage({ params }: PageProps) {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {service.features.map((feature, idx) => (
-              <div key={idx} className="p-8 bg-gray-50 rounded-2xl border border-gray-100 hover:border-orange/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-orange/5 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-150 duration-500"></div>
-                <div className="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6 text-teal group-hover:text-orange group-hover:scale-110 transition-all duration-300 relative z-10">
+              <div key={idx} className="p-8 bg-gray-50 rounded-2xl border border-gray-100 hover:border-[#02066F]/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-[#02066F]/5 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-150 duration-500"></div>
+                <div className="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6 text-[#02066F] group-hover:text-[#02066F] group-hover:scale-110 transition-all duration-300 relative z-10">
                   <CheckCircle2 size={28} />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3 relative z-10">{feature}</h3>
@@ -169,7 +169,7 @@ export default function ServicePage({ params }: PageProps) {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-10">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              Our Approach to <span className="text-orange">{service.title}</span>
+              Our Approach to <span className="text-[#02066F]">{service.title}</span>
             </h2>
             <p className="text-lg text-gray-600">
               We follow a proven methodology to ensure consistent, high-quality results for every project.
@@ -188,7 +188,7 @@ export default function ServicePage({ params }: PageProps) {
             ].map((step, idx) => (
               <div key={idx} className="text-center bg-white md:bg-transparent p-6 md:p-0 rounded-xl shadow-sm md:shadow-none">
                 <div className="w-24 h-24 bg-white rounded-full border-4 border-gray-100 flex items-center justify-center mx-auto mb-4 shadow-sm relative z-10">
-                  <span className="text-3xl font-bold text-teal/20">{idx + 1}</span>
+                  <span className="text-3xl font-bold text-[#02066F]/20">{idx + 1}</span>
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">{step.title}</h3>
                 <p className="text-gray-600 text-sm">{step.desc}</p>
@@ -202,19 +202,19 @@ export default function ServicePage({ params }: PageProps) {
       <ServiceIndustries />
 
       {/* Benefits Section */}
-      <div className="py-16 bg-teal text-white relative overflow-hidden">
+      <div className="py-16 bg-[#02066F] text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold mb-8">
-                Why Choose Our <span className="text-orange">{service.title}</span>?
+                Why Choose Our <span className="text-white">{service.title}</span>?
               </h2>
               <div className="space-y-6">
                 {service.benefits.map((benefit, idx) => (
                   <div key={idx} className="flex gap-4 group">
-                    <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center shrink-0 mt-1 group-hover:bg-orange transition-colors duration-300">
-                      <Star size={20} className="text-white" />
+                    <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center shrink-0 mt-1 group-hover:bg-white group-hover:text-[#02066F] transition-colors duration-300">
+                      <Star size={20} className="text-white group-hover:text-[#02066F]" />
                     </div>
                     <div>
                       <h3 className="text-xl font-bold mb-2">{benefit}</h3>
@@ -227,7 +227,7 @@ export default function ServicePage({ params }: PageProps) {
               </div>
             </div>
             <div className="relative">
-              <div className="absolute -inset-4 bg-orange/20 rounded-3xl blur-2xl animate-pulse-glow"></div>
+              <div className="absolute -inset-4 bg-white/5 rounded-3xl blur-2xl animate-pulse-glow"></div>
               <div className="relative bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10">
                 <h3 className="text-2xl font-bold mb-6">Get a Custom Quote</h3>
                 <p className="text-gray-300 mb-8">
@@ -235,7 +235,7 @@ export default function ServicePage({ params }: PageProps) {
                 </p>
                 <Link 
                   href="/contact"
-                  className="block w-full py-4 bg-orange text-white text-center rounded-lg font-bold hover:bg-orange/90 transition-all hover:scale-105 shadow-lg shadow-orange/20"
+                  className="block w-full py-4 bg-white text-[#02066F] text-center rounded-lg font-bold hover:bg-gray-100 transition-all hover:scale-105 shadow-lg shadow-black/20"
                 >
                   Enquire Now
                 </Link>
@@ -267,7 +267,7 @@ export default function ServicePage({ params }: PageProps) {
                 >
                   <h3 className="text-lg font-bold text-gray-900 mb-2">{relatedService.title}</h3>
                   <p className="text-gray-600 text-sm line-clamp-2">{relatedService.description}</p>
-                  <span className="inline-flex items-center gap-1 text-teal text-sm font-medium mt-4">
+                  <span className="inline-flex items-center gap-1 text-[#02066F] text-sm font-medium mt-4">
                     View Service <ArrowRight size={14} />
                   </span>
                 </Link>

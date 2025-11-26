@@ -125,7 +125,7 @@ export default function PortfolioProjectPage({
         <div className="container mx-auto px-4 pt-8">
           <Link
             href="/portfolio"
-            className="inline-flex items-center gap-2 text-teal hover:text-orange transition mb-8"
+            className="inline-flex items-center gap-2 text-[#02066F] hover:text-black transition mb-8"
           >
             <ArrowLeft size={20} />
             <span>Back to Portfolio</span>
@@ -136,11 +136,11 @@ export default function PortfolioProjectPage({
           {/* Hero Section */}
           <div className="max-w-4xl mx-auto mb-12">
             <div className="mb-6">
-              <span className="inline-block px-4 py-2 bg-orange text-white rounded-full text-sm font-semibold">
+              <span className="inline-block px-4 py-2 bg-[#02066F] text-white rounded-full text-sm font-semibold">
                 {project.industry}
               </span>
             </div>
-            <h1 className="text-4xl lg:text-6xl font-bold text-teal mb-6">
+            <h1 className="text-4xl lg:text-6xl font-bold text-[#02066F] mb-6">
               {project.title}
             </h1>
             <p className="text-xl lg:text-2xl text-gray-700 leading-relaxed">
@@ -160,7 +160,7 @@ export default function PortfolioProjectPage({
                   priority
                 />
               ) : (
-                <div className="w-full h-full bg-gradient-to-br from-orange/20 to-teal/20 flex items-center justify-center">
+                <div className="w-full h-full bg-gradient-to-br from-[#02066F]/20 to-black/20 flex items-center justify-center">
                   <div className="text-6xl">🎯</div>
                 </div>
               )}
@@ -171,7 +171,7 @@ export default function PortfolioProjectPage({
           {project.fullDescription && (
             <div className="max-w-4xl mx-auto mb-12">
               <div className="bg-white rounded-xl p-8 lg:p-12 shadow-lg">
-                <h2 className="text-3xl font-bold text-teal mb-6">Project Overview</h2>
+                <h2 className="text-3xl font-bold text-[#02066F] mb-6">Project Overview</h2>
                 <div className="prose prose-lg max-w-none">
                   <p className="text-gray-700 leading-relaxed text-lg">
                     {project.fullDescription}
@@ -185,11 +185,11 @@ export default function PortfolioProjectPage({
           {project.metrics && (
             <div className="max-w-4xl mx-auto mb-12">
               <div className="bg-white rounded-xl p-8 lg:p-12 shadow-lg">
-                <h2 className="text-3xl font-bold text-teal mb-6">Key Results</h2>
+                <h2 className="text-3xl font-bold text-[#02066F] mb-6">Key Results</h2>
                 <div className="grid md:grid-cols-3 gap-6">
                   {project.metrics.growth && (
                     <div className="text-center">
-                      <div className="flex items-center justify-center gap-2 text-orange mb-2">
+                      <div className="flex items-center justify-center gap-2 text-[#02066F] mb-2">
                         <TrendingUp size={24} />
                         <span className="text-3xl font-bold">{project.metrics.growth}</span>
                       </div>
@@ -198,7 +198,7 @@ export default function PortfolioProjectPage({
                   )}
                   {project.metrics.sales && (
                     <div className="text-center">
-                      <div className="text-3xl font-bold text-teal mb-2">
+                      <div className="text-3xl font-bold text-[#02066F] mb-2">
                         {project.metrics.sales}
                       </div>
                       <p className="text-gray-600 font-semibold">Monthly Sales</p>
@@ -206,7 +206,7 @@ export default function PortfolioProjectPage({
                   )}
                   {project.metrics.traffic && (
                     <div className="text-center">
-                      <div className="text-3xl font-bold text-teal mb-2">
+                      <div className="text-3xl font-bold text-[#02066F] mb-2">
                         {project.metrics.traffic}
                       </div>
                       <p className="text-gray-600 font-semibold">Traffic Growth</p>
@@ -221,7 +221,7 @@ export default function PortfolioProjectPage({
           {project.results && (
             <div className="max-w-4xl mx-auto mb-12">
               <div className="bg-white rounded-xl p-8 lg:p-12 shadow-lg">
-                <h2 className="text-3xl font-bold text-teal mb-6">Results Achieved</h2>
+                <h2 className="text-3xl font-bold text-[#02066F] mb-6">Results Achieved</h2>
                 <p className="text-lg text-gray-700 leading-relaxed">{project.results}</p>
               </div>
             </div>
@@ -229,16 +229,16 @@ export default function PortfolioProjectPage({
 
           {/* CTA Section */}
           <div className="max-w-4xl mx-auto">
-            <div className="bg-gradient-to-br from-orange to-teal rounded-xl p-8 lg:p-12 text-white text-center">
-              <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+            <div className="bg-slate-50 rounded-xl p-8 lg:p-12 text-center border border-slate-200">
+              <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-slate-900">
                 Ready to Transform Your Business?
               </h2>
-              <p className="text-xl mb-8 opacity-90">
+              <p className="text-xl mb-8 text-slate-600">
                 Let Webdesino help you achieve similar results for your business in Delhi NCR.
               </p>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-white text-teal px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition transform hover:scale-105 shadow-lg"
+                className="inline-flex items-center gap-2 bg-[#02066F] text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-black transition transform hover:scale-105 shadow-lg"
               >
                 Get a Free Consultation
               </Link>

@@ -48,8 +48,8 @@ export default function TrustedSection() {
     <section className="py-12 lg:py-20 bg-white relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 opacity-50">
-        <div className="absolute top-10 right-10 w-72 h-72 bg-blue-600/5 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-10 left-10 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-10 right-10 w-72 h-72 bg-[#02066F]/5 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-10 left-10 w-96 h-96 bg-[#02066F]/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -70,10 +70,10 @@ export default function TrustedSection() {
             return (
               <div
                 key={idx}
-                className="p-8 rounded-3xl bg-white border border-slate-100 shadow-lg hover:shadow-xl hover:border-blue-100 text-center hover-lift transition-all duration-300 animate-fade-in"
+                className="p-8 rounded-3xl bg-white border border-slate-100 shadow-lg hover:shadow-xl hover:border-[#02066F]/20 text-center hover-lift transition-all duration-300 animate-fade-in"
                 style={{ animationDelay: `${idx * 0.1 + 0.2}s` }}
               >
-                <Icon className="mx-auto mb-4 text-blue-600" size={48} />
+                <Icon className="mx-auto mb-4 text-[#02066F]" size={48} />
                 <div className="text-4xl font-bold text-slate-900 mb-2">{stat.value}</div>
                 <div className="text-slate-600 font-medium">{stat.label}</div>
               </div>
@@ -103,7 +103,7 @@ export default function TrustedSection() {
                     className="w-full h-auto object-contain max-w-[60px] sm:max-w-[70px] md:max-w-[80px] mx-auto"
                   />
                 </div>
-                <div className="text-xs text-gray-600 group-hover:text-teal transition-colors font-medium">
+                <div className="text-xs text-gray-600 group-hover:text-[#02066F] transition-colors font-medium">
                   {cert.name.replace(" Delhi NCR", "")}
                 </div>
               </Link>
@@ -113,8 +113,8 @@ export default function TrustedSection() {
           {/* Optimize Your Marketing Badge */}
           <div className="text-center">
             <div className="inline-flex items-center gap-3 px-8 py-4 rounded-full glass-strong animate-fade-in" style={{ animationDelay: '1s' }}>
-              <Award className="text-orange" size={24} />
-              <span className="text-sm font-bold text-teal uppercase tracking-wider">
+              <Award className="text-[#02066F]" size={24} />
+              <span className="text-sm font-bold text-[#02066F] uppercase tracking-wider">
                 Optimize Your Marketing
               </span>
             </div>
@@ -122,29 +122,33 @@ export default function TrustedSection() {
         </div>
 
         {/* Trusted by Companies Worldwide Banner */}
-        <div className="bg-gray-50 dark:bg-gray-800 py-12 md:py-20">
+        <div className="bg-[#02066F] py-12 md:py-20 border-t border-slate-200">
           <div className="container mx-auto text-center">
-            <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-8">
+            <h2 className="text-3xl font-bold text-white mb-8">
               Trusted by leading brands
             </h2>
             <div className="relative overflow-hidden">
               <div className="flex animate-infinite-scroll">
                 {logos.map((logo, index) => (
                   <div key={index} className="flex-shrink-0 w-48 mx-6">
-                    <NextImage
-                      className="h-24 w-auto mx-auto"
-                      src={logo.src}
-                      alt={logo.alt}
-                    />
+                    <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                      <NextImage
+                        className="h-24 w-auto mx-auto object-contain transition-all duration-300"
+                        src={logo.src}
+                        alt={logo.alt}
+                      />
+                    </div>
                   </div>
                 ))}
                 {logos.map((logo, index) => (
                   <div key={`duplicate-${index}`} className="flex-shrink-0 w-48 mx-6">
-                    <NextImage
-                      className="h-24 w-auto mx-auto"
-                      src={logo.src}
-                      alt={logo.alt}
-                    />
+                    <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                      <NextImage
+                        className="h-24 w-auto mx-auto object-contain transition-all duration-300"
+                        src={logo.src}
+                        alt={logo.alt}
+                      />
+                    </div>
                   </div>
                 ))}
               </div>

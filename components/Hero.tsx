@@ -100,9 +100,9 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 		>
 			{/* Floating background elements */}
 			<div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-				<div className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-3xl animate-float" />
+				<div className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] bg-[#02066F]/5 rounded-full blur-3xl animate-float" />
 				<div
-					className="absolute bottom-[-10%] right-[-5%] w-[600px] h-[600px] bg-slate-900/5 rounded-full blur-3xl animate-float"
+					className="absolute bottom-[-10%] right-[-5%] w-[600px] h-[600px] bg-[#02066F]/5 rounded-full blur-3xl animate-float"
 					style={{ animationDelay: "1s" }}
 				/>
 			</div>
@@ -114,10 +114,10 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 						
 						{/* Rotating words ticker */}
 						<div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 shadow-sm mb-4 animate-fade-in">
-							<span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
+							<span className="w-2 h-2 rounded-full bg-[#02066F] animate-pulse"></span>
 							<Link 
 								href={rotatingWords[currentWordIndex].href}
-								className="text-sm font-medium text-slate-600 min-w-[140px] transition-all duration-300 hover:text-blue-600"
+								className="text-sm font-medium text-slate-600 min-w-[140px] transition-all duration-300 hover:text-[#02066F]"
 							>
 								{rotatingWords[currentWordIndex].text}
 							</Link>
@@ -127,9 +127,9 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 							<span className="block">
 								Stunning Websites By Top
 							</span>
-							<span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">
+							<span className="block text-[#02066F]">
 								{text}
-                                <span className="animate-pulse text-blue-600">|</span>
+                                <span className="animate-pulse text-[#02066F]">|</span>
 							</span>
 						</h1>
 
@@ -145,11 +145,11 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 									placeholder="Search services (e.g., SEO, Web Design)..."
 									value={searchTerm}
 									onChange={(e) => setSearchTerm(e.target.value)}
-									className="w-full px-6 py-4 rounded-full bg-white border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all shadow-sm pr-12 text-slate-700 placeholder:text-slate-400"
+									className="w-full px-6 py-4 rounded-full bg-white border border-slate-200 focus:border-[#02066F] focus:ring-2 focus:ring-[#02066F]/20 outline-none transition-all shadow-sm pr-12 text-slate-700 placeholder:text-slate-400"
 								/>
 								<button
 									type="submit"
-									className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors"
+									className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-[#02066F] text-white rounded-full hover:bg-[#02066F]/90 transition-colors"
 									aria-label="Search"
 								>
 									<Search size={20} />
@@ -160,7 +160,7 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 						<div className="flex flex-col sm:flex-row gap-4">
 							<Link
 								href="/contact"
-								className="px-8 py-4 bg-blue-600 text-white rounded-full font-bold hover:bg-blue-700 transition-all hover:scale-105 shadow-lg shadow-blue-600/25 flex items-center justify-center gap-2 group"
+								className="px-8 py-4 bg-[#02066F] text-white rounded-full font-bold hover:bg-[#02066F]/90 transition-all hover:scale-105 shadow-lg shadow-[#02066F]/25 flex items-center justify-center gap-2 group"
 							>
 								Start Your Project
 								<ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
@@ -205,7 +205,7 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 					<div className="hidden lg:flex flex-col gap-8 h-full justify-center">
 						<div className="relative h-[500px] w-full">
 							{/* Background Blob for Depth */}
-							<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-blue-100/50 rounded-full blur-3xl" />
+							<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-[#02066F]/10 rounded-full blur-3xl" />
 
 							{/* Gradient Overlays - Matching Section Background */}
 							<div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-slate-50 to-transparent z-10" />
@@ -220,22 +220,22 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 										return (
 											<div
 												key={`item-1-${idx}`}
-												className="relative bg-white/90 backdrop-blur-sm border border-slate-100 p-6 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(59,130,246,0.15)] hover:-translate-y-1 hover:border-blue-200 transition-all duration-300 group cursor-pointer"
+												className="relative bg-white/90 backdrop-blur-sm border border-slate-100 p-6 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(2,6,111,0.15)] hover:-translate-y-1 hover:border-[#02066F]/30 transition-all duration-300 group cursor-pointer"
 												onClick={() => router.push('/portfolio')}
 											>
 												<div className="flex items-start justify-between mb-4">
-													<div className="p-3 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-100 group-hover:scale-110 transition-transform duration-300">
+													<div className="p-3 bg-gray-50 rounded-xl border border-gray-200 group-hover:scale-110 transition-transform duration-300">
 														<Icon className={`${item.iconColor} w-6 h-6`} />
 													</div>
-													<div className="px-3 py-1 rounded-full bg-slate-50 border border-slate-100 text-slate-600 text-xs font-bold group-hover:bg-blue-50 group-hover:text-blue-600 group-hover:border-blue-100 transition-colors">
+													<div className="px-3 py-1 rounded-full bg-slate-50 border border-slate-100 text-slate-600 text-xs font-bold group-hover:bg-[#02066F]/5 group-hover:text-[#02066F] group-hover:border-[#02066F]/20 transition-colors">
 														{item.stat}
 													</div>
 												</div>
 												
-												<h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-blue-600 transition-colors">
+												<h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-[#02066F] transition-colors">
 													{item.name}
 												</h3>
-												<div className="text-sm font-medium text-slate-500 mb-3 group-hover:text-blue-500 transition-colors">{item.category}</div>
+												<div className="text-sm font-medium text-slate-500 mb-3 group-hover:text-[#02066F] transition-colors">{item.category}</div>
 												
 												<p className="text-slate-600 text-sm leading-relaxed">
 													{item.description}
@@ -250,22 +250,22 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 										return (
 											<div
 												key={`item-2-${idx}`}
-												className="relative bg-white/90 backdrop-blur-sm border border-slate-100 p-6 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(59,130,246,0.15)] hover:-translate-y-1 hover:border-blue-200 transition-all duration-300 group cursor-pointer"
+												className="relative bg-white/90 backdrop-blur-sm border border-slate-100 p-6 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(2,6,111,0.15)] hover:-translate-y-1 hover:border-[#02066F]/30 transition-all duration-300 group cursor-pointer"
 												onClick={() => router.push('/portfolio')}
 											>
 												<div className="flex items-start justify-between mb-4">
-													<div className="p-3 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-100 group-hover:scale-110 transition-transform duration-300">
+													<div className="p-3 bg-gray-50 rounded-xl border border-gray-200 group-hover:scale-110 transition-transform duration-300">
 														<Icon className={`${item.iconColor} w-6 h-6`} />
 													</div>
-													<div className="px-3 py-1 rounded-full bg-slate-50 border border-slate-100 text-slate-600 text-xs font-bold group-hover:bg-blue-50 group-hover:text-blue-600 group-hover:border-blue-100 transition-colors">
+													<div className="px-3 py-1 rounded-full bg-slate-50 border border-slate-100 text-slate-600 text-xs font-bold group-hover:bg-[#02066F]/5 group-hover:text-[#02066F] group-hover:border-[#02066F]/20 transition-colors">
 														{item.stat}
 													</div>
 												</div>
 												
-												<h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-blue-600 transition-colors">
+												<h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-[#02066F] transition-colors">
 													{item.name}
 												</h3>
-												<div className="text-sm font-medium text-slate-500 mb-3 group-hover:text-blue-500 transition-colors">{item.category}</div>
+												<div className="text-sm font-medium text-slate-500 mb-3 group-hover:text-[#02066F] transition-colors">{item.category}</div>
 												
 												<p className="text-slate-600 text-sm leading-relaxed">
 													{item.description}

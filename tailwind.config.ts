@@ -23,9 +23,12 @@ const config: Config = {
         }
       },
       colors: {
-        cream: "#F8FAFC", // Off-White/Slate-50
-        orange: "#3B82F6", // Changed from Cyan to Royal Blue
-        teal: "#0F172A", // Changed from Midnight Blue to Slate-900 (Rich Navy)
+        cream: "#FFFFFF", // Pure White
+        orange: "#02066F", // Royal Blue
+        teal: "#02066F", // Royal Blue (Replacing Teal)
+        blue: {
+          600: "#02066F",
+        },
       },
       container: {
         center: true,

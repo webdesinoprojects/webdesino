@@ -75,7 +75,7 @@ export default function ServiceTechStack({ categorySlug }: ServiceTechStackProps
               key={idx}
               className="flex flex-col items-center justify-center p-6 bg-gray-50 rounded-xl hover:bg-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-gray-100 group"
             >
-              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-3 shadow-sm group-hover:shadow-md text-teal group-hover:text-orange transition-colors">
+              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-3 shadow-sm group-hover:shadow-md text-[#02066F] group-hover:text-[#02066F] transition-colors">
                 <tech.icon size={24} />
               </div>
               <span className="font-semibold text-gray-700 text-sm group-hover:text-gray-900">{tech.name}</span>

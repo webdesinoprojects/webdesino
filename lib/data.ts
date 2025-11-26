@@ -429,7 +429,7 @@ export const getClients = (): Client[] => {
     { name: "ShopHipV", url: "https://shophipv.com/", image: "https://api.microlink.io/?url=https://shophipv.com/&screenshot=true&embed=screenshot.url", category: "Shopify Websites" },
 
     // Our Apps
-    { name: "Fancee User", url: "https://play.google.com/store/apps/details?id=com.fancee.user", image: "https://play-lh.googleusercontent.com/8P2P5j2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k", category: "Our Apps" },
+    { name: "Fancee User", url: "https://play.google.com/store/apps/details?id=com.fancee.user", image: "https://play-lh.googleusercontent.com/8P2P5j2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k", category: "Our Apps" },
     { name: "Fancee Celebrity", url: "https://play.google.com/store/apps/details?id=com.fancee.celebrity", image: "https://play-lh.googleusercontent.com/8P2P5j2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k", category: "Our Apps" },
     { name: "CityExpressKart Delivery", url: "https://play.google.com/store/apps/details?id=com.cityexpresskart.delivery", image: "https://play-lh.googleusercontent.com/8P2P5j2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k", category: "Our Apps" },
     { name: "Oorkart", url: "https://apps.apple.com/in/app/oorkart/id6475118165", image: "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/df/2f/3f/df2f3f3f-3f3f-3f3f-3f3f-3f3f3f3f3f3f/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/246x0w.webp", category: "Our Apps" },
@@ -846,7 +846,7 @@ export const getBlogPosts = (): BlogPost[] => {
       category: "Digital Marketing",
       excerpt: "In today’s competitive world, small businesses need a strong digital presence to grow, attract customers, and stay ahead. That’s where WebDesino, a trusted name in...",
       content: `
-        <p>In today’s competitive world, small businesses need a strong digital presence to grow, attract customers, and stay ahead. That’s where WebDesino, a trusted name in <a href="https://webdesino.com/digital-marketing-services/" class="text-blue-600 hover:underline">affordable digital marketing services in Delhi</a>, comes in. With years of expertise and a passion for helping startups and local brands, WebDesino empowers small businesses to compete with big names online — all without breaking the bank.</p>
+        <p>In today’s competitive world, small businesses need a strong digital presence to grow, attract customers, and stay ahead. That’s where WebDesino, a trusted name in <a href="https://webdesino.com/digital-marketing-services/" class="text-[#02066F] hover:underline">affordable digital marketing services in Delhi</a>, comes in. With years of expertise and a passion for helping startups and local brands, WebDesino empowers small businesses to compete with big names online — all without breaking the bank.</p>
 
         <h2 class="text-2xl font-bold mt-8 mb-4">Why Small Businesses Need Digital Marketing in Delhi</h2>
         <p>Delhi is one of the fastest-growing markets in India, filled with startups, local shops, and small enterprises. But standing out among thousands of competitors isn’t easy. Traditional marketing methods like pamphlets or posters no longer deliver the desired reach.</p>
@@ -1227,7 +1227,7 @@ export const getHeroShowcaseItems = (): HeroShowcaseItem[] => {
       stat: "₹25L+ Sales", 
       description: "Scaled from zero to ₹25L+ monthly sales in 3 months",
       iconName: "Store",
-      iconColor: "text-blue-600"
+      iconColor: "text-[#02066F]"
     },
     { 
       name: "Fitness Pro", 
@@ -1235,7 +1235,7 @@ export const getHeroShowcaseItems = (): HeroShowcaseItem[] => {
       stat: "50k+ Downloads", 
       description: "Cross-platform fitness tracking app with real-time analytics",
       iconName: "Smartphone",
-      iconColor: "text-green-600"
+      iconColor: "text-[#02066F]"
     },
     { 
       name: "Growth Campaign", 
@@ -1243,7 +1243,7 @@ export const getHeroShowcaseItems = (): HeroShowcaseItem[] => {
       stat: "500% ROI", 
       description: "Data-driven ad campaigns delivering massive returns",
       iconName: "Megaphone",
-      iconColor: "text-purple-600"
+      iconColor: "text-[#02066F]"
     },
     { 
       name: "Brand Identity", 
@@ -1251,7 +1251,7 @@ export const getHeroShowcaseItems = (): HeroShowcaseItem[] => {
       stat: "Viral Content", 
       description: "Stunning visuals and reels that captured millions of views",
       iconName: "Palette",
-      iconColor: "text-pink-600"
+      iconColor: "text-[#02066F]"
     },
     { 
       name: "Meritshot", 
@@ -1259,7 +1259,7 @@ export const getHeroShowcaseItems = (): HeroShowcaseItem[] => {
       stat: "Global Rank #1", 
       description: "Ranked #1 globally for Investment Banking courses",
       iconName: "Globe",
-      iconColor: "text-cyan-600"
+      iconColor: "text-[#02066F]"
     },
     { 
       name: "Foodie Express", 
@@ -1267,7 +1267,7 @@ export const getHeroShowcaseItems = (): HeroShowcaseItem[] => {
       stat: "4.8 Star Rating", 
       description: "Seamless food ordering experience with live tracking",
       iconName: "Smartphone",
-      iconColor: "text-orange-600"
+      iconColor: "text-[#02066F]"
     },
     { 
       name: "SEO Dominance", 
@@ -1275,7 +1275,7 @@ export const getHeroShowcaseItems = (): HeroShowcaseItem[] => {
       stat: "1st Page Rank", 
       description: "Ranking businesses on top for competitive keywords",
       iconName: "TrendingUp",
-      iconColor: "text-indigo-600"
+      iconColor: "text-[#02066F]"
     },
     { 
       name: "Social Reels", 
@@ -1283,7 +1283,7 @@ export const getHeroShowcaseItems = (): HeroShowcaseItem[] => {
       stat: "1M+ Views", 
       description: "High-retention video edits for social media growth",
       iconName: "Palette",
-      iconColor: "text-red-600"
+      iconColor: "text-[#02066F]"
     },
   ];
 };

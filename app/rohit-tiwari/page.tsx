@@ -25,11 +25,11 @@ export default function FounderPage() {
   return (
     <main className="bg-white">
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-28 bg-slate-900 overflow-hidden">
+      <section className="relative py-20 lg:py-28 bg-black overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blue-600/10 to-transparent" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-float" />
+          <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#02066F]/20 to-transparent" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#02066F]/20 rounded-full blur-3xl animate-float" />
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
@@ -37,8 +37,8 @@ export default function FounderPage() {
             {/* Image Column */}
             <div className="w-full lg:w-1/3 order-2 lg:order-1">
               <div className="relative group mx-auto max-w-md lg:max-w-none">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-3xl blur-2xl opacity-50 group-hover:opacity-75 transition-opacity duration-500" />
-                <div className="relative rounded-3xl overflow-hidden border-2 border-slate-600 group-hover:border-blue-500 transition-colors duration-300 aspect-[4/5]">
+                <div className="absolute inset-0 bg-[#02066F] rounded-3xl blur-2xl opacity-50 group-hover:opacity-75 transition-opacity duration-500" />
+                <div className="relative rounded-3xl overflow-hidden border-2 border-gray-800 group-hover:border-white transition-colors duration-300 aspect-[4/5]">
                   <Image
                     src="/rohittiwari.png"
                     alt="Rohit Tiwari - Founder & CEO"
@@ -51,7 +51,7 @@ export default function FounderPage() {
                 {/* Floating Stats */}
                 <div className="absolute -right-6 top-10 bg-white p-4 rounded-xl shadow-xl hidden md:block animate-float" style={{ animationDelay: '1s' }}>
                   <div className="flex items-center gap-3">
-                    <div className="p-2 bg-orange/10 rounded-lg text-orange">
+                    <div className="p-2 bg-gray-100 rounded-lg text-[#02066F]">
                       <Rocket size={24} />
                     </div>
                     <div>
@@ -63,7 +63,7 @@ export default function FounderPage() {
 
                 <div className="absolute -left-6 bottom-20 bg-white p-4 rounded-xl shadow-xl hidden md:block animate-float" style={{ animationDelay: '2s' }}>
                   <div className="flex items-center gap-3">
-                    <div className="p-2 bg-blue-600/10 rounded-lg text-blue-600">
+                    <div className="p-2 bg-gray-100 rounded-lg text-[#02066F]">
                       <Award size={24} />
                     </div>
                     <div>
@@ -77,19 +77,19 @@ export default function FounderPage() {
 
             {/* Content Column */}
             <div className="w-full lg:w-2/3 order-1 lg:order-2 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600/10 rounded-full text-blue-400 font-medium text-sm mb-6 border border-blue-500/20">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full text-white font-medium text-sm mb-6 border border-white/20">
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
                 </span>
                 Founder & CEO
               </div>
               
               <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-                Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Rohit Tiwari</span>
+                Hi, I'm <span className="text-white">Rohit Tiwari</span>
               </h1>
               
-              <p className="text-xl text-slate-300 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+              <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
                 "I help businesses transform their digital presence. My mission is to empower brands in Delhi NCR and beyond with technology that drives real growth, not just traffic."
               </p>
 
@@ -97,14 +97,14 @@ export default function FounderPage() {
                 <Link 
                   href="https://www.linkedin.com/in/irohittiwari/" 
                   target="_blank"
-                  className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition-all hover:-translate-y-1"
+                  className="flex items-center gap-2 px-6 py-3 bg-white text-black rounded-full font-semibold hover:bg-gray-200 transition-all hover:-translate-y-1"
                 >
                   <Linkedin size={20} />
                   Connect on LinkedIn
                 </Link>
                 <Link 
                   href="/contact"
-                  className="flex items-center gap-2 px-6 py-3 bg-slate-800 text-white border border-slate-700 rounded-full font-semibold hover:bg-slate-700 transition-all hover:-translate-y-1"
+                  className="flex items-center gap-2 px-6 py-3 bg-[#02066F] text-white border border-[#02066F] rounded-full font-semibold hover:bg-[#02066F]/90 transition-all hover:-translate-y-1"
                 >
                   <Mail size={20} />
                   Work With Me
@@ -120,7 +120,7 @@ export default function FounderPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-8 text-center">
-              The Story Behind <span className="text-blue-600">WebDesino</span>
+              The Story Behind <span className="text-[#02066F]">WebDesino</span>
             </h2>
             
             <div className="prose prose-lg text-slate-600 mx-auto">
@@ -168,7 +168,7 @@ export default function FounderPage() {
               }
             ].map((item, idx) => (
               <div key={idx} className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-all border border-slate-100">
-                <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6">
+                <div className="w-12 h-12 bg-gray-100 text-[#02066F] rounded-xl flex items-center justify-center mb-6">
                   <item.icon size={24} />
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 mb-3">{item.title}</h3>
@@ -180,24 +180,24 @@ export default function FounderPage() {
       </section>
 
       {/* Connect Section */}
-      <section className="py-20 bg-blue-600 text-white relative overflow-hidden">
+      <section className="py-20 bg-[#02066F] text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <h2 className="text-3xl lg:text-5xl font-bold mb-8">Let's Build Something Amazing Together</h2>
-          <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-200 mb-10 max-w-2xl mx-auto">
             Whether you have a specific project in mind or just want to discuss your digital strategy, I'm always open to a conversation.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link 
               href="/contact"
-              className="px-8 py-4 bg-white text-blue-600 rounded-full font-bold hover:bg-blue-50 transition-all shadow-lg"
+              className="px-8 py-4 bg-white text-[#02066F] rounded-full font-bold hover:bg-gray-50 transition-all shadow-lg"
             >
               Start a Project
             </Link>
             <Link 
               href="https://www.linkedin.com/in/irohittiwari/"
               target="_blank"
-              className="px-8 py-4 bg-blue-700 text-white border border-blue-500 rounded-full font-bold hover:bg-blue-800 transition-all"
+              className="px-8 py-4 bg-black text-white border border-white rounded-full font-bold hover:bg-[#02066F] transition-all"
             >
               Follow on LinkedIn
             </Link>

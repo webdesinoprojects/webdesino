@@ -182,13 +182,13 @@ function SearchContent() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cream via-white to-cream py-16">
+    <div className="min-h-screen bg-white py-16">
       <div className="container mx-auto px-4">
         {/* Search Header */}
         <div className="max-w-4xl mx-auto mb-12">
           <div className="flex items-center gap-3 mb-6">
-            <Search className="text-orange" size={32} />
-            <h1 className="text-3xl lg:text-5xl font-bold text-teal">
+            <Search className="text-[#02066F]" size={32} />
+            <h1 className="text-3xl lg:text-5xl font-bold text-[#02066F]">
               Search Results
             </h1>
           </div>
@@ -201,12 +201,12 @@ function SearchContent() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search for web design, SEO, or services in Delhi..."
-                className="w-full px-6 py-4 pr-12 rounded-full bg-white/80 backdrop-blur border-none focus:outline-none focus:ring-2 focus:ring-orange/50 text-base transition-all"
+                className="w-full px-6 py-4 pr-12 rounded-full bg-white/80 backdrop-blur border-none focus:outline-none focus:ring-2 focus:ring-[#02066F]/50 text-base transition-all"
                 aria-label="Search for services"
               />
               <button
                 type="submit"
-                className="absolute right-3 top-1/2 -translate-y-1/2 p-3 bg-orange text-white rounded-full hover:bg-orange/90 transition-all hover:scale-110"
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-3 bg-[#02066F] text-white rounded-full hover:bg-[#02066F]/90 transition-all hover:scale-110"
                 aria-label="Search"
               >
                 <Search size={20} />
@@ -216,7 +216,7 @@ function SearchContent() {
           
           {query && (
             <p className="text-xl text-gray-600 mb-6">
-              Showing results for: <span className="font-bold text-teal">"{query}"</span>
+              Showing results for: <span className="font-bold text-[#02066F]">"{query}"</span>
             </p>
           )}
 
@@ -224,7 +224,7 @@ function SearchContent() {
           {!isLoading && (
             <div className="glass-strong rounded-2xl p-4 inline-block">
               <p className="text-sm text-gray-700">
-                Found <span className="font-bold text-orange">{searchResults.length}</span> result{searchResults.length !== 1 ? 's' : ''}
+                Found <span className="font-bold text-[#02066F]">{searchResults.length}</span> result{searchResults.length !== 1 ? 's' : ''}
               </p>
             </div>
           )}
@@ -233,7 +233,7 @@ function SearchContent() {
         {/* Loading State */}
         {isLoading && (
           <div className="max-w-4xl mx-auto text-center py-12">
-            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-orange mx-auto mb-4"></div>
+            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#02066F] mx-auto mb-4"></div>
             <p className="text-gray-600">Searching...</p>
           </div>
         )}
@@ -251,7 +251,7 @@ function SearchContent() {
               </p>
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 bg-gradient-orange text-white px-6 py-3 rounded-full font-semibold hover-lift transition-all"
+                className="inline-flex items-center gap-2 bg-[#02066F] text-white px-6 py-3 rounded-full font-semibold hover-lift transition-all"
               >
                 Go to Homepage
                 <ArrowRight size={18} />
@@ -274,14 +274,14 @@ function SearchContent() {
               <div className="flex flex-wrap gap-4 justify-center">
                 <Link
                   href="/services"
-                  className="inline-flex items-center gap-2 bg-gradient-orange text-white px-6 py-3 rounded-full font-semibold hover-lift transition-all"
+                  className="inline-flex items-center gap-2 bg-[#02066F] text-white px-6 py-3 rounded-full font-semibold hover-lift transition-all"
                 >
                   View Services
                   <ArrowRight size={18} />
                 </Link>
                 <Link
                   href="/portfolio"
-                  className="inline-flex items-center gap-2 border-2 border-teal text-teal px-6 py-3 rounded-full font-semibold hover:bg-teal hover:text-white transition-all"
+                  className="inline-flex items-center gap-2 border-2 border-[#02066F] text-[#02066F] px-6 py-3 rounded-full font-semibold hover:bg-[#02066F] hover:text-white transition-all"
                 >
                   View Portfolio
                   <ExternalLink size={18} />
@@ -303,7 +303,7 @@ function SearchContent() {
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <span className="text-xs font-bold text-white bg-orange px-3 py-1 rounded-full uppercase">
+                      <span className="text-xs font-bold text-white bg-[#02066F] px-3 py-1 rounded-full uppercase">
                         {result.type.replace("-", " ")}
                       </span>
                       {result.category && (
@@ -312,7 +312,7 @@ function SearchContent() {
                         </span>
                       )}
                     </div>
-                    <h3 className="text-xl font-bold text-teal mb-2 group-hover:text-orange transition-colors">
+                    <h3 className="text-xl font-bold text-[#02066F] mb-2 group-hover:text-[#02066F] transition-colors">
                       {result.title}
                     </h3>
                     <p className="text-gray-600 line-clamp-2">
@@ -320,7 +320,7 @@ function SearchContent() {
                     </p>
                   </div>
                   <ArrowRight 
-                    className="text-orange flex-shrink-0 transform group-hover:translate-x-2 transition-transform" 
+                    className="text-[#02066F] flex-shrink-0 transform group-hover:translate-x-2 transition-transform" 
                     size={24} 
                   />
                 </div>
@@ -333,7 +333,7 @@ function SearchContent() {
         {searchResults.length > 0 && (
           <div className="max-w-4xl mx-auto mt-12">
             <div className="glass rounded-2xl p-6">
-              <h3 className="font-bold text-teal mb-3">Search Tips:</h3>
+              <h3 className="font-bold text-[#02066F] mb-3">Search Tips:</h3>
               <ul className="space-y-2 text-sm text-gray-600">
                 <li>• Try using different keywords or synonyms</li>
                 <li>• Search for specific services like "SEO", "web design", or "digital marketing"</li>
@@ -352,7 +352,7 @@ export default function SearchPage() {
   return (
     <Suspense fallback={
       <div className="min-h-screen bg-gradient-to-br from-cream via-white to-cream flex items-center justify-center">
-        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-orange"></div>
+        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#02066F]"></div>
       </div>
     }>
       <SearchContent />

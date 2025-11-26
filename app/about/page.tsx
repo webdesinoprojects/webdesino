@@ -53,20 +53,21 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Hero Section */}
-      <section className="relative bg-slate-900 text-white py-20 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-blue-600/10"></div>
+      <section className="relative bg-slate-50 text-slate-900 py-20 overflow-hidden border-b border-slate-200">
+        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5"></div>
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#02066F]/5 to-transparent"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl lg:text-6xl font-bold animate-fade-in">
-              About <span className="text-blue-500">Webdesino</span>
+            <h1 className="text-4xl lg:text-6xl font-bold mb-6 animate-fade-in text-slate-900">
+              About <span className="text-[#02066F]">Webdesino</span>
             </h1>
-            <p className="text-xl text-slate-300 mb-8 leading-relaxed animate-slide-up">
+            <p className="text-xl text-slate-600 mb-8 leading-relaxed animate-slide-up">
               Building Your Online Presence. Find a team of Web Developers you can rely on. Every day, we build trust through communication, transparency, and results.
             </p>
             </div>
             </div>
             </section>
-            <div className="relative w-full aspect-[4/1] mt-12 rounded-xl overflow-hidden shadow-2xl animate-fade-in border border-slate-700">
+            <div className="relative w-full aspect-[4/1] mt-12 rounded-xl overflow-hidden shadow-2xl animate-fade-in border border-white/10">
               <Image
                 src="/rohittiwaribanner.png"
                 alt="Rohit Tiwari Web Developer"
@@ -81,7 +82,7 @@ export default function AboutPage() {
       <section className="py-16 lg:py-24 bg-slate-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h6 className="text-blue-600 font-bold tracking-wider uppercase mb-2">Our Team</h6>
+            <h6 className="text-[#02066F] font-bold tracking-wider uppercase mb-2">Our Team</h6>
             <h2 className="text-3xl lg:text-4xl font-bold text-slate-900">Meet The Team</h2>
             <p className="text-slate-600 mt-4 max-w-2xl mx-auto">
               Find a team of Web Developers you can rely on. Every day, we build trust through communication, transparency, and results.
@@ -101,7 +102,7 @@ export default function AboutPage() {
                 </div>
                 <div className="p-6 text-center">
                   <h3 className="text-xl font-bold text-slate-900 mb-1">{member.name}</h3>
-                  <p className="text-blue-600 font-medium">{member.role}</p>
+                  <p className="text-[#02066F] font-medium">{member.role}</p>
                 </div>
               </div>
             ))}
@@ -115,15 +116,15 @@ export default function AboutPage() {
           {/* Block 1 */}
           <div className="flex flex-col lg:flex-row items-center gap-12 mb-20">
              <div className="lg:w-1/2">
-                <h6 className="text-blue-600 font-bold uppercase mb-2">Our Story</h6>
+                <h6 className="text-[#02066F] font-bold uppercase mb-2">Our Story</h6>
                 <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">We Are The Best Web Development Agency</h2>
                 <p className="text-lg text-slate-600 leading-relaxed">
                    Our team combines cutting-edge technology with creative expertise to deliver custom web solutions that drive results. We turn your vision into a powerful online presence, ensuring your business stands out in the digital landscape.
                 </p>
              </div>
              <div className="lg:w-1/2 flex justify-center">
-                <div className="w-full max-w-md aspect-video bg-blue-50 rounded-2xl flex items-center justify-center">
-                   <TrendingUp size={64} className="text-blue-200" />
+                <div className="w-full max-w-md aspect-video bg-[#02066F]/5 rounded-2xl flex items-center justify-center">
+                   <TrendingUp size={64} className="text-[#02066F]/40" />
                 </div>
              </div>
           </div>
@@ -131,15 +132,15 @@ export default function AboutPage() {
           {/* Block 2 */}
           <div className="flex flex-col lg:flex-row-reverse items-center gap-12 mb-20">
              <div className="lg:w-1/2">
-                <h6 className="text-blue-600 font-bold uppercase mb-2">Who We Are</h6>
+                <h6 className="text-[#02066F] font-bold uppercase mb-2">Who We Are</h6>
                 <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">The Leading WEB DEVELOPMENT Company In INDIA</h2>
                 <p className="text-lg text-slate-600 leading-relaxed">
                    Delivering innovative and tailored web solutions, we specialize in creating dynamic, responsive websites that elevate your brand and drive success in the digital world. Trust us to bring your vision to life with cutting-edge technology and unmatched expertise.
                 </p>
              </div>
              <div className="lg:w-1/2 flex justify-center">
-                <div className="w-full max-w-md aspect-video bg-blue-50 rounded-2xl flex items-center justify-center">
-                   <Target size={64} className="text-blue-200" />
+                <div className="w-full max-w-md aspect-video bg-[#02066F]/5 rounded-2xl flex items-center justify-center">
+                   <Target size={64} className="text-[#02066F]/40" />
                 </div>
              </div>
           </div>
@@ -147,15 +148,15 @@ export default function AboutPage() {
           {/* Block 3 */}
           <div className="flex flex-col lg:flex-row items-center gap-12 mb-20">
              <div className="lg:w-1/2">
-                <h6 className="text-blue-600 font-bold uppercase mb-2">What We Do</h6>
+                <h6 className="text-[#02066F] font-bold uppercase mb-2">What We Do</h6>
                 <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">We Help You To 10X Your Business</h2>
                 <p className="text-lg text-slate-600 leading-relaxed">
                    Elevate your business to new heights with our cutting-edge web development solutions. We specialize in crafting high-performing websites and digital strategies that multiply your growth, ensuring your online presence is not just a website, but a powerful tool for success.
                 </p>
              </div>
              <div className="lg:w-1/2 flex justify-center">
-                <div className="w-full max-w-md aspect-video bg-blue-50 rounded-2xl flex items-center justify-center">
-                   <Award size={64} className="text-blue-200" />
+                <div className="w-full max-w-md aspect-video bg-[#02066F]/5 rounded-2xl flex items-center justify-center">
+                   <Award size={64} className="text-[#02066F]/40" />
                 </div>
              </div>
           </div>
@@ -169,7 +170,7 @@ export default function AboutPage() {
                   key={idx}
                   className="p-8 rounded-2xl bg-slate-50 border border-slate-100 text-center hover:shadow-lg transition-all duration-300"
                 >
-                  <div className="w-16 h-16 mx-auto bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-600">
+                  <div className="w-16 h-16 mx-auto bg-[#02066F]/10 rounded-full flex items-center justify-center mb-4 text-[#02066F]">
                     <Icon size={32} />
                   </div>
                   <h3 className="text-4xl font-bold text-slate-900 mb-2">{stat.value}</h3>
@@ -188,20 +189,20 @@ export default function AboutPage() {
       <IndustriesSection />
 
       {/* Certifications Section */}
-      <section className="py-16 bg-slate-900 text-white">
+      <section className="py-16 bg-[#02066F] text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-8">Trusted & Certified</h2>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto mb-12">
+          <p className="text-xl text-white/80 max-w-3xl mx-auto mb-12">
             Recognized by global leaders like Google, WordPress, Shopify, SEMRush, and DesignRush for professional work and high-quality digital solutions.
           </p>
           <div className="flex flex-wrap justify-center gap-8 items-center">
             {certifications.map((cert, idx) => (
-              <div key={idx} className="relative h-16 w-32 lg:h-20 lg:w-40 bg-white/5 rounded-lg p-2 hover:bg-white/10 transition-all duration-300">
+              <div key={idx} className="relative h-16 w-32 lg:h-20 lg:w-40 bg-white/10 rounded-lg p-2 hover:bg-white/20 transition-all duration-300">
                 <Image
                   src={cert.image}
                   alt={cert.name}
                   fill
-                  className="object-contain p-2"
+                  className="object-contain p-2 brightness-0 invert"
                 />
               </div>
             ))}
@@ -219,8 +220,8 @@ export default function AboutPage() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               {serviceAreas.map((area, idx) => (
-                <div key={idx} className="flex items-center gap-2 bg-slate-50 px-5 py-2.5 rounded-lg border border-slate-200 text-slate-700 hover:border-blue-300 hover:text-blue-600 transition-colors">
-                  <MapPin size={18} className="text-blue-500" />
+                <div key={idx} className="flex items-center gap-2 bg-slate-50 px-5 py-2.5 rounded-lg border border-slate-200 text-slate-700 hover:border-[#02066F]/50 hover:text-[#02066F] transition-colors">
+                  <MapPin size={18} className="text-[#02066F]" />
                   <span className="font-medium">{area}</span>
                 </div>
               ))}
@@ -230,15 +231,15 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-blue-600 text-white text-center">
+      <section className="py-20 bg-[#02066F] text-white text-center">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl lg:text-4xl font-bold mb-6">Ready to Transform Your Online Presence?</h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
             Join 50+ happy clients who have scaled their business with WebDesino.
           </p>
           <Link 
             href="/contact" 
-            className="inline-flex items-center gap-2 bg-white text-blue-600 px-8 py-4 rounded-full font-bold hover:bg-blue-50 transition-colors"
+            className="inline-flex items-center gap-2 bg-white text-[#02066F] px-8 py-4 rounded-full font-bold hover:bg-white/90 transition-colors"
           >
             Get Started Today
             <ArrowRight size={20} />

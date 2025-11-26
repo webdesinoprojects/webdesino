@@ -25,7 +25,7 @@ export default function Portfolio({ projects }: PortfolioProps) {
     <section className="py-10 lg:py-16 bg-white" itemScope itemType="https://schema.org/ItemList">
       <div className="container mx-auto px-4">
         <div className="text-center mb-10 lg:mb-12">
-          <h2 className="text-3xl lg:text-5xl font-bold text-teal mb-4">
+          <h2 className="text-3xl lg:text-5xl font-bold text-[#02066F] mb-4">
             Our Success Stories
           </h2>
           <p className="text-gray-600 text-lg mb-6">
@@ -33,7 +33,7 @@ export default function Portfolio({ projects }: PortfolioProps) {
           </p>
           <Link 
             href="/case-studies" 
-            className="inline-block bg-orange text-white px-6 py-3 rounded-full font-semibold hover:bg-orange/90 transition"
+            className="inline-block bg-[#02066F] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#02066F]/90 transition"
           >
             View Detailed Case Studies →
           </Link>
@@ -50,7 +50,7 @@ export default function Portfolio({ projects }: PortfolioProps) {
               }}
               className={`px-5 py-2.5 rounded-full font-semibold text-sm transition ${
                 activeFilter === industry
-                  ? "bg-orange text-white shadow-md"
+                  ? "bg-[#02066F] text-white shadow-md"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
@@ -69,9 +69,9 @@ export default function Portfolio({ projects }: PortfolioProps) {
                   href={`/case-studies/${project.slug}`}
                   className={`${
                     idx === activeProject ? "md:col-span-2" : "hidden md:block"
-                  } bg-cream rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] group`}
+                  } bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] group`}
                 >
-                  <div className="aspect-video bg-gradient-to-br from-orange/20 to-teal/20 relative overflow-hidden">
+                  <div className="aspect-video bg-gray-100 relative overflow-hidden">
                     {project.image ? (
                       <Image
                         src={project.image}
@@ -82,12 +82,12 @@ export default function Portfolio({ projects }: PortfolioProps) {
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
-                        <GoalIcon className="w-12 h-12 text-orange" />
+                        <GoalIcon className="w-12 h-12 text-[#02066F]" />
                       </div>
                     )}
                   </div>
                   <div className="p-6" itemScope itemType="https://schema.org/CreativeWork">
-                    <h3 className="text-xl font-bold text-teal mb-2 group-hover:text-orange transition" itemProp="name">
+                    <h3 className="text-xl font-bold text-[#02066F] mb-2 group-hover:text-[#02066F]/80 transition" itemProp="name">
                       {project.title}
                     </h3>
                     <p className="text-gray-700" itemProp="description">{project.description}</p>

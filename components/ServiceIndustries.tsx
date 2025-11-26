@@ -32,10 +32,10 @@ export default function ServiceIndustries() {
               key={idx}
               className="group p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 flex flex-col items-center text-center"
             >
-              <div className="w-14 h-14 bg-teal/5 rounded-full flex items-center justify-center mb-4 text-teal group-hover:bg-orange/10 group-hover:text-orange transition-colors duration-300">
+              <div className="w-14 h-14 bg-[#02066F]/5 rounded-full flex items-center justify-center mb-4 text-[#02066F] group-hover:bg-[#02066F]/10 group-hover:text-[#02066F] transition-colors duration-300">
                 <industry.icon size={28} />
               </div>
-              <h3 className="font-bold text-gray-900 group-hover:text-teal transition-colors">{industry.name}</h3>
+              <h3 className="font-bold text-gray-900 group-hover:text-[#02066F] transition-colors">{industry.name}</h3>
             </div>
           ))}
         </div>

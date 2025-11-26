@@ -50,24 +50,24 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       {/* Hero Section */}
-      <section className="bg-slate-900 text-white py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-blue-600/10"></div>
+      <section className="bg-[#02066F] text-white py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[#02066F]/10"></div>
         <div className="container mx-auto px-4 relative z-10">
-          <Link href="/blog" className="inline-flex items-center gap-2 text-slate-400 hover:text-white mb-8 transition-colors">
+          <Link href="/blog" className="inline-flex items-center gap-2 text-white/60 hover:text-white mb-8 transition-colors">
             <ArrowLeft size={20} />
             Back to Blog
           </Link>
           <div className="max-w-4xl">
-            <div className="flex items-center gap-4 text-sm text-blue-400 mb-4 font-semibold uppercase tracking-wider">
+            <div className="flex items-center gap-4 text-sm text-white/80 mb-4 font-semibold uppercase tracking-wider">
               <span>{post.category}</span>
-              <span className="w-1 h-1 bg-slate-500 rounded-full"></span>
+              <span className="w-1 h-1 bg-white/40 rounded-full"></span>
               <span>{post.date}</span>
             </div>
             <h1 className="text-3xl lg:text-5xl font-bold mb-6 leading-tight">
               {post.title}
             </h1>
-            <div className="flex items-center gap-3 text-slate-300">
-              <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center font-bold text-white">
+            <div className="flex items-center gap-3 text-white/80">
+              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center font-bold text-[#02066F]">
                 W
               </div>
               <div>
@@ -97,7 +97,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
               </div>
               
               {/* Article Body */}
-              <div className="p-8 lg:p-12 prose prose-lg max-w-none prose-headings:text-slate-900 prose-p:text-slate-600 prose-a:text-blue-600 hover:prose-a:text-blue-700 prose-img:rounded-xl">
+              <div className="p-8 lg:p-12 prose prose-lg max-w-none prose-headings:text-slate-900 prose-p:text-slate-600 prose-a:text-[#02066F] hover:prose-a:text-[#02066F] prose-img:rounded-xl">
                 {post.content ? (
                   <div dangerouslySetInnerHTML={{ __html: post.content }} />
                 ) : (

@@ -89,13 +89,13 @@ export default function OurClientsPage({
   return (
     <main className="bg-slate-50 min-h-screen">
       {/* Hero Section */}
-      <section className="bg-slate-900 text-white py-20 lg:py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-blue-600/10"></div>
+      <section className="bg-[#02066F] text-white py-20 lg:py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[#02066F]/10"></div>
         <div className="container mx-auto px-4 relative z-10 text-center">
           <h1 className="text-4xl lg:text-6xl font-bold mb-6 animate-fade-in uppercase">
             {content.title}
           </h1>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto animate-slide-up mb-8">
+          <p className="text-xl text-white/80 max-w-3xl mx-auto animate-slide-up mb-8">
             {content.description}
           </p>
           
@@ -104,8 +104,8 @@ export default function OurClientsPage({
             <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto text-left mt-12">
               {content.features.map((feature, idx) => (
                 <div key={idx} className="flex items-start gap-3 animate-fade-in" style={{ animationDelay: `${idx * 0.1}s` }}>
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2.5 flex-shrink-0"></div>
-                  <p className="text-slate-300">{feature}</p>
+                  <div className="w-2 h-2 bg-white rounded-full mt-2.5 flex-shrink-0"></div>
+                  <p className="text-white/80">{feature}</p>
                 </div>
               ))}
             </div>
@@ -184,10 +184,10 @@ export default function OurClientsPage({
                       unoptimized
                     />
                   </div>
-                  <h3 className="font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                  <h3 className="font-bold text-slate-900 group-hover:text-[#02066F] transition-colors">
                     {client.name.replace(" Instagram", "")}
                   </h3>
-                  <span className="text-sm text-blue-500 mt-2 font-medium">View Profile</span>
+                  <span className="text-sm text-[#02066F] mt-2 font-medium">View Profile</span>
                 </a>
               ))}
             </div>
@@ -226,12 +226,12 @@ export default function OurClientsPage({
                             className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
                             unoptimized // Since we are using external microlink images
                           />
-                          <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/40 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                          <div className="absolute inset-0 bg-[#02066F]/0 group-hover:bg-[#02066F]/40 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
                             <a
                               href={client.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="bg-white text-slate-900 px-6 py-3 rounded-full font-bold transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 flex items-center gap-2 hover:bg-blue-50"
+                              className="bg-white text-[#02066F] px-6 py-3 rounded-full font-bold transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 flex items-center gap-2 hover:bg-white/90"
                             >
                               View Project
                               <ArrowRight size={18} />
@@ -239,14 +239,14 @@ export default function OurClientsPage({
                           </div>
                         </div>
                         <div className="p-6">
-                          <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
+                          <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-[#02066F] transition-colors">
                             {client.name}
                           </h3>
                           <a
                             href={client.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-sm text-slate-500 hover:text-blue-600 transition-colors truncate block"
+                            className="text-sm text-slate-500 hover:text-[#02066F] transition-colors truncate block"
                           >
                             {client.url}
                           </a>
@@ -270,14 +270,14 @@ export default function OurClientsPage({
 
       {/* Why Choose Us for Graphic Designing */}
       {content.whyChooseUs.length > 0 && (
-        <section className="bg-slate-900 text-white py-20">
+        <section className="bg-[#02066F] text-white py-20">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl lg:text-4xl font-bold text-center mb-16 uppercase">Why Choose Us?</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {content.whyChooseUs.map((item, idx) => (
-                <div key={idx} className="bg-slate-800/50 p-8 rounded-2xl border border-slate-700 hover:bg-slate-800 transition-colors">
-                  <h3 className="text-xl font-bold text-blue-400 mb-4">{item.title}</h3>
-                  <p className="text-slate-300">{item.text}</p>
+                <div key={idx} className="bg-white/5 p-8 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors">
+                  <h3 className="text-xl font-bold text-white mb-4">{item.title}</h3>
+                  <p className="text-white/80">{item.text}</p>
                 </div>
               ))}
             </div>

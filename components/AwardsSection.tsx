@@ -14,9 +14,9 @@ export default function AwardsSection() {
 		<section className="py-2 lg:py-4 bg-slate-50 relative overflow-hidden">
 			{/* Animated background */}
 			<div className="absolute inset-0 overflow-hidden pointer-events-none">
-				<div className="absolute top-10 left-10 w-72 h-72 bg-blue-600/5 rounded-full blur-3xl animate-float" />
+				<div className="absolute top-10 left-10 w-72 h-72 bg-[#02066F]/5 rounded-full blur-3xl animate-float" />
 				<div
-					className="absolute bottom-10 right-10 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl animate-float"
+					className="absolute bottom-10 right-10 w-96 h-96 bg-[#02066F]/5 rounded-full blur-3xl animate-float"
 					style={{ animationDelay: "1.5s" }}
 				/>
 			</div>
@@ -29,7 +29,7 @@ export default function AwardsSection() {
 							{["Awards", "Awards", "Awards", "Awards", "Awards", "Awards", "Awards", "Awards"].map((text, idx) => (
 								<div
 									key={idx}
-									className="flex-shrink-0 text-6xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 opacity-5"
+									className="flex-shrink-0 text-6xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#02066F] to-[#02066F] opacity-5"
 								>
 									{text}
 								</div>
@@ -38,13 +38,13 @@ export default function AwardsSection() {
 					</div>
 
 					<h2 className="text-4xl lg:text-6xl font-bold text-center mb-4 animate-scale-in text-slate-900">
-						<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Our Work Speaks Louder</span>
+						<span className="text-[#02066F]">Our Work Speaks Louder</span>
 					</h2>
 					<h2
 						className="text-4xl lg:text-6xl font-bold text-center mb-6 animate-scale-in text-slate-900"
 						style={{ animationDelay: "0.1s" }}
 					>
-						<span className="text-blue-600">with Awards</span>
+						<span className="text-[#02066F]">with Awards</span>
 					</h2>
 					<p
 						className="text-center text-slate-600 mb-10 text-lg max-w-3xl mx-auto animate-fade-in"
@@ -61,23 +61,23 @@ export default function AwardsSection() {
 							return (
 								<div
 									key={idx}
-									className="group relative bg-white border border-slate-200 rounded-3xl overflow-hidden hover-lift cursor-pointer transition-all duration-500 animate-scale-in hover:shadow-2xl hover:border-blue-300"
+									className="group relative bg-white border border-slate-200 rounded-3xl overflow-hidden hover-lift cursor-pointer transition-all duration-500 animate-scale-in hover:shadow-2xl hover:border-[#02066F]"
 									style={{ animationDelay: `${0.4 + idx * 0.1}s` }}
 								>
 									{/* Gradient background on hover */}
-									<div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+									<div className="absolute inset-0 bg-[#02066F] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
 									<div className="relative p-8 flex flex-col items-center h-full">
 										{/* Icon/Image Container */}
 										<div className="w-20 h-20 my-2 bg-slate-50 rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors duration-500 shadow-inner">
-											<IconComponent className="w-10 h-10 text-blue-600 group-hover:text-white transition-colors" />
+											<IconComponent className="w-10 h-10 text-[#02066F] group-hover:text-white transition-colors" />
 										</div>
 
 										<div className="text-center mt-auto">
 											<h3 className="text-lg font-bold text-slate-900 group-hover:text-white transition-colors mb-2 leading-tight">
 												{award.title}
 											</h3>
-											<div className="w-12 h-1 bg-blue-100 group-hover:bg-white/30 mx-auto my-3 rounded-full transition-colors" />
+											<div className="w-12 h-1 bg-gray-100 group-hover:bg-white/30 mx-auto my-3 rounded-full transition-colors" />
 											<p className="text-sm font-medium text-slate-500 group-hover:text-white/90 transition-colors uppercase tracking-wide">
 												{award.org}
 											</p>
@@ -86,7 +86,7 @@ export default function AwardsSection() {
 
 									{/* Corner decoration */}
 									<div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-										<Star className="w-6 h-6 text-yellow-300 fill-yellow-300 animate-pulse" />
+										<Star className="w-6 h-6 text-white fill-white animate-pulse" />
 									</div>
 								</div>
 							);

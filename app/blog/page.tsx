@@ -19,9 +19,9 @@ export default function BlogPage({ searchParams }: { searchParams: { page?: stri
   const currentPosts = allPosts.slice(startIndex, startIndex + postsPerPage);
 
   return (
-    <main className="bg-slate-50 min-h-screen">
+    <main className="bg-white min-h-screen">
       {/* Hero Section */}
-      <section className="bg-slate-900 text-white py-20 lg:py-32 relative overflow-hidden">
+      <section className="bg-[#02066F] text-white py-20 lg:py-32 relative overflow-hidden">
         <div className="absolute inset-0 bg-blue-600/10"></div>
         <div className="container mx-auto px-4 relative z-10 text-center">
           <h1 className="text-4xl lg:text-6xl font-bold mb-6 animate-fade-in">
@@ -52,7 +52,7 @@ export default function BlogPage({ searchParams }: { searchParams: { page?: stri
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+                    <div className="absolute top-4 left-4 bg-[#02066F] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
                       {post.category}
                     </div>
                   </Link>
@@ -69,7 +69,7 @@ export default function BlogPage({ searchParams }: { searchParams: { page?: stri
                       </div>
                     </div>
 
-                    <h2 className="text-xl font-bold text-slate-900 mb-3 line-clamp-2 hover:text-blue-600 transition-colors">
+                    <h2 className="text-xl font-bold text-slate-900 mb-3 line-clamp-2 hover:text-[#02066F] transition-colors">
                       <Link href={`/blog/${post.slug}`}>
                         {post.title}
                       </Link>
@@ -81,7 +81,7 @@ export default function BlogPage({ searchParams }: { searchParams: { page?: stri
 
                     <Link
                       href={`/blog/${post.slug}`}
-                      className="inline-flex items-center gap-2 text-blue-600 font-semibold text-sm hover:gap-3 transition-all group"
+                      className="inline-flex items-center gap-2 text-[#02066F] font-semibold text-sm hover:gap-3 transition-all group"
                     >
                       Read More 
                       <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
@@ -97,7 +97,7 @@ export default function BlogPage({ searchParams }: { searchParams: { page?: stri
                 {currentPage > 1 && (
                   <Link
                     href={`/blog?page=${currentPage - 1}`}
-                    className="flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 rounded-full text-slate-600 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all"
+                    className="flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 rounded-full text-slate-600 hover:bg-[#02066F] hover:text-white hover:border-[#02066F] transition-all"
                   >
                     <ChevronLeft size={18} />
                     Previous
@@ -111,7 +111,7 @@ export default function BlogPage({ searchParams }: { searchParams: { page?: stri
                       href={`/blog?page=${page}`}
                       className={`w-10 h-10 flex items-center justify-center rounded-full font-semibold transition-all ${
                         currentPage === page
-                          ? "bg-blue-600 text-white"
+                          ? "bg-[#02066F] text-white"
                           : "bg-white border border-slate-200 text-slate-600 hover:bg-slate-100"
                       }`}
                     >
@@ -123,7 +123,7 @@ export default function BlogPage({ searchParams }: { searchParams: { page?: stri
                 {currentPage < totalPages && (
                   <Link
                     href={`/blog?page=${currentPage + 1}`}
-                    className="flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 rounded-full text-slate-600 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all"
+                    className="flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 rounded-full text-slate-600 hover:bg-[#02066F] hover:text-white hover:border-[#02066F] transition-all"
                   >
                     Next
                     <ChevronRight size={18} />

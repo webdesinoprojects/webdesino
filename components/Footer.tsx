@@ -7,17 +7,17 @@ import { footerLocations } from "@/lib/locations-data";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-gradient-to-br from-teal via-teal/95 to-teal/90 text-white overflow-hidden">
+    <footer className="relative bg-[#02066F] text-white overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-10 left-10 w-96 h-96 bg-orange/10 rounded-full blur-3xl animate-float" />
+        <div className="absolute top-10 left-10 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-float" />
         <div className="absolute bottom-10 right-10 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
       </div>
 
       <div className="container mx-auto px-4 py-12 relative z-10">
         {/* Newsletter Section */}
         <div className="mb-10 text-center animate-fade-in">
-          <h3 className="text-3xl lg:text-4xl font-bold mb-4 gradient-text-orange">
+          <h3 className="text-3xl lg:text-4xl font-bold mb-4 text-white">
             Stay Updated with WebDesino
           </h3>
           <p className="text-gray-200 mb-6 max-w-2xl mx-auto">
@@ -33,11 +33,11 @@ export default function Footer() {
               name="email"
               required
               placeholder="Enter your email address"
-              className="flex-1 px-6 py-4 rounded-full bg-white/10 backdrop-blur border border-white/20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-orange/50 transition-all"
+              className="flex-1 px-6 py-4 rounded-full bg-white/10 backdrop-blur border border-white/20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all"
             />
             <button
               type="submit"
-              className="px-8 py-4 bg-gradient-orange text-white rounded-full font-semibold hover-lift hover-glow transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
+              className="px-8 py-4 bg-white text-[#02066F] rounded-full font-semibold hover-lift hover-glow transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
             >
               Subscribe
               <ArrowRight size={18} />
@@ -50,7 +50,7 @@ export default function Footer() {
           {/* Company Info - Spans 3 columns */}
           <div className="lg:col-span-3 animate-slide-in-left" style={{ animationDelay: '0.1s' }}>
             <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
-              <span>Webdesino<span className="text-orange">.com</span></span>
+              <span>Webdesino<span className="text-white">.com</span></span>
             </h3>
             <p className="text-gray-200 mb-6 leading-relaxed text-sm">
               Leading Digital Marketing Agency Delhi and web development
@@ -61,7 +61,7 @@ export default function Footer() {
                 href="https://www.facebook.com/webdesino"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-orange hover:scale-110 transition-all duration-300"
+                className="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-white hover:text-[#02066F] hover:scale-110 transition-all duration-300"
                 aria-label="Facebook"
               >
                 <Facebook size={18} />
@@ -70,7 +70,7 @@ export default function Footer() {
                 href="https://www.linkedin.com/company/webdesino"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-orange hover:scale-110 transition-all duration-300"
+                className="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-white hover:text-[#02066F] hover:scale-110 transition-all duration-300"
                 aria-label="LinkedIn"
               >
                 <Linkedin size={18} />
@@ -79,7 +79,7 @@ export default function Footer() {
                 href="https://www.twitter.com/webdesino"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-orange hover:scale-110 transition-all duration-300"
+                className="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-white hover:text-[#02066F] hover:scale-110 transition-all duration-300"
                 aria-label="Twitter"
               >
                 <Twitter size={18} />
@@ -88,7 +88,7 @@ export default function Footer() {
                 href="https://www.instagram.com/webdesino"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-orange hover:scale-110 transition-all duration-300"
+                className="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-white hover:text-[#02066F] hover:scale-110 transition-all duration-300"
                 aria-label="Instagram"
               >
                 <Instagram size={18} />
@@ -97,7 +97,7 @@ export default function Footer() {
                 href="https://www.youtube.com/@webdesino"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-orange hover:scale-110 transition-all duration-300"
+                className="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-white hover:text-[#02066F] hover:scale-110 transition-all duration-300"
                 aria-label="Youtube"
               >
                 <Youtube size={18} />
@@ -106,22 +106,22 @@ export default function Footer() {
 
             {/* Get In Touch */}
             <div>
-              <h4 className="text-lg font-bold mb-4 text-orange">Get In Touch</h4>
+              <h4 className="text-lg font-bold mb-4 text-white">Get In Touch</h4>
               <ul className="space-y-3 text-sm text-gray-200">
                 <li className="flex items-start gap-3">
-                  <Phone className="text-orange mt-1 flex-shrink-0" size={16} />
+                  <Phone className="text-white mt-1 flex-shrink-0" size={16} />
                   <a href="tel:+919310851557" className="hover:text-white transition-colors">
                     +91 93108 51557
                   </a>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Mail className="text-orange mt-1 flex-shrink-0" size={16} />
+                  <Mail className="text-white mt-1 flex-shrink-0" size={16} />
                   <a href="mailto:info@webdesino.com" className="hover:text-white transition-colors">
                     info@webdesino.com
                   </a>
                 </li>
                 <li className="flex items-start gap-3">
-                  <MapPin className="text-orange mt-1 flex-shrink-0" size={16} />
+                  <MapPin className="text-white mt-1 flex-shrink-0" size={16} />
                   <span>Delhi NCR, India</span>
                 </li>
               </ul>
@@ -132,7 +132,7 @@ export default function Footer() {
           <div className="lg:col-span-2 animate-slide-in-left" style={{ animationDelay: '0.2s' }}>
 
             <div>
-              <h4 className="text-lg font-bold mb-4 text-orange">Quick Links</h4>
+              <h4 className="text-lg font-bold mb-4 text-white">Quick Links</h4>
               <ul className="space-y-2 text-sm">
                 <li>
                   <Link href="/about" className="text-gray-200 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
@@ -162,7 +162,7 @@ export default function Footer() {
               </ul>
             </div>
             <div>
-              <h4 className="text-lg font-bold my-4 text-orange">Our Clients</h4>
+              <h4 className="text-lg font-bold my-4 text-white">Our Clients</h4>
               <ul className="space-y-2 text-sm">
                 <li>
                   <Link href="/our-clients?category=Our%20Websites" className="text-gray-200 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
@@ -227,7 +227,7 @@ export default function Footer() {
 
           {/* Our Services - Spans 7 columns (Split into 3 sub-columns) */}
           <div className="lg:col-span-7 animate-slide-in-left" style={{ animationDelay: '0.3s' }}>
-            <h4 className="text-lg font-bold mb-4 text-orange">Our Services</h4>
+            <h4 className="text-lg font-bold mb-4 text-white">Our Services</h4>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
               {/* Column 1 */}
               <div className="space-y-6">
@@ -317,14 +317,14 @@ export default function Footer() {
 
         {/* Service Locations - SEO Section */}
         <div className="mb-12 border-t border-white/10 pt-8 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-          <h4 className="text-lg font-bold mb-6 text-orange text-center">We Serve All Across Delhi NCR</h4>
+          <h4 className="text-lg font-bold mb-6 text-white text-center">We Serve All Across Delhi NCR</h4>
           <div className="h-64 overflow-y-auto pr-2 custom-scrollbar">
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
               {footerLocations.map((loc, idx) => (
                 <a
                   key={idx}
                   href={loc.href}
-                  className="text-sm text-gray-400 hover:text-orange transition-colors truncate block"
+                  className="text-sm text-gray-400 hover:text-white transition-colors truncate block"
                   title={loc.name}
                 >
                   {loc.name}
@@ -337,19 +337,19 @@ export default function Footer() {
         {/* Stats Bar */}
         <div className="py-8 mb-8 grid grid-cols-2 md:grid-cols-4 gap-6 border-y border-white/10 animate-fade-in" style={{ animationDelay: '0.5s' }}>
           <div className="text-center">
-            <div className="text-3xl font-bold text-orange mb-1">100+</div>
+            <div className="text-3xl font-bold text-white mb-1">100+</div>
             <div className="text-sm text-gray-300">Projects Delivered</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-orange mb-1">₹6.3 Cr+</div>
+            <div className="text-3xl font-bold text-white mb-1">₹6.3 Cr+</div>
             <div className="text-sm text-gray-300">Revenue Generated</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-orange mb-1">50+</div>
+            <div className="text-3xl font-bold text-white mb-1">50+</div>
             <div className="text-sm text-gray-300">Happy Clients</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-orange mb-1">20k+</div>
+            <div className="text-3xl font-bold text-white mb-1">20k+</div>
             <div className="text-sm text-gray-300">Specialists</div>
           </div>
         </div>
@@ -357,11 +357,11 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 text-center text-gray-300 animate-fade-in" style={{ animationDelay: '0.6s' }}>
           <div className="flex flex-wrap justify-center gap-6 mb-4 text-sm">
-            <Link href="/privacy" className="hover:text-orange transition">Privacy Policy</Link>
+            <Link href="/privacy-policy" className="hover:text-white transition">Privacy Policy</Link>
             <span>•</span>
-            <Link href="/terms" className="hover:text-orange transition">Terms & Conditions</Link>
+            <Link href="/terms-conditions" className="hover:text-white transition">Terms & Conditions</Link>
             <span>•</span>
-            <Link href="/sitemap" className="hover:text-orange transition">Sitemap</Link>
+            <Link href="/refund-policy" className="hover:text-white transition">Refund Policy</Link>
           </div>
           <p className="text-sm">
             &copy; 2025 <span className="font-bold text-white">Webdesino</span>, All Rights Reserved

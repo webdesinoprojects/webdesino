@@ -43,7 +43,7 @@ export default function ServiceFAQ({ serviceTitle }: ServiceFAQProps) {
         <div className="flex flex-col md:flex-row gap-12">
           <div className="md:w-1/3">
             <div className="sticky top-24">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange/10 text-orange rounded-full text-sm font-bold mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#02066F]/10 text-[#02066F] rounded-full text-sm font-bold mb-6">
                 <HelpCircle size={16} /> FAQ
               </div>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
@@ -52,7 +52,7 @@ export default function ServiceFAQ({ serviceTitle }: ServiceFAQProps) {
               <p className="text-gray-600 mb-8">
                 Have questions about our {serviceTitle} services? Find answers to common queries here.
               </p>
-              <a href="/contact" className="text-teal font-bold hover:text-orange transition-colors underline underline-offset-4">
+              <a href="/contact" className="text-[#02066F] font-bold hover:text-black transition-colors underline underline-offset-4">
                 Have more questions? Contact Us
               </a>
             </div>
@@ -62,7 +62,7 @@ export default function ServiceFAQ({ serviceTitle }: ServiceFAQProps) {
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className="border border-gray-200 rounded-xl overflow-hidden hover:border-teal/30 transition-colors"
+                className="border border-gray-200 rounded-xl overflow-hidden hover:border-[#02066F]/30 transition-colors"
                 itemScope
                 itemType="https://schema.org/Question"
               >
@@ -75,7 +75,7 @@ export default function ServiceFAQ({ serviceTitle }: ServiceFAQProps) {
                     {faq.question}
                   </span>
                   {openIndex === index ? (
-                    <ChevronUp className="text-orange flex-shrink-0" size={20} />
+                    <ChevronUp className="text-[#02066F] flex-shrink-0" size={20} />
                   ) : (
                     <ChevronDown className="text-gray-400 flex-shrink-0" size={20} />
                   )}

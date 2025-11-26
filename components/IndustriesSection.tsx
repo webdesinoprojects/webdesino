@@ -73,13 +73,13 @@ export default function IndustriesSection() {
   return (
     <section className="py-10 lg:py-16 bg-white relative overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute top-10 right-0 w-96 h-96 bg-teal/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-10 left-0 w-96 h-96 bg-orange/5 rounded-full blur-3xl" />
+      <div className="absolute top-10 right-0 w-96 h-96 bg-[#02066F]/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-10 left-0 w-96 h-96 bg-[#02066F]/5 rounded-full blur-3xl" />
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 lg:mb-12">
-          <h2 className="text-3xl lg:text-5xl font-bold text-teal mb-4 animate-fade-in">
+          <h2 className="text-3xl lg:text-5xl font-bold text-[#02066F] mb-4 animate-fade-in">
             Industries We Serve
           </h2>
           <p className="text-lg text-gray-600 animate-fade-in" style={{ animationDelay: '0.1s' }}>
@@ -99,11 +99,11 @@ export default function IndustriesSection() {
               >
                 {/* Icon */}
                 <div className="flex items-center gap-4 mb-4">
-                  <Icon className="text-teal group-hover:text-orange transition-colors duration-300" size={40} />
+                  <Icon className="text-[#02066F] group-hover:text-[#02066F]/80 transition-colors duration-300" size={40} />
                 </div>
 
                 {/* Content */}
-                <h3 className="text-xl font-bold text-teal mb-3 group-hover:gradient-text transition-all">
+                <h3 className="text-xl font-bold text-[#02066F] mb-3 group-hover:text-[#02066F]/80 transition-all">
                   {industry.title}
                 </h3>
                 <p className="text-gray-600 mb-4 leading-relaxed">
@@ -115,7 +115,7 @@ export default function IndustriesSection() {
                   href={industry.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-orange font-semibold text-sm hover:gap-3 transition-all"
+                  className="inline-flex items-center gap-2 text-[#02066F] font-semibold text-sm hover:gap-3 transition-all"
                 >
                   View Example – {industry.example}
                   <span className="text-xl">→</span>
