@@ -345,7 +345,7 @@ export default function Footer() {
             <div className="text-sm text-gray-300">Revenue Generated</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-white mb-1">50+</div>
+            <div className="text-3xl font-bold text-white mb-1">100+</div>
             <div className="text-sm text-gray-300">Happy Clients</div>
           </div>
           <div className="text-center">

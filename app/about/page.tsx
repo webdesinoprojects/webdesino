@@ -25,11 +25,11 @@ const certifications = [
 
 export const metadata: Metadata = {
   title: "About Us - Web Development Company in Delhi NCR | Webdesino",
-  description: "Learn about Webdesino - A leading web development and digital marketing company in Delhi NCR. 50+ happy clients, 100+ projects delivered, and proven results.",
+  description: "Learn about Webdesino - A leading web development and digital marketing company in Delhi NCR. 100+ happy clients, 100+ projects delivered, and proven results.",
 };
 
 const stats = [
-  { icon: Users, value: "50+", label: "Happy Clients" },
+  { icon: Users, value: "100+", label: "Happy Clients" },
   { icon: Target, value: "100+", label: "Projects Completed" },
   { icon: TrendingUp, value: "₹6.3 Cr+", label: "Sales Generated" },
   { icon: Award, value: "10+", label: "Certifications" },
@@ -237,7 +237,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl lg:text-4xl font-bold mb-6">Ready to Transform Your Online Presence?</h2>
           <p className="text-xl text-slate-600 mb-8 max-w-2xl mx-auto">
-            Join 50+ happy clients who have scaled their business with WebDesino.
+            Join 100+ happy clients who have scaled their business with WebDesino.
           </p>
           <Link 
             href="/contact" 

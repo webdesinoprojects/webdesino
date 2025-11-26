@@ -141,7 +141,7 @@ export default function MaximizeSection() {
               <div className="text-gray-600 font-medium">Projects Completed</div>
             </div>
             <div className="text-center p-6 glass rounded-2xl hover-lift cursor-pointer">
-              <div className="text-4xl font-bold gradient-text mb-2">50+</div>
+              <div className="text-4xl font-bold gradient-text mb-2">100+</div>
               <div className="text-gray-600 font-medium">Happy Clients</div>
             </div>
           </div>

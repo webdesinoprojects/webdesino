@@ -131,7 +131,7 @@ export default function FounderPage() {
                 With over 3 years of hands-on experience in the web development industry, I founded WebDesino to solve this exact problem. I wanted to create an agency that didn't just deliver code, but delivered <em>results</em>.
               </p>
               <p className="mb-6">
-                Based in the heart of Delhi, I've had the privilege of working with over 50+ clients, ranging from local startups in Uttam Nagar to established enterprises across India. My approach combines technical precision with creative design thinking, ensuring that every project we undertake is not just visually stunning but also performance-optimized.
+                Based in the heart of Delhi, I've had the privilege of working with over 100+ clients, ranging from local startups in Uttam Nagar to established enterprises across India. My approach combines technical precision with creative design thinking, ensuring that every project we undertake is not just visually stunning but also performance-optimized.
               </p>
               <p>
                 Today, WebDesino stands as a testament to that vision—a team of passionate experts dedicated to helping your business succeed in the digital age.

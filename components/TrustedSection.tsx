@@ -19,7 +19,7 @@ import AmbassadorPerk from "@/public/image.png";
 import Uag from "@/public/uag.png";
 
 const stats = [
-  { icon: Users, label: "Happy Clients", value: "50+" },
+  { icon: Users, label: "Happy Clients", value: "100+" },
   { icon: Briefcase, label: "Projects Delivered", value: "100+" },
   { icon: Shield, label: "Global Certifications", value: "10+" },
 ];
@@ -59,7 +59,7 @@ export default function TrustedSection() {
             Trusted Web Development Company in Delhi NCR
           </h2>
           <p className="text-lg text-slate-600 leading-relaxed animate-fade-in" style={{ animationDelay: '0.1s' }}>
-            At WebDesino, we are trusted by 50+ clients across Delhi NCR for delivering modern websites, SEO strategies, and digital marketing solutions. Recognized by global leaders, we ensure every project is SEO-optimized, professional, and result-driven.
+            At WebDesino, we are trusted by 100+ clients across Delhi NCR for delivering modern websites, SEO strategies, and digital marketing solutions. Recognized by global leaders, we ensure every project is SEO-optimized, professional, and result-driven.
           </p>
         </div>
 
