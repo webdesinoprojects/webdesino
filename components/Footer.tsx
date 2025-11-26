@@ -58,7 +58,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-3 mb-6">
               <a
-                href="https://www.facebook.com/webdesino"
+                href="https://www.facebook.com/thewebdiseno/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-white hover:text-[#02066F] hover:scale-110 transition-all duration-300"
@@ -76,7 +76,7 @@ export default function Footer() {
                 <Linkedin size={18} />
               </a>
               <a
-                href="https://www.instagram.com/webdesino"
+                href="https://www.instagram.com/the_webdesino/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-white hover:text-[#02066F] hover:scale-110 transition-all duration-300"
