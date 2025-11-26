@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Send, CheckCircle, Loader2, User, Mail, Phone, MessageSquare } from "lucide-react";
+import { Send, CheckCircle, Loader2, User, Mail, Phone, MessageSquare, ShieldCheck} from "lucide-react";
 
 export default function ServiceEnquiryForm({ serviceTitle }: { serviceTitle: string }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -39,61 +39,65 @@ export default function ServiceEnquiryForm({ serviceTitle }: { serviceTitle: str
   }
 
   return (
-    <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 lg:p-8 shadow-2xl border border-white/20 relative overflow-hidden animate-fade-in-up">
-      {/* Decorative gradient line */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#02066F] via-white to-[#02066F]"></div>
+    <div className="bg-[#02066F] rounded-2xl p-6 lg:p-8 shadow-2xl shadow-[#02066F]/20 border border-white/10 relative overflow-hidden animate-fade-in-up">
+      {/* Decorative elements */}
+      <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#4F46E5]/20 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
       
-      <div className="mb-6">
-        <h3 className="text-2xl font-bold text-white mb-2">Get a Free Quote</h3>
-        <p className="text-gray-200 text-sm">
-          Ready to start your <span className="text-[#02066F] font-semibold">{serviceTitle}</span> project? Fill out the form below.
+      <div className="mb-8 relative z-10">
+        <span className="inline-block px-3 py-1 bg-white/10 rounded-full text-xs font-medium text-white mb-3 border border-white/10">
+          Fast Response
+        </span>
+        <h3 className="text-2xl font-bold text-white mb-2">Get Your Free Quote</h3>
+        <p className="text-gray-300 text-sm leading-relaxed">
+          Ready to start your <span className="text-white font-semibold">{serviceTitle}</span> project? Fill out the form and we'll get back to you within 24 hours.
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-5 relative z-10">
         <div className="relative group">
-          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#02066F] transition-colors">
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-white transition-colors">
             <User size={18} />
           </div>
           <input
             type="text"
             required
-            className="w-full pl-10 pr-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:border-[#02066F] focus:ring-1 focus:ring-[#02066F] outline-none transition-all"
+            className="w-full pl-10 pr-4 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:border-white/30 focus:bg-white/10 focus:ring-1 focus:ring-white/30 outline-none transition-all"
             placeholder="Your Name"
           />
         </div>
 
         <div className="relative group">
-          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#02066F] transition-colors">
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-white transition-colors">
             <Mail size={18} />
           </div>
           <input
             type="email"
             required
-            className="w-full pl-10 pr-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:border-[#02066F] focus:ring-1 focus:ring-[#02066F] outline-none transition-all"
+            className="w-full pl-10 pr-4 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:border-white/30 focus:bg-white/10 focus:ring-1 focus:ring-white/30 outline-none transition-all"
             placeholder="Email Address"
           />
         </div>
 
         <div className="relative group">
-          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#02066F] transition-colors">
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-white transition-colors">
             <Phone size={18} />
           </div>
           <input
             type="tel"
             required
-            className="w-full pl-10 pr-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:border-[#02066F] focus:ring-1 focus:ring-[#02066F] outline-none transition-all"
+            className="w-full pl-10 pr-4 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:border-white/30 focus:bg-white/10 focus:ring-1 focus:ring-white/30 outline-none transition-all"
             placeholder="Phone Number"
           />
         </div>
 
         <div className="relative group">
-          <div className="absolute left-3 top-4 text-gray-400 group-focus-within:text-[#02066F] transition-colors">
+          <div className="absolute left-3 top-4 text-gray-400 group-focus-within:text-white transition-colors">
             <MessageSquare size={18} />
           </div>
           <textarea
             rows={3}
-            className="w-full pl-10 pr-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:border-[#02066F] focus:ring-1 focus:ring-[#02066F] outline-none transition-all resize-none"
+            className="w-full pl-10 pr-4 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:border-white/30 focus:bg-white/10 focus:ring-1 focus:ring-white/30 outline-none transition-all resize-none"
             placeholder="Tell us about your project requirements..."
           ></textarea>
         </div>
@@ -101,7 +105,7 @@ export default function ServiceEnquiryForm({ serviceTitle }: { serviceTitle: str
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full py-4 bg-[#02066F] text-white rounded-lg font-bold hover:shadow-lg hover:shadow-[#02066F]/20 hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed mt-2"
+          className="w-full py-4 bg-white text-[#02066F] rounded-xl font-bold hover:bg-gray-50 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-black/10 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
         >
           {isSubmitting ? (
             <>
@@ -110,15 +114,16 @@ export default function ServiceEnquiryForm({ serviceTitle }: { serviceTitle: str
             </>
           ) : (
             <>
-              Request Consultation <Send size={18} />
+              Get My Free Quote <Send size={18} />
             </>
           )}
         </button>
         
-        <p className="text-xs text-center text-gray-400 mt-4">
-          We respect your privacy. No spam, ever.
+        <p className="text-center text-xs text-gray-400 mt-4">
+          <span className="inline-flex items-center gap-1"><ShieldCheck size={12} /> 100% Secure & Confidential</span>
         </p>
       </form>
     </div>
   );
 }
+

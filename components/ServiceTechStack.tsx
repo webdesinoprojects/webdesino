@@ -58,14 +58,15 @@ export default function ServiceTechStack({ categorySlug }: ServiceTechStackProps
   // In a real scenario, you'd use actual SVG logos for these brands.
 
   return (
-    <section className="py-20 bg-white border-t border-gray-100">
+    <section className="py-12 bg-white border-t border-gray-100">
       <div className="container mx-auto px-4">
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Tools & Technologies We Use
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <span className="text-[#02066F] font-semibold text-sm uppercase tracking-wider mb-2 block">Technology First</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            Powered by <span className="text-[#02066F]">Modern Technology</span>
           </h2>
-          <p className="text-gray-600">
-            We leverage the latest tools and frameworks to deliver high-quality results.
+          <p className="text-gray-600 text-lg">
+            We stay ahead of the curve by leveraging the most advanced frameworks, tools, and platforms to build secure, scalable, and high-performance solutions for your business.
           </p>
         </div>
 
