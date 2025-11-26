@@ -15,7 +15,7 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
   const displayedTestimonials = testimonials.slice(0, 3);
 
   return (
-    <section className="py-12 lg:py-20 bg-white relative overflow-hidden" itemScope itemType="https://schema.org/Review">
+    <section className="py-12 bg-white relative overflow-hidden" itemScope itemType="https://schema.org/Review">
       {/* Background Decoration */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-[#02066F]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#02066F]/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
@@ -69,7 +69,7 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
         </div>
 
         {testimonials.length > 3 && (
-          <div className="text-center mb-16">
+          <div className="text-center">
             <Link
               href="/testimonials"
               className="inline-flex items-center justify-center px-8 py-3 border border-[#02066F] text-[#02066F] font-semibold rounded-full hover:bg-[#02066F] hover:text-white transition-colors duration-300"
@@ -79,7 +79,7 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
           </div>
         )}
 
-        <div className="flex justify-center gap-8 text-center">
+        {/* <div className="flex justify-center gap-8 text-center">
           <div className="flex flex-col items-center">
             <div className="text-3xl font-bold text-[#02066F] mb-1">4.9/5</div>
             <div className="flex gap-1 mb-1">
@@ -95,7 +95,7 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
             <div className="text-sm font-semibold text-[#02066F] mb-1">Satisfaction</div>
             <div className="text-xs text-gray-500">Client Retention</div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
