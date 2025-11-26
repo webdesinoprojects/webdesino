@@ -90,7 +90,7 @@ export default function FounderPage() {
               </h1>
               
               <p className="text-xl text-slate-600 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                "I help businesses transform their digital presence. My mission is to empower brands in Delhi NCR and beyond with technology that drives real growth, not just traffic."
+                "I help businesses transform their digital presence. My mission is to empower brands and beyond with technology that drives real growth, not just traffic."
               </p>
 
               <div className="flex flex-wrap justify-center lg:justify-start gap-4">

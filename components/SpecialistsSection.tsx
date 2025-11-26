@@ -84,8 +84,7 @@ export default function SpecialistsSection() {
 
 								<p className="text-slate-600 text-lg leading-relaxed mb-8">
 									"At WebDesino, we don't just build websites; we build
-									digital legacies. My mission is to empower businesses in
-									Delhi NCR and beyond with technology that drives real
+									digital legacies. My mission is to empower businesses and beyond with technology that drives real
 									growth. From a single line of code to a full-scale digital
 									transformation, we are committed to excellence."
 								</p>
