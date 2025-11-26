@@ -1,7 +1,9 @@
 import { getTestimonials } from "@/lib/data";
 import { Quote, Star, User } from "lucide-react";
 import type { Metadata } from "next";
+import FAQ from "@/components/FAQ";
 
+import { getFAQs, } from "@/lib/data";
 export const metadata: Metadata = {
   title: "Client Testimonials | WebDesino",
   description: "Read what our clients say about our web development, SEO, and digital marketing services in Delhi NCR.",
@@ -9,6 +11,7 @@ export const metadata: Metadata = {
 
 export default function TestimonialsPage() {
   const testimonials = getTestimonials();
+  const faqs = getFAQs();
 
   return (
     <main className="pt-24 pb-16 bg-white min-h-screen">
@@ -24,12 +27,12 @@ export default function TestimonialsPage() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {testimonials.map((testimonial, idx) => (
-            <div 
+            <div
               key={idx}
               className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 relative group border border-gray-100"
             >
               <Quote className="absolute top-6 right-6 text-[#02066F]/20 w-10 h-10 group-hover:text-[#02066F]/40 transition-colors" />
-              
+
               <div className="flex gap-1 mb-6">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} size={16} className="fill-[#02066F] text-[#02066F]" />
@@ -63,6 +66,7 @@ export default function TestimonialsPage() {
             </div>
           ))}
         </div>
+        <FAQ faqs={faqs} />
       </div>
     </main>
   );
