@@ -76,15 +76,6 @@ export default function Footer() {
                 <Linkedin size={18} />
               </a>
               <a
-                href="https://www.twitter.com/webdesino"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-white hover:text-[#02066F] hover:scale-110 transition-all duration-300"
-                aria-label="Twitter"
-              >
-                <Twitter size={18} />
-              </a>
-              <a
                 href="https://www.instagram.com/webdesino"
                 target="_blank"
                 rel="noopener noreferrer"
