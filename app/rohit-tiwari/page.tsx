@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Linkedin, Globe, Mail, Award, Code, Rocket, Target, CheckCircle2, ArrowRight } from "lucide-react";
 import { BASE_URL } from "@/lib/seo";
+import Rohit from "@/public/rohittiwari2.jpeg";
 
 export const metadata = {
   title: "Rohit Tiwari | Founder & CEO of WebDesino | Top Web Developer in Delhi",
@@ -12,7 +13,8 @@ export const metadata = {
     url: `${BASE_URL}/rohit-tiwari`,
     images: [
       {
-        url: `${BASE_URL}/rohittiwari.png`,
+        // url: `${BASE_URL}/rohittiwari.jpeg`,
+        src: Rohit,
         width: 800,
         height: 800,
         alt: "Rohit Tiwari - Founder WebDesino",
@@ -40,7 +42,7 @@ export default function FounderPage() {
                 <div className="absolute inset-0 bg-[#02066F] rounded-3xl blur-2xl opacity-50 group-hover:opacity-75 transition-opacity duration-500" />
                 <div className="relative rounded-3xl overflow-hidden border-2 border-gray-800 group-hover:border-white transition-colors duration-300 aspect-[4/5]">
                   <Image
-                    src="/rohittiwari.png"
+                    src={Rohit}
                     alt="Rohit Tiwari - Founder & CEO"
                     fill
                     className="object-cover transform group-hover:scale-105 transition-transform duration-500"

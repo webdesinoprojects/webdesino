@@ -3,6 +3,7 @@
 import { Linkedin, Globe, Award, CheckCircle, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import Rohit from "@/public/rohittiwari2.jpeg";
 
 export default function SpecialistsSection() {
 	return (
@@ -44,7 +45,7 @@ export default function SpecialistsSection() {
 									<div className="absolute inset-0 bg-[#02066F] rounded-3xl blur-xl opacity-10 group-hover:opacity-20 transition-opacity duration-500" />
 									<div className="relative rounded-3xl overflow-hidden border-2 border-slate-100 group-hover:border-[#02066F] transition-colors duration-300 aspect-[4/5]">
 										<Image
-											src="/rohittiwari.png"
+											src={Rohit}
 											alt="Rohit Tiwari - Founder & CEO"
 											fill
 											className="object-cover transform group-hover:scale-105 transition-transform duration-500"

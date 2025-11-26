@@ -5,10 +5,12 @@ import { Award, Users, Target, TrendingUp, ArrowRight, MapPin, CheckCircle2 } fr
 import WhyChooseUs from "@/components/WhyChooseUs";
 import IndustriesSection from "@/components/IndustriesSection";
 import ServiceIndustries from "@/components/ServiceIndustries";
+import Rohit from "@/public/rohittiwari2.jpeg";
+import Vishnu from "@/public/vishnusharma.png";
 
 const teamMembers = [
-  { name: "Rohit Tiwari", role: "Founder & CEO", image: "/rohittiwari.png" },
-  { name: "Vishnu Sharma", role: "Co-Founder", image: "/vishnusharma.png" },
+  { name: "Rohit Tiwari", role: "Founder & CEO", image: Rohit },
+  { name: "Vishnu Sharma", role: "Co-Founder", image: Vishnu },
   // { name: "Akash Tiwari", role: "Digital Marketer", image: "/akashtiwari.png" },
   // { name: "Rajeev Ranjan", role: "Web Developer", image: "/rajeevranjan.png" },
   // { name: "Ankit Tiwari", role: "Digital Marketer", image: "/ankittiwari.png" },
