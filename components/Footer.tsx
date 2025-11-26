@@ -14,7 +14,7 @@ export default function Footer() {
         <div className="absolute bottom-10 right-10 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
       </div>
 
-      <div className="container mx-auto px-4 py-12 relative z-10">
+      <div className="container mx-auto px-4 py-14 relative z-10">
         {/* Newsletter Section */}
         <div className="mb-10 text-center animate-fade-in">
           <h3 className="text-3xl lg:text-4xl font-bold mb-4 text-white">
@@ -186,9 +186,9 @@ export default function Footer() {
                 </li>
               </ul>
             </div>
-
-            {/* <div className="mt-8">
-              <h4 className="text-lg font-bold mb-4 text-orange">Our Offices</h4>
+            
+          <div className="my-4">
+              <h4 className="text-lg font-bold mb-4 text-white">Our Offices</h4>
               <ul className="space-y-2 text-sm">
                 <li>
                   <a href="https://share.google/1oqOSK2n3UvhKbHu5" target="_blank" rel="noopener noreferrer" className="text-gray-200 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
@@ -221,7 +221,7 @@ export default function Footer() {
                   </a>
                 </li>
               </ul>
-            </div> */}
+            </div>
 
           </div>
 
