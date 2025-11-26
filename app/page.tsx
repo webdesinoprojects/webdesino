@@ -63,9 +63,9 @@ export default function Home() {
       <ServicesPills />
       <WhyChooseUs features={features} />
       <IndustriesSection />
-      <Suspense fallback={<div>Loading portfolio...</div>}>
+      {/* <Suspense fallback={<div>Loading portfolio...</div>}>
         <Portfolio projects={projects} />
-      </Suspense>
+      </Suspense> */}
       <MaximizeSection />
       <HoverSection />
       <SpecialistsSection />
@@ -76,9 +76,9 @@ export default function Home() {
       <SaaSSection />
       <SEOAuditSection />
       <ResultsSection results={results} />
-      <Suspense fallback={<div>Loading case studies...</div>}>
-        {/* <CaseStudiesList caseStudies={caseStudies} /> */}
-      </Suspense>
+      {/* <Suspense fallback={<div>Loading case studies...</div>}>
+        <CaseStudiesList caseStudies={caseStudies} />
+      </Suspense> */}
       <Testimonials testimonials={testimonials} />
       <FAQ faqs={faqs} />
     </>

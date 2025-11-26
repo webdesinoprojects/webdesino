@@ -379,8 +379,8 @@ export const getCaseStudies = (): CaseStudy[] => {
 export const getIndustries = (): string[] => {
   return [
     "All",
-    "Ecommerce",
-    "Healthcare",
+    "E-commerce",
+    "Health & Wellness",
     "Education",
     "Real Estate",
     "Corporate",
