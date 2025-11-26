@@ -96,7 +96,7 @@ export default function SpecialistsSection() {
 											<Award size={24} />
 										</div>
 										<div className="text-left">
-											<div className="text-slate-900 font-bold">3+ Years</div>
+											<div className="text-slate-900 font-bold">5+ Years</div>
 											<div className="text-slate-500 text-sm">
 												Industry Experience
 											</div>
