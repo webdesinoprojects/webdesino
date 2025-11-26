@@ -4,14 +4,15 @@ import Link from "next/link";
 import { Award, Users, Target, TrendingUp, ArrowRight, MapPin, CheckCircle2 } from "lucide-react";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import IndustriesSection from "@/components/IndustriesSection";
+import ServiceIndustries from "@/components/ServiceIndustries";
 
 const teamMembers = [
   { name: "Rohit Tiwari", role: "Founder & CEO", image: "/rohittiwari.png" },
   { name: "Vishnu Sharma", role: "Co-Founder", image: "/vishnusharma.png" },
-  { name: "Akash Tiwari", role: "Digital Marketer", image: "/akashtiwari.png" },
-  { name: "Rajeev Ranjan", role: "Web Developer", image: "/rajeevranjan.png" },
-  { name: "Ankit Tiwari", role: "Digital Marketer", image: "/ankittiwari.png" },
-  { name: "Shubham", role: "Management", image: "/shubham.png" },
+  // { name: "Akash Tiwari", role: "Digital Marketer", image: "/akashtiwari.png" },
+  // { name: "Rajeev Ranjan", role: "Web Developer", image: "/rajeevranjan.png" },
+  // { name: "Ankit Tiwari", role: "Digital Marketer", image: "/ankittiwari.png" },
+  // { name: "Shubham", role: "Management", image: "/shubham.png" },
 ];
 
 const certifications = [
@@ -67,7 +68,7 @@ export default function AboutPage() {
             </div>
             </div>
             </section>
-            <div className="relative w-full aspect-[4/1] mt-12 rounded-xl overflow-hidden shadow-2xl animate-fade-in border border-white/10">
+            <div className="relative max-w-6xl mx-auto text-center aspect-[4/1] rounded-xl overflow-hidden shadow-2xl animate-fade-in border border-white/10">
               <Image
                 src="/rohittiwaribanner.png"
                 alt="Rohit Tiwari Web Developer"
@@ -82,14 +83,14 @@ export default function AboutPage() {
       <section className="py-16 lg:py-24 bg-slate-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h6 className="text-[#02066F] font-bold tracking-wider uppercase mb-2">Our Team</h6>
-            <h2 className="text-3xl lg:text-4xl font-bold text-slate-900">Meet The Team</h2>
-            <p className="text-slate-600 mt-4 max-w-2xl mx-auto">
-              Find a team of Web Developers you can rely on. Every day, we build trust through communication, transparency, and results.
+            <h6 className="text-[#02066F] font-bold tracking-wider uppercase mb-2">OUR FOUNDERS</h6>
+            <h2 className="text-3xl lg:text-4xl font-bold text-slate-900">Meet the Leaders Who Started It All</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto">
+              Driven by innovation and passion, our founders lead the company with a shared vision of excellence and growth.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 gap-8 max-w-4xl mx-auto">
             {teamMembers.map((member, idx) => (
               <div key={idx} className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100">
                 <div className="aspect-[4/5] relative bg-slate-200 overflow-hidden">
@@ -100,8 +101,8 @@ export default function AboutPage() {
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                    />
                 </div>
-                <div className="p-6 text-center">
-                  <h3 className="text-xl font-bold text-slate-900 mb-1">{member.name}</h3>
+                <div className="p-2 text-center">
+                  <h3 className="text-md font-bold text-slate-900">{member.name}</h3>
                   <p className="text-[#02066F] font-medium">{member.role}</p>
                 </div>
               </div>
@@ -186,7 +187,8 @@ export default function AboutPage() {
       <WhyChooseUs features={whyChooseUsFeatures} />
 
       {/* Industries We Serve */}
-      <IndustriesSection />
+      {/* <IndustriesSection /> */}
+      <ServiceIndustries />
 
       {/* Certifications Section */}
       <section className="py-16 bg-[#02066F] text-white">
@@ -197,12 +199,12 @@ export default function AboutPage() {
           </p>
           <div className="flex flex-wrap justify-center gap-8 items-center">
             {certifications.map((cert, idx) => (
-              <div key={idx} className="relative h-16 w-32 lg:h-20 lg:w-40 bg-white/10 rounded-lg p-2 hover:bg-white/20 transition-all duration-300">
+              <div key={idx} className="relative h-16 w-32 lg:h-20 lg:w-40 bg-white/5 rounded-lg p-2 hover:bg-white/10 transition-all duration-300">
                 <Image
                   src={cert.image}
                   alt={cert.name}
                   fill
-                  className="object-contain p-2 brightness-0 invert"
+                  className="object-contain p-2"
                 />
               </div>
             ))}
@@ -231,15 +233,15 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-[#02066F] text-white text-center">
+      <section className="py-20 bg-slate-50 text-[#02066F] text-center">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl lg:text-4xl font-bold mb-6">Ready to Transform Your Online Presence?</h2>
-          <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-slate-600 mb-8 max-w-2xl mx-auto">
             Join 50+ happy clients who have scaled their business with WebDesino.
           </p>
           <Link 
             href="/contact" 
-            className="inline-flex items-center gap-2 bg-white text-[#02066F] px-8 py-4 rounded-full font-bold hover:bg-white/90 transition-colors"
+            className="inline-flex items-center gap-2 bg-white text-[#02066F] px-8 py-4 rounded-full font-bold hover:bg-white/90 transition-colors border border-[#02066F]"
           >
             Get Started Today
             <ArrowRight size={20} />
