@@ -77,7 +77,7 @@ export default function Home() {
       <SEOAuditSection />
       <ResultsSection results={results} />
       <Suspense fallback={<div>Loading case studies...</div>}>
-        <CaseStudiesList caseStudies={caseStudies} />
+        {/* <CaseStudiesList caseStudies={caseStudies} /> */}
       </Suspense>
       <Testimonials testimonials={testimonials} />
       <FAQ faqs={faqs} />
