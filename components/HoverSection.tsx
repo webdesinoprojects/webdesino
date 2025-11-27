@@ -128,7 +128,7 @@ export default function HoverSection() {
           <div className="mt-16 flex justify-center gap-8 flex-wrap animate-fade-in" style={{ animationDelay: '1.4s' }}>
             <div className="flex items-center gap-3 px-6 py-3 glass rounded-full hover-lift">
               <div className="w-3 h-3 bg-[#02066F] rounded-full animate-pulse-glow" />
-              <span className="font-bold text-gray-700">20k+ Specialists</span>
+              <span className="font-bold text-gray-700">30+ Specialists</span>
             </div>
             <div className="flex items-center gap-3 px-6 py-3 glass rounded-full hover-lift">
               <div className="w-3 h-3 bg-[#02066F] rounded-full animate-pulse-glow" />

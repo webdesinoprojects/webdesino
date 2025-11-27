@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Phone, Mail, Menu, X, ChevronDown, ArrowRight, ChevronLeft, ChevronRight, Code, Brush, Smartphone, Rocket, Briefcase, ShoppingCart, PenTool, Target, MapPin, Power, BarChart, Search, Home, Users, BookOpen, Info, GraduationCap, Pill, ShoppingBag } from "lucide-react";
 import Image from "next/image";
 import { servicesData } from "@/lib/services-data";
@@ -46,6 +47,12 @@ export default function Navbar() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setActiveDropdown(null);
+    setIsMenuOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

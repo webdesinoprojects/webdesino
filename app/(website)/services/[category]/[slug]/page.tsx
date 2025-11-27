@@ -252,7 +252,7 @@ export default function ServicePage({ params }: PageProps) {
                     <div className="text-xs text-gray-300">Client Satisfaction</div>
                   </div>
                   <div className="bg-white/10 rounded-lg p-4 text-center">
-                    <div className="text-3xl font-bold text-white mb-1">250+</div>
+                    <div className="text-3xl font-bold text-white mb-1">100+</div>
                     <div className="text-xs text-gray-300">Projects Delivered</div>
                   </div>
                   <div className="bg-white/10 rounded-lg p-4 text-center">

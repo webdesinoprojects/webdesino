@@ -74,7 +74,8 @@ export default function ResultsSection({ results }: ResultsSectionProps) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredResults.slice(0,3).map((result, idx) => (
-            <div
+            <Link
+              href={result.slug ? `/case-studies/${result.slug}` : '#'}
               key={idx}
               className="group relative bg-white rounded-2xl p-8 border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-[#02066F]/10 transition-all duration-300 hover:-translate-y-1 flex flex-col h-full overflow-hidden"
             >
@@ -116,7 +117,7 @@ export default function ResultsSection({ results }: ResultsSectionProps) {
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
