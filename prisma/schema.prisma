@@ -1,0 +1,102 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// --- ADMIN & UTILS ---
+
+model Admin {
+  id       String @id @default(cuid())
+  email    String @unique
+  password String
+}
+
+model Enquiry {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  service   String?
+  message   String   @db.Text
+  status    String   @default("New") // New, Contacted, Closed
+  createdAt DateTime @default(now())
+}
+
+// --- CONTENT MODELS ---
+
+model Project {
+  id              Int      @id @default(autoincrement())
+  title           String
+  slug            String   @unique
+  industry        String
+  description     String   @db.Text
+  image           String
+  fullDescription String?  @db.Text
+  results         String?  @db.Text
+  
+  // Metrics from your interface
+  growthMetric    String?
+  salesMetric     String?
+  trafficMetric   String?
+  
+  createdAt       DateTime @default(now())
+}
+
+model BlogPost {
+  id        String   @id @default(cuid())
+  title     String
+  slug      String   @unique
+  date      String   // String to match "November 21, 2025"
+  category  String
+  excerpt   String   @db.Text
+  content   String   @db.Text
+  image     String?
+  createdAt DateTime @default(now())
+}
+
+model Testimonial {
+  id        Int     @id @default(autoincrement())
+  name      String
+  text      String  @db.Text
+  company   String?
+  location  String?
+  image     String?
+}
+
+model Faq {
+  id       Int     @id @default(autoincrement())
+  question String  @db.Text
+  answer   String  @db.Text
+  category String?
+}
+
+// --- CASE STUDIES ---
+
+model CaseStudy {
+  id             String   @id @default(cuid())
+  slug           String   @unique
+  title          String
+  client         String
+  industry       String
+  duration       String
+  background     String   @db.Text
+  
+  // JSON Fields for complex nested data (Prisma 5 supports this natively with Postgres)
+  heroMetrics    Json
+  challenges     Json
+  solutions      Json
+  implementation Json
+  results        Json
+  testimonial    Json
+  keyLearnings   String[]
+  faqs           Json
+  
+  createdAt      DateTime @default(now())
+}
