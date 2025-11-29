@@ -10,12 +10,16 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-// --- ADMIN & UTILS ---
+// ==========================================
+// 🔐 AUTH & ADMIN SYSTEM
+// ==========================================
 
 model Admin {
-  id       String @id @default(cuid())
-  email    String @unique
-  password String
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  createdAt DateTime @default(now())
 }
 
 model Enquiry {
@@ -23,62 +27,74 @@ model Enquiry {
   name      String
   email     String
   phone     String?
-  service   String?
+  service   String?  // e.g. "SEO", "Web Dev"
   message   String   @db.Text
-  status    String   @default("New") // New, Contacted, Closed
+  status    String   @default("New") // New, Contacted, Closed, Spam
   createdAt DateTime @default(now())
 }
 
-// --- CONTENT MODELS ---
+// ==========================================
+// 🏠 HOME PAGE SECTIONS
+// ==========================================
+
+// 1. HERO SHOWCASE (The cards with stats like "532% Sales")
+model HeroShowcase {
+  id          Int      @id @default(autoincrement())
+  name        String   // e.g. "BookBuzzz"
+  category    String   // e.g. "E-commerce Website"
+  stat        String   // e.g. "₹25L+ Sales"
+  description String   @db.Text // e.g. "Scaled from zero..."
+  iconName    String   // Store Lucide icon name: "Store", "Smartphone"
+  iconColor   String   // e.g. "text-[#02066F]"
+  order       Int      @default(0)
+}
+
+// 2. FEATURES (The "Why Choose Us" section)
+model Feature {
+  id          Int      @id @default(autoincrement())
+  number      String   // e.g. "01", "02"
+  title       String   // e.g. "Proven Results"
+  description String   @db.Text
+  order       Int      @default(0)
+}
+
+// 3. RESULTS (The "Real Results" section summaries)
+model Result {
+  id          Int      @id @default(autoincrement())
+  title       String   // e.g. "BookBuzzz E-commerce Growth"
+  description String   @db.Text
+  growth      String   // e.g. "532%"
+  industry    String   // e.g. "E-commerce"
+  slug        String?  // Link to full case study
+  order       Int      @default(0)
+}
+
+// ==========================================
+// 💼 PORTFOLIO & CASE STUDIES
+// ==========================================
 
 model Project {
   id              Int      @id @default(autoincrement())
   title           String
   slug            String   @unique
-  industry        String
-  description     String   @db.Text
-  image           String
+  industry        String   // e.g. "Ecommerce", "Healthcare"
+  description     String   @db.Text // Short description for cards
+  image           String   // Main cover image URL
+  
+  // Detailed Content
   fullDescription String?  @db.Text
   results         String?  @db.Text
   
-  // Metrics from your interface
-  growthMetric    String?
-  salesMetric     String?
-  trafficMetric   String?
+  // Specific Metrics from your data.ts
+  growthMetric    String?  // e.g. "532%"
+  salesMetric     String?  // e.g. "₹25,00,000+ monthly"
+  trafficMetric   String?  // e.g. "Global visibility"
   
+  isFeatured      Boolean  @default(false)
   createdAt       DateTime @default(now())
 }
 
-model BlogPost {
-  id        String   @id @default(cuid())
-  title     String
-  slug      String   @unique
-  date      String   // String to match "November 21, 2025"
-  category  String
-  excerpt   String   @db.Text
-  content   String   @db.Text
-  image     String?
-  createdAt DateTime @default(now())
-}
-
-model Testimonial {
-  id        Int     @id @default(autoincrement())
-  name      String
-  text      String  @db.Text
-  company   String?
-  location  String?
-  image     String?
-}
-
-model Faq {
-  id       Int     @id @default(autoincrement())
-  question String  @db.Text
-  answer   String  @db.Text
-  category String?
-}
-
-// --- CASE STUDIES ---
-
+// For detailed, long-form case studies (from lib/case-studies.ts)
 model CaseStudy {
   id             String   @id @default(cuid())
   slug           String   @unique
@@ -88,15 +104,107 @@ model CaseStudy {
   duration       String
   background     String   @db.Text
   
-  // JSON Fields for complex nested data (Prisma 5 supports this natively with Postgres)
-  heroMetrics    Json
-  challenges     Json
-  solutions      Json
-  implementation Json
-  results        Json
-  testimonial    Json
-  keyLearnings   String[]
-  faqs           Json
+  // Complex Data stored as JSON
+  heroMetrics    Json     // { revenue: "...", roi: "..." }
+  challenges     Json     // { title: "...", points: [] }
+  solutions      Json     // { title: "...", points: [] }
+  implementation Json     // Timeline or steps
+  results        Json     // After state
+  testimonial    Json     // Specific quote
+  techStack      String[] // ["Next.js", "Shopify"]
+  faqs           Json     // Specific FAQs for this case study
   
   createdAt      DateTime @default(now())
+}
+
+// ==========================================
+// 🛠 SERVICES (Dynamic Menu & Pages)
+// ==========================================
+
+model ServiceCategory {
+  id          String           @id @default(cuid())
+  title       String           // e.g. "Web Development"
+  slug        String           @unique // e.g. "web-development"
+  description String?          @db.Text
+  icon        String?          // Icon name
+  subtypes    ServiceSubtype[] // Relation to sub-services
+  order       Int              @default(0)
+}
+
+model ServiceSubtype {
+  id          String   @id @default(cuid())
+  title       String   // e.g. "E-commerce Website"
+  slug        String   @unique // e.g. "ecommerce-website"
+  description String   @db.Text
+  features    String[] 
+  benefits    String[] 
+  
+  categoryId  String
+  category    ServiceCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+}
+
+// ==========================================
+// 🤝 CLIENTS & TESTIMONIALS
+// ==========================================
+
+model Client {
+  id        Int      @id @default(autoincrement())
+  name      String
+  image     String   // Logo URL
+  url       String?  // Website Link
+  category  String   // "Our Clients", "Querky", "Shopify Websites", "Our Apps"
+  createdAt DateTime @default(now())
+}
+
+model Testimonial {
+  id        Int     @id @default(autoincrement())
+  name      String
+  text      String  @db.Text
+  company   String? // e.g. "E-commerce Business"
+  location  String? // e.g. "Delhi"
+  image     String? // User Avatar URL
+  rating    Int     @default(5)
+}
+
+// ==========================================
+// 📚 CONTENT & SEO
+// ==========================================
+
+model BlogPost {
+  id        String   @id @default(cuid())
+  title     String
+  slug      String   @unique
+  excerpt   String   @db.Text
+  content   String   @db.Text // HTML Rich Text
+  image     String?
+  category  String   // e.g. "Digital Marketing"
+  date      String   // Keeping as string to match "November 21, 2025"
+  
+  author    String?  // e.g. "Rohit Tiwari"
+  createdAt DateTime @default(now())
+}
+
+model Faq {
+  id       Int     @id @default(autoincrement())
+  question String  @db.Text
+  answer   String  @db.Text
+  category String? // "General", "SEO Services", "Pricing"
+}
+
+// For SEO location pages (e.g. "Web Design in Pitampura")
+model Location {
+  id      Int    @id @default(autoincrement())
+  name    String // e.g. "Pitampura"
+  url     String // e.g. "/web-design-pitampura"
+}
+
+// For Generic Pages (Privacy Policy, Terms, etc.)
+model Page {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique 
+  content     String   @db.Text 
+  metaTitle   String?
+  metaDesc    String?
+  updatedAt   DateTime @updatedAt
 }
