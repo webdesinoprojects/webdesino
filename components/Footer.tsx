@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Phone, Mail, MapPin, Facebook, Linkedin, Twitter, Instagram, Youtube, ArrowRight } from "lucide-react";
+import { Phone, Mail, MapPin, Facebook, Linkedin, Twitter, Instagram, Youtube, ArrowRight, FileText } from "lucide-react";
 import { servicesData } from "@/lib/services-data";
 import { footerLocations } from "@/lib/locations-data";
 
@@ -98,7 +98,7 @@ export default function Footer() {
             {/* Get In Touch */}
             <div>
               <h4 className="text-lg font-bold mb-4 text-white">Get In Touch</h4>
-              <ul className="space-y-3 text-sm text-gray-200">
+              <ul className="space-y-2 text-sm text-gray-200">
                 <li className="flex items-start gap-3">
                   <Phone className="text-white mt-1 flex-shrink-0" size={16} />
                   <a href="tel:+919310851557" className="hover:text-white transition-colors">
@@ -114,6 +114,10 @@ export default function Footer() {
                 <li className="flex items-start gap-3">
                   <MapPin className="text-white mt-1 flex-shrink-0" size={16} />
                   <span>Delhi NCR, India</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <FileText className="text-white mt-1 flex-shrink-0" size={16} />
+                  <span>GST: 07CCKPT2540Q1ZW</span>
                 </li>
               </ul>
             </div>
@@ -152,8 +156,8 @@ export default function Footer() {
                 </li>
               </ul>
             </div>
-            <div>
-              <h4 className="text-lg font-bold my-4 text-white">Our Clients</h4>
+            <div className="mt-8">
+              <h4 className="text-lg font-bold mb-4 text-white">Our Clients</h4>
               <ul className="space-y-2 text-sm">
                 <li>
                   <Link href="/our-clients?category=Our%20Websites" className="text-gray-200 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
@@ -178,7 +182,7 @@ export default function Footer() {
               </ul>
             </div>
             
-          <div className="my-4">
+            <div className="mt-8">
               <h4 className="text-lg font-bold mb-4 text-white">Our Offices</h4>
               <ul className="space-y-2 text-sm">
                 <li>
