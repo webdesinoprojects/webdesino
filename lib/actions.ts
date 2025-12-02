@@ -45,9 +45,60 @@ export async function createBlogPost(formData: FormData) {
       excerpt,
       image,
       content,
+      date: new Date(), // Add current date
     },
   });
 
   revalidatePath("/admin/blogs");
   redirect("/admin/blogs");
+}
+
+export async function createServiceCategory(formData: FormData) {
+  const title = formData.get("title") as string;
+  const slug = formData.get("slug") as string;
+  const description = formData.get("description") as string;
+  const icon = formData.get("icon") as string;
+
+  await prisma.serviceCategory.create({
+    data: {
+      title,
+      slug,
+      description,
+      icon,
+    },
+  });
+
+  revalidatePath("/admin/services");
+  redirect("/admin/services");
+}
+
+export async function createServiceSubtype(formData: FormData) {
+  const title = formData.get("title") as string;
+  const slug = formData.get("slug") as string;
+  const description = formData.get("description") as string;
+  const categoryId = formData.get("categoryId") as string;
+  const icon = formData.get("icon") as string;
+  
+  // Handle array fields (features and benefits)
+  // Expecting them as newline separated strings from textarea
+  const featuresRaw = formData.get("features") as string;
+  const benefitsRaw = formData.get("benefits") as string;
+
+  const features = featuresRaw ? featuresRaw.split('\n').filter(line => line.trim() !== '') : [];
+  const benefits = benefitsRaw ? benefitsRaw.split('\n').filter(line => line.trim() !== '') : [];
+
+  await prisma.serviceSubtype.create({
+    data: {
+      title,
+      slug,
+      description,
+      categoryId,
+      icon,
+      features,
+      benefits,
+    },
+  });
+
+  revalidatePath(`/admin/services/${categoryId}`);
+  redirect(`/admin/services/${categoryId}`);
 }

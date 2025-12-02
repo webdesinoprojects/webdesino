@@ -29,6 +29,7 @@ export default async function AdminDashboardLayout({ children }: { children: Rea
         <nav className="p-4 space-y-2 overflow-y-auto h-[calc(100vh-64px)]">
           <NavItem href="/admin/dashboard" icon={<LayoutDashboard size={20} />} label="Dashboard" />
           <NavItem href="/admin/projects" icon={<Briefcase size={20} />} label="Projects" />
+          <NavItem href="/admin/services" icon={<LayoutDashboard size={20} />} label="Services" />
           <NavItem href="/admin/blogs" icon={<FileText size={20} />} label="Blogs" />
           <NavItem href="/admin/enquiries" icon={<Mail size={20} />} label="Enquiries" />
           
