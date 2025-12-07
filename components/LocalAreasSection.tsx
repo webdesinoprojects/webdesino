@@ -64,6 +64,19 @@ export default function LocalAreasSection() {
 					</div>
 				</div>
 
+
+				{/* Map Container */}
+				<div className="w-full h-[400px] lg:h-[500px] rounded-2xl overflow-hidden shadow-xl border border-white/20 glass mb-12 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+					<iframe 
+						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224345.83923192776!2d77.0688975472578!3d28.52728034389636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x37205b715389640!2sDelhi!5e0!3m2!1sen!2sin!4v1701945000000!5m2!1sen!2sin" 
+						width="100%" 
+						height="100%" 
+						style={{ border: 0 }}
+						allowFullScreen 
+						loading="lazy"
+						title="WebDesino Service Areas"
+					></iframe>
+				</div>
 				{/* Location Links */}
 				<div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
 					{locations.map((location, idx) => (
@@ -82,6 +95,7 @@ export default function LocalAreasSection() {
 						</Link>
 					))}
 				</div>
+
 
 				{/* Closing Statement */}
 				<div className="text-center max-w-3xl mx-auto">
