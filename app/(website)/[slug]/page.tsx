@@ -21,9 +21,19 @@ export async function generateStaticParams() {
     const locations = await prisma.locationPage.findMany({
         select: { slug: true },
     });
-    return locations.map((loc) => ({
-        slug: loc.slug,
-    }));
+
+    const reservedRoutes = [
+        "about", "blog", "case-studies", "contact", "our-clients", 
+        "portfolio", "pricing", "privacy-policy", "refund-policy", 
+        "rohit-tiwari", "search", "services", "terms-conditions", 
+        "testimonials"
+    ];
+
+    return locations
+        .filter((loc) => loc.slug && loc.slug !== "index" && loc.slug !== "" && !reservedRoutes.includes(loc.slug))
+        .map((loc) => ({
+            slug: loc.slug,
+        }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
