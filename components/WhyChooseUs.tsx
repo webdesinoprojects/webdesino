@@ -1,5 +1,5 @@
 import type { Feature } from "@/lib/data";
-import { GoalIcon, Target } from "lucide-react";
+import { Target } from "lucide-react";
 
 interface WhyChooseUsProps {
   features: Feature[];
@@ -47,21 +47,33 @@ export default function WhyChooseUs({ features }: WhyChooseUsProps) {
             ))}
           </div>
 
-          {/* Center - Graphic/3D Element */}
-          <div className="flex flex-col items-center justify-center relative">
-            <div className="w-full aspect-[4/5] bg-[#02066F] rounded-3xl flex items-center justify-center relative overflow-hidden shadow-2xl transform rotate-1 hover:rotate-0 transition-transform duration-500">
-              <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-20"></div>
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+          {/* Center - Vision Card */}
+          <div className="flex flex-col items-center justify-center relative h-full">
+            <div className="w-full h-full min-h-[400px] bg-gradient-to-br from-[#02066F] to-[#000040] rounded-3xl flex items-center justify-center relative overflow-hidden shadow-2xl group hover:scale-[1.02] transition-transform duration-500">
+              {/* Animated Background Elements */}
+              <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
+              <div className="absolute -top-20 -right-20 w-64 h-64 bg-[#4F46E5]/30 rounded-full blur-3xl animate-pulse"></div>
+              <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-[#0EA5E9]/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
               
-              <div className="relative z-10 text-center p-8">
-                <div className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center mx-auto mb-6 border border-white/20 shadow-lg animate-float">
-                  <GoalIcon className="text-4xl text-white" />
+              <div className="relative z-10 text-center p-10 flex flex-col items-center justify-center h-full">
+                <div className="mb-8 relative">
+                  <div className="absolute inset-0 bg-white/20 blur-xl rounded-full"></div>
+                  <h3 className="text-4xl lg:text-5xl font-bold text-white relative z-10 tracking-tight">
+                    Our Vision
+                  </h3>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-2">Our Vision</h3>
-                <p className="text-gray-200 text-sm leading-relaxed">
-                  To empower businesses with digital excellence and innovative technology solutions.
+                
+                <div className="w-16 h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent mb-8"></div>
+
+                <p className="text-blue-100 text-lg lg:text-xl leading-relaxed font-light max-w-xs mx-auto">
+                  "To empower businesses with <span className="text-white font-semibold">digital excellence</span> and <span className="text-white font-semibold">innovative technology</span> solutions."
                 </p>
+
+                <div className="mt-10 flex gap-2">
+                  <div className="w-2 h-2 rounded-full bg-white/20 animate-bounce" style={{ animationDelay: '0s' }}></div>
+                  <div className="w-2 h-2 rounded-full bg-white/40 animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                  <div className="w-2 h-2 rounded-full bg-white/60 animate-bounce" style={{ animationDelay: '0.4s' }}></div>
+                </div>
               </div>
             </div>
           </div>
