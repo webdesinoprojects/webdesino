@@ -90,3 +90,14 @@ model ServiceSubtype {
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
 }
+
+model LocationPage {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  location    String
+  title       String
+  description String?
+  content     Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

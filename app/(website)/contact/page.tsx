@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Phone, Mail, MapPin, Send } from "lucide-react";
+import { Phone, Mail, MapPin } from "lucide-react";
+import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact Us - Get Free Consultation | Webdesino",
@@ -27,91 +28,7 @@ export default function ContactPage() {
 
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
-            <div className="glass-strong rounded-3xl p-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-              <h2 className="text-2xl font-bold text-[#02066F] mb-6">Send Us a Message</h2>
-              <form 
-                action="https://webdesino.com/contact-form-submit" 
-                method="POST"
-                className="space-y-6"
-              >
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#02066F]/50 transition-all"
-                    placeholder="Your name"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#02066F]/50 transition-all"
-                    placeholder="your@email.com"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#02066F]/50 transition-all"
-                    placeholder="+91 XXXXX XXXXX"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
-                    Service Interested In
-                  </label>
-                  <select
-                    id="service"
-                    name="service"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#02066F]/50 transition-all"
-                  >
-                    <option value="">Select a service</option>
-                    <option value="web-development">Web Development</option>
-                    <option value="seo">SEO Services</option>
-                    <option value="digital-marketing">Digital Marketing</option>
-                    <option value="content-writing">Content Writing</option>
-                    <option value="ecommerce">E-commerce Development</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                    Message *
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    required
-                    rows={5}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#02066F]/50 transition-all resize-none"
-                    placeholder="Tell us about your project..."
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full bg-[#02066F] text-white px-8 py-4 rounded-full font-semibold hover:shadow-xl transition-all duration-300 hover-lift flex items-center justify-center gap-2"
-                >
-                  Send Message
-                  <Send size={20} />
-                </button>
-              </form>
-            </div>
+            <ContactForm />
 
             {/* Contact Information */}
             <div className="space-y-6 animate-fade-in" style={{ animationDelay: '0.3s' }}>

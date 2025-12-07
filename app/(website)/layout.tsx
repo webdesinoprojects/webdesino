@@ -7,6 +7,7 @@ import BottomNav from "@/components/BottomNav";
 import {Analytics} from "@vercel/analytics/react";
 import { generateOrganizationSchema } from "@/lib/seo";
 import ContactWidget from "@/components/ContactWidget";
+import prisma from "@/lib/prisma";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -74,12 +75,27 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const jsonLd = generateOrganizationSchema();
+  
+  const locations = await prisma.locationPage.findMany({
+    select: {
+      location: true,
+      slug: true,
+    },
+    orderBy: {
+      location: 'asc',
+    },
+  });
+
+  const footerLocations = locations.map(loc => ({
+    name: loc.location,
+    slug: loc.slug,
+  }));
 
   return (
     <html lang="en">
@@ -93,7 +109,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Analytics />
-        <Footer />
+        <Footer locations={footerLocations} />
         <BottomNav />
         <ContactWidget />
       </body>

@@ -3,9 +3,12 @@
 import Link from "next/link";
 import { Phone, Mail, MapPin, Facebook, Linkedin, Twitter, Instagram, Youtube, ArrowRight, FileText } from "lucide-react";
 import { servicesData } from "@/lib/services-data";
-import { footerLocations } from "@/lib/locations-data";
 
-export default function Footer() {
+interface FooterProps {
+  locations?: { name: string; slug: string }[];
+}
+
+export default function Footer({ locations = [] }: FooterProps) {
   return (
     <footer className="relative bg-[#02066F] text-white overflow-hidden">
       {/* Animated background elements */}
@@ -315,15 +318,15 @@ export default function Footer() {
           <h4 className="text-lg font-bold mb-6 text-white text-center">We Serve All Across Delhi NCR</h4>
           <div className="h-64 overflow-y-auto pr-2 custom-scrollbar">
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-              {footerLocations.map((loc, idx) => (
-                <a
+              {locations.map((loc, idx) => (
+                <Link
                   key={idx}
-                  href={loc.href}
+                  href={`/${loc.slug}`}
                   className="text-sm text-gray-400 hover:text-white transition-colors truncate block"
                   title={loc.name}
                 >
                   {loc.name}
-                </a>
+                </Link>
               ))}
             </div>
           </div>

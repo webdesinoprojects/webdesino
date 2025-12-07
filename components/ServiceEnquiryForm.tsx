@@ -2,20 +2,29 @@
 
 import { useState } from "react";
 import { Send, CheckCircle, Loader2, User, Mail, Phone, MessageSquare, ShieldCheck} from "lucide-react";
+import { createEnquiry } from "@/lib/actions";
 
 export default function ServiceEnquiryForm({ serviceTitle }: { serviceTitle: string }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError(null);
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    const formData = new FormData(e.currentTarget);
+    formData.append("service", serviceTitle);
+
+    const result = await createEnquiry(formData);
     
     setIsSubmitting(false);
-    setIsSuccess(true);
+    if (result.success) {
+      setIsSuccess(true);
+    } else {
+      setError(result.error || "Something went wrong. Please try again.");
+    }
   };
 
   if (isSuccess) {
@@ -61,6 +70,7 @@ export default function ServiceEnquiryForm({ serviceTitle }: { serviceTitle: str
           </div>
           <input
             type="text"
+            name="name"
             required
             className="w-full pl-10 pr-4 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:border-white/30 focus:bg-white/10 focus:ring-1 focus:ring-white/30 outline-none transition-all"
             placeholder="Your Name"
@@ -73,6 +83,7 @@ export default function ServiceEnquiryForm({ serviceTitle }: { serviceTitle: str
           </div>
           <input
             type="email"
+            name="email"
             required
             className="w-full pl-10 pr-4 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:border-white/30 focus:bg-white/10 focus:ring-1 focus:ring-white/30 outline-none transition-all"
             placeholder="Email Address"
@@ -85,6 +96,7 @@ export default function ServiceEnquiryForm({ serviceTitle }: { serviceTitle: str
           </div>
           <input
             type="tel"
+            name="phone"
             required
             className="w-full pl-10 pr-4 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:border-white/30 focus:bg-white/10 focus:ring-1 focus:ring-white/30 outline-none transition-all"
             placeholder="Phone Number"
@@ -96,11 +108,18 @@ export default function ServiceEnquiryForm({ serviceTitle }: { serviceTitle: str
             <MessageSquare size={18} />
           </div>
           <textarea
+            name="message"
             rows={3}
             className="w-full pl-10 pr-4 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:border-white/30 focus:bg-white/10 focus:ring-1 focus:ring-white/30 outline-none transition-all resize-none"
             placeholder="Tell us about your project requirements..."
           ></textarea>
         </div>
+
+        {error && (
+          <div className="text-red-300 text-sm text-center bg-red-900/20 p-2 rounded-lg border border-red-500/20">
+            {error}
+          </div>
+        )}
 
         <button
           type="submit"
@@ -126,4 +145,5 @@ export default function ServiceEnquiryForm({ serviceTitle }: { serviceTitle: str
     </div>
   );
 }
+
 
