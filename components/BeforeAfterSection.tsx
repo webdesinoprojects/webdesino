@@ -45,8 +45,9 @@ export default function BeforeAfterSection({ industries: propIndustries }: Befor
           </div>
         </div>
 
-        <h2 className="text-4xl lg:text-6xl font-bold text-center mb-4 animate-scale-in text-slate-900">
-          <span className="text-slate-900">Before and After</span>
+        <h2 className="text-4xl lg:text-6xl font-bold text-center mb-6 tracking-tight text-slate-900">
+          Transforming Digital <br/>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#02066F] to-blue-600">Experiences</span>
         </h2>
         <p className="text-center text-slate-600 text-lg mb-12 animate-fade-in" style={{ animationDelay: '0.2s' }}>
           See the transformation from outdated to outstanding
