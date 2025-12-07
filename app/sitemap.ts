@@ -2,8 +2,9 @@ import { MetadataRoute } from 'next';
 import { getPortfolioProjects } from '@/lib/data';
 import { getAllCaseSlugs } from '@/lib/case-studies';
 import { servicesData } from '@/lib/services-data';
+import prisma from '@/lib/prisma';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 1. Get all dynamic project routes
   const projects = getPortfolioProjects();
   const projectEntries: MetadataRoute.Sitemap = projects.map((project) => ({
@@ -39,7 +40,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   );
 
-  // 4. Define static routes
+  // 4. Get all location routes
+  const locations = await prisma.locationPage.findMany({
+    select: { slug: true },
+  });
+  const locationEntries: MetadataRoute.Sitemap = locations.map((loc) => ({
+    url: `https://webdesino.com/${loc.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }));
+
+  // 5. Define static routes
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: 'https://webdesino.com',
@@ -86,5 +98,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...serviceSubtypeEntries,
     ...projectEntries,
     ...caseStudyEntries,
+    ...locationEntries,
   ];
 }

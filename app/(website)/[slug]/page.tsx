@@ -6,6 +6,7 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import FAQ from "@/components/FAQ";
 import Link from "next/link";
 import { Monitor, Smartphone, Megaphone, Palette, Code2, ArrowRight, CheckCircle2 } from "lucide-react";
+import { generateLocalBusinessSchema } from "@/lib/seo";
 
 interface PageProps {
   params: {
@@ -45,6 +46,7 @@ export default async function LocationPage({ params }: PageProps) {
   }
 
   const locationName = page.location;
+  const jsonLd = generateLocalBusinessSchema(locationName, params.slug);
 
   // Dynamic Features for WhyChooseUs
   const features = [
@@ -115,6 +117,10 @@ export default async function LocationPage({ params }: PageProps) {
 
   return (
     <main className="min-h-screen bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Hero Section */}
       <section className="relative bg-[#02066F] text-white py-20 lg:py-32 overflow-hidden">
          <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>

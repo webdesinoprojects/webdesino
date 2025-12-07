@@ -48,6 +48,51 @@ export function generateWebSiteSchema() {
   };
 }
 
+export function generateLocalBusinessSchema(locationName: string, slug: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: `Webdesino - Web Development in ${locationName}`,
+    image: `${BASE_URL}/logo.png`,
+    '@id': `${BASE_URL}/${slug}`,
+    url: `${BASE_URL}/${slug}`,
+    telephone: '+91-9310851557',
+    priceRange: '₹₹',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'M, 54/H, Block Z, Krishan Vihar',
+      addressLocality: 'New Delhi',
+      addressRegion: 'Delhi',
+      postalCode: '110086',
+      addressCountry: 'IN',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 28.7041,
+      longitude: 77.1025,
+    },
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+      ],
+      opens: '09:00',
+      closes: '18:00',
+    },
+    sameAs: [
+      'https://www.facebook.com/webdesino',
+      'https://twitter.com/webdesino',
+      'https://www.instagram.com/webdesino',
+      'https://www.linkedin.com/company/webdesino',
+    ],
+  };
+}
+
 export function generateBlogPostingSchema(post: any) {
   return {
     '@context': 'https://schema.org',

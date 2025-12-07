@@ -3,7 +3,7 @@
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import nodemailer from "nodemailer";
+import { sendEnquiryEmail } from "@/lib/email";
 
 export async function createProject(formData: FormData) {
   const title = formData.get("title") as string;
@@ -127,40 +127,7 @@ export async function createEnquiry(formData: FormData) {
       },
     });
 
-    if (process.env.SMTP_HOST && process.env.SMTP_USER) {
-      const transporter = nodemailer.createTransport({
-        host: process.env.SMTP_HOST,
-        port: parseInt(process.env.SMTP_PORT || "587"),
-        secure: false,
-        auth: {
-          user: process.env.SMTP_USER,
-          pass: process.env.SMTP_PASS,
-        },
-      });
-
-      await transporter.sendMail({
-        from: process.env.SMTP_FROM || '"WebDesino Website" <no-reply@webdesino.com>',
-        to: process.env.SMTP_TO || "info@webdesino.com",
-        subject: `New Enquiry from ${name} - ${service || "General"} ${location ? `(${location})` : ""}`,
-        text: `
-          Name: ${name}
-          Email: ${email}
-          Phone: ${phone}
-          Service: ${service}
-          Location: ${location || "N/A"}
-          Message: ${message}
-        `,
-        html: `
-          <h1>New Enquiry Received</h1>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Phone:</strong> ${phone}</p>
-          <p><strong>Service:</strong> ${service}</p>
-          <p><strong>Location:</strong> ${location || "N/A"}</p>
-          <p><strong>Message:</strong><br/>${message.replace(/\n/g, "<br/>")}</p>
-        `,
-      });
-    }
+    await sendEnquiryEmail(name, email, phone, service, message, location);
 
     revalidatePath("/admin/enquiries");
     return { success: true };
