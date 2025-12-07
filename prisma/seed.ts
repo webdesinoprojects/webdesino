@@ -33,29 +33,38 @@ async function main() {
         continue
     }
 
-    // Default title logic based on the user's pattern
-    // Most are "Best Web Development Company in [Location]"
-    // But some have specific titles in the href or name.
-    // For now, we'll use a generic title if we can't derive it better, 
-    // but the user's data has "name" which is the location name.
-    // We can construct a default title.
-    
-    const title = `Best Web Development Company in ${loc.name}`
+    // Heuristic to determine if the name is a full title or just a location
+    let title = `Best Web Development Company in ${loc.name}`;
+    let locationName = loc.name;
+
+    const keywords = ["Agency", "Services", "Company", "Developer", "Consultant", "Management", "Designer", "Campaign"];
+    if (keywords.some(k => loc.name.includes(k))) {
+        title = loc.name;
+        // Try to extract location
+        if (loc.name.includes(" in ")) {
+            locationName = loc.name.split(" in ").pop()!;
+        } else if (loc.name.includes(" near ")) {
+            locationName = loc.name.split(" near ").pop()!;
+        } else if (loc.name.includes(" For ")) {
+             locationName = loc.name.split(" For ")[0].split(" in ").pop() || "Delhi";
+        } else {
+             if (loc.name.includes("Delhi")) locationName = "Delhi";
+             else if (loc.name.includes("Noida")) locationName = "Noida";
+             else if (loc.name.includes("Gurgaon")) locationName = "Gurgaon";
+        }
+    }
 
     await prisma.locationPage.upsert({
       where: { slug },
       update: {
-        location: loc.name,
-        // Only update title if it doesn't exist? No, let's update it to ensure consistency.
-        // But maybe we want to preserve manual edits? 
-        // For now, let's update it.
+        location: locationName,
         title: title,
       },
       create: {
         slug,
-        location: loc.name,
+        location: locationName,
         title: title,
-        description: `Looking for the ${title}? We provide top-notch web design and development services in ${loc.name}. Contact us today!`,
+        description: `Looking for ${title}? We provide top-notch web design and development services in ${locationName}. Contact us today!`,
       },
     })
   }
