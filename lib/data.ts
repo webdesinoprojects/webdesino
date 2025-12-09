@@ -40,7 +40,7 @@ export const getPortfolioProjects = (): PortfolioProject[] => {
       industry: "Ecommerce",
       description:
         "Within 2 months, with our SEO & performance marketing strategies, they now generate ₹10,00,000+ monthly sales.",
-      image: "https://api.microlink.io/?url=https://luckynutra.com/&screenshot=true&embed=screenshot.url",
+      image: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/uploads/2025/10/Lucky_Nutra_1000px.png",
       fullDescription:
         "LuckyNutra started with only ₹3,000/month in website sales and zero marketplace presence. Our team implemented targeted SEO strategies and performance marketing campaigns. Within 2 months, they achieved ₹10,00,000+ in monthly sales.",
       results: "Boosted sales from ₹3,000/month to ₹10,00,000+ monthly with SEO & performance marketing.",
@@ -56,7 +56,7 @@ export const getPortfolioProjects = (): PortfolioProject[] => {
       industry: "Ecommerce",
       description:
         "After implementing our SEO campaigns and optimizing user experience, they now achieve ₹6,00,000/month in sales.",
-      image: "https://api.microlink.io/?url=https://buykharibaoli.com/&screenshot=true&embed=screenshot.url",
+      image: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/uploads/2025/10/buy-khari-baoli-logo-small.webp",
       fullDescription:
         "BuyKhariBauli began with ₹30,000/month in website sales. Through strategic SEO campaigns and comprehensive user experience optimization, we helped them achieve ₹6,00,000/month in sales directly from their website.",
       results: "Improved website sales from ₹30,000/month to ₹6,00,000/month with targeted SEO campaigns.",
@@ -72,7 +72,7 @@ export const getPortfolioProjects = (): PortfolioProject[] => {
       industry: "Healthcare",
       description:
         "Within months, we ranked their website on highly competitive global keywords... driving significant worldwide visibility.",
-      image: "https://api.microlink.io/?url=https://meritshot.com/&screenshot=true&embed=screenshot.url",
+      image: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/uploads/2025/10/68ce47b8847dda2fd5b1a6b9_Meritshot-Education-Logo.avif",
       fullDescription:
         "Meritshot partnered with Webdesino for a focused SEO strategy targeting highly competitive global keywords. We successfully ranked their website for terms like 'Investment Banking Course', 'Best Institute for Investment Banking', and 'Indian No.1 Institute for Investment Banking', driving significant worldwide visibility and student enrollments.",
       results: "Ranked on highly competitive global keywords, driving significant worldwide visibility.",

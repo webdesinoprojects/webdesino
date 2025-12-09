@@ -7,6 +7,10 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "WebDesino Admin",
   description: "Admin Dashboard for WebDesino",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function AdminRootLayout({

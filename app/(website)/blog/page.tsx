@@ -55,7 +55,7 @@ export default async function BlogPage({ searchParams }: { searchParams: { page?
                       src={post.image || "https://api.microlink.io/?url=https://webdesino.com&screenshot=true&meta=false&embed=screenshot.url"}
                       alt={post.title}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="object-contain group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute top-4 left-4 bg-[#02066F] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
                       {post.category}

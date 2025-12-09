@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { Phone, Mail, MapPin, Facebook, Linkedin, Twitter, Instagram, Youtube, ArrowRight, FileText } from "lucide-react";
 import { servicesData } from "@/lib/services-data";

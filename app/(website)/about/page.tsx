@@ -86,7 +86,7 @@ export default async function AboutPage() {
                 src={getStorageUrl(hero.image || "/rohittiwaribanner.png")}
                 alt="About Banner"
                 fill
-                className="object-cover"
+                className="object-contain"
                 priority
               />
             </div>
@@ -111,7 +111,7 @@ export default async function AboutPage() {
                       src={member.image}
                       alt={member.name}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="object-contain group-hover:scale-105 transition-transform duration-500"
                    />
                 </div>
                 <div className="p-2 text-center">

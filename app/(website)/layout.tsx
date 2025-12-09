@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Best Web Design Agency in Delhi | SEO Services | Webdesino",
     description: "Webdesino is the top web development company in Delhi NCR. We build affordable, high-performance websites and provide expert SEO services to rank your business #1.",
-    images: ["/og-image.jpg"],
+    images: ["https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/logo.png"],
   },
   robots: {
     index: true,

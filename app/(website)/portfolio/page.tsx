@@ -52,7 +52,7 @@ export default async function PortfolioPage() {
                       src={project.image}
                       alt={`${project.title} - ${project.industry} Website Development`}
                       fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-300"
+                      className="object-contain group-hover:scale-110 transition-transform duration-300"
                       unoptimized
                     />
                   ) : (

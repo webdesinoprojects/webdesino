@@ -33,7 +33,7 @@ export default async function BlogSection() {
                   src={post.image || `https://placehold.co/600x400?text=${encodeURIComponent(post.title)}`}
                   alt={post.title}
                   fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="object-contain group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-[#02066F]">
                   {post.category}

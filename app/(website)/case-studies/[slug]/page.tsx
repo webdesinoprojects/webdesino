@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 import { CaseStudy } from '@/lib/case-studies';
@@ -35,6 +36,7 @@ function transformProjectToCaseStudy(project: any): CaseStudy {
     client: project.client,
     industry: project.industry,
     duration: heroMetrics.timeline,
+    image: project.image,
     heroMetrics,
     background: project.description,
     challenges: project.challenges as any,
@@ -154,6 +156,17 @@ export default async function CaseStudyPage({ params }: { params: { slug: string
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed animate-fade-in" style={{ animationDelay: '0.3s' }}>
               {caseStudy.background}
             </p>
+            
+            {caseStudy.image && (
+              <div className="mt-12 relative w-full max-w-4xl mx-auto h-[300px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl animate-fade-in" style={{ animationDelay: '0.4s' }}>
+                <Image
+                  src={caseStudy.image}
+                  alt={caseStudy.title}
+                  fill
+                  className="object-contain"
+                />
+              </div>
+            )}
           </div>
 
           {/* Metrics Cards */}

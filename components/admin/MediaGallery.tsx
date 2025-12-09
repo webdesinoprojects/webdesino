@@ -67,7 +67,7 @@ export default function MediaGallery() {
                       src={file.url} 
                       alt={file.filename} 
                       fill 
-                      className="object-cover"
+                      className="object-contain"
                     />
                     <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                       <Button size="icon" variant="secondary" onClick={() => copyUrl(file.url)} title="Copy URL">

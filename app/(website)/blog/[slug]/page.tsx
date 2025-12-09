@@ -103,7 +103,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                   src={post.image || "https://api.microlink.io/?url=https://webdesino.com&screenshot=true&meta=false&embed=screenshot.url"}
                   alt={post.title}
                   fill
-                  className="object-cover"
+                  className="object-contain"
                 />
               </div>
               

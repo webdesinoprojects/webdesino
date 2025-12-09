@@ -156,7 +156,7 @@ export default function PortfolioProjectPage({
                   src={project.image}
                   alt={`${project.title} - Webdesino Portfolio Project`}
                   fill
-                  className="object-cover"
+                  className="object-contain"
                   priority
                 />
               ) : (

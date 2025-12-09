@@ -15,7 +15,7 @@ const projects = [
     client: "LuckyNutra",
     industry: "Health & Wellness (Supplements)",
     description: "LuckyNutra is a fast-growing nutritional supplement brand in India, focused on providing high-quality, science-backed products. Despite offering effective supplements, they struggled with low sales, poor online visibility, and almost no brand presence on key digital channels. Their website traffic was negligible, and they weren't ranking for critical keywords.",
-    image: "https://api.microlink.io/?url=https://luckynutra.com/&screenshot=true&embed=screenshot.url",
+    image: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/uploads/2025/10/Lucky_Nutra_1000px.png",
     metrics: [
       { label: "Revenue", value: "₹3K → ₹10L+ Monthly" },
       { label: "ROI", value: "+330x Growth" },
@@ -219,7 +219,7 @@ const projects = [
     client: "Meritshot",
     industry: "Education (Investment Banking)",
     description: "Meritshot is a premier investment banking training institute catering to students worldwide. Before WebDesino, their website was not ranking for competitive keywords like 'Investment Banking Course'. Despite high-quality programs, their digital presence was weak and international visibility was minimal.",
-    image: "https://api.microlink.io/?url=https://meritshot.com/&screenshot=true&embed=screenshot.url",
+    image: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/uploads/2025/10/68ce47b8847dda2fd5b1a6b9_Meritshot-Education-Logo.avif",
     metrics: [
       { label: "Revenue", value: "300%+ Organic Leads" },
       { label: "ROI", value: "Global Reach" },
@@ -320,7 +320,7 @@ const projects = [
     client: "BuyKhariBauli",
     industry: "E-commerce (Dry Fruits & Nuts)",
     description: "BuyKhariBauli, a premium dry fruits and spices retailer, was struggling with low online visibility despite having quality products. Their website was generating only ₹30,000 per month in sales, far below their potential. The challenge was clear: transform their digital presence to match their product quality and tap into the growing online market for premium dry fruits.",
-    image: "https://api.microlink.io/?url=https://buykharibaoli.com/&screenshot=true&embed=screenshot.url",
+    image: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/uploads/2025/10/buy-khari-baoli-logo-small.webp",
     metrics: [
       { label: "Revenue", value: "₹30,000 → ₹6,00,000+ Monthly" },
       { label: "ROI", value: "+20x Growth" },

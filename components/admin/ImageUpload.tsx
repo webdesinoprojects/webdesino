@@ -60,7 +60,7 @@ export default function ImageUpload({ name, defaultValue, label = "Image", onUpl
             src={imageUrl} 
             alt="Uploaded image" 
             fill 
-            className="object-cover"
+            className="object-contain"
           />
           <Button
             type="button"

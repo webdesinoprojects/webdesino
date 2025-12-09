@@ -24,7 +24,7 @@ async function main() {
                   <img
                     src="/rohittiwari2.jpeg"
                     alt="Rohit Tiwari - Founder & CEO"
-                    class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500"
+                    class="object-contain w-full h-full transform group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
 

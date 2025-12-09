@@ -51,7 +51,7 @@ export default async function TeamPage() {
                         src={member.image} 
                         alt={member.name} 
                         fill 
-                        className="object-cover"
+                        className="object-contain"
                       />
                     </div>
                   )}

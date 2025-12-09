@@ -76,7 +76,7 @@ export default function Portfolio({ projects }: PortfolioProps) {
                         src={project.image}
                         alt={`${project.title} - Webdesino Portfolio Project - ${project.industry} Website Development`}
                         fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-300"
+                        className="object-contain group-hover:scale-110 transition-transform duration-300"
                         unoptimized
                       />
                     ) : (

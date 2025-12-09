@@ -135,7 +135,7 @@ export default async function FounderPage() {
                     alt="Rohit Tiwari - Founder & CEO"
                     fill
                     sizes="(max-width: 1024px) 100vw, 33vw"
-                    className="object-cover transform group-hover:scale-105 transition-transform duration-500"
+                    className="object-contain transform group-hover:scale-105 transition-transform duration-500"
                     priority
                   />
                 </div>

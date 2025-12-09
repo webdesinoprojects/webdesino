@@ -229,7 +229,7 @@ export default async function OurClientsPage({
                             src={client.image}
                             alt={`${client.name} Screenshot`}
                             fill
-                            className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                            className="object-contain object-top group-hover:scale-105 transition-transform duration-500"
                             unoptimized // Since we are using external microlink images
                           />
                           <div className="absolute inset-0 bg-[#02066F]/0 group-hover:bg-[#02066F]/40 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">

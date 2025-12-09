@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Hero from "@/components/Hero";
 import ServicesOverview from "@/components/ServicesOverview";
 import ServicesPills from "@/components/ServicesPills";
@@ -18,7 +19,6 @@ import FAQ from "@/components/FAQ";
 import SaaSSection from "@/components/SaaSSection";
 import SEOAuditSection from "@/components/SEOAuditSection";
 import BlogSection from "@/components/BlogSection";
-import { Suspense } from 'react';
 import { generateWebSiteSchema } from "@/lib/seo";
 import { prisma } from "@/lib/prisma";
 
@@ -30,11 +30,20 @@ import {
   getHeroShowcaseItems,
 } from "@/lib/data";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Webdesino | Stunning Websites by Top Web Development Agency",
-  image: Logo,
   description:
     "Webdesino is a leading Digital Marketing Agency Delhi and web development company helping businesses grow online with creative websites, SEO, and digital marketing solutions. Trusted by 100+ businesses across Delhi NCR.",
+  openGraph: {
+    images: [
+      {
+        url: Logo,
+        width: 1200,
+        height: 630,
+        alt: "Webdesino Logo",
+      },
+    ],
+  },
 };
 
 export default async function Home() {
@@ -46,7 +55,6 @@ export default async function Home() {
     orderBy: { order: 'asc' },
   });
   
-  // const faqs = getFAQs();
   const features = getFeatures();
   const results = getResults();
   const heroShowcaseItems = getHeroShowcaseItems();
