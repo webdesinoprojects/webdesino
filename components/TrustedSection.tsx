@@ -4,19 +4,20 @@ import Link from "next/link";
 import NextImage from "next/image";
 import { Award, Users, Briefcase, Shield } from "lucide-react";
 import React from 'react';
-import Google from "@/public/google.jpg";
-import WordPress from "@/public/wordpress.jpg";
-import Shopify from "@/public/shopify.jpg";
-import SEMRush from "@/public/semrush.png";
-import DesignRush from "@/public/designrush.jpg";
-import Aadiva from "@/public/aadiva.png";
-import Bookbuzz from "@/public/bookbuzz.png";
-import Bulkwala from "@/public/bulkwala.jpg";
-import BuyKhariBauli from "@/public/buykharibauli.png";
-import Landsaathi from "@/public/landsaathi.png";
-import Maxlift from "@/public/maxlift.png";
-import AmbassadorPerk from "@/public/image.png";
-import Uag from "@/public/uag.png";
+
+const Google = "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/google.jpg";
+const WordPress = "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/wordpress.jpg";
+const Shopify = "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/shopify.jpg";
+const SEMRush = "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/semrush.png";
+const DesignRush = "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/designrush.jpg";
+const Aadiva = "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/aadiva.png";
+const Bookbuzz = "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/bookbuzz.png";
+const Bulkwala = "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/bulkwala.jpg";
+const BuyKhariBauli = "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/buykharibauli.png";
+const Landsaathi = "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/landsaathi.png";
+const Maxlift = "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/maxlift.png";
+const AmbassadorPerk = "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/image.png";
+const Uag = "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/uag.png";
 
 const stats = [
   { icon: Users, label: "Happy Clients", value: "100+" },
@@ -136,6 +137,9 @@ export default function TrustedSection() {
                         className="h-24 w-auto mx-auto object-contain transition-all duration-300"
                         src={logo.src}
                         alt={logo.alt}
+                        width={200}
+                        height={100}
+                        style={{ width: 'auto', height: 'auto' }}
                       />
                     </div>
                   </div>
@@ -147,6 +151,9 @@ export default function TrustedSection() {
                         className="h-24 w-auto mx-auto object-contain transition-all duration-300"
                         src={logo.src}
                         alt={logo.alt}
+                        width={200}
+                        height={100}
+                        style={{ width: 'auto', height: 'auto' }}
                       />
                     </div>
                   </div>

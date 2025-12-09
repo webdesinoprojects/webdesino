@@ -2,6 +2,8 @@ import prisma from "@/lib/prisma";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Plus, ArrowLeft, FileText } from "lucide-react";
+import { deleteService } from "@/lib/actions";
+import ActionsMenu from "@/components/admin/ActionsMenu";
 import {
   Table,
   TableBody,
@@ -63,9 +65,11 @@ export default async function ServiceCategoryDetailsPage({ params }: { params: {
                 <TableCell>{subtype.slug}</TableCell>
                 <TableCell>{subtype.features.length} features</TableCell>
                 <TableCell className="text-right">
-                  <Button variant="ghost" size="sm" disabled>
-                    Edit
-                  </Button>
+                  <ActionsMenu
+                    id={subtype.id}
+                    editUrl={`/admin/services/${category.id}/${subtype.id}`}
+                    deleteAction={deleteService}
+                  />
                 </TableCell>
               </TableRow>
             ))}

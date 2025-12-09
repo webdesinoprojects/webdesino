@@ -1,4 +1,4 @@
-import { getPortfolioProjects, getIndustries } from "@/lib/data";
+import { prisma } from "@/lib/prisma";
 import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -18,9 +18,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function PortfolioPage() {
-  const projects = getPortfolioProjects();
-  const industries = getIndustries().filter((ind) => ind !== "All");
+export default async function PortfolioPage() {
+  const projects = await prisma.project.findMany({
+    orderBy: { id: 'asc' },
+  });
+  
+  // Get unique industries
+  const industries = Array.from(new Set(projects.map(p => p.industry)));
 
   return (
     <main className="min-h-screen bg-cream py-16 lg:py-24">

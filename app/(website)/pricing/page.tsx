@@ -1,13 +1,24 @@
 import React from 'react';
 import Link from 'next/link';
 import { Metadata } from 'next';
+import { prisma } from '@/lib/prisma';
 
 export const metadata: Metadata = {
   title: 'Pricing & Packages | WebDesino',
   description: 'Affordable web design and digital marketing packages tailored to your business needs.',
 };
 
-export default function Pricing() {
+export default async function Pricing() {
+  const page = await prisma.page.findUnique({
+    where: { slug: 'pricing' },
+  });
+
+  const content = (page?.content as any) || {};
+
+  if (page?.content) {
+    return <div dangerouslySetInnerHTML={{ __html: content.html || '' }} />;
+  }
+
   return (
     <div className="min-h-screen bg-white">
       <main className="pt-24 pb-16">

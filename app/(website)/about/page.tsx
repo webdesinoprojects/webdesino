@@ -1,3 +1,4 @@
+import { prisma } from "@/lib/prisma";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -5,39 +6,24 @@ import { Award, Users, Target, TrendingUp, ArrowRight, MapPin, CheckCircle2 } fr
 import WhyChooseUs from "@/components/WhyChooseUs";
 import IndustriesSection from "@/components/IndustriesSection";
 import ServiceIndustries from "@/components/ServiceIndustries";
-import Rohit from "@/public/rohittiwari2.jpeg";
-import Vishnu from "@/public/vishnusharma.png";
+import { getStorageUrl } from "@/lib/utils";
 
-const teamMembers = [
-  { name: "Rohit Tiwari", role: "Founder & CEO", image: Rohit },
-  { name: "Vishnu Sharma", role: "Co-Founder", image: Vishnu },
-  // { name: "Akash Tiwari", role: "Digital Marketer", image: "/akashtiwari.png" },
-  // { name: "Rajeev Ranjan", role: "Web Developer", image: "/rajeevranjan.png" },
-  // { name: "Ankit Tiwari", role: "Digital Marketer", image: "/ankittiwari.png" },
-  // { name: "Shubham", role: "Management", image: "/shubham.png" },
-];
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await prisma.page.findUnique({ where: { slug: "about" } });
+  return {
+    title: page?.title || "About Us - Web Development Company in Delhi NCR | Webdesino",
+    description: page?.description || "Learn about Webdesino - A leading web development and digital marketing company in Delhi NCR.",
+  };
+}
 
-const certifications = [
-  { name: "Google", image: "/google.jpg" },
-  { name: "WordPress", image: "/wordpress.jpg" },
-  { name: "Shopify", image: "/shopify.jpg" },
-  { name: "SEMRush", image: "/semrush.png" },
-  { name: "DesignRush", image: "/designrush.jpg" },
-];
-
-export const metadata: Metadata = {
-  title: "About Us - Web Development Company in Delhi NCR | Webdesino",
-  description: "Learn about Webdesino - A leading web development and digital marketing company in Delhi NCR. 100+ happy clients, 100+ projects delivered, and proven results.",
-};
-
-const stats = [
+const defaultStats = [
   { icon: Users, value: "100+", label: "Happy Clients" },
   { icon: Target, value: "100+", label: "Projects Completed" },
   { icon: TrendingUp, value: "₹6.3 Cr+", label: "Sales Generated" },
   { icon: Award, value: "10+", label: "Certifications" },
 ];
 
-const whyChooseUsFeatures = [
+const defaultWhyChooseUsFeatures = [
   { number: "01", title: "Proven Results", description: "Trusted by businesses across Delhi NCR with measurable growth in traffic, leads, and sales." },
   { number: "02", title: "Timely Delivery", description: "We respect deadlines and deliver fully tested, functional websites on time, every time." },
   { number: "03", title: "Award Winning", description: "Recognized for professional work and high-quality digital solutions that set industry benchmarks." },
@@ -46,34 +32,59 @@ const whyChooseUsFeatures = [
   { number: "06", title: "24/7 Support", description: "Our dedicated team is available round the clock for maintenance, updates, and assistance." },
 ];
 
-const serviceAreas = [
+const defaultServiceAreas = [
   "Uttam Nagar", "Kamla Nagar", "Krishan Vihar", "Karol Bagh", 
   "Hauz Khas", "DLF Camellias", "Dwarka", "Janakpuri", 
   "Rajouri Garden", "Govindpuri", "Kalkaji", "Civil Lines"
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const page = await prisma.page.findUnique({ where: { slug: "about" } });
+  const content = (page?.content as any) || {};
+  const hero = content.hero || {};
+
+  const stats = (content.stats || []).length > 0 
+    ? content.stats.map((s: any, i: number) => ({
+        ...s,
+        icon: defaultStats[i]?.icon || Users // Fallback icon
+      }))
+    : defaultStats;
+
+  const whyChooseUsFeatures = (content.features || []).length > 0
+    ? content.features.map((f: any, i: number) => ({
+        ...f,
+        number: `0${i + 1}`
+      }))
+    : defaultWhyChooseUsFeatures;
+
+  const serviceAreas = content.serviceAreas || defaultServiceAreas;
+
+  const teamMembers = await prisma.teamMember.findMany({
+    orderBy: { order: 'asc' }
+  });
+  const certifications = await prisma.certification.findMany();
+
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Hero Section */}
       <section className="relative bg-slate-50 text-slate-900 py-20 overflow-hidden border-b border-slate-200">
-        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5"></div>
+        <div className="absolute inset-0 opacity-5" style={{ backgroundImage: `url(${getStorageUrl('/grid-pattern.svg')})` }}></div>
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#02066F]/5 to-transparent"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold mb-6 animate-fade-in text-slate-900">
-              About <span className="text-[#02066F]">Webdesino</span>
+              {hero.title || <>About <span className="text-[#02066F]">Webdesino</span></>}
             </h1>
             <p className="text-xl text-slate-600 mb-8 leading-relaxed animate-slide-up">
-              Building Your Online Presence. Find a team of Web Developers you can rely on. Every day, we build trust through communication, transparency, and results.
+              {hero.subtitle || "Building Your Online Presence. Find a team of Web Developers you can rely on. Every day, we build trust through communication, transparency, and results."}
             </p>
             </div>
             </div>
             </section>
             <div className="relative max-w-6xl mx-auto text-center aspect-[4/1] rounded-xl overflow-hidden shadow-2xl animate-fade-in border border-white/10">
               <Image
-                src="/rohittiwaribanner.png"
-                alt="Rohit Tiwari Web Developer"
+                src={getStorageUrl(hero.image || "/rohittiwaribanner.png")}
+                alt="About Banner"
                 fill
                 className="object-cover"
                 priority
@@ -166,7 +177,7 @@ export default function AboutPage() {
           
           {/* Stats Grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-            {stats.map((stat, idx) => {
+            {stats.map((stat: any, idx: number) => {
               const Icon = stat.icon;
               return (
                 <div
@@ -223,7 +234,7 @@ export default function AboutPage() {
               We proudly serve businesses in key locations across Delhi NCR, helping them grow with SEO, websites, and digital marketing.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              {serviceAreas.map((area, idx) => (
+              {serviceAreas.map((area: string, idx: number) => (
                 <div key={idx} className="flex items-center gap-2 bg-slate-50 px-5 py-2.5 rounded-lg border border-slate-200 text-slate-700 hover:border-[#02066F]/50 hover:text-[#02066F] transition-colors">
                   <MapPin size={18} className="text-[#02066F]" />
                   <span className="font-medium">{area}</span>

@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getCaseStudyBySlug, getAllCaseSlugs } from '@/lib/case-studies';
+import { prisma } from '@/lib/prisma';
+import { CaseStudy } from '@/lib/case-studies';
 import { generateArticleSchema, generateBreadcrumbSchema, BASE_URL } from '@/lib/seo';
 import { 
   ArrowLeft, 
@@ -18,23 +19,58 @@ import {
   GoalIcon
 } from 'lucide-react';
 
+// Helper to transform Prisma project to CaseStudy interface
+function transformProjectToCaseStudy(project: any): CaseStudy {
+  const metrics = (project.metrics as any[]) || [];
+  const heroMetrics = {
+    revenue: metrics.find((m: any) => m.label === "Revenue")?.value || "",
+    roi: metrics.find((m: any) => m.label === "ROI")?.value || "",
+    timeline: metrics.find((m: any) => m.label === "Timeline")?.value || "",
+    channels: metrics.find((m: any) => m.label === "Channels")?.value || "",
+  };
+
+  return {
+    slug: project.slug,
+    title: project.title,
+    client: project.client,
+    industry: project.industry,
+    duration: heroMetrics.timeline,
+    heroMetrics,
+    background: project.description,
+    challenges: project.challenges as any,
+    solutions: project.solutions as any,
+    implementation: project.implementation as any,
+    results: project.resultsData as any,
+    testimonial: project.testimonial as any,
+    keyLearnings: project.keyLearnings,
+    faqs: (project.faqs as any) || [],
+    relatedServices: (project.relatedServices as any) || []
+  };
+}
+
 // Generate static params for all case studies
 export async function generateStaticParams() {
-  const slugs = getAllCaseSlugs();
-  return slugs.map((slug) => ({
-    slug: slug,
+  const projects = await prisma.project.findMany({
+    select: { slug: true }
+  });
+  return projects.map((project) => ({
+    slug: project.slug,
   }));
 }
 
 // Generate metadata for each case study
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const caseStudy = getCaseStudyBySlug(params.slug);
+  const project = await prisma.project.findUnique({
+    where: { slug: params.slug }
+  });
   
-  if (!caseStudy) {
+  if (!project) {
     return {
       title: 'Case Study Not Found',
     };
   }
+
+  const caseStudy = transformProjectToCaseStudy(project);
 
   return {
     title: `${caseStudy.title} | WebDesino Case Study`,
@@ -59,12 +95,16 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default function CaseStudyPage({ params }: { params: { slug: string } }) {
-  const caseStudy = getCaseStudyBySlug(params.slug);
+export default async function CaseStudyPage({ params }: { params: { slug: string } }) {
+  const project = await prisma.project.findUnique({
+    where: { slug: params.slug }
+  });
 
-  if (!caseStudy) {
+  if (!project) {
     notFound();
   }
+
+  const caseStudy = transformProjectToCaseStudy(project);
 
   // JSON-LD Schema
   const articleSchema = generateArticleSchema({

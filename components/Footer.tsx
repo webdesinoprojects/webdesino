@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Phone, Mail, MapPin, Facebook, Linkedin, Twitter, Instagram, Youtube, ArrowRight, FileText } from "lucide-react";
 import { servicesData } from "@/lib/services-data";
+import Image from "next/image";
 
 interface FooterProps {
   locations?: { name: string; slug: string }[];
@@ -52,9 +53,17 @@ export default function Footer({ locations = [] }: FooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 mb-12">
           {/* Company Info - Spans 3 columns */}
           <div className="lg:col-span-3 animate-slide-in-left" style={{ animationDelay: '0.1s' }}>
-            <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
+            {/* <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
               <span>Webdesino<span className="text-white">.com</span></span>
-            </h3>
+            </h3> */}
+            <Image 
+              src="https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/1765225653351-9gxe3n.png" 
+              alt="Webdesino.com" 
+              width={150} 
+              height={40} 
+              className="object-contain mb-4" 
+              style={{ width: 'auto', height: 'auto' }}
+            />
             <p className="text-gray-200 mb-6 leading-relaxed text-sm">
               Leading Digital Marketing Agency Delhi and web development
               company helping businesses grow online with creative websites, SEO, and digital marketing solutions.

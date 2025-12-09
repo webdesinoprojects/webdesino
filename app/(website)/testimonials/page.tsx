@@ -1,17 +1,16 @@
-import { getTestimonials } from "@/lib/data";
+import { prisma } from "@/lib/prisma";
 import { Quote, Star, User } from "lucide-react";
 import type { Metadata } from "next";
 import FAQ from "@/components/FAQ";
 
-import { getFAQs, } from "@/lib/data";
 export const metadata: Metadata = {
   title: "Client Testimonials | WebDesino",
   description: "Read what our clients say about our web development, SEO, and digital marketing services in Delhi NCR.",
 };
 
-export default function TestimonialsPage() {
-  const testimonials = getTestimonials();
-  const faqs = getFAQs();
+export default async function TestimonialsPage() {
+  const testimonials = await prisma.testimonial.findMany();
+  const faqs = await prisma.faq.findMany({ orderBy: { order: 'asc' } });
 
   return (
     <main className="pt-24 pb-16 bg-white min-h-screen">

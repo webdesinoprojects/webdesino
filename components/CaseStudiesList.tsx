@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import type { CaseStudy } from "@/lib/data";
+import { Project } from "@prisma/client";
 
 interface CaseStudiesListProps {
-  caseStudies: CaseStudy[];
+  caseStudies: Project[];
 }
 
 export default function CaseStudiesList({ caseStudies }: CaseStudiesListProps) {
@@ -26,7 +26,7 @@ export default function CaseStudiesList({ caseStudies }: CaseStudiesListProps) {
                   style={{ animationDelay: `${idx * 0.1}s` }}
                 >
                   <h3 className="text-xl font-bold text-[#02066F] mb-2">{study.title}</h3>
-                  <p className="text-gray-700">{study.result}</p>
+                  <p className="text-gray-700">{study.results}</p>
                 </div>
               );
 

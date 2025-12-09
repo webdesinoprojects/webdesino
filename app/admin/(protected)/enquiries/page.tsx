@@ -47,7 +47,7 @@ export default async function EnquiriesPage() {
                   </span>
                 </TableCell>
                 <TableCell>{new Date(enquiry.createdAt).toLocaleDateString()}</TableCell>
-                <TableCell className="text-right">
+                                <TableCell className="text-right">
                   <Link href={`/admin/enquiries/${enquiry.id}`}>
                     <Button variant="ghost" size="sm">
                       View

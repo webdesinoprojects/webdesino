@@ -2,6 +2,8 @@ import prisma from "@/lib/prisma";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Plus } from "lucide-react";
+import { deleteBlogPost } from "@/lib/actions";
+import ActionsMenu from "@/components/admin/ActionsMenu";
 import {
   Table,
   TableBody,
@@ -44,11 +46,11 @@ export default async function BlogsPage() {
                 <TableCell>{blog.category}</TableCell>
                 <TableCell>{new Date(blog.date).toLocaleDateString()}</TableCell>
                 <TableCell className="text-right">
-                  <Link href={`/admin/blogs/${blog.id}`}>
-                    <Button variant="ghost" size="sm">
-                      Edit
-                    </Button>
-                  </Link>
+                  <ActionsMenu
+                    id={blog.id}
+                    editUrl={`/admin/blogs/${blog.id}`}
+                    deleteAction={deleteBlogPost}
+                  />
                 </TableCell>
               </TableRow>
             ))}

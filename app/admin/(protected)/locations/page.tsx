@@ -2,6 +2,8 @@ import prisma from "@/lib/prisma";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Plus } from "lucide-react";
+import { deleteLocation } from "@/lib/actions";
+import ActionsMenu from "@/components/admin/ActionsMenu";
 import {
   Table,
   TableBody,
@@ -44,11 +46,12 @@ export default async function LocationsPage() {
                 <TableCell>{loc.slug}</TableCell>
                 <TableCell className="max-w-md truncate">{loc.title}</TableCell>
                 <TableCell className="text-right">
-                  <Link href={`/admin/locations/${loc.id}`}>
-                    <Button variant="ghost" size="sm">
-                      Edit
-                    </Button>
-                  </Link>
+                  <ActionsMenu 
+                    editUrl={`/admin/locations/${loc.id}`} 
+                    id={loc.id} 
+                    deleteAction={deleteLocation} 
+                    itemName="location" 
+                  />
                 </TableCell>
               </TableRow>
             ))}

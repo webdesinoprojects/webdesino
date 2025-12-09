@@ -19,16 +19,14 @@ import SaaSSection from "@/components/SaaSSection";
 import SEOAuditSection from "@/components/SEOAuditSection";
 import BlogSection from "@/components/BlogSection";
 import { Suspense } from 'react';
-import Logo from "@/public/logo.png";
 import { generateWebSiteSchema } from "@/lib/seo";
+import { prisma } from "@/lib/prisma";
+
+const Logo = "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/logo.png";
 
 import {
-  getPortfolioProjects,
-  getTestimonials,
-  getFAQs,
   getFeatures,
   getResults,
-  getCaseStudies,
   getHeroShowcaseItems,
 } from "@/lib/data";
 
@@ -39,14 +37,18 @@ export const metadata = {
     "Webdesino is a leading Digital Marketing Agency Delhi and web development company helping businesses grow online with creative websites, SEO, and digital marketing solutions. Trusted by 100+ businesses across Delhi NCR.",
 };
 
-export default function Home() {
+export default async function Home() {
   // Fetch all data on the server
-  const projects = getPortfolioProjects();
-  const testimonials = getTestimonials();
-  const faqs = getFAQs();
+  const projects = await prisma.project.findMany();
+  const testimonials = await prisma.testimonial.findMany();
+  const services = await prisma.serviceCategory.findMany();
+  const faqs = await prisma.faq.findMany({
+    orderBy: { order: 'asc' },
+  });
+  
+  // const faqs = getFAQs();
   const features = getFeatures();
   const results = getResults();
-  const caseStudies = getCaseStudies();
   const heroShowcaseItems = getHeroShowcaseItems();
   
   const jsonLd = generateWebSiteSchema();
@@ -59,7 +61,7 @@ export default function Home() {
       />
       <Hero showcaseItems={heroShowcaseItems} />
       <TrustedSection />
-      <ServicesOverview />
+      <ServicesOverview categories={services} />
       <ServicesPills />
       <WhyChooseUs features={features} />
       <IndustriesSection />

@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     locale: "en_IN",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/logo.png",
         width: 1200,
         height: 630,
         alt: "Webdesino - Web Design and SEO Agency",

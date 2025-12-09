@@ -3,16 +3,15 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { getIndustries } from "@/lib/data";
-import type { PortfolioProject } from "@/lib/data";
+import { Project } from "@prisma/client";
 import { GoalIcon } from "lucide-react";
 
 interface PortfolioProps {
-  projects: PortfolioProject[];
+  projects: Project[];
 }
 
 export default function Portfolio({ projects }: PortfolioProps) {
-  const industries = getIndustries();
+  const industries = ["All", ...Array.from(new Set(projects.map(p => p.industry)))];
   const [activeFilter, setActiveFilter] = useState("All");
   const [activeProject, setActiveProject] = useState(0);
 

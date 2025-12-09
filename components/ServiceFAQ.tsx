@@ -2,19 +2,21 @@
 
 import { useState } from "react";
 import { ChevronDown, ChevronUp, HelpCircle } from "lucide-react";
+import { Faq } from "@prisma/client";
 
 interface ServiceFAQProps {
   serviceTitle: string;
+  faqs?: Faq[];
 }
 
-export default function ServiceFAQ({ serviceTitle }: ServiceFAQProps) {
+export default function ServiceFAQ({ serviceTitle, faqs = [] }: ServiceFAQProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  const faqs = [
+  const defaultFaqs = [
     {
       question: `Why should I choose WebDesino for ${serviceTitle}?`,
       answer: `WebDesino is a leading agency with a proven track record of delivering high-quality ${serviceTitle} services. We combine creativity, technical expertise, and data-driven strategies to ensure your project's success.`
@@ -36,6 +38,8 @@ export default function ServiceFAQ({ serviceTitle }: ServiceFAQProps) {
       answer: `Absolutely! We specialize in custom solutions. Our team will work closely with you to understand your unique needs and deliver a tailored ${serviceTitle} solution.`
     }
   ];
+
+  const displayFaqs = faqs.length > 0 ? faqs : defaultFaqs;
 
   return (
     <section className="py-20 bg-white" itemScope itemType="https://schema.org/FAQPage">
@@ -59,7 +63,7 @@ export default function ServiceFAQ({ serviceTitle }: ServiceFAQProps) {
           </div>
 
           <div className="md:w-2/3 space-y-4">
-            {faqs.map((faq, index) => (
+            {displayFaqs.map((faq, index) => (
               <div
                 key={index}
                 className="border border-gray-200 rounded-xl overflow-hidden hover:border-[#02066F]/30 transition-colors"
@@ -85,9 +89,11 @@ export default function ServiceFAQ({ serviceTitle }: ServiceFAQProps) {
                   itemScope 
                   itemType="https://schema.org/Answer"
                 >
-                  <div className="p-6 pt-0 bg-gray-50 text-gray-600 leading-relaxed" itemProp="text">
-                    {faq.answer}
-                  </div>
+                  <div 
+                    className="p-6 pt-0 bg-gray-50 text-gray-600 leading-relaxed" 
+                    itemProp="text"
+                    dangerouslySetInnerHTML={{ __html: faq.answer }}
+                  />
                 </div>
               </div>
             ))}

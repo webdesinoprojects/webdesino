@@ -2,10 +2,14 @@
 
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import type { FAQ } from "@/lib/data";
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
 
 interface FAQProps {
-  faqs: FAQ[];
+  faqs: FAQItem[];
 }
 
 export default function FAQ({ faqs }: FAQProps) {

@@ -1,7 +1,7 @@
+import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { servicesData } from "@/lib/services-data";
-import { ArrowRight, CheckCircle2, Star, ChevronRight, ShieldCheck, Zap, Users, Clock, Smartphone } from "lucide-react";
+import { ArrowRight, CheckCircle2, Star, ChevronRight, ShieldCheck, Users, Clock, Smartphone } from "lucide-react";
 import { generateServiceSchema, generateBreadcrumbSchema, BASE_URL } from "@/lib/seo";
 import ServiceEnquiryForm from "@/components/ServiceEnquiryForm";
 import ServiceTechStack from "@/components/ServiceTechStack";
@@ -18,22 +18,15 @@ interface PageProps {
   };
 }
 
-export function generateStaticParams() {
-  const params = [];
-  for (const category of servicesData) {
-    for (const subtype of category.subtypes) {
-      params.push({
-        category: category.slug,
-        slug: subtype.slug,
-      });
-    }
-  }
-  return params;
-}
+export async function generateMetadata({ params }: PageProps) {
+  const category = await prisma.serviceCategory.findUnique({
+    where: { slug: params.category },
+    include: { subtypes: true },
+  });
+  
+  if (!category) return null;
 
-export function generateMetadata({ params }: PageProps) {
-  const category = servicesData.find((c) => c.slug === params.category);
-  const service = category?.subtypes.find((s) => s.slug === params.slug);
+  const service = category.subtypes.find((s) => s.slug === params.slug);
 
   if (!service) return null;
 
@@ -46,7 +39,7 @@ export function generateMetadata({ params }: PageProps) {
       url: `${BASE_URL}/services/${params.category}/${params.slug}`,
       images: [
         {
-          url: `${BASE_URL}/og-image.jpg`, // Ideally specific service image
+          url: `${BASE_URL}/og-image.jpg`,
           width: 1200,
           height: 630,
           alt: service.title,
@@ -59,13 +52,30 @@ export function generateMetadata({ params }: PageProps) {
   };
 }
 
-export default function ServicePage({ params }: PageProps) {
-  const category = servicesData.find((c) => c.slug === params.category);
-  const service = category?.subtypes.find((s) => s.slug === params.slug);
+export default async function ServicePage({ params }: PageProps) {
+  const category = await prisma.serviceCategory.findUnique({
+    where: { slug: params.category },
+    include: { subtypes: true },
+  });
 
-  if (!category || !service) {
+  if (!category) {
     notFound();
   }
+
+  const service = category.subtypes.find((s) => s.slug === params.slug);
+
+  if (!service) {
+    notFound();
+  }
+
+  const faqs = await prisma.faq.findMany({
+    where: {
+      category: {
+        in: [category.title, service.title, "Services"]
+      }
+    },
+    orderBy: { order: 'asc' }
+  });
 
   const serviceSchema = generateServiceSchema(service);
   const breadcrumbSchema = generateBreadcrumbSchema([
@@ -280,7 +290,7 @@ export default function ServicePage({ params }: PageProps) {
       </div>
       <ServiceIndustries />
       <ServiceCaseStudies />
-      <ServiceFAQ serviceTitle={service.title} />
+      <ServiceFAQ serviceTitle={service.title} faqs={faqs} />
 
       {/* Related Services */}
       <div className="py-16 bg-gray-50">

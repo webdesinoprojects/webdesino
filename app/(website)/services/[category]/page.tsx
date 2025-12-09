@@ -1,7 +1,8 @@
+import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { servicesData } from "@/lib/services-data";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
+import * as LucideIcons from "lucide-react";
 
 interface PageProps {
   params: {
@@ -9,14 +10,11 @@ interface PageProps {
   };
 }
 
-export function generateStaticParams() {
-  return servicesData.map((category) => ({
-    category: category.slug,
-  }));
-}
-
-export function generateMetadata({ params }: PageProps) {
-  const category = servicesData.find((c) => c.slug === params.category);
+export async function generateMetadata({ params }: PageProps) {
+  const category = await prisma.serviceCategory.findUnique({
+    where: { slug: params.category },
+  });
+  
   if (!category) return { title: "Category Not Found" };
   
   return {
@@ -25,14 +23,18 @@ export function generateMetadata({ params }: PageProps) {
   };
 }
 
-export default function CategoryPage({ params }: PageProps) {
-  const category = servicesData.find((c) => c.slug === params.category);
+export default async function CategoryPage({ params }: PageProps) {
+  const category = await prisma.serviceCategory.findUnique({
+    where: { slug: params.category },
+    include: { subtypes: true },
+  });
 
   if (!category) {
     notFound();
   }
 
-  const Icon = category.icon;
+  // Dynamically get the icon component
+  const Icon = category.icon ? (LucideIcons as any)[category.icon] : null;
 
   return (
     <main className="min-h-screen bg-gray-50">

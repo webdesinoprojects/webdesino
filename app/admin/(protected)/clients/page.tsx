@@ -1,0 +1,69 @@
+import prisma from "@/lib/prisma";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Plus } from "lucide-react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { deleteClient } from "@/lib/actions";
+import ActionsMenu from "@/components/admin/ActionsMenu";
+
+export default async function ClientsPage() {
+  const clients = await prisma.client.findMany({
+    orderBy: { createdAt: "desc" },
+  });
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h1 className="text-3xl font-bold text-blue-900">Clients</h1>
+        <Link href="/admin/clients/new">
+          <Button>
+            <Plus className="mr-2 h-4 w-4" /> Add Client
+          </Button>
+        </Link>
+      </div>
+
+      <div className="rounded-md border bg-white">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Name</TableHead>
+              <TableHead>Category</TableHead>
+              <TableHead>URL</TableHead>
+              <TableHead className="text-right">Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {clients.map((client) => (
+              <TableRow key={client.id}>
+                <TableCell className="font-medium">{client.name}</TableCell>
+                <TableCell>{client.category}</TableCell>
+                <TableCell className="max-w-xs truncate">{client.url}</TableCell>
+                <TableCell className="text-right">
+                  <ActionsMenu
+                    id={client.id}
+                    editUrl={`/admin/clients/${client.id}`}
+                    deleteAction={deleteClient}
+                  />
+                </TableCell>
+              </TableRow>
+            ))}
+            {clients.length === 0 && (
+              <TableRow>
+                <TableCell colSpan={4} className="text-center py-10 text-gray-500">
+                  No clients found. Create one to get started.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
+    </div>
+  );
+}

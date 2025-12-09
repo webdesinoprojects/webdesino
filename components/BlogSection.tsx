@@ -1,10 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Calendar, User } from "lucide-react";
-import { getBlogPosts } from "@/lib/data";
+import { prisma } from "@/lib/prisma";
+import { format } from "date-fns";
 
-export default function BlogSection() {
-  const posts = getBlogPosts().slice(0, 3); // Get latest 3 posts
+export default async function BlogSection() {
+  const posts = await prisma.blogPost.findMany({
+    orderBy: { createdAt: 'desc' },
+    take: 3,
+  });
 
   return (
     <section className="py-10 bg-slate-50">
@@ -39,11 +43,7 @@ export default function BlogSection() {
                 <div className="flex items-center gap-4 text-xs text-slate-500 mb-4">
                   <span className="flex items-center gap-1">
                     <Calendar size={14} />
-                    {post.date}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <User size={14} />
-                    WebDesino Team
+                    {format(new Date(post.createdAt), 'MMM d, yyyy')}
                   </span>
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 mb-3 line-clamp-2 group-hover:text-[#02066F] transition-colors">

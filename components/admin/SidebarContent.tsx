@@ -8,7 +8,9 @@ import {
   Briefcase,
   FileText,
   Mail,
-  MapPin
+  MapPin,
+  Image,
+  Globe
 } from "lucide-react";
 import { logout } from "@/lib/auth-actions";
 
@@ -22,12 +24,17 @@ export function SidebarContent({ onNavigate }: SidebarContentProps) {
         <div className="h-16 flex items-center justify-center border-b border-gray-200 shrink-0">
           <h1 className="text-xl font-bold text-blue-900">WEBDESINO</h1>
         </div>
-        <nav className="p-4 space-y-2 overflow-y-auto flex-1">
+        <nav className="p-4 space-y-2 overflow-y-auto flex-1 scrollbar-hide">
           <NavItem href="/admin/dashboard" icon={<LayoutDashboard size={20} />} label="Dashboard" onClick={onNavigate} />
-          <NavItem href="/admin/projects" icon={<Briefcase size={20} />} label="Projects" onClick={onNavigate} />
+          <NavItem href="/admin/case-studies" icon={<Briefcase size={20} />} label="Case Studies" onClick={onNavigate} />
+          <NavItem href="/admin/clients" icon={<Globe size={20} />} label="Clients" onClick={onNavigate} />
           <NavItem href="/admin/services" icon={<LayoutDashboard size={20} />} label="Services" onClick={onNavigate} />
           <NavItem href="/admin/locations" icon={<MapPin size={20} />} label="Locations" onClick={onNavigate} />
+          <NavItem href="/admin/pages" icon={<FileText size={20} />} label="Pages" onClick={onNavigate} />
+          <NavItem href="/admin/team" icon={<Users size={20} />} label="Team" onClick={onNavigate} />
+          <NavItem href="/admin/media" icon={<Image size={20} />} label="Media" onClick={onNavigate} />
           <NavItem href="/admin/blogs" icon={<FileText size={20} />} label="Blogs" onClick={onNavigate} />
+          <NavItem href="/admin/faqs" icon={<FileText size={20} />} label="FAQs" onClick={onNavigate} />
           <NavItem href="/admin/enquiries" icon={<Mail size={20} />} label="Enquiries" onClick={onNavigate} />
           
           <div className="pt-4 pb-2">

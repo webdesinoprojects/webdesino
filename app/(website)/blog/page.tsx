@@ -1,22 +1,27 @@
-import { getBlogPosts } from "@/lib/data";
+import { prisma } from "@/lib/prisma";
 import Image from "next/image";
 import Link from "next/link";
 import { Calendar, User, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import BlogSidebar from "@/components/BlogSidebar";
+import { format } from "date-fns";
 
 export const metadata = {
   title: "Blog | WebDesino - Insights on Web Design & Development",
   description: "Read our latest articles on web design trends, development best practices, SEO strategies, and digital marketing insights.",
 };
 
-export default function BlogPage({ searchParams }: { searchParams: { page?: string } }) {
-  const allPosts = getBlogPosts();
+export default async function BlogPage({ searchParams }: { searchParams: { page?: string } }) {
   const currentPage = Number(searchParams.page) || 1;
   const postsPerPage = 10;
-  const totalPages = Math.ceil(allPosts.length / postsPerPage);
   
-  const startIndex = (currentPage - 1) * postsPerPage;
-  const currentPosts = allPosts.slice(startIndex, startIndex + postsPerPage);
+  const totalPosts = await prisma.blogPost.count();
+  const totalPages = Math.ceil(totalPosts / postsPerPage);
+  
+  const currentPosts = await prisma.blogPost.findMany({
+    orderBy: { date: 'desc' },
+    skip: (currentPage - 1) * postsPerPage,
+    take: postsPerPage,
+  });
 
   return (
     <main className="bg-white min-h-screen">
@@ -61,7 +66,7 @@ export default function BlogPage({ searchParams }: { searchParams: { page?: stri
                     <div className="flex items-center gap-4 text-xs text-slate-500 mb-4">
                       <div className="flex items-center gap-1">
                         <Calendar size={14} />
-                        <span>{post.date}</span>
+                        <span>{format(post.date, "MMM d, yyyy")}</span>
                       </div>
                       <div className="flex items-center gap-1">
                         <User size={14} />

@@ -2,6 +2,8 @@ import prisma from "@/lib/prisma";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Plus } from "lucide-react";
+import { deleteProject } from "@/lib/actions";
+import ActionsMenu from "@/components/admin/ActionsMenu";
 import {
   Table,
   TableBody,
@@ -19,10 +21,10 @@ export default async function ProjectsPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-blue-900">Projects</h1>
-        <Link href="/admin/projects/new">
+        <h1 className="text-3xl font-bold text-blue-900">Case Studies</h1>
+        <Link href="/admin/case-studies/new">
           <Button>
-            <Plus className="mr-2 h-4 w-4" /> Add Project
+            <Plus className="mr-2 h-4 w-4" /> Add Case Study
           </Button>
         </Link>
       </div>
@@ -44,18 +46,18 @@ export default async function ProjectsPage() {
                 <TableCell>{project.industry}</TableCell>
                 <TableCell>{project.slug}</TableCell>
                 <TableCell className="text-right">
-                  <Link href={`/admin/projects/${project.id}`}>
-                    <Button variant="ghost" size="sm">
-                      Edit
-                    </Button>
-                  </Link>
+                  <ActionsMenu
+                    id={project.id}
+                    editUrl={`/admin/case-studies/${project.id}`}
+                    deleteAction={deleteProject}
+                  />
                 </TableCell>
               </TableRow>
             ))}
             {projects.length === 0 && (
               <TableRow>
                 <TableCell colSpan={4} className="text-center py-10 text-gray-500">
-                  No projects found. Create one to get started.
+                  No case studies found. Create one to get started.
                 </TableCell>
               </TableRow>
             )}

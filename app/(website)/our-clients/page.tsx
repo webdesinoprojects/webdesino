@@ -1,4 +1,4 @@
-import { getClients } from "@/lib/data";
+import { prisma } from "@/lib/prisma";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -8,13 +8,11 @@ export const metadata = {
   description: "See the amazing websites we've built for our valued clients across various industries including Real Estate, E-commerce, Healthcare, and more.",
 };
 
-export default function OurClientsPage({
+export default async function OurClientsPage({
   searchParams,
 }: {
   searchParams: { category?: string };
 }) {
-  const clients = getClients();
-  
   const selectedCategory = searchParams.category;
 
   // Define which data categories to show based on the selected dropdown category
@@ -85,6 +83,14 @@ export default function OurClientsPage({
       ]
     };
   }
+
+  const clients = await prisma.client.findMany({
+    where: {
+      category: {
+        in: categoriesToShow
+      }
+    }
+  });
 
   return (
     <main className="bg-slate-50 min-h-screen">

@@ -90,7 +90,15 @@ export default function Navbar() {
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2 font-bold text-xl hover:text-gray-200 transition">
-              <span>Webdesino<span className="text-white">.com</span></span>
+              {/* <span>Webdesino<span className="text-white">.com</span></span> */}
+              <Image 
+                src="https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/1765225653351-9gxe3n.png" 
+                alt="Webdesino.com" 
+                width={120} 
+                height={40} 
+                className="object-contain" 
+                style={{ width: 'auto', height: 'auto' }}
+              />
             </Link>
             <div className="hidden md:flex items-center gap-6 text-sm text-white/80">
               <a href="tel:+919310851557" className="flex items-center gap-2 hover:text-white transition">

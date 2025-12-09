@@ -1,13 +1,16 @@
-import { getBlogPosts } from "@/lib/data";
+import { prisma } from "@/lib/prisma";
 import Image from "next/image";
 import Link from "next/link";
 import { Calendar, User, ArrowLeft } from "lucide-react";
 import BlogSidebar from "@/components/BlogSidebar";
 import { notFound } from "next/navigation";
 import { generateBlogPostingSchema, BASE_URL } from "@/lib/seo";
+import { format } from "date-fns";
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const post = getBlogPosts().find((p) => p.slug === params.slug);
+  const post = await prisma.blogPost.findUnique({
+    where: { slug: params.slug },
+  });
   if (!post) return null;
   
   return {
@@ -17,7 +20,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       title: post.title,
       description: post.excerpt,
       type: 'article',
-      publishedTime: post.date,
+      publishedTime: post.date.toISOString(),
       authors: ['Webdesino Team'],
       images: [
         {
@@ -34,14 +37,22 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = getBlogPosts().find((p) => p.slug === params.slug);
+export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+  const post = await prisma.blogPost.findUnique({
+    where: { slug: params.slug },
+  });
 
   if (!post) {
     notFound();
   }
 
-  const jsonLd = generateBlogPostingSchema(post);
+  // Convert Date to string for schema
+  const postForSchema = {
+    ...post,
+    date: post.date.toISOString(),
+  };
+
+  const jsonLd = generateBlogPostingSchema(postForSchema);
 
   return (
     <main className="bg-slate-50 min-h-screen">
@@ -61,7 +72,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             <div className="flex items-center gap-4 text-sm text-white/80 mb-4 font-semibold uppercase tracking-wider">
               <span>{post.category}</span>
               <span className="w-1 h-1 bg-white/40 rounded-full"></span>
-              <span>{post.date}</span>
+              <span>{format(post.date, "MMMM d, yyyy")}</span>
             </div>
             <h1 className="text-3xl lg:text-5xl font-bold mb-6 leading-tight">
               {post.title}

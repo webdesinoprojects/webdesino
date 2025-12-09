@@ -1,15 +1,37 @@
 import React from 'react';
 import LegalPageLayout from '@/components/LegalPageLayout';
 import { Metadata } from 'next';
+import { prisma } from "@/lib/prisma";
 
-export const metadata: Metadata = {
-  title: 'Terms & Conditions | WebDesino',
-  description: 'Terms and Conditions for using WebDesino services and website.',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await prisma.page.findUnique({ where: { slug: "terms-conditions" } });
+  return {
+    title: page?.title || 'Terms & Conditions | WebDesino',
+    description: page?.description || 'Terms and Conditions for using WebDesino services and website.',
+  };
+}
 
-export default function TermsConditions() {
+export default async function TermsConditions() {
+  const page = await prisma.page.findUnique({ where: { slug: "terms-conditions" } });
+  const content = (page?.content as any) || {};
+  const sections = content.sections || [];
+
   return (
-    <LegalPageLayout title="Terms & Conditions" lastUpdated="10/07/2025">
+    <LegalPageLayout 
+      title={page?.title || "Terms & Conditions"} 
+      lastUpdated={content.hero?.subtitle?.replace("Last Updated: ", "") || "10/07/2025"}
+    >
+      {sections.length > 1 ? (
+        <div className="prose prose-slate max-w-none">
+          {sections.map((s: any, i: number) => (
+             <div key={i}>
+               {s.title && <h2 className="text-2xl font-bold mb-4">{s.title}</h2>}
+               <div dangerouslySetInnerHTML={{ __html: s.content }} />
+             </div>
+          ))}
+        </div>
+      ) : (
+        <>
       <p>
         Welcome to WebDesino.com. By accessing our website or using our services, you agree to comply with and
         be bound by the following Terms and Conditions. Please read them carefully. If
@@ -106,6 +128,8 @@ export default function TermsConditions() {
         Email: <a href="mailto:support@webdesino.com">support@webdesino.com</a><br />
         Website: <a href="https://webdesino.com">https://webdesino.com</a>
       </p>
+        </>
+      )}
     </LegalPageLayout>
   );
 }

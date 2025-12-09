@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { generateLocalBusinessSchema } from "@/lib/seo";
 import FAQ from "@/components/FAQ";
+import { getStorageUrl } from "@/lib/utils";
 
 interface PageProps {
     params: {
@@ -61,12 +62,70 @@ export default async function LocationPage({ params }: PageProps) {
     const locationName = page.location;
     const jsonLd = generateLocalBusinessSchema(locationName, params.slug);
 
+    const faqs = await prisma.faq.findMany({
+        where: {
+            category: { in: ["Location", "General"] }
+        },
+        orderBy: { order: 'asc' }
+    });
+
+    const processedFaqs = faqs.map(faq => ({
+        ...faq,
+        question: faq.question.replace(/{{location}}/g, locationName),
+        answer: faq.answer.replace(/{{location}}/g, locationName)
+    }));
+
     // Fetch other locations for the footer grid
     const otherLocations = await prisma.locationPage.findMany({
         take: 20,
         select: { title: true, slug: true, location: true },
         where: { slug: { not: params.slug } }
     });
+
+    const content = (page.content as any) || {};
+
+    const story = {
+        content: content.story?.content || [
+            `In today's digital landscape, your customers are actively engaged online, whether they are exploring the vibrant market in ${locationName}. A professionally crafted website does more than just provide information; it serves as a powerful tool for your business.`,
+            "A captivating website design establishes trust with potential clients, featuring a sleek, modern aesthetic that reflects your brand's values. It effectively generates leads by incorporating clear and compelling calls to action that guide visitors towards taking the next step. Additionally, a well-structured website opens up a realm of new marketing opportunities, allowing you to connect through various channels such as social media, Google Ads, and email marketing.",
+            `Whether you run a charming boutique, a dynamic coaching center, a caring clinic, or a home-based service, a local website tailored for the ${locationName} audience will enable you to differentiate yourself from your competitors and attract the clientele you desire.`
+        ],
+        image: getStorageUrl(content.story?.image || "/hero-img.png")
+    };
+
+    const services = (content.services || [
+        {
+            title: "Website Design & Development",
+            items: [
+                "Mobile-responsive layouts using WordPress, custom HTML/CSS, and popular CMS platforms",
+                "SEO-structured, fast-loading code for better rankings and user experience",
+                "Custom templates designed for clinics, shops, real estate agents, and startups",
+                "Before/After design comparisons to showcase how we transform your online presence"
+            ],
+            image: "/hero-img.png"
+        },
+        {
+            title: "SEO & Google My Business Optimization",
+            items: [
+                `On-page SEO targeting high-value keywords like "web designer ${locationName}" and "SEO service in West Delhi"`,
+                "Google My Business setup with accurate categories, operating hours, photos, and keyword-rich descriptions",
+                "Citation building and weekly posts to maintain high visibility in local searches"
+            ],
+            image: "/hero-img.png"
+        },
+        {
+            title: "Local Targeting & Fast Support",
+            items: [
+                `In-person consultations in ${locationName}, Janakpuri, Tilak Nagar, Uttam Nagar, and Hari Nagar`,
+                "Quick call/WhatsApp support for urgent changes or troubleshooting",
+                "A dedicated local account manager who understands the West Delhi business ecosystem"
+            ],
+            image: "/hero-img.png"
+        }
+    ]).map((s: any) => ({
+        ...s,
+        image: getStorageUrl(s.image)
+    }));
 
     return (
         <main className="min-h-screen bg-white">
@@ -77,7 +136,7 @@ export default async function LocationPage({ params }: PageProps) {
 
             {/* 1. Hero Section */}
             <section className="relative bg-[#02066F] text-white py-20 lg:py-32 overflow-hidden">
-                <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
+                <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `url(${getStorageUrl('/grid-pattern.svg')})` }}></div>
                 <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blue-500/20 to-transparent"></div>
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="max-w-4xl mx-auto text-center">
@@ -85,14 +144,14 @@ export default async function LocationPage({ params }: PageProps) {
                             {page.title}
                         </h1>
                         <p className="text-xl text-gray-200 max-w-2xl mx-auto mb-8">
-                            Are you searching for a reliable website designer in {locationName}? At WebDesino, we help local businesses create modern, fast, and SEO-friendly websites that generate genuine leads and rank well on Google.
+                            {content.hero?.subtitle || `Are you searching for a reliable website designer in ${locationName}? At WebDesino, we help local businesses create modern, fast, and SEO-friendly websites that generate genuine leads and rank well on Google.`}
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <Link href="#contact" className="px-8 py-4 bg-white text-[#02066F] rounded-full font-bold hover:bg-gray-100 transition-all transform hover:scale-105">
-                                Get a Free Quote
+                            <Link href={content.hero?.ctaLink || "#contact"} className="px-8 py-4 bg-white text-[#02066F] rounded-full font-bold hover:bg-gray-100 transition-all transform hover:scale-105">
+                                {content.hero?.ctaText || "Get a Free Quote"}
                             </Link>
-                            <Link href="tel:+919310851557" className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-full font-bold hover:bg-white/10 transition-all">
-                                Call Us Now
+                            <Link href={content.hero?.secondaryCtaLink || "tel:+919310851557"} className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-full font-bold hover:bg-white/10 transition-all">
+                                {content.hero?.secondaryCtaText || "Call Us Now"}
                             </Link>
                         </div>
                     </div>
@@ -106,25 +165,19 @@ export default async function LocationPage({ params }: PageProps) {
                         <div className="lg:w-1/2">
                             <span className="text-[#02066F] font-bold tracking-wider text-sm uppercase mb-2 block">OUR STORY</span>
                             <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">
-                                Why Your {locationName} Business Needs a Website Today
+                                {content.story?.title || `Why Your ${locationName} Business Needs a Website Today`}
                             </h2>
                             <div className="prose prose-lg text-slate-600">
-                                <p className="mb-4">
-                                    In today's digital landscape, your customers are actively engaged online, whether they are exploring the vibrant market in {locationName}. A professionally crafted website does more than just provide information; it serves as a powerful tool for your business.
-                                </p>
-                                <p className="mb-4">
-                                    A captivating website design establishes trust with potential clients, featuring a sleek, modern aesthetic that reflects your brand's values. It effectively generates leads by incorporating clear and compelling calls to action that guide visitors towards taking the next step. Additionally, a well-structured website opens up a realm of new marketing opportunities, allowing you to connect through various channels such as social media, Google Ads, and email marketing.
-                                </p>
-                                <p>
-                                    Whether you run a charming boutique, a dynamic coaching center, a caring clinic, or a home-based service, a local website tailored for the {locationName} audience will enable you to differentiate yourself from your competitors and attract the clientele you desire.
-                                </p>
+                                {story.content?.map((paragraph: string, index: number) => (
+                                    <p key={index} className="mb-4">{paragraph}</p>
+                                ))}
                             </div>
                         </div>
                         <div className="lg:w-1/2">
                             <div className="relative">
                                 {/* Placeholder for illustration */}
                                 <div className="bg-blue-50 rounded-2xl p-8 flex items-center justify-center min-h-[400px]">
-                                    <img src="/hero-img.png" className="w-full h-auto object-contain" />
+                                    <img src={story.image} className="w-full h-auto object-contain" alt="Web Development" />
                                 </div>
                             </div>
                         </div>
@@ -137,10 +190,14 @@ export default async function LocationPage({ params }: PageProps) {
                 <div className="container mx-auto px-4 text-center">
                     <span className="text-[#02066F] font-bold tracking-wider text-sm uppercase mb-2 block">WHO ARE WE</span>
                     <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6 max-w-3xl mx-auto">
-                        The Leading Web Development Company in {locationName}
+                        {content.leadingCompany?.title || `The Leading Web Development Company in ${locationName}`}
                     </h2>
                     <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
-                        Located in the heart of West Delhi, WebDesino is known for delivering high-converting websites for small businesses and startups. We're the go-to <strong>web developer in {locationName}</strong> for WordPress, Shopify, and custom-built platforms.
+                        {content.leadingCompany?.content || (
+                            <>
+                                Located in the heart of West Delhi, WebDesino is known for delivering high-converting websites for small businesses and startups. We're the go-to <strong>web developer in {locationName}</strong> for WordPress, Shopify, and custom-built platforms.
+                            </>
+                        )}
                     </p>
                 </div>
             </section>
@@ -154,93 +211,53 @@ export default async function LocationPage({ params }: PageProps) {
                     </div>
 
                     <div className="space-y-20">
-                        {/* Service 1 */}
-                        <div className="flex flex-col md:flex-row items-center gap-12">
-                            <div className="md:w-1/2 order-2 md:order-1">
-                                <h3 className="text-2xl font-bold text-slate-900 mb-4">Website Design & Development</h3>
-                                <ul className="space-y-3 text-slate-600">
-                                    <li className="flex items-start gap-3">
-                                        <CheckCircle2 className="text-[#02066F] mt-1 flex-shrink-0" size={20} />
-                                        <span>Mobile-responsive layouts using WordPress, custom HTML/CSS, and popular CMS platforms</span>
-                                    </li>
-                                    <li className="flex items-start gap-3">
-                                        <CheckCircle2 className="text-[#02066F] mt-1 flex-shrink-0" size={20} />
-                                        <span>SEO-structured, fast-loading code for better rankings and user experience</span>
-                                    </li>
-                                    <li className="flex items-start gap-3">
-                                        <CheckCircle2 className="text-[#02066F] mt-1 flex-shrink-0" size={20} />
-                                        <span>Custom templates designed for clinics, shops, real estate agents, and startups</span>
-                                    </li>
-                                    <li className="flex items-start gap-3">
-                                        <CheckCircle2 className="text-[#02066F] mt-1 flex-shrink-0" size={20} />
-                                        <span>Before/After design comparisons to showcase how we transform your online presence</span>
-                                    </li>
-                                </ul>
+                        {services.map((service: any, index: number) => (
+                            <div key={index} className="flex flex-col md:flex-row items-center gap-12">
+                                {index % 2 === 0 ? (
+                                    <>
+                                        <div className="md:w-1/2 order-2 md:order-1">
+                                            <h3 className="text-2xl font-bold text-slate-900 mb-4">{service.title}</h3>
+                                            <ul className="space-y-3 text-slate-600">
+                                                {service.items?.map((item: string, i: number) => (
+                                                    <li key={i} className="flex items-start gap-3">
+                                                        <CheckCircle2 className="text-[#02066F] mt-1 flex-shrink-0" size={20} />
+                                                        <span>{item}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                        <div className="md:w-1/2 order-1 md:order-2 flex justify-center">
+                                            <div className="bg-blue-50 p-8 rounded-2xl w-full max-w-md flex items-center justify-center">
+                                                <div className="bg-blue-50 rounded-2xl p-8 flex items-center justify-center min-h-[400px]">
+                                                    <img src={service.image} className="w-full h-auto object-contain" alt={service.title} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <>
+                                        <div className="md:w-1/2 flex justify-center">
+                                            <div className="bg-blue-50 p-8 rounded-2xl w-full max-w-md flex items-center justify-center">
+                                                <div className="bg-blue-50 rounded-2xl p-8 flex items-center justify-center min-h-[400px]">
+                                                    <img src={service.image} className="w-full h-auto object-contain" alt={service.title} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="md:w-1/2">
+                                            <h3 className="text-2xl font-bold text-slate-900 mb-4">{service.title}</h3>
+                                            <ul className="space-y-3 text-slate-600">
+                                                {service.items?.map((item: string, i: number) => (
+                                                    <li key={i} className="flex items-start gap-3">
+                                                        <CheckCircle2 className="text-[#02066F] mt-1 flex-shrink-0" size={20} />
+                                                        <span>{item}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </>
+                                )}
                             </div>
-                            <div className="md:w-1/2 order-1 md:order-2 flex justify-center">
-                                <div className="bg-green-50 p-8 rounded-2xl w-full max-w-md flex items-center justify-center">
-                                    <div className="bg-blue-50 rounded-2xl p-8 flex items-center justify-center min-h-[400px]">
-                                        <img src="/hero-img.png" className="w-full h-auto object-contain" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Service 2 */}
-                        <div className="flex flex-col md:flex-row items-center gap-12">
-                            <div className="md:w-1/2 flex justify-center">
-                                <div className="bg-blue-50 p-8 rounded-2xl w-full max-w-md flex items-center justify-center">
-                                    <div className="bg-blue-50 rounded-2xl p-8 flex items-center justify-center min-h-[400px]">
-                                        <img src="/hero-img.png" className="w-full h-auto object-contain" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="md:w-1/2">
-                                <h3 className="text-2xl font-bold text-slate-900 mb-4">SEO & Google My Business Optimization</h3>
-                                <ul className="space-y-3 text-slate-600">
-                                    <li className="flex items-start gap-3">
-                                        <CheckCircle2 className="text-[#02066F] mt-1 flex-shrink-0" size={20} />
-                                        <span>On-page SEO targeting high-value keywords like "web designer {locationName}" and "SEO service in West Delhi"</span>
-                                    </li>
-                                    <li className="flex items-start gap-3">
-                                        <CheckCircle2 className="text-[#02066F] mt-1 flex-shrink-0" size={20} />
-                                        <span>Google My Business setup with accurate categories, operating hours, photos, and keyword-rich descriptions</span>
-                                    </li>
-                                    <li className="flex items-start gap-3">
-                                        <CheckCircle2 className="text-[#02066F] mt-1 flex-shrink-0" size={20} />
-                                        <span>Citation building and weekly posts to maintain high visibility in local searches</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        {/* Service 3 */}
-                        <div className="flex flex-col md:flex-row items-center gap-12">
-                            <div className="md:w-1/2 order-2 md:order-1">
-                                <h3 className="text-2xl font-bold text-slate-900 mb-4">Local Targeting & Fast Support</h3>
-                                <ul className="space-y-3 text-slate-600">
-                                    <li className="flex items-start gap-3">
-                                        <CheckCircle2 className="text-[#02066F] mt-1 flex-shrink-0" size={20} />
-                                        <span>In-person consultations in {locationName}, Janakpuri, Tilak Nagar, Uttam Nagar, and Hari Nagar</span>
-                                    </li>
-                                    <li className="flex items-start gap-3">
-                                        <CheckCircle2 className="text-[#02066F] mt-1 flex-shrink-0" size={20} />
-                                        <span>Quick call/WhatsApp support for urgent changes or troubleshooting</span>
-                                    </li>
-                                    <li className="flex items-start gap-3">
-                                        <CheckCircle2 className="text-[#02066F] mt-1 flex-shrink-0" size={20} />
-                                        <span>A dedicated local account manager who understands the West Delhi business ecosystem</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="md:w-1/2 order-1 md:order-2 flex justify-center">
-                                <div className="bg-blue-50 p-8 rounded-2xl w-full max-w-md flex items-center justify-center">
-                                    <div className="bg-blue-50 rounded-2xl p-8 flex items-center justify-center min-h-[400px]">
-                                        <img src="/hero-img.png" className="w-full h-auto object-contain" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </section>
@@ -254,7 +271,7 @@ export default async function LocationPage({ params }: PageProps) {
                     </div>
                     <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row">
                         <div className="md:w-1/2 bg-[#02066F] p-8 lg:p-12 text-white flex flex-col justify-center relative overflow-hidden">
-                            <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
+                            <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `url(${getStorageUrl('/grid-pattern.svg')})` }}></div>
                             <div className="relative z-10">
                                 <h3 className="text-2xl font-bold mb-6">Get In Touch</h3>
                                 <p className="mb-8 text-blue-100">
@@ -395,7 +412,7 @@ export default async function LocationPage({ params }: PageProps) {
                         <div className="lg:w-1/2 flex justify-center order-2 lg:order-1">
                             <div className="bg-blue-50 p-8 rounded-2xl w-full max-w-md flex items-center justify-center">
                                 <div className="bg-blue-50 rounded-2xl p-8 flex items-center justify-center min-h-[400px]">
-                                    <img src="/hero-img.png" className="w-full h-auto object-contain" />
+                                    <img src="https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/logo.png" className="w-full h-auto object-contain" />
                                 </div>
                             </div>
                         </div>
@@ -454,10 +471,10 @@ export default async function LocationPage({ params }: PageProps) {
                                 This holistic approach increases your chances of appearing in Google's Local 3-Pack.
                             </p>
                         </div>
-                        <div className="lg:w-1/2 flex justify-center">
+                        <div className="lg:w-1/2 sticky top-24">
                             <div className="bg-blue-50 p-8 rounded-2xl w-full max-w-md flex items-center justify-center">
                                 <div className="bg-blue-50 rounded-2xl p-8 flex items-center justify-center min-h-[400px]">
-                                    <img src="/hero-img.png" className="w-full h-auto object-contain" />
+                                    <img src="https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/logo.png" className="w-full h-auto object-contain" />
                                 </div>
                             </div>
                         </div>
@@ -508,7 +525,7 @@ export default async function LocationPage({ params }: PageProps) {
                         <div className="lg:w-1/2 flex justify-center">
                             <div className="bg-blue-50 p-8 rounded-2xl w-full max-w-md flex items-center justify-center">
                                 <div className="bg-blue-50 rounded-2xl p-8 flex items-center justify-center min-h-[400px]">
-                                    <img src="/hero-img.png" className="w-full h-auto object-contain" />
+                                    <img src="https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/logo.png" className="w-full h-auto object-contain" />
                                 </div>
                             </div>
                         </div>
@@ -563,48 +580,7 @@ export default async function LocationPage({ params }: PageProps) {
                         </p>
                     </div> */}
                     {/* <div className="max-w-3xl mx-auto"> */}
-                        <FAQ faqs={[
-                            {
-                                question: `What is the cost of website designing in ${locationName}, Delhi?`,
-                                answer: "Our pricing is flexible and depends on your specific requirements. We offer affordable packages tailored for small businesses and startups."
-                            },
-                            {
-                                question: `Which is the best website development company in ${locationName}?`,
-                                answer: `WebDesino is a top-rated web development company serving ${locationName}, known for delivering high-quality, SEO-friendly websites.`
-                            },
-                            {
-                                question: `Do you offer e-commerce website development for ${locationName} businesses?`,
-                                answer: "Yes, we specialize in building secure and scalable e-commerce websites using platforms like WooCommerce and Shopify."
-                            },
-                            {
-                                question: `Can I rank my ${locationName} business on Google Maps with a website?`,
-                                answer: "Absolutely! A website combined with our Local SEO services significantly improves your chances of ranking in the Google Local Pack."
-                            },
-                            {
-                                question: "How long does it take to design and launch a website?",
-                                answer: "Typically, a standard business website takes 1-2 weeks, while more complex e-commerce sites may take 3-4 weeks."
-                            },
-                            {
-                                question: `Do you provide SEO with your website design service in ${locationName}?`,
-                                answer: "Yes! All our websites are built with SEO best practices in mind. We also offer dedicated SEO packages for ongoing growth."
-                            },
-                            {
-                                question: `Is WebDesino a local company near ${locationName}?`,
-                                answer: "Yes, we are based in West Delhi and have extensive experience working with businesses in your area."
-                            },
-                            {
-                                question: `What platforms do you use for website development in ${locationName}?`,
-                                answer: "We primarily use WordPress, Shopify, and custom coding (React/Next.js) depending on your project needs."
-                            },
-                            {
-                                question: "Can I update my website content after it's built?",
-                                answer: "Yes, we build websites with user-friendly CMS platforms like WordPress, allowing you to easily update content yourself."
-                            },
-                            {
-                                question: `How do I contact WebDesino for website design services in ${locationName}?`,
-                                answer: "You can call us at +91 93108 51557, email us at info@webdesino.com, or fill out the contact form on this page."
-                            }
-                        ]} />
+                        <FAQ faqs={processedFaqs} />
                     </div>
                 {/* </div> */}
             </section>

@@ -204,6 +204,21 @@ export const getFAQs = (): FAQ[] => {
         "Every website we build is 100% mobile-responsive, fast-loading, and optimized for Google search rankings, ensuring better visibility and user experience. We follow SEO best practices from the ground up, including proper heading structure, semantic HTML, optimized images, and fast page load times.",
       category: "Technical",
     },
+    {
+      question: "What is the cost of website designing in {{location}}?",
+      answer: "Our pricing is flexible and depends on your specific requirements. We offer affordable packages tailored for small businesses and startups in {{location}}.",
+      category: "Location",
+    },
+    {
+      question: "Which is the best website development company in {{location}}?",
+      answer: "WebDesino is a top-rated web development company serving {{location}}, known for delivering high-quality, SEO-friendly websites.",
+      category: "Location",
+    },
+    {
+      question: "Do you offer e-commerce website development for {{location}} businesses?",
+      answer: "Yes, we specialize in building secure and scalable e-commerce websites using platforms like WooCommerce and Shopify for businesses in {{location}}.",
+      category: "Location",
+    },
   ];
 };
 

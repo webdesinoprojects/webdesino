@@ -1,12 +1,13 @@
 import prisma from "@/lib/prisma";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Briefcase, FileText, Mail, Users } from "lucide-react";
+import { Briefcase, FileText, Mail, Users, MapPin } from "lucide-react";
 
 export default async function DashboardPage() {
   try {
     const projectCount = await prisma.project.count();
     const blogCount = await prisma.blogPost.count();
     const enquiryCount = await prisma.enquiry.count();
+    const locationCount = await prisma.locationPage.count();
 
     return (
       <div className="space-y-6">
@@ -15,7 +16,7 @@ export default async function DashboardPage() {
           <StatCard title="Total Projects" value={projectCount.toString()} icon={<Briefcase className="h-4 w-4 text-muted-foreground" />} />
           <StatCard title="Active Blogs" value={blogCount.toString()} icon={<FileText className="h-4 w-4 text-muted-foreground" />} />
           <StatCard title="Enquiries" value={enquiryCount.toString()} icon={<Mail className="h-4 w-4 text-muted-foreground" />} />
-          <StatCard title="Clients" value="0" icon={<Users className="h-4 w-4 text-muted-foreground" />} />
+          <StatCard title="Locations" value={locationCount.toString()} icon={<MapPin className="h-4 w-4 text-muted-foreground" />} />
         </div>
         <Card>
           <CardHeader>

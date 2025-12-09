@@ -1,13 +1,18 @@
+import { prisma } from "@/lib/prisma";
 import Link from "next/link";
-import { servicesData } from "@/lib/services-data";
 import { ArrowRight } from "lucide-react";
+import * as LucideIcons from "lucide-react";
 
 export const metadata = {
   title: "Our Services | Webdesino",
   description: "Explore our comprehensive range of web development, digital marketing, and SEO services designed to grow your business.",
 };
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const servicesData = await prisma.serviceCategory.findMany({
+    include: { subtypes: true },
+  });
+
   return (
     <main className="min-h-screen bg-gray-50 py-12 md:py-20">
       <div className="container mx-auto px-4">
@@ -22,7 +27,7 @@ export default function ServicesPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {servicesData.map((category) => {
-            const Icon = category.icon;
+            const Icon = category.icon ? (LucideIcons as any)[category.icon] : null;
             return (
               <div key={category.slug} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100">
                 <div className="p-8">

@@ -1,15 +1,26 @@
 import React from 'react';
 import LegalPageLayout from '@/components/LegalPageLayout';
 import { Metadata } from 'next';
+import { prisma } from '@/lib/prisma';
 
 export const metadata: Metadata = {
   title: 'Return & Refund Policy | WebDesino',
   description: 'Return and Refund Policy for WebDesino services.',
 };
 
-export default function RefundPolicy() {
+export default async function RefundPolicy() {
+  const page = await prisma.page.findUnique({
+    where: { slug: 'refund-policy' },
+  });
+
+  const content = (page?.content as any) || {};
+
   return (
-    <LegalPageLayout title="Refund Policy">
+    <LegalPageLayout title={page?.title || "Refund Policy"}>
+      {page?.content ? (
+        <div dangerouslySetInnerHTML={{ __html: content.html || '' }} />
+      ) : (
+        <>
       <p>
         At WebDesino, we specialize in providing high-quality Website Development, Digital Marketing, SEO Services, App Development, and IT
         solutions tailored to businesses of all sizes. Our focus is on delivering measurable
@@ -99,6 +110,8 @@ export default function RefundPolicy() {
         Phone: <a href="tel:+919310851557">+91 93108 51557</a><br />
         Website: <a href="https://webdesino.com">https://webdesino.com</a>
       </p>
+        </>
+      )}
     </LegalPageLayout>
   );
 }

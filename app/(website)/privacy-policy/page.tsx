@@ -1,15 +1,37 @@
 import React from 'react';
 import LegalPageLayout from '@/components/LegalPageLayout';
 import { Metadata } from 'next';
+import { prisma } from "@/lib/prisma";
 
-export const metadata: Metadata = {
-  title: 'Privacy Policy | WebDesino',
-  description: 'Privacy Policy for WebDesino. Learn how we collect, use, and protect your personal information.',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await prisma.page.findUnique({ where: { slug: "privacy-policy" } });
+  return {
+    title: page?.title || 'Privacy Policy | WebDesino',
+    description: page?.description || 'Privacy Policy for WebDesino. Learn how we collect, use, and protect your personal information.',
+  };
+}
 
-export default function PrivacyPolicy() {
+export default async function PrivacyPolicy() {
+  const page = await prisma.page.findUnique({ where: { slug: "privacy-policy" } });
+  const content = (page?.content as any) || {};
+  const sections = content.sections || [];
+
   return (
-    <LegalPageLayout title="Privacy Policy" lastUpdated="10/07/2025">
+    <LegalPageLayout 
+      title={page?.title || "Privacy Policy"} 
+      lastUpdated={content.hero?.subtitle?.replace("Last Updated: ", "") || "10/07/2025"}
+    >
+      {sections.length > 1 ? (
+        <div className="prose prose-slate max-w-none">
+          {sections.map((s: any, i: number) => (
+             <div key={i}>
+               {s.title && <h2 className="text-2xl font-bold mb-4">{s.title}</h2>}
+               <div dangerouslySetInnerHTML={{ __html: s.content }} />
+             </div>
+          ))}
+        </div>
+      ) : (
+        <>
       <p>
         At WebDesino.com, your privacy is very important to us. This Privacy Policy outlines how we
         collect, use, disclose, and safeguard your information when you visit our website or
@@ -149,6 +171,8 @@ export default function PrivacyPolicy() {
         Email: support@webdesino.com<br />
         Website: https://webdesino.com
       </p>
+        </>
+      )}
     </LegalPageLayout>
   );
 }

@@ -3,7 +3,8 @@
 import { Linkedin, Globe, Award, CheckCircle, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import Rohit from "@/public/rohittiwari2.jpeg";
+
+const Rohit = "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/rohittiwari2.jpeg";
 
 export default function SpecialistsSection() {
 	return (
@@ -48,6 +49,7 @@ export default function SpecialistsSection() {
 											src={Rohit}
 											alt="Rohit Tiwari - Founder & CEO"
 											fill
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 											className="object-cover transform group-hover:scale-105 transition-transform duration-500"
 										/>
 									</div>

@@ -1,3 +1,4 @@
+import { prisma } from "@/lib/prisma";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Phone, Mail, MapPin } from "lucide-react";
@@ -8,7 +9,14 @@ export const metadata: Metadata = {
   description: "Contact Webdesino for web development, SEO, and digital marketing services in Delhi NCR. Call +91 93108 51557 or email info@webdesino.com for a free consultation.",
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const page = await prisma.page.findUnique({ where: { slug: "contact" } });
+  const content = (page?.content as any) || {};
+  const hero = content.hero || {};
+
+  const settings = await prisma.companySettings.findMany();
+  const getSetting = (key: string) => settings.find(s => s.key === key)?.value || "";
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -19,10 +27,10 @@ export default function ContactPage() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center mb-16">
             <h1 className="text-4xl lg:text-6xl font-bold text-[#02066F] mb-6 animate-fade-in">
-              Let's Work <span className="text-[#02066F]">Together</span>
+              {hero.title || <>Let's Work <span className="text-[#02066F]">Together</span></>}
             </h1>
             <p className="text-xl text-gray-600 animate-fade-in" style={{ animationDelay: '0.1s' }}>
-              Get in touch with WebDesino for a free consultation. We're here to help your business grow online.
+              {hero.subtitle || "Get in touch with WebDesino for a free consultation. We're here to help your business grow online."}
             </p>
           </div>
 
@@ -36,7 +44,7 @@ export default function ContactPage() {
                 <h2 className="text-2xl font-bold text-[#02066F] mb-6">Contact Information</h2>
                 <div className="space-y-6">
                   <a 
-                    href="tel:+919310851557"
+                    href={`tel:${getSetting('phone').replace(/\s/g, '')}`}
                     className="flex items-start gap-4 p-4 rounded-xl hover:bg-white/50 transition-all group"
                   >
                     <div className="w-12 h-12 rounded-full bg-[#02066F]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#02066F] group-hover:text-white transition-all">
@@ -44,12 +52,12 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h3 className="font-bold text-gray-900 mb-1">Phone</h3>
-                      <p className="text-gray-600">+91 93108 51557</p>
+                      <p className="text-gray-600">{getSetting('phone')}</p>
                     </div>
                   </a>
 
                   <a 
-                    href="mailto:info@webdesino.com"
+                    href={`mailto:${getSetting('email')}`}
                     className="flex items-start gap-4 p-4 rounded-xl hover:bg-white/50 transition-all group"
                   >
                     <div className="w-12 h-12 rounded-full bg-[#02066F]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#02066F] group-hover:text-white transition-all">
@@ -57,7 +65,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h3 className="font-bold text-gray-900 mb-1">Email</h3>
-                      <p className="text-gray-600">info@webdesino.com</p>
+                      <p className="text-gray-600">{getSetting('email')}</p>
                     </div>
                   </a>
 
@@ -68,8 +76,7 @@ export default function ContactPage() {
                     <div>
                       <h3 className="font-bold text-gray-900 mb-1">Office Address</h3>
                       <p className="text-gray-600">
-                        M, 54/H, Block Z, Krishan Vihar,<br />
-                        New Delhi, Delhi, 110086
+                        {getSetting('address')}
                       </p>
                     </div>
                   </div>
@@ -81,15 +88,15 @@ export default function ContactPage() {
                 <div className="space-y-2 text-gray-600">
                   <div className="flex justify-between">
                     <span>Monday - Friday:</span>
-                    <span className="font-semibold">9:00 AM - 7:00 PM</span>
+                    <span className="font-semibold">{getSetting('businessHours_weekdays')}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Saturday:</span>
-                    <span className="font-semibold">10:00 AM - 5:00 PM</span>
+                    <span className="font-semibold">{getSetting('businessHours_saturday')}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Sunday:</span>
-                    <span className="font-semibold">Closed</span>
+                    <span className="font-semibold">{getSetting('businessHours_sunday')}</span>
                   </div>
                 </div>
                 <p className="mt-4 text-sm text-gray-500">

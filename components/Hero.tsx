@@ -5,12 +5,13 @@ import NextImage from "next/image";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, FormEvent } from "react";
 import { ArrowRight, Search, Award, Briefcase, BarChart, Store, Code, Star, TrendingUp, Users, Globe, Smartphone, Palette, Megaphone } from "lucide-react";
-import Google from "@/public/google.jpg";
-import WordPress from "@/public/wordpress.jpg";
-import Shopify from "@/public/shopify.jpg";
-import SEMRush from "@/public/semrush.png";
-import DesignRush from "@/public/designrush.jpg";
 import { HeroShowcaseItem } from "@/lib/data";
+
+const Google = "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/google.jpg";
+const WordPress = "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/wordpress.jpg";
+const Shopify = "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/shopify.jpg";
+const SEMRush = "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/semrush.png";
+const DesignRush = "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/designrush.jpg";
 
 const iconMap = {
   Store: Store,
@@ -192,6 +193,7 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 												src={cert.logo}
 												alt={cert.name}
 												fill
+                                                sizes="(max-width: 768px) 100px, 100px"
 												className="object-contain object-center md:object-left"
 											/>
 										</div>
@@ -295,6 +297,7 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 												src={cert.logo}
 												alt={cert.name}
 												fill
+                                                sizes="(max-width: 768px) 100px, 100px"
 												className="object-contain"
 											/>
 										</div>

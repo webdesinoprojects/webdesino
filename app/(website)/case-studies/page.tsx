@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { getCaseStudies } from '@/lib/case-studies';
 import { TrendingUp, ArrowRight, Award, Calendar } from 'lucide-react';
+import { prisma } from '@/lib/prisma';
+import { Project } from '@prisma/client';
 
 export const metadata: Metadata = {
   title: 'Case Studies | Proven Success Stories | WebDesino',
@@ -13,8 +14,33 @@ export const metadata: Metadata = {
   },
 };
 
-export default function CaseStudiesPage() {
-  const caseStudies = getCaseStudies();
+export default async function CaseStudiesPage() {
+  const projects = await prisma.project.findMany({
+    orderBy: {
+      createdAt: 'desc',
+    },
+  });
+
+  const caseStudies = projects.map((project: Project) => {
+    const metrics = (project.metrics as any[]) || [];
+    const getMetric = (label: string) => metrics.find((m: any) => m.label === label)?.value || '';
+
+    return {
+      slug: project.slug,
+      industry: project.industry,
+      client: project.client,
+      duration: getMetric('Timeline'),
+      background: project.description,
+      heroMetrics: {
+        revenue: getMetric('Revenue'),
+        roi: getMetric('ROI'),
+        timeline: getMetric('Timeline'),
+      },
+      results: {
+        highlights: project.highlights || [],
+      },
+    };
+  });
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-cream to-white">
@@ -105,7 +131,7 @@ export default function CaseStudiesPage() {
 
                 {/* Key Results */}
                 <div className="space-y-2 mb-6">
-                  {study.results.highlights.slice(0, 3).map((highlight, idx) => (
+                  {study.results.highlights.slice(0, 3).map((highlight: string, idx: number) => (
                     <div key={idx} className="flex items-start text-sm text-gray-700">
                       <Award className="w-4 h-4 text-[#02066F] mr-2 mt-0.5 flex-shrink-0" />
                       <span>{highlight}</span>
