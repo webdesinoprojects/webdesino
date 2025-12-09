@@ -24,7 +24,7 @@ export async function sendEnquiryEmail(
   });
 
   await transporter.sendMail({
-    from: process.env.SMTP_FROM || '"WebDesino Website" <no-reply@webdesino.com>',
+    from: process.env.SMTP_FROM || '"WebDesino" <no-reply@webdesino.com>',
     to: process.env.SMTP_TO || "info@webdesino.com",
     subject: `New Enquiry from ${name} - ${service || "General"} ${location ? `(${location})` : ""}`,
     text: `
