@@ -14,12 +14,22 @@ export async function login(formData: FormData) {
     return { success: false, error: "Email and password are required" };
   }
 
+  // Basic validation
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return { success: false, error: "Invalid email format" };
+  }
+
+  if (password.length < 6) {
+    return { success: false, error: "Invalid credentials" };
+  }
+
   try {
     const user = await prisma.admin.findUnique({
-      where: { email },
+      where: { email: email.toLowerCase().trim() },
     });
 
     if (!user) {
+      // Use same error message to prevent user enumeration
       return { success: false, error: "Invalid credentials" };
     }
 
@@ -34,6 +44,7 @@ export async function login(formData: FormData) {
     cookies().set("session", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
       maxAge: 60 * 60 * 24, // 1 day
       path: "/",
     });
@@ -41,7 +52,7 @@ export async function login(formData: FormData) {
     return { success: true };
   } catch (error) {
     console.error("Login error:", error);
-    return { success: false, error: "Failed to login" };
+    return { success: false, error: "Failed to login. Please try again." };
   }
 }
 

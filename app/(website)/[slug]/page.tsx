@@ -18,42 +18,62 @@ interface PageProps {
     };
 }
 
+// Allow static generation with fallback for missing pages
+export const dynamicParams = true; // Allow dynamic params not in generateStaticParams
+
 export async function generateStaticParams() {
-    const locations = await prisma.locationPage.findMany({
-        select: { slug: true },
-    });
+    try {
+        const locations = await prisma.locationPage.findMany({
+            select: { slug: true },
+        });
 
-    const reservedRoutes = [
-        "about", "blog", "case-studies", "contact", "our-clients", 
-        "portfolio", "pricing", "privacy-policy", "refund-policy", 
-        "rohit-tiwari", "search", "services", "terms-conditions", 
-        "testimonials"
-    ];
+        const reservedRoutes = [
+            "about", "blog", "case-studies", "contact", "our-clients", 
+            "portfolio", "pricing", "privacy-policy", "refund-policy", 
+            "rohit-tiwari", "search", "services", "terms-conditions", 
+            "testimonials"
+        ];
 
-    return locations
-        .filter((loc) => loc.slug && loc.slug !== "index" && loc.slug !== "" && !reservedRoutes.includes(loc.slug))
-        .map((loc) => ({
-            slug: loc.slug,
-        }));
+        return locations
+            .filter((loc) => loc.slug && loc.slug !== "index" && loc.slug !== "" && !reservedRoutes.includes(loc.slug))
+            .map((loc) => ({
+                slug: loc.slug,
+            }));
+    } catch (error) {
+        console.error("Error generating static params for location pages:", error);
+        // Return empty array to prevent build failure, pages will be generated on-demand
+        return [];
+    }
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-    const page = await prisma.locationPage.findUnique({
-        where: { slug: params.slug },
-    });
+    try {
+        const page = await prisma.locationPage.findUnique({
+            where: { slug: params.slug },
+        });
 
-    if (!page) return { title: "Page Not Found" };
+        if (!page) return { title: "Page Not Found" };
 
-    return {
-        title: page.title,
-        description: page.description || `Best Web Development Services in ${page.location}`,
-    };
+        return {
+            title: page.title,
+            description: page.description || `Best Web Development Services in ${page.location}`,
+        };
+    } catch (error) {
+        console.error("Error generating metadata for location page:", error);
+        return { title: "Page Not Found" };
+    }
 }
 
 export default async function LocationPage({ params }: PageProps) {
-    const page = await prisma.locationPage.findUnique({
-        where: { slug: params.slug },
-    });
+    let page;
+    try {
+        page = await prisma.locationPage.findUnique({
+            where: { slug: params.slug },
+        });
+    } catch (error) {
+        console.error("Error fetching location page:", error);
+        notFound();
+    }
 
     if (!page) {
         notFound();
@@ -62,25 +82,47 @@ export default async function LocationPage({ params }: PageProps) {
     const locationName = page.location;
     const jsonLd = generateLocalBusinessSchema(locationName, params.slug);
 
-    const faqs = await prisma.faq.findMany({
-        where: {
-            category: { in: ["Location", "General"] }
-        },
-        orderBy: { order: 'asc' }
-    });
+    let processedFaqs: Array<{
+        id: string;
+        question: string;
+        answer: string;
+        category: string;
+        order: number;
+    }> = [];
+    try {
+        const faqsData = await prisma.faq.findMany({
+            where: {
+                category: { in: ["Location", "General"] }
+            },
+            orderBy: { order: 'asc' }
+        });
 
-    const processedFaqs = faqs.map(faq => ({
-        ...faq,
-        question: faq.question.replace(/{{location}}/g, locationName),
-        answer: faq.answer.replace(/{{location}}/g, locationName)
-    }));
+        processedFaqs = faqsData.map(faq => ({
+            ...faq,
+            question: faq.question.replace(/{{location}}/g, locationName),
+            answer: faq.answer.replace(/{{location}}/g, locationName)
+        }));
+    } catch (error) {
+        console.error("Error fetching FAQs:", error);
+        // Continue with empty FAQs array
+    }
 
     // Fetch other locations for the footer grid
-    const otherLocations = await prisma.locationPage.findMany({
-        take: 20,
-        select: { title: true, slug: true, location: true },
-        where: { slug: { not: params.slug } }
-    });
+    let otherLocations: Array<{
+        title: string;
+        slug: string;
+        location: string;
+    }> = [];
+    try {
+        otherLocations = await prisma.locationPage.findMany({
+            take: 20,
+            select: { title: true, slug: true, location: true },
+            where: { slug: { not: params.slug } }
+        });
+    } catch (error) {
+        console.error("Error fetching other locations:", error);
+        // Continue with empty array
+    }
 
     const content = (page.content as any) || {};
 

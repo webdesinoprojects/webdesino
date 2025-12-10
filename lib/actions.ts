@@ -252,28 +252,73 @@ export async function createEnquiry(formData: FormData) {
   let message = formData.get("message") as string;
   const location = formData.get("location") as string;
 
+  // Validation
+  if (!name || name.trim().length < 2) {
+    return { success: false, error: "Name must be at least 2 characters long" };
+  }
+
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return { success: false, error: "Please provide a valid email address" };
+  }
+
+  if (!message || message.trim().length < 10) {
+    return { success: false, error: "Message must be at least 10 characters long" };
+  }
+
+  // Sanitize inputs
+  const sanitizedName = name.trim().substring(0, 200);
+  const sanitizedEmail = email.trim().toLowerCase().substring(0, 255);
+  const sanitizedPhone = phone ? phone.trim().substring(0, 50) : null;
+  const sanitizedService = service ? service.trim().substring(0, 100) : null;
+  const sanitizedMessage = message.trim().substring(0, 5000);
+  
+  // Validate and sanitize location
+  let sanitizedLocation: string | null = null;
   if (location) {
-    message = `[Location: ${location}]\n\n${message}`;
+    const trimmedLocation = location.trim();
+    // Validate location length (reasonable limit for location names)
+    if (trimmedLocation.length > 0 && trimmedLocation.length <= 200) {
+      // Sanitize location: remove potentially dangerous characters, keep alphanumeric, spaces, hyphens, commas, and common location characters
+      sanitizedLocation = trimmedLocation
+        .replace(/[<>\"'&]/g, "") // Remove HTML/script injection characters
+        .replace(/\n\r\t/g, " ") // Replace newlines/tabs with spaces
+        .replace(/\s+/g, " ") // Normalize whitespace
+        .substring(0, 200); // Enforce max length
+    } else if (trimmedLocation.length > 200) {
+      return { success: false, error: "Location name is too long (maximum 200 characters)" };
+    }
+  }
+
+  if (sanitizedLocation) {
+    message = `[Location: ${sanitizedLocation}]\n\n${sanitizedMessage}`;
+  } else {
+    message = sanitizedMessage;
   }
 
   try {
     await prisma.enquiry.create({
       data: {
-        name,
-        email,
-        phone,
-        service,
+        name: sanitizedName,
+        email: sanitizedEmail,
+        phone: sanitizedPhone,
+        service: sanitizedService,
         message,
       },
     });
 
-    await sendEnquiryEmail(name, email, phone, service, message, location);
+    // Send email (non-blocking - don't fail if email fails)
+    try {
+      await sendEnquiryEmail(sanitizedName, sanitizedEmail, sanitizedPhone || "", sanitizedService || "", message, sanitizedLocation || undefined);
+    } catch (emailError) {
+      console.error("Error sending enquiry email:", emailError);
+      // Continue even if email fails
+    }
 
     revalidatePath("/admin/enquiries");
     return { success: true };
   } catch (error) {
     console.error("Error creating enquiry:", error);
-    return { success: false, error: "Failed to submit enquiry" };
+    return { success: false, error: "Failed to submit enquiry. Please try again later." };
   }
 }
 
