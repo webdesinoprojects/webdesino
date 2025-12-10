@@ -90,7 +90,7 @@ export default async function LocationPage({ params }: PageProps) {
             "A captivating website design establishes trust with potential clients, featuring a sleek, modern aesthetic that reflects your brand's values. It effectively generates leads by incorporating clear and compelling calls to action that guide visitors towards taking the next step. Additionally, a well-structured website opens up a realm of new marketing opportunities, allowing you to connect through various channels such as social media, Google Ads, and email marketing.",
             `Whether you run a charming boutique, a dynamic coaching center, a caring clinic, or a home-based service, a local website tailored for the ${locationName} audience will enable you to differentiate yourself from your competitors and attract the clientele you desire.`
         ],
-        image: getStorageUrl(content.story?.image || "/hero-img.png")
+        image: getStorageUrl(content.story?.image || "/location-story.png")
     };
 
     const services = (content.services || [
@@ -102,7 +102,7 @@ export default async function LocationPage({ params }: PageProps) {
                 "Custom templates designed for clinics, shops, real estate agents, and startups",
                 "Before/After design comparisons to showcase how we transform your online presence"
             ],
-            image: "/hero-img.png"
+            image: "/location-service-1.png"
         },
         {
             title: "SEO & Google My Business Optimization",
@@ -111,7 +111,7 @@ export default async function LocationPage({ params }: PageProps) {
                 "Google My Business setup with accurate categories, operating hours, photos, and keyword-rich descriptions",
                 "Citation building and weekly posts to maintain high visibility in local searches"
             ],
-            image: "/hero-img.png"
+            image: "/location-service-2.png"
         },
         {
             title: "Local Targeting & Fast Support",
@@ -120,7 +120,7 @@ export default async function LocationPage({ params }: PageProps) {
                 "Quick call/WhatsApp support for urgent changes or troubleshooting",
                 "A dedicated local account manager who understands the West Delhi business ecosystem"
             ],
-            image: "/hero-img.png"
+            image: "/location-service-3.png"
         }
     ]).map((s: any) => ({
         ...s,
@@ -139,21 +139,32 @@ export default async function LocationPage({ params }: PageProps) {
                 <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `url(${getStorageUrl('/grid-pattern.svg')})` }}></div>
                 <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blue-500/20 to-transparent"></div>
                 <div className="container mx-auto px-4 relative z-10">
-                    <div className="max-w-4xl mx-auto text-center">
-                        <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                            {page.title}
-                        </h1>
-                        <p className="text-xl text-gray-200 max-w-2xl mx-auto mb-8">
-                            {content.hero?.subtitle || `Are you searching for a reliable website designer in ${locationName}? At WebDesino, we help local businesses create modern, fast, and SEO-friendly websites that generate genuine leads and rank well on Google.`}
-                        </p>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <Link href={content.hero?.ctaLink || "#contact"} className="px-8 py-4 bg-white text-[#02066F] rounded-full font-bold hover:bg-gray-100 transition-all transform hover:scale-105">
-                                {content.hero?.ctaText || "Get a Free Quote"}
-                            </Link>
-                            <Link href={content.hero?.secondaryCtaLink || "tel:+919310851557"} className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-full font-bold hover:bg-white/10 transition-all">
-                                {content.hero?.secondaryCtaText || "Call Us Now"}
-                            </Link>
+                    <div className={`flex flex-col lg:flex-row items-center gap-12 ${!content.hero?.image ? 'justify-center' : ''}`}>
+                        <div className={`w-full ${content.hero?.image ? 'lg:w-1/2 text-left' : 'max-w-4xl mx-auto text-center'}`}>
+                            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                                {page.title}
+                            </h1>
+                            <p className="text-xl text-gray-200 mb-8">
+                                {content.hero?.subtitle || `Are you searching for a reliable website designer in ${locationName}? At WebDesino, we help local businesses create modern, fast, and SEO-friendly websites that generate genuine leads and rank well on Google.`}
+                            </p>
+                            <div className={`flex flex-col sm:flex-row gap-4 ${content.hero?.image ? 'justify-start' : 'justify-center'}`}>
+                                <Link href={content.hero?.ctaLink || "#contact"} className="px-8 py-4 bg-white text-[#02066F] rounded-full font-bold hover:bg-gray-100 transition-all transform hover:scale-105">
+                                    {content.hero?.ctaText || "Get a Free Quote"}
+                                </Link>
+                                <Link href={content.hero?.secondaryCtaLink || "tel:+919310851557"} className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-full font-bold hover:bg-white/10 transition-all">
+                                    {content.hero?.secondaryCtaText || "Call Us Now"}
+                                </Link>
+                            </div>
                         </div>
+                        {content.hero?.image && (
+                            <div className="w-full lg:w-1/2 flex justify-center">
+                                <img 
+                                    src={getStorageUrl(content.hero.image)} 
+                                    alt={page.title} 
+                                    className="w-full max-w-lg h-auto object-contain rounded-lg"
+                                />
+                            </div>
+                        )}
                     </div>
                 </div>
             </section>
@@ -412,7 +423,7 @@ export default async function LocationPage({ params }: PageProps) {
                         <div className="lg:w-1/2 flex justify-center order-2 lg:order-1">
                             <div className="bg-blue-50 p-8 rounded-2xl w-full max-w-md flex items-center justify-center">
                                 <div className="bg-blue-50 rounded-2xl p-8 flex items-center justify-center min-h-[400px]">
-                                    <img src="https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/logo.png" className="w-full h-auto object-contain" />
+                                    <img src={getStorageUrl("/location-service-3.png")} className="w-full h-auto object-contain" alt="Industries We Serve" />
                                 </div>
                             </div>
                         </div>
@@ -474,7 +485,7 @@ export default async function LocationPage({ params }: PageProps) {
                         <div className="lg:w-1/2 sticky top-24">
                             <div className="bg-blue-50 p-8 rounded-2xl w-full max-w-md flex items-center justify-center">
                                 <div className="bg-blue-50 rounded-2xl p-8 flex items-center justify-center min-h-[400px]">
-                                    <img src="https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/logo.png" className="w-full h-auto object-contain" />
+                                    <img src={getStorageUrl("/location-service-2.png")} className="w-full h-auto object-contain" alt="Local SEO Strategies" />
                                 </div>
                             </div>
                         </div>
@@ -525,7 +536,7 @@ export default async function LocationPage({ params }: PageProps) {
                         <div className="lg:w-1/2 flex justify-center">
                             <div className="bg-blue-50 p-8 rounded-2xl w-full max-w-md flex items-center justify-center">
                                 <div className="bg-blue-50 rounded-2xl p-8 flex items-center justify-center min-h-[400px]">
-                                    <img src="https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/logo.png" className="w-full h-auto object-contain" />
+                                    <img src={getStorageUrl("/location-hero.png")} className="w-full h-auto object-contain" alt="Transform Your Online Presence" />
                                 </div>
                             </div>
                         </div>

@@ -9,13 +9,13 @@ export function getStorageUrl(path: string | undefined | null) {
   if (!path) return "";
   if (path.startsWith("http")) return path;
   
-  // If it's a local path from public folder, we assume it's uploaded to 'images' bucket
-  // Remove leading slash if present
-  const cleanPath = path.startsWith("/") ? path.slice(1) : path;
+  // If it starts with /, assume it's a local public asset
+  if (path.startsWith("/")) return path;
   
+  // If it's a relative path (not starting with /), assume it's uploaded to 'images' bucket
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   if (!supabaseUrl) return path; // Fallback to local if no env var
   
-  return `${supabaseUrl}/storage/v1/object/public/images/${cleanPath}`;
+  return `${supabaseUrl}/storage/v1/object/public/images/${path}`;
 }
 

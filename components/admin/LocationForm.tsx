@@ -58,7 +58,8 @@ export default function LocationForm({ location }: LocationFormProps) {
       ctaText: "Get a Free Quote",
       ctaLink: "#contact",
       secondaryCtaText: "Call Us Now",
-      secondaryCtaLink: "tel:+919310851557"
+      secondaryCtaLink: "tel:+919310851557",
+      image: "/location-hero.png"
     },
     story: {
       title: `Why Your ${locName} Business Needs a Website Today`,
@@ -67,7 +68,7 @@ export default function LocationForm({ location }: LocationFormProps) {
         "A captivating website design establishes trust with potential clients, featuring a sleek, modern aesthetic that reflects your brand's values. It effectively generates leads by incorporating clear and compelling calls to action that guide visitors towards taking the next step.",
         `Whether you run a charming boutique, a dynamic coaching center, a caring clinic, or a home-based service, a local website tailored for the ${locName} audience will enable you to differentiate yourself from your competitors and attract the clientele you desire.`
       ],
-      image: "/hero-img.png"
+      image: "/location-story.png"
     },
     leadingCompany: {
       title: `The Leading Web Development Company in ${locName}`,
@@ -82,7 +83,7 @@ export default function LocationForm({ location }: LocationFormProps) {
           "Custom templates designed for clinics, shops, real estate agents, and startups",
           "Before/After design comparisons to showcase how we transform your online presence"
         ],
-        image: "/hero-img.png"
+        image: "/location-service-1.png"
       },
       {
         title: "SEO & Google My Business Optimization",
@@ -91,7 +92,7 @@ export default function LocationForm({ location }: LocationFormProps) {
           "Google My Business setup with accurate categories, operating hours, photos, and keyword-rich descriptions",
           "Citation building and weekly posts to maintain high visibility in local searches"
         ],
-        image: "/hero-img.png"
+        image: "/location-service-2.png"
       },
       {
         title: "Local Targeting & Fast Support",
@@ -100,7 +101,7 @@ export default function LocationForm({ location }: LocationFormProps) {
           "Quick call/WhatsApp support for urgent changes or troubleshooting",
           "A dedicated local account manager who understands the West Delhi business ecosystem"
         ],
-        image: "/hero-img.png"
+        image: "/location-service-3.png"
       }
     ]
   });
@@ -156,7 +157,7 @@ export default function LocationForm({ location }: LocationFormProps) {
   const addService = () => {
     setContent(prev => ({
       ...prev,
-      services: [...(prev.services || []), { title: "New Service", items: ["Feature 1"], image: "/hero-img.png" }]
+      services: [...(prev.services || []), { title: "New Service", items: ["Feature 1"], image: "/location-service-1.png" }]
     }));
   };
 
