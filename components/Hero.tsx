@@ -6,12 +6,13 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect, FormEvent } from "react";
 import { ArrowRight, Search, Award, Briefcase, BarChart, Store, Code, Star, TrendingUp, Users, Globe, Smartphone, Palette, Megaphone } from "lucide-react";
 import { HeroShowcaseItem } from "@/lib/data";
+import { getStorageUrl } from "@/lib/utils";
 
-const Google = "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/google.jpg";
-const WordPress = "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/wordpress.jpg";
-const Shopify = "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/shopify.jpg";
-const SEMRush = "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/semrush.png";
-const DesignRush = "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/designrush.jpg";
+const Google = getStorageUrl("/google.jpg");
+const WordPress = getStorageUrl("/wordpress.jpg");
+const Shopify = getStorageUrl("/shopify.jpg");
+const SEMRush = getStorageUrl("/semrush.png");
+const DesignRush = getStorageUrl("/designrush.jpg");
 
 const iconMap = {
   Store: Store,

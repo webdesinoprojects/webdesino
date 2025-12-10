@@ -5,6 +5,8 @@ import { Calendar, User, ArrowRight, ChevronLeft, ChevronRight } from "lucide-re
 import BlogSidebar from "@/components/BlogSidebar";
 import { format } from "date-fns";
 
+import { getStorageUrl } from "@/lib/utils";
+
 export const metadata = {
   title: "Blog | WebDesino - Insights on Web Design & Development",
   description: "Read our latest articles on web design trends, development best practices, SEO strategies, and digital marketing insights.",
@@ -52,7 +54,7 @@ export default async function BlogPage({ searchParams }: { searchParams: { page?
                 >
                   <Link href={`/blog/${post.slug}`} className="block aspect-[16/10] relative overflow-hidden bg-slate-100 group">
                     <Image
-                      src={post.image || "https://api.microlink.io/?url=https://webdesino.com&screenshot=true&meta=false&embed=screenshot.url"}
+                      src={getStorageUrl(post.image || "/location-story.png")}
                       alt={post.title}
                       fill
                       className="object-contain group-hover:scale-105 transition-transform duration-500"

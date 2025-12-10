@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Phone, Mail, MapPin, Facebook, Linkedin, Twitter, Instagram, Youtube, ArrowRight, FileText } from "lucide-react";
 import { servicesData } from "@/lib/services-data";
 import Image from "next/image";
+import { getStorageUrl } from "@/lib/utils";
 
 interface FooterProps {
   locations?: { name: string; slug: string }[];
@@ -55,7 +56,7 @@ export default function Footer({ locations = [] }: FooterProps) {
               <span>Webdesino<span className="text-white">.com</span></span>
             </h3> */}
             <Image 
-              src="https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/1765225653351-9gxe3n.png" 
+              src={getStorageUrl("/WebDesino.png")}
               alt="Webdesino.com" 
               width={150} 
               height={40} 

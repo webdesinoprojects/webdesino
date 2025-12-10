@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Project } from "@prisma/client";
 import { GoalIcon } from "lucide-react";
+import { getStorageUrl } from "@/lib/utils";
 
 interface PortfolioProps {
   projects: Project[];
@@ -73,7 +74,7 @@ export default function Portfolio({ projects }: PortfolioProps) {
                   <div className="aspect-video bg-gray-100 relative overflow-hidden">
                     {project.image ? (
                       <Image
-                        src={project.image}
+                        src={getStorageUrl(project.image)}
                         alt={`${project.title} - Webdesino Portfolio Project - ${project.industry} Website Development`}
                         fill
                         className="object-contain group-hover:scale-110 transition-transform duration-300"

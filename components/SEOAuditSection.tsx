@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import { Search, ArrowRight, Loader2 } from "lucide-react";
+import { getStorageUrl } from "@/lib/utils";
 
 export default function SEOAuditSection() {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
+  const bgPattern = getStorageUrl("/grid-pattern.svg");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,7 +23,10 @@ export default function SEOAuditSection() {
 
   return (
     <section className="py-10 bg-slate-50 text-slate-900 relative overflow-hidden border-t border-slate-200">
-      <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5"></div>
+      <div 
+        className="absolute inset-0 opacity-5"
+        style={{ backgroundImage: `url('${bgPattern}')` }}
+      ></div>
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center">

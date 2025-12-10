@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Phone, Mail, Menu, X, ChevronDown, ArrowRight, ChevronLeft, ChevronRight, Code, Brush, Smartphone, Rocket, Briefcase, ShoppingCart, PenTool, Target, MapPin, Power, BarChart, Search, Home, Users, BookOpen, Info, GraduationCap, Pill, ShoppingBag } from "lucide-react";
 import Image from "next/image";
 import { servicesData } from "@/lib/services-data";
+import { getStorageUrl } from "@/lib/utils";
 
 // Work dropdown content
 const workDropdown = [
@@ -92,7 +93,7 @@ export default function Navbar() {
             <Link href="/" className="flex items-center gap-2 font-bold text-xl hover:text-gray-200 transition">
               {/* <span>Webdesino<span className="text-white">.com</span></span> */}
               <Image 
-                src="https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/1765225653351-9gxe3n.png" 
+                src={getStorageUrl("/WebDesino.png")}
                 alt="Webdesino.com" 
                 width={120} 
                 height={40} 

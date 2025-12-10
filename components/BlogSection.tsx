@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ArrowRight, Calendar, User } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { format } from "date-fns";
+import { getStorageUrl } from "@/lib/utils";
 
 export default async function BlogSection() {
   const posts = await prisma.blogPost.findMany({
@@ -30,7 +31,7 @@ export default async function BlogSection() {
             <article key={post.id} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group border border-slate-100">
               <div className="relative h-48 overflow-hidden">
                 <Image
-                  src={post.image || `https://placehold.co/600x400?text=${encodeURIComponent(post.title)}`}
+                  src={getStorageUrl(post.image || "/location-story.png")}
                   alt={post.title}
                   fill
                   className="object-contain group-hover:scale-110 transition-transform duration-500"

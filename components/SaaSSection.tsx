@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { getStorageUrl } from "@/lib/utils";
 
 export default function SaaSSection() {
   const steps = [
@@ -11,10 +12,15 @@ export default function SaaSSection() {
     { step: "04", title: "Final Result" }
   ];
 
+  const bgPattern = getStorageUrl("/grid-pattern.svg");
+
   return (
     <section className="py-20 bg-[#02066F] text-white relative overflow-hidden">
       {/* Background Pattern */}
-      <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
+      <div 
+        className="absolute inset-0 opacity-10"
+        style={{ backgroundImage: `url('${bgPattern}')` }}
+      ></div>
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">

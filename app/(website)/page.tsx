@@ -21,8 +21,9 @@ import SEOAuditSection from "@/components/SEOAuditSection";
 import BlogSection from "@/components/BlogSection";
 import { generateWebSiteSchema } from "@/lib/seo";
 import { prisma } from "@/lib/prisma";
+import { getStorageUrl } from "@/lib/utils";
 
-const Logo = "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/logo.png";
+const Logo = getStorageUrl("/logo.png");
 
 import {
   getFeatures,

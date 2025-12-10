@@ -1,5 +1,6 @@
 import type { Feature } from "@/lib/data";
 import { Target } from "lucide-react";
+import { getStorageUrl } from "@/lib/utils";
 
 interface WhyChooseUsProps {
   features: Feature[];
@@ -7,6 +8,7 @@ interface WhyChooseUsProps {
 
 export default function WhyChooseUs({ features }: WhyChooseUsProps) {
   if (features.length === 0) return null;
+  const bgPattern = getStorageUrl("/grid-pattern.svg");
 
   return (
     <section className="py-10 lg:py-16 bg-white relative overflow-hidden">
@@ -51,7 +53,10 @@ export default function WhyChooseUs({ features }: WhyChooseUsProps) {
           <div className="flex flex-col items-center justify-center relative h-full">
             <div className="w-full h-full min-h-[400px] bg-gradient-to-br from-[#02066F] to-[#000040] rounded-3xl flex items-center justify-center relative overflow-hidden shadow-2xl group hover:scale-[1.02] transition-transform duration-500">
               {/* Animated Background Elements */}
-              <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
+              <div 
+                className="absolute inset-0 opacity-10"
+                style={{ backgroundImage: `url('${bgPattern}')` }}
+              ></div>
               <div className="absolute -top-20 -right-20 w-64 h-64 bg-[#4F46E5]/30 rounded-full blur-3xl animate-pulse"></div>
               <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-[#0EA5E9]/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
               
