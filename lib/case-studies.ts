@@ -68,7 +68,7 @@ export const caseStudies: CaseStudy[] = [
     client: "LuckyNutra",
     industry: "Health & Wellness (Supplements)",
     duration: "90 Days",
-    image: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/uploads/2025/10/Lucky_Nutra_1000px.png",
+    image: "uploads/2025/10/Lucky_Nutra_1000px.png",
     heroMetrics: {
       revenue: "₹3K → ₹10L+ Monthly",
       roi: "+330x Growth",
@@ -261,7 +261,7 @@ export const caseStudies: CaseStudy[] = [
     client: "Meritshot",
     industry: "Education (Investment Banking)",
     duration: "120 Days",
-    image: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/uploads/2025/10/68ce47b8847dda2fd5b1a6b9_Meritshot-Education-Logo.avif",
+    image: "uploads/2025/10/68ce47b8847dda2fd5b1a6b9_Meritshot-Education-Logo.avif",
     heroMetrics: {
       revenue: "300%+ Organic Leads",
       roi: "Global Reach",
@@ -357,7 +357,7 @@ export const caseStudies: CaseStudy[] = [
     client: "BuyKhariBauli",
     industry: "E-commerce (Dry Fruits & Nuts)",
     duration: "90 Days",
-    image: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/uploads/2025/10/buy-khari-baoli-logo-small.webp",
+    image: "uploads/2025/10/buy-khari-baoli-logo-small.webp",
     heroMetrics: {
       revenue: "₹30,000 → ₹6,00,000+ Monthly",
       roi: "+20x Growth",

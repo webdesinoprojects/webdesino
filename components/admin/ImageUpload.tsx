@@ -60,6 +60,7 @@ export default function ImageUpload({ name, defaultValue, label = "Image", onUpl
             src={imageUrl} 
             alt="Uploaded image" 
             fill 
+            sizes="(max-width: 768px) 100vw, 33vw"
             className="object-contain"
           />
           <Button

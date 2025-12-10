@@ -3,8 +3,9 @@ import Link from "next/link";
 import { Linkedin, Globe, Mail, Award, Code, Rocket, Target, CheckCircle2, ArrowRight } from "lucide-react";
 import { BASE_URL } from "@/lib/seo";
 import prisma from "@/lib/prisma";
+import { getStorageUrl } from "@/lib/utils";
 
-const Rohit = "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/rohittiwari2.jpeg";
+const Rohit = getStorageUrl("/rohittiwari2.jpeg");
 
 export const metadata = {
   title: "Rohit Tiwari | Founder & CEO of WebDesino | Top Web Developer in Delhi",

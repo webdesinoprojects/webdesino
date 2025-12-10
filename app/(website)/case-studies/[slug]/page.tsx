@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 import { CaseStudy } from '@/lib/case-studies';
+import { getStorageUrl } from '@/lib/utils';
 import { generateArticleSchema, generateBreadcrumbSchema, BASE_URL } from '@/lib/seo';
 import { 
   ArrowLeft, 
@@ -160,7 +161,7 @@ export default async function CaseStudyPage({ params }: { params: { slug: string
             {caseStudy.image && (
               <div className="mt-12 relative w-full max-w-4xl mx-auto h-[300px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl animate-fade-in" style={{ animationDelay: '0.4s' }}>
                 <Image
-                  src={caseStudy.image}
+                  src={getStorageUrl(caseStudy.image)}
                   alt={caseStudy.title}
                   fill
                   className="object-contain"

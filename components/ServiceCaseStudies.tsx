@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, TrendingUp } from "lucide-react";
 import { getCaseStudies } from "@/lib/case-studies";
+import { getStorageUrl } from "@/lib/utils";
 
 export default function ServiceCaseStudies() {
   // Get top 3 case studies
@@ -38,8 +39,16 @@ export default function ServiceCaseStudies() {
             >
               <div className="aspect-[4/3] relative overflow-hidden bg-slate-100">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity" />
-                {/* Placeholder for image if not available in study object, or use a pattern */}
-                <div className="absolute inset-0 bg-[#02066F]/10 group-hover:scale-105 transition-transform duration-700" />
+                {study.image ? (
+                  <Image
+                    src={getStorageUrl(study.image)}
+                    alt={study.title}
+                    fill
+                    className="object-contain group-hover:scale-105 transition-transform duration-700"
+                  />
+                ) : (
+                  <div className="absolute inset-0 bg-[#02066F]/10 group-hover:scale-105 transition-transform duration-700" />
+                )}
                 
                 <div className="absolute bottom-6 left-6 right-6 z-20">
                   <span className="inline-block px-3 py-1 bg-[#02066F] text-white text-xs font-bold rounded-full mb-3">

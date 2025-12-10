@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { getStorageUrl } from "@/lib/utils";
 
 export const metadata = {
   title: "Our Clients | WebDesino - Trusted by Innovative Companies",
@@ -152,7 +153,7 @@ export default async function OurClientsPage({
                   <div key={idx} className="rounded-2xl overflow-hidden shadow-lg border border-slate-100">
                     <div className="aspect-[16/9] relative bg-slate-100">
                       <Image
-                        src={client.image}
+                        src={getStorageUrl(client.image)}
                         alt={client.name}
                         fill
                         className="object-contain"
@@ -183,7 +184,7 @@ export default async function OurClientsPage({
                 >
                   <div className="w-16 h-16 mb-4 relative">
                     <Image
-                      src={client.image}
+                      src={getStorageUrl(client.image)}
                       alt="Instagram"
                       fill
                       className="object-contain"
@@ -226,7 +227,7 @@ export default async function OurClientsPage({
                       >
                         <div className="aspect-video relative overflow-hidden bg-slate-100">
                           <Image
-                            src={client.image}
+                            src={getStorageUrl(client.image)}
                             alt={`${client.name} Screenshot`}
                             fill
                             className="object-contain object-top group-hover:scale-105 transition-transform duration-500"

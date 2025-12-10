@@ -42,7 +42,7 @@ export const servicesData: ServiceCategory[] = [
     slug: "website-solutions",
     description: "Comprehensive web solutions tailored to your business needs, from custom development to maintenance.",
     icon: Layout,
-    image: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/uploads/2025/10/Website-Design-Delhi.jpg",
+    image: "uploads/2025/10/Website-Design-Delhi.jpg",
     subtypes: [
       {
         title: "Web Development",
@@ -93,7 +93,7 @@ export const servicesData: ServiceCategory[] = [
     slug: "digital-marketing",
     description: "Data-driven digital marketing strategies to boost your online presence and drive conversions.",
     icon: Megaphone,
-    image: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/uploads/2025/10/Digital-Marketing-in-Delhi.jpg",
+    image: "uploads/2025/10/Digital-Marketing-in-Delhi.jpg",
     subtypes: [
       {
         title: "Social Media Marketing",
@@ -144,7 +144,7 @@ export const servicesData: ServiceCategory[] = [
     slug: "seo-services",
     description: "Improve your search engine rankings and drive organic traffic with our expert SEO services.",
     icon: Search,
-    image: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/uploads/2025/11/seo.jpg",
+    image: "uploads/2025/11/seo.jpg",
     subtypes: [
       {
         title: "Local SEO",

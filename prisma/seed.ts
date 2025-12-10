@@ -15,7 +15,7 @@ const projects = [
     client: "LuckyNutra",
     industry: "Health & Wellness (Supplements)",
     description: "LuckyNutra is a fast-growing nutritional supplement brand in India, focused on providing high-quality, science-backed products. Despite offering effective supplements, they struggled with low sales, poor online visibility, and almost no brand presence on key digital channels. Their website traffic was negligible, and they weren't ranking for critical keywords.",
-    image: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/uploads/2025/10/Lucky_Nutra_1000px.png",
+    image: "uploads/2025/10/Lucky_Nutra_1000px.png",
     metrics: [
       { label: "Revenue", value: "₹3K → ₹10L+ Monthly" },
       { label: "ROI", value: "+330x Growth" },
@@ -219,7 +219,7 @@ const projects = [
     client: "Meritshot",
     industry: "Education (Investment Banking)",
     description: "Meritshot is a premier investment banking training institute catering to students worldwide. Before WebDesino, their website was not ranking for competitive keywords like 'Investment Banking Course'. Despite high-quality programs, their digital presence was weak and international visibility was minimal.",
-    image: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/uploads/2025/10/68ce47b8847dda2fd5b1a6b9_Meritshot-Education-Logo.avif",
+    image: "uploads/2025/10/68ce47b8847dda2fd5b1a6b9_Meritshot-Education-Logo.avif",
     metrics: [
       { label: "Revenue", value: "300%+ Organic Leads" },
       { label: "ROI", value: "Global Reach" },
@@ -320,7 +320,7 @@ const projects = [
     client: "BuyKhariBauli",
     industry: "E-commerce (Dry Fruits & Nuts)",
     description: "BuyKhariBauli, a premium dry fruits and spices retailer, was struggling with low online visibility despite having quality products. Their website was generating only ₹30,000 per month in sales, far below their potential. The challenge was clear: transform their digital presence to match their product quality and tap into the growing online market for premium dry fruits.",
-    image: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/uploads/2025/10/buy-khari-baoli-logo-small.webp",
+    image: "uploads/2025/10/buy-khari-baoli-logo-small.webp",
     metrics: [
       { label: "Revenue", value: "₹30,000 → ₹6,00,000+ Monthly" },
       { label: "ROI", value: "+20x Growth" },
@@ -714,23 +714,23 @@ const servicesData = [
 ];
 
 const teamMembers = [
-  { name: "Rohit Tiwari", role: "Founder & CEO", image: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/rohittiwaribanner.png", order: 1 },
-  { name: "Vishnu Sharma", role: "Co-Founder", image: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/vishnusharma.png", order: 2 },
+  { name: "Rohit Tiwari", role: "Founder & CEO", image: "/rohittiwari2.jpeg", order: 1 },
+  { name: "Vishnu Sharma", role: "Co-Founder", image: "/vishnusharma.png", order: 2 },
 ];
 
 const certifications = [
-  { name: "Google", image: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/google.jpg" },
-  { name: "WordPress", image: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/wordpress.jpg" },
-  { name: "Shopify", image: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/shopify.jpg" },
-  { name: "SEMRush", image: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/semrush.png" },
-  { name: "DesignRush", image: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/designrush.jpg" },
+  { name: "Google", image: "/google.jpg" },
+  { name: "WordPress", image: "/wordpress.jpg" },
+  { name: "Shopify", image: "/shopify.jpg" },
+  { name: "SEMRush", image: "/semrush.png" },
+  { name: "DesignRush", image: "/designrush.jpg" },
 ];
 
 const aboutPageContent = {
   hero: {
     title: "About Webdesino",
     subtitle: "Building Your Online Presence. Find a team of Web Developers you can rely on. Every day, we build trust through communication, transparency, and results.",
-    image: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/rohittiwaribanner.png"
+    image: "/rohittiwaribanner.png"
   },
   stats: [
     { icon: "Users", value: "100+", label: "Happy Clients" },
@@ -768,9 +768,9 @@ async function main() {
       password,
     },
   })
-  console.log({ admin })
+  //console.log({ admin })
 
-  console.log('Seeding locations... SKIPPED')
+  //console.log('Seeding locations... SKIPPED')
   /*
   for (const loc of footerLocations) {
     const cleanHref = loc.href.endsWith('/') ? loc.href.slice(0, -1) : loc.href
@@ -815,11 +815,11 @@ async function main() {
       },
     })
   }
-  console.log('Locations seeded.')
+  //console.log('Locations seeded.')
   */
 
   // Seed Projects
-  console.log('Seeding projects...')
+  //console.log('Seeding projects...')
   for (const project of projects) {
     await prisma.project.upsert({
       where: { slug: project.slug },
@@ -829,7 +829,7 @@ async function main() {
   }
 
   // Seed Testimonials
-  console.log('Seeding testimonials...')
+  //console.log('Seeding testimonials...')
   for (const testimonial of testimonials) {
     const existing = await prisma.testimonial.findFirst({
         where: { name: testimonial.name, text: testimonial.text }
@@ -843,7 +843,7 @@ async function main() {
   }
 
   // Seed Services
-  console.log('Seeding services...')
+  //console.log('Seeding services...')
   for (const category of servicesData) {
     const { subtypes, ...categoryData } = category
     
@@ -871,7 +871,7 @@ async function main() {
   }
 
   // Seed Team Members
-  console.log('Seeding team members...')
+  //console.log('Seeding team members...')
   for (const member of teamMembers) {
       const existing = await prisma.teamMember.findFirst({ where: { name: member.name } });
       if (!existing) {
@@ -882,7 +882,7 @@ async function main() {
   }
 
   // Seed Certifications
-  console.log('Seeding certifications...')
+  //console.log('Seeding certifications...')
   for (const cert of certifications) {
       const existing = await prisma.certification.findFirst({ where: { name: cert.name } });
       if (!existing) {
@@ -891,7 +891,7 @@ async function main() {
   }
 
   // Seed About Page
-  console.log('Seeding About page...')
+  //console.log('Seeding About page...')
   await prisma.page.upsert({
       where: { slug: 'about' },
       update: {
@@ -908,7 +908,7 @@ async function main() {
   });
 
   // Seed Legal Pages
-  console.log('Seeding Legal pages...')
+  //console.log('Seeding Legal pages...')
   const legalPages = [
     {
       slug: "terms-conditions",
@@ -1062,12 +1062,12 @@ async function main() {
   }
 
   // Seed Founder Page
-  console.log('Seeding Founder page...')
+  //console.log('Seeding Founder page...')
   const founderPageContent = {
     hero: {
       title: "Hi, I'm Rohit Tiwari",
       description: "My name is Rohit Tiwari, and I am a professional Web Developer and Digital Marketing Specialist dedicated to building high-performing online identities for businesses, startups, and brands. Over the years, I have gained extensive experience in WordPress, Shopify, custom-coded web development, SEO, social media marketing, Google Ads, Meta Ads, and brand communication. My focus is to combine technical precision with strategic marketing to create websites and digital assets that deliver measurable business growth.",
-      image: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/rohittiwari2.jpeg",
+      image: "/rohittiwari2.jpeg",
       stats: [
         { label: "Projects Delivered", value: "150+" },
         { label: "Years Experience", value: "5+" }
@@ -1147,7 +1147,7 @@ async function main() {
   });
 
   // Seed Clients
-  console.log('Seeding clients...')
+  //console.log('Seeding clients...')
   await prisma.client.deleteMany({}); // Clear existing clients to avoid duplicates
   const clients = getClients();
   await prisma.client.createMany({
@@ -1160,7 +1160,7 @@ async function main() {
   });
 
   // Seed Blog Posts
-  console.log('Seeding blog posts...')
+  //console.log('Seeding blog posts...')
   const blogPosts = getBlogPosts();
   for (const post of blogPosts) {
     await prisma.blogPost.upsert({
@@ -1186,7 +1186,7 @@ async function main() {
   }
 
   // Seed FAQs
-  console.log('Seeding FAQs...')
+  //console.log('Seeding FAQs...')
   await prisma.faq.deleteMany({});
   const faqs = getFAQs();
   await prisma.faq.createMany({
@@ -1199,7 +1199,7 @@ async function main() {
   });
 
   // Seed Location Pages
-  console.log('Seeding location pages...')
+  //console.log('Seeding location pages...')
   const locationPages = parseLocations();
   for (const page of locationPages) {
       const content = {
@@ -1274,7 +1274,7 @@ async function main() {
       });
   }
 
-  console.log('Seeding completed.')
+  //console.log('Seeding completed.')
 }
 
 main()

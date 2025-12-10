@@ -3,8 +3,9 @@
 import { Linkedin, Globe, Award, CheckCircle, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { getStorageUrl } from "@/lib/utils";
 
-const Rohit = "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/rohittiwari2.jpeg";
+const Rohit = getStorageUrl("/rohittiwari2.jpeg");
 
 export default function SpecialistsSection() {
 	return (

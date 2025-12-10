@@ -9,11 +9,11 @@ async function main() {
   const uploadsDir = path.join(process.cwd(), "public", "uploads");
   
   if (!fs.existsSync(uploadsDir)) {
-    console.log("Uploads directory not found");
+    //console.log("Uploads directory not found");
     return;
   }
 
-  console.log("Scanning uploads directory...");
+  //console.log("Scanning uploads directory...");
   
   const files: string[] = [];
 
@@ -35,7 +35,7 @@ async function main() {
 
   scanDir(uploadsDir);
 
-  console.log(`Found ${files.length} files. Seeding database...`);
+  //console.log(`Found ${files.length} files. Seeding database...`);
 
   let count = 0;
   for (const filePath of files) {
@@ -61,12 +61,12 @@ async function main() {
       });
       count++;
       if (count % 100 === 0) {
-          console.log(`Seeded ${count} files...`);
+          //console.log(`Seeded ${count} files...`);
       }
     }
   }
 
-  console.log(`Seeding complete. Added ${count} new files.`);
+  //console.log(`Seeding complete. Added ${count} new files.`);
 }
 
 function getMimeType(filename: string): string {

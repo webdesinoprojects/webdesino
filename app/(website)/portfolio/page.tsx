@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Goal, GoalIcon } from "lucide-react";
+import { getStorageUrl } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Portfolio - Web Development Projects | Webdesino",
@@ -49,7 +50,7 @@ export default async function PortfolioPage() {
                 <div className="aspect-video bg-gradient-to-br from-[#02066F]/20 to-black/20 relative overflow-hidden">
                   {project.image ? (
                     <Image
-                      src={project.image}
+                      src={getStorageUrl(project.image)}
                       alt={`${project.title} - ${project.industry} Website Development`}
                       fill
                       className="object-contain group-hover:scale-110 transition-transform duration-300"

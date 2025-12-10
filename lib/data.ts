@@ -24,7 +24,7 @@ export const getPortfolioProjects = (): PortfolioProject[] => {
       industry: "Ecommerce",
       description:
         "After just 3 months of SEO, marketing, and website optimization, they now generate ₹25,00,000+ monthly sales.",
-      image: "https://api.microlink.io/?url=https://bookbuzzz.com/&screenshot=true&embed=screenshot.url",
+      image: "/bookbuzz.png",
       fullDescription:
         "BookBuzzz approached Webdesino with nearly zero website and marketplace sales. Through comprehensive SEO strategies, performance marketing, and website optimization, we transformed their online presence. Within just 3 months, they achieved ₹25,00,000+ in monthly sales across their website and marketplaces.",
       results: "Increased monthly sales from zero to ₹25,00,000+ through SEO and website optimization.",
@@ -40,7 +40,7 @@ export const getPortfolioProjects = (): PortfolioProject[] => {
       industry: "Ecommerce",
       description:
         "Within 2 months, with our SEO & performance marketing strategies, they now generate ₹10,00,000+ monthly sales.",
-      image: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/uploads/2025/10/Lucky_Nutra_1000px.png",
+      image: "uploads/2025/10/Lucky_Nutra_1000px.png",
       fullDescription:
         "LuckyNutra started with only ₹3,000/month in website sales and zero marketplace presence. Our team implemented targeted SEO strategies and performance marketing campaigns. Within 2 months, they achieved ₹10,00,000+ in monthly sales.",
       results: "Boosted sales from ₹3,000/month to ₹10,00,000+ monthly with SEO & performance marketing.",
@@ -56,7 +56,7 @@ export const getPortfolioProjects = (): PortfolioProject[] => {
       industry: "Ecommerce",
       description:
         "After implementing our SEO campaigns and optimizing user experience, they now achieve ₹6,00,000/month in sales.",
-      image: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/uploads/2025/10/buy-khari-baoli-logo-small.webp",
+      image: "/buykharibauli.png",
       fullDescription:
         "BuyKhariBauli began with ₹30,000/month in website sales. Through strategic SEO campaigns and comprehensive user experience optimization, we helped them achieve ₹6,00,000/month in sales directly from their website.",
       results: "Improved website sales from ₹30,000/month to ₹6,00,000/month with targeted SEO campaigns.",
@@ -72,7 +72,7 @@ export const getPortfolioProjects = (): PortfolioProject[] => {
       industry: "Healthcare",
       description:
         "Within months, we ranked their website on highly competitive global keywords... driving significant worldwide visibility.",
-      image: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/uploads/2025/10/68ce47b8847dda2fd5b1a6b9_Meritshot-Education-Logo.avif",
+      image: "uploads/2025/10/68ce47b8847dda2fd5b1a6b9_Meritshot-Education-Logo.avif",
       fullDescription:
         "Meritshot partnered with Webdesino for a focused SEO strategy targeting highly competitive global keywords. We successfully ranked their website for terms like 'Investment Banking Course', 'Best Institute for Investment Banking', and 'Indian No.1 Institute for Investment Banking', driving significant worldwide visibility and student enrollments.",
       results: "Ranked on highly competitive global keywords, driving significant worldwide visibility.",
@@ -444,19 +444,19 @@ export const getClients = (): Client[] => {
     { name: "ShopHipV", url: "https://shophipv.com/", image: "https://api.microlink.io/?url=https://shophipv.com/&screenshot=true&embed=screenshot.url", category: "Shopify Websites" },
 
     // Our Apps
-    { name: "Fancee User", url: "https://play.google.com/store/apps/details?id=com.fancee.user", image: "https://play-lh.googleusercontent.com/8P2P5j2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k", category: "Our Apps" },
-    { name: "Fancee Celebrity", url: "https://play.google.com/store/apps/details?id=com.fancee.celebrity", image: "https://play-lh.googleusercontent.com/8P2P5j2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k", category: "Our Apps" },
-    { name: "CityExpressKart Delivery", url: "https://play.google.com/store/apps/details?id=com.cityexpresskart.delivery", image: "https://play-lh.googleusercontent.com/8P2P5j2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k", category: "Our Apps" },
-    { name: "Oorkart", url: "https://apps.apple.com/in/app/oorkart/id6475118165", image: "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/df/2f/3f/df2f3f3f-3f3f-3f3f-3f3f-3f3f3f3f3f3f/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/246x0w.webp", category: "Our Apps" },
-    { name: "Oorkart Seller", url: "https://apps.apple.com/in/app/oorkart-seller/id6475118015", image: "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/df/2f/3f/df2f3f3f-3f3f-3f3f-3f3f-3f3f3f3f3f3f/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/246x0w.webp", category: "Our Apps" },
-    { name: "Auto Assist Limo", url: "https://apps.apple.com/in/app/auto-assist-limo/id6475956973", image: "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/df/2f/3f/df2f3f3f-3f3f-3f3f-3f3f-3f3f3f3f3f3f/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/246x0w.webp", category: "Our Apps" },
-    { name: "Auto Assist Driver", url: "https://play.google.com/store/apps/details?id=com.autoassist.driverapp", image: "https://play-lh.googleusercontent.com/8P2P5j2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k2k", category: "Our Apps" },
+    { name: "Fancee User", url: "https://play.google.com/store/apps/details?id=com.fancee.user", image: "/logo.png", category: "Our Apps" },
+    { name: "Fancee Celebrity", url: "https://play.google.com/store/apps/details?id=com.fancee.celebrity", image: "/logo.png", category: "Our Apps" },
+    { name: "CityExpressKart Delivery", url: "https://play.google.com/store/apps/details?id=com.cityexpresskart.delivery", image: "/logo.png", category: "Our Apps" },
+    { name: "Oorkart", url: "https://apps.apple.com/in/app/oorkart/id6475118165", image: "/logo.png", category: "Our Apps" },
+    { name: "Oorkart Seller", url: "https://apps.apple.com/in/app/oorkart-seller/id6475118015", image: "/logo.png", category: "Our Apps" },
+    { name: "Auto Assist Limo", url: "https://apps.apple.com/in/app/auto-assist-limo/id6475956973", image: "/logo.png", category: "Our Apps" },
+    { name: "Auto Assist Driver", url: "https://play.google.com/store/apps/details?id=com.autoassist.driverapp", image: "/logo.png", category: "Our Apps" },
 
     // Digital Marketing (Ads Results)
-    { name: "Google Ads Dashboard Result 1", url: "#", image: "https://webdesino.com/wp-content/uploads/2025/07/6.png", category: "Digital Marketing" },
-    { name: "Google Ads Dashboard Result 2", url: "#", image: "https://webdesino.com/wp-content/uploads/2025/07/5.png", category: "Digital Marketing" },
-    { name: "Google Ads Dashboard Result 3", url: "#", image: "https://webdesino.com/wp-content/uploads/2025/07/4-1.png", category: "Digital Marketing" },
-    { name: "Google Ads Dashboard Result 4", url: "#", image: "https://webdesino.com/wp-content/uploads/2025/07/3-1.png", category: "Digital Marketing" },
+    { name: "Google Ads Dashboard Result 1", url: "#", image: "uploads/2025/07/6.png", category: "Digital Marketing" },
+    { name: "Google Ads Dashboard Result 2", url: "#", image: "uploads/2025/07/5.png", category: "Digital Marketing" },
+    { name: "Google Ads Dashboard Result 3", url: "#", image: "uploads/2025/07/4-1.png", category: "Digital Marketing" },
+    { name: "Google Ads Dashboard Result 4", url: "#", image: "uploads/2025/07/3-1.png", category: "Digital Marketing" },
     
     // Digital Marketing (SMM Portfolio)
     { name: "Bookbuzzz Instagram", url: "https://www.instagram.com/bookbuzzz.insta/", image: "https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png", category: "Digital Marketing" },
@@ -499,7 +499,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "November 21, 2025",
       category: "Digital Marketing",
       excerpt: "In today’s highly competitive digital world, every business—whether it’s a new startup or an established brand—needs a strong online presence. But for founders juggling product...",
-      image: "https://webdesino.com/wp-content/uploads/2025/11/Social-Media-Agency-In-South-Africa-1024x643-1.jpeg",
+      image: "uploads/2025/11/Social-Media-Agency-In-South-Africa-1024x643-1.jpeg",
       content: `
         <p>In today’s highly competitive digital world, every business—whether it’s a new startup or an established brand—needs a strong online presence. But for founders juggling product development, operations, sales, and customer support, marketing often becomes the most ignored part. This is where WebDesino, a trusted digital growth partner, comes in.</p>
         <p>From <a href="https://webdesino.com/social-media-management/">social media marketing agency services in South Delhi</a> to <a href="http://website%20development%20services%20in%20gurgaon%20delhi/">website development in Gurgaon</a> & Delhi NCR, and PPC campaign management for startups in Delhi, WebDesino offers everything a business needs to scale in the digital era.</p>
@@ -549,7 +549,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "November 20, 2025",
       category: "Digital Marketing",
       excerpt: "Delhi is one of the fastest-growing business hubs in India. Whether it’s a local shop in Laxmi Nagar, a startup in Dwarka, or a service...",
-      image: "https://webdesino.com/wp-content/uploads/2025/11/seo-1024x523.jpg",
+      image: "uploads/2025/11/seo-1024x523.jpg",
       content: `
         <p>Delhi is one of the fastest-growing business hubs in India. Whether it’s a local shop in Laxmi Nagar, a startup in Dwarka, or a service business in Rohini—every brand wants visibility, customers, and growth. And in this crowded marketplace, <a href="https://webdesino.com/digital-marketing-services/">digital marketing in Delhi</a> has become the backbone of business success. But with hundreds of agencies promising results, small businesses often struggle to find a trusted team that actually delivers value at an affordable price.</p>
         <p>This is where WebDesino stands out. Known for offering <a href="https://webdesino.com/seo-services/">SEO services</a>, website design in Delhi NCR, and complete digital marketing support at small-business-friendly pricing, WebDesino has become a go-to partner for brands that want real growth—not just big promises.</p>
@@ -630,7 +630,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "November 19, 2025",
       category: "Digital Marketing",
       excerpt: "Delhi has become a fast-growing digital hub where businesses compete every single day for online visibility, customer engagement, and brand trust. From small startups in...",
-      image: "https://webdesino.com/wp-content/uploads/2025/11/affordable-seo-services-1024x576.png",
+      image: "uploads/2025/11/affordable-seo-services-1024x576.png",
       content: `
         <p>Delhi has become a fast-growing digital hub where businesses compete every single day for online visibility, customer engagement, and brand trust. From small startups in Laxmi Nagar to established brands in Connaught Place and South Delhi, every business is now shifting towards digital transformation. This sudden shift has made <a href="https://webdesino.com/digital-marketing-services/">digital marketing in Delhi</a> one of the most in-demand services—and choosing the right agency determines how fast your business grows online.</p>
         <p>In this environment, WebDesino, a trusted digital marketing and <a href="https://webdesino.com/seo-services/">SEO agency in Delhi</a>, is helping businesses build strong online identities, generate leads, and achieve long-term growth through strategic, data-driven marketing.</p>
@@ -694,7 +694,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "November 18, 2025",
       category: "Digital Marketing",
       excerpt: "In 2026, digital marketing in Delhi has completely transformed. Businesses are no longer competing only for visibility—they are competing for attention, trust, and long-term brand...",
-      image: "https://webdesino.com/wp-content/uploads/2025/11/Digital-Marketing-in-Delhi.jpg",
+      image: "uploads/2025/11/Digital-Marketing-in-Delhi.jpg",
       content: `
         <p>In 2026, digital marketing in Delhi has completely transformed. Businesses are no longer competing only for visibility—they are competing for attention, trust, and long-term brand authority. With rapid changes in consumer behavior, AI-driven searches, and smarter Google algorithms, companies now require a digital partner who understands modern marketing from the inside out. This is where WebDesino, one of the most reliable names in digital marketing, SEO, and <a href="https://webdesino.com/website-designing/">website design in Delhi NCR</a>, is making a strong impact.</p>
         
@@ -741,7 +741,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "November 17, 2025",
       category: "Digital Marketing",
       excerpt: "The digital landscape in 2026 is more competitive, fast-moving, and algorithm-driven than ever before. Brands across Delhi NCR—especially startups and local businesses—are focusing heavily on...",
-      image: "https://webdesino.com/wp-content/uploads/2025/11/Social-Media-Agency-In-South-Africa-1024x643-1.jpeg",
+      image: "uploads/2025/11/Social-Media-Agency-In-South-Africa-1024x643-1.jpeg",
       content: `
         <p>The digital landscape in 2026 is more competitive, fast-moving, and algorithm-driven than ever before. Brands across Delhi NCR—especially startups and local businesses—are focusing heavily on online visibility, customer engagement, and performance-driven marketing. With platforms like Instagram, YouTube Shorts, Google Ads, and AI-powered search dominating consumer behavior, having the right digital partner can make or break your business growth.</p>
         <p>This is where WebDesino stands out as one of the most reliable and future-ready digital agencies. From being a creative <a href="https://webdesino.com/social-media-management/">social media marketing agency in South Delhi</a> to offering high-performance website development services in Gurgaon, Delhi NCR, and conversion-focused <a href="https://webdesino.com/ppc-campaign-management-in-delhi-for-startups/">PPC campaign management in Delhi for startups</a>, WebDesino brings everything under one roof.</p>
@@ -796,6 +796,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "November 15, 2025",
       category: "Digital Marketing",
       excerpt: "In today’s fast-moving digital world, every business—whether a small shop in Lajpat Nagar or a startup in Gurgaon—needs strong online visibility. Delhi NCR has become...",
+      image: "uploads/2025/11/digital-marketing-1.jpg.optimal.jpg",
     },
     {
       id: "7",
@@ -804,6 +805,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "November 13, 2025",
       category: "Digital Marketing",
       excerpt: "If you’re a small business owner in Delhi NCR, you’ve probably wondered — “How can I compete with bigger brands online without spending a fortune?”...",
+      image: "uploads/2025/11/best-seo-company-delhi-india.jpg",
     },
     {
       id: "8",
@@ -812,6 +814,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "November 12, 2025",
       category: "Digital Marketing",
       excerpt: "In today’s competitive digital world, having a strong online presence is not an option — it’s a necessity. Whether you run a small local business...",
+      image: "uploads/2025/12/No-1.-SEO-Company-in-Delhi-NCR-01-01-scaled-1200x672-1.jpg",
     },
     {
       id: "9",
@@ -820,6 +823,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "November 11, 2025",
       category: "Digital Marketing",
       excerpt: "In today’s competitive market, every small business dreams of standing out and building a strong online presence. Whether you run a local store in South...",
+      image: "uploads/2025/11/affordable-seo-services.png",
     },
     {
       id: "10",
@@ -828,6 +832,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "November 10, 2025",
       category: "Digital Marketing",
       excerpt: "In today’s competitive online world, having a strong digital presence is no longer optional — it’s essential. Whether you’re a small business owner, a growing...",
+      image: "uploads/2025/11/Digital-Marketing-in-Delhi.jpg",
     },
     {
       id: "11",
@@ -836,6 +841,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "November 5, 2025",
       category: "Digital Marketing",
       excerpt: "In today’s fast-paced digital world, every business—big or small—needs a strong online presence to stay ahead of the competition. Whether you’re running a startup, a...",
+      image: "uploads/2025/11/digital-marketing-1.jpg.optimal.jpg",
     },
     {
       id: "12",
@@ -844,6 +850,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "November 3, 2025",
       category: "Digital Marketing",
       excerpt: "In today’s competitive world, every business — whether a small local store or a fast-growing startup — needs a strong online presence. If you’re searching...",
+      image: "uploads/2025/11/digital-marketing-2.jpg.optimal.jpg",
     },
     {
       id: "13",
@@ -852,6 +859,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "November 1, 2025",
       category: "Digital Marketing",
       excerpt: "In the heart of India’s hustle — Delhi NCR — every street has a story and every brand wants to be heard. But in a...",
+      image: "uploads/2025/11/major-components-of-digital-marketing.png",
     },
     {
       id: "14",
@@ -860,6 +868,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "October 18, 2025",
       category: "Digital Marketing",
       excerpt: "In today’s competitive world, small businesses need a strong digital presence to grow, attract customers, and stay ahead. That’s where WebDesino, a trusted name in...",
+      image: "uploads/2025/11/affordable-seo-services.png",
       content: `
         <p>In today’s competitive world, small businesses need a strong digital presence to grow, attract customers, and stay ahead. That’s where WebDesino, a trusted name in <a href="https://webdesino.com/digital-marketing-services/" class="text-[#02066F] hover:underline">affordable digital marketing services in Delhi</a>, comes in. With years of expertise and a passion for helping startups and local brands, WebDesino empowers small businesses to compete with big names online — all without breaking the bank.</p>
 
@@ -973,6 +982,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "October 17, 2025",
       category: "Digital Marketing",
       excerpt: "In today’s digital-first world, having a professional website is no longer optional; it’s essential. For businesses in Delhi NCR, finding the right website design company...",
+      image: "uploads/2025/10/Website-Design-Delhi.jpg",
     },
     {
       id: "16",
@@ -981,6 +991,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "October 17, 2025",
       category: "Digital Marketing",
       excerpt: "In today’s fast-paced digital world, having an online presence is essential for every business. Whether you run a small shop in Dwarka or manage a...",
+      image: "uploads/2025/10/SEO-Agency-Delhi.jpeg",
     },
     {
       id: "17",
@@ -989,6 +1000,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "October 15, 2025",
       category: "Digital Marketing",
       excerpt: "In today’s online-first world, having a strong digital presence is no longer optional — it’s essential. Businesses in Delhi NCR and nearby areas need a...",
+      image: "uploads/2025/10/website-development-company-1024x538-1.webp",
     },
     {
       id: "18",
@@ -997,6 +1009,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "October 10, 2025",
       category: "Digital Marketing",
       excerpt: "When local businesses—from cafés to clinics to retailers—in Delhi NCR seek growth, partnering with an agency that understands both technical strength and local nuances becomes...",
+      image: "uploads/2025/11/best-seo-company-delhi-india.jpg",
     },
     {
       id: "19",
@@ -1005,6 +1018,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "October 9, 2025",
       category: "Digital Marketing",
       excerpt: "In today’s competitive business landscape, small businesses in Delhi face the challenge of standing out online while keeping costs manageable. This is where affordable digital...",
+      image: "uploads/2025/11/affordable-seo-services.png",
     },
     {
       id: "20",
@@ -1013,6 +1027,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "October 7, 2025",
       category: "Digital Marketing",
       excerpt: "In the bustling districts of Delhi such as Moti Nagar, Palam, Sadar Bazar Cantonment, Shankar Vihar, and Vasant Vihar, small businesses often face a common...",
+      image: "uploads/2025/11/affordable-seo-services.png",
     },
     {
       id: "21",
@@ -1021,6 +1036,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "October 6, 2025",
       category: "Digital Marketing",
       excerpt: "Transforming Small Businesses with Expert Website Design and Affordable Digital Marketing In the bustling economic landscape of Delhi NCR, standing out in the digital crowd...",
+      image: "uploads/2025/10/Digital-Marketing-in-Delhi.jpg",
     },
     {
       id: "22",
@@ -1029,6 +1045,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "October 4, 2025",
       category: "Digital Marketing",
       excerpt: "In today’s competitive landscape, businesses in Delhi and NCR cannot rely only on traditional methods to grow. With the majority of consumers spending time online—whether...",
+      image: "uploads/2025/10/Digital-Marketing-in-Delhi.jpg",
     },
     {
       id: "23",
@@ -1037,6 +1054,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "October 3, 2025",
       category: "Digital Marketing",
       excerpt: "In 2025, businesses in Delhi NCR are realizing more than ever that having an online presence is not optional—it’s essential. From startups to established cafes...",
+      image: "uploads/2025/09/The-Ultimate-Guide-to-Ecommerce-Website-Development-in-2023jpg.webp",
     },
     {
       id: "24",
@@ -1045,6 +1063,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "September 29, 2025",
       category: "Digital Marketing",
       excerpt: "In today’s fast-changing digital landscape, a strong online presence has become the backbone of business growth. From startups to established enterprises, companies are realizing that...",
+      image: "uploads/2025/10/website-development-company-1024x538-1.webp",
     },
     {
       id: "25",
@@ -1053,6 +1072,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "September 27, 2025",
       category: "Digital Marketing",
       excerpt: "Digital marketing has become the backbone of modern business growth, and nowhere is it more evident than in Delhi. With thousands of startups, small businesses,...",
+      image: "uploads/2025/10/Digital-Marketing-in-Delhi.jpg",
     },
     {
       id: "26",
@@ -1061,6 +1081,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "September 26, 2025",
       category: "Digital Marketing",
       excerpt: "Digital marketing has become the lifeline for small businesses that want to grow and compete in today’s fast-moving market. In a city like Delhi NCR,...",
+      image: "uploads/2025/11/affordable-seo-services.png",
     },
     {
       id: "27",
@@ -1069,6 +1090,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "September 25, 2025",
       category: "Digital Marketing",
       excerpt: "Why Choosing the Right SEO Agency in Delhi Matters In today’s digital age, businesses are no longer judged by just their products or services but...",
+      image: "uploads/2025/10/SEO-Agency-Delhi.jpeg",
     },
     {
       id: "28",
@@ -1077,6 +1099,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "September 24, 2025",
       category: "Digital Marketing",
       excerpt: "In today’s digital-first economy, a brand without an online presence is almost invisible. Whether you are a startup trying to create an impact, a retail...",
+      image: "uploads/2025/10/Digital-Marketing-in-Delhi.jpg",
     },
     {
       id: "29",
@@ -1085,6 +1108,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "September 23, 2025",
       category: "Digital Marketing",
       excerpt: "In today’s digital-first world, small businesses in Delhi are no longer competing only with local shops but also with online brands. Having a strong digital...",
+      image: "uploads/2025/11/affordable-seo-services.png",
     },
     {
       id: "30",
@@ -1093,6 +1117,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "September 22, 2025",
       category: "Digital Marketing",
       excerpt: "In today’s fast-paced digital world, having an online presence is no longer optional—it’s essential. For businesses in Delhi and NCR, competition is fierce across industries.",
+      image: "uploads/2025/10/Digital-Marketing-in-Delhi.jpg",
     },
     {
       id: "31",
@@ -1101,6 +1126,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "September 18, 2025",
       category: "Digital Marketing",
       excerpt: "In today’s digital-first world, businesses can no longer rely only on offline sales and word of mouth. Whether you run a fashion store, a homegrown...",
+      image: "uploads/2025/09/The-Ultimate-Guide-to-Ecommerce-Website-Development-in-2023jpg.webp",
     },
     {
       id: "32",
@@ -1109,6 +1135,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "September 17, 2025",
       category: "Digital Marketing",
       excerpt: "In today’s fast-paced business world, digital marketing in Delhi has become the backbone of growth for startups, small businesses, and established enterprises alike. With millions...",
+      image: "uploads/2025/10/Digital-Marketing-in-Delhi.jpg",
     },
     {
       id: "33",
@@ -1117,6 +1144,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "September 16, 2025",
       category: "Digital Marketing",
       excerpt: "In today’s fast-paced digital world, every business—whether a café in South Delhi, a startup in Gurgaon, or a small store in Old Delhi—needs a strong...",
+      image: "uploads/2025/10/Digital-Marketing-in-Delhi.jpg",
     },
     {
       id: "34",
@@ -1125,6 +1153,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "August 11, 2024",
       category: "Uncategorized",
       excerpt: "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!",
+      image: "uploads/2025/10/Digital-Marketing-in-Delhi.jpg",
     },
     {
       id: "35",
@@ -1133,6 +1162,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "April 22, 2024",
       category: "Blog",
       excerpt: "Saepe dolor neque. Repudiandae voluptatibus recusandae. Officiis vero nostrum. Eum voluptatibus animi.",
+      image: "uploads/2025/10/SEO-Agency-Delhi.jpeg",
     },
     {
       id: "36",
@@ -1141,6 +1171,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "April 22, 2024",
       category: "Blog",
       excerpt: "Dolorem. Quibusdam cumque.",
+      image: "uploads/2025/10/Website-Design-Delhi.jpg",
     },
     {
       id: "37",
@@ -1149,6 +1180,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "April 22, 2024",
       category: "Blog",
       excerpt: "Distinctio sequi autem.",
+      image: "uploads/2025/10/digital-marketing-manager.jpg",
     },
     {
       id: "38",
@@ -1157,6 +1189,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "April 22, 2024",
       category: "Blog",
       excerpt: "Aut aspernatur voluptas.",
+      image: "uploads/2025/10/What_is_digital_marketing.avif",
     },
     {
       id: "39",
@@ -1165,6 +1198,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "April 22, 2024",
       category: "Blog",
       excerpt: "Qui voluptatum corrupti dolorem dolores et aut cum. Sit iste laborum qui. Expedita dolorem dolorem qui Et qui qui architecto provident itaque Aut ipsam veniam",
+      image: "/location-story.png",
     },
     {
       id: "40",
@@ -1173,6 +1207,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "April 22, 2024",
       category: "Blog",
       excerpt: "Maxime blanditiis aut qui.",
+      image: "/location-hero.png",
     },
     {
       id: "41",
@@ -1181,6 +1216,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "April 22, 2024",
       category: "Blog",
       excerpt: "Culpa ipsa repellendus magni. Molestiae temporibus quisquam atque iusto et sit perferendis. Aut similique quia dolor facere sunt doloremque alias Ut qui quos et enim",
+      image: "/location-service-1.png",
     },
     {
       id: "42",
@@ -1189,6 +1225,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "April 22, 2024",
       category: "Blog",
       excerpt: "Voluptate nam et esse. Eos est dolorum nam consequatur enim doloribus Sint ipsa accusamus earum rem Ea voluptas et dicta aut et Iusto eos ad",
+      image: "/location-service-2.png",
     },
     {
       id: "43",
@@ -1197,6 +1234,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "April 22, 2024",
       category: "Blog",
       excerpt: "Quia earum.",
+      image: "/location-service-3.png",
     },
     {
       id: "44",
@@ -1205,6 +1243,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "April 22, 2024",
       category: "Blog",
       excerpt: "Nisi ullam soluta ex rem. Vel vel nemo eos corporis. Qui rerum alias pariatur alias Vel dolor earum Mollitia ullam omnis aut aut rem Debitis",
+      image: "/location-story.png",
     },
     {
       id: "45",
@@ -1213,6 +1252,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "April 22, 2024",
       category: "Blog",
       excerpt: "Excepturi doloremque consequatur ea saepe. Placeat temporibus voluptatem deleniti ut non. Qui nihil iure expedita impedit molestiae dolore dolorum",
+      image: "/location-hero.png",
     },
     {
       id: "46",
@@ -1221,6 +1261,7 @@ export const getBlogPosts = (): BlogPost[] => {
       date: "April 22, 2024",
       category: "Blog",
       excerpt: "Qui sapiente illo repellendus vel vero In ut inventore animi perspiciatis. Deserunt ipsam consequatur exercitationem quibusdam ipsa odit eius. Nesciunt et illum sit animi Nulla",
+      image: "/location-service-1.png",
     },
   ];
 };

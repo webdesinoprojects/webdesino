@@ -108,7 +108,7 @@ export default async function AboutPage() {
               <div key={idx} className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100">
                 <div className="aspect-[4/5] relative bg-slate-200 overflow-hidden">
                    <Image
-                      src={member.image}
+                      src={getStorageUrl(member.image)}
                       alt={member.name}
                       fill
                       className="object-contain group-hover:scale-105 transition-transform duration-500"
@@ -137,8 +137,8 @@ export default async function AboutPage() {
                 </p>
              </div>
              <div className="lg:w-1/2 flex justify-center">
-                <div className="w-full max-w-md aspect-video bg-[#02066F]/5 rounded-2xl flex items-center justify-center">
-                   <TrendingUp size={64} className="text-[#02066F]/40" />
+                <div className="w-full max-w-md aspect-video bg-[#02066F]/5 rounded-2xl flex items-center justify-center relative overflow-hidden">
+                   <Image src={getStorageUrl("/location-service-1.png")} alt="Our Story" fill className="object-contain" />
                 </div>
              </div>
           </div>
@@ -153,8 +153,8 @@ export default async function AboutPage() {
                 </p>
              </div>
              <div className="lg:w-1/2 flex justify-center">
-                <div className="w-full max-w-md aspect-video bg-[#02066F]/5 rounded-2xl flex items-center justify-center">
-                   <Target size={64} className="text-[#02066F]/40" />
+                <div className="w-full max-w-md aspect-video bg-[#02066F]/5 rounded-2xl flex items-center justify-center relative overflow-hidden">
+                   <Image src={getStorageUrl("/location-service-2.png")} alt="Who We Are" fill className="object-contain" />
                 </div>
              </div>
           </div>
@@ -169,8 +169,8 @@ export default async function AboutPage() {
                 </p>
              </div>
              <div className="lg:w-1/2 flex justify-center">
-                <div className="w-full max-w-md aspect-video bg-[#02066F]/5 rounded-2xl flex items-center justify-center">
-                   <Award size={64} className="text-[#02066F]/40" />
+                <div className="w-full max-w-md aspect-video bg-[#02066F]/5 rounded-2xl flex items-center justify-center relative overflow-hidden">
+                   <Image src={getStorageUrl("/location-service-3.png")} alt="What We Do" fill className="object-contain" />
                 </div>
              </div>
           </div>

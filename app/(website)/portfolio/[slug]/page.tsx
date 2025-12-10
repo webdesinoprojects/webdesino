@@ -1,4 +1,5 @@
 import { getPortfolioProjects } from "@/lib/data";
+import { getStorageUrl } from "@/lib/utils";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -55,9 +56,9 @@ export async function generateMetadata({
       type: "article",
       images: [
         {
-          url: project.image.startsWith("http")
-            ? project.image
-            : `https://webdesino.com${project.image}`,
+          url: getStorageUrl(project.image).startsWith("http")
+            ? getStorageUrl(project.image)
+            : `https://webdesino.com${getStorageUrl(project.image)}`,
           width: 1200,
           height: 630,
           alt: `${project.title} - Webdesino Portfolio Project`,
@@ -69,9 +70,9 @@ export async function generateMetadata({
       title,
       description,
       images: [
-        project.image.startsWith("http")
-          ? project.image
-          : `https://webdesino.com${project.image}`,
+        getStorageUrl(project.image).startsWith("http")
+          ? getStorageUrl(project.image)
+          : `https://webdesino.com${getStorageUrl(project.image)}`,
       ],
     },
     alternates: {
@@ -98,9 +99,9 @@ export default function PortfolioProjectPage({
     "@type": "CreativeWork",
     name: project.title,
     description: project.fullDescription || project.description,
-    image: project.image.startsWith("http")
-      ? project.image
-      : `https://webdesino.com${project.image}`,
+    image: getStorageUrl(project.image).startsWith("http")
+      ? getStorageUrl(project.image)
+      : `https://webdesino.com${getStorageUrl(project.image)}`,
     creator: {
       "@type": "Organization",
       name: "Webdesino",
@@ -153,7 +154,7 @@ export default function PortfolioProjectPage({
             <div className="relative aspect-video rounded-xl overflow-hidden shadow-2xl">
               {project.image ? (
                 <Image
-                  src={project.image}
+                  src={getStorageUrl(project.image)}
                   alt={`${project.title} - Webdesino Portfolio Project`}
                   fill
                   className="object-contain"

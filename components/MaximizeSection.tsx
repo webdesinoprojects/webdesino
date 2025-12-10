@@ -2,7 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import NextImage from "next/image";
 import { ArrowRight, TrendingUp, Award, Zap, Rocket, Star, Trophy } from "lucide-react";
+import { getStorageUrl } from "@/lib/utils";
+
+const StoryImage = getStorageUrl("/location-story.png");
 
 const certifications = [
   { name: "Google Partner", icon: <TrendingUp className="w-6 h-6" />, description: "Certified Partner Delhi NCR" },
@@ -22,9 +26,10 @@ export default function MaximizeSection() {
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-gradient-radial from-[#02066F]/10 to-transparent rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          {/* Main Heading with Animated Gradient Text */}
-          <div className="mb-0 text-center lg:text-left">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
+            {/* Main Heading with Animated Gradient Text */}
+            <div className="mb-0 text-center lg:text-left">
             <div className="inline-block px-4 py-2 bg-[#02066F]/10 rounded-full mb-6 animate-fade-in">
               <span className="text-sm font-bold text-[#02066F] uppercase tracking-wide flex items-center gap-2">
                 <Rocket className="w-4 h-4" />
@@ -73,6 +78,22 @@ export default function MaximizeSection() {
               </Link>
             </div>
           </div>
+
+          {/* Right Column - Image */}
+          <div className="relative hidden lg:flex items-center justify-center animate-fade-in-right">
+            <div className="relative w-full max-w-md rounded-2xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-500 border-4 border-white/20 group">
+              <NextImage 
+                src={StoryImage} 
+                alt="Digital Growth" 
+                width={600} 
+                height={450} 
+                className="object-contain w-full h-auto transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+            <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-[#02066F]/10 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute -top-10 -right-10 w-32 h-32 bg-blue-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+          </div>
+        </div>
 
           {/* Trusted Certifications & Recognition */}
           <div className="relative animate-scale-in" style={{ animationDelay: '0.6s' }}>
