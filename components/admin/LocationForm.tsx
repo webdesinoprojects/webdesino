@@ -24,6 +24,7 @@ interface Content {
     ctaLink?: string;
     secondaryCtaText?: string;
     secondaryCtaLink?: string;
+    image?: string;
   };
   story?: {
     title?: string;
@@ -274,6 +275,31 @@ export default function LocationForm({ location }: LocationFormProps) {
                   onChange={(e) => updateHero("ctaLink", e.target.value)}
                 />
               </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label>Secondary CTA Text</Label>
+                <Input
+                  value={content.hero?.secondaryCtaText || ""}
+                  onChange={(e) => updateHero("secondaryCtaText", e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label>Secondary CTA Link</Label>
+                <Input
+                  value={content.hero?.secondaryCtaLink || ""}
+                  onChange={(e) => updateHero("secondaryCtaLink", e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <Label>Hero Image</Label>
+              <ImageUpload 
+                name="hero_image" 
+                label="Upload Hero Image"
+                defaultValue={content.hero?.image}
+                onUploadComplete={(url: string) => updateHero("image", url)}
+              />
             </div>
           </CardContent>
         </Card>
