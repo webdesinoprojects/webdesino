@@ -6,8 +6,8 @@ export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
   // Define paths that are protected (dashboard, profile, etc.)
-  // Everything under /admin except the root /admin (which is login)
-  const isProtectedPath = path.startsWith("/admin/") && path !== "/admin";
+  // Everything under /admin except the root /admin (login) and /admin/forgot-password
+  const isProtectedPath = path.startsWith("/admin/") && path !== "/admin" && path !== "/admin/forgot-password";
   
   // Define paths that are for public auth (login page is /admin)
   const isAuthPath = path === "/admin";

@@ -67,14 +67,14 @@ export default function LocalAreasSection() {
 
 				{/* Map Container */}
 				<div className="w-full h-[400px] lg:h-[500px] rounded-2xl overflow-hidden shadow-xl border border-white/20 glass mb-12 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-					<iframe 
-						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224345.83923192776!2d77.0688975472578!3d28.52728034389636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x37205b715389640!2sDelhi!5e0!3m2!1sen!2sin!4v1701945000000!5m2!1sen!2sin" 
-						width="100%" 
-						height="100%" 
+					<iframe
+						src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d437.42263208577924!2d77.078731!3d28.708156!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d07a48393eb81%3A0x1ad6b22a2676a6e9!2sRohit%20Tiwari%20-%20Web%20Developer%20and%20designer!5e0!3m2!1sen!2sus!4v1763955823882!5m2!1sen!2sus"
+						width="100%"
+						height="100%"
 						style={{ border: 0 }}
-						allowFullScreen 
+						allowFullScreen
 						loading="lazy"
-						title="WebDesino Service Areas"
+						referrerPolicy="no-referrer-when-downgrade"
 					></iframe>
 				</div>
 				{/* Location Links */}

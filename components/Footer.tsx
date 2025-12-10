@@ -192,41 +192,7 @@ export default function Footer({ locations = [] }: FooterProps) {
               </ul>
             </div>
             
-            <div className="mt-8">
-              <h4 className="text-lg font-bold mb-4 text-white">Our Offices</h4>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <a href="https://share.google/1oqOSK2n3UvhKbHu5" target="_blank" rel="noopener noreferrer" className="text-gray-200 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
-                    Krishan Vihar
-                  </a>
-                </li>
-                <li>
-                  <a href="https://share.google/7bfsoSDMcdKosq9H4" target="_blank" rel="noopener noreferrer" className="text-gray-200 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
-                    Uttam Nagar
-                  </a>
-                </li>
-                <li>
-                  <a href="https://share.google/HamoWu7AFPzS3TEoh" target="_blank" rel="noopener noreferrer" className="text-gray-200 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
-                    Kamla Nagar
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.google.com/maps/place/Karol+Bagh,+Delhi" target="_blank" rel="noopener noreferrer" className="text-gray-200 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
-                    Karol Bagh
-                  </a>
-                </li>
-                <li>
-                  <a href="https://share.google/c7gS6rqXBDvqMimZ8" target="_blank" rel="noopener noreferrer" className="text-gray-200 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
-                    Hauz Khas
-                  </a>
-                </li>
-                <li>
-                  <a href="https://share.google/OEllDuOFBQkSiWfF6" target="_blank" rel="noopener noreferrer" className="text-gray-200 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
-                    DLF Camellias
-                  </a>
-                </li>
-              </ul>
-            </div>
+            {/* Our Offices moved to Services column */}
 
           </div>
 
@@ -301,6 +267,44 @@ export default function Footer({ locations = [] }: FooterProps) {
                     </ul>
                   </div>
                 ))}
+
+                <div className="mt-8">
+                  <h5 className="font-semibold text-white mb-3 text-sm uppercase tracking-wider border-b border-white/10 pb-1">
+                    Our Locations
+                  </h5>
+                  <ul className="space-y-1.5 text-sm">
+                    <li>
+                      <a href="https://share.google/1oqOSK2n3UvhKbHu5" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
+                        Krishan Vihar
+                      </a>
+                    </li>
+                    <li>
+                      <a href="https://share.google/7bfsoSDMcdKosq9H4" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
+                        Uttam Nagar
+                      </a>
+                    </li>
+                    <li>
+                      <a href="https://share.google/HamoWu7AFPzS3TEoh" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
+                        Kamla Nagar
+                      </a>
+                    </li>
+                    <li>
+                      <a href="https://www.google.com/maps/place/Karol+Bagh,+Delhi" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
+                        Karol Bagh
+                      </a>
+                    </li>
+                    <li>
+                      <a href="https://share.google/c7gS6rqXBDvqMimZ8" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
+                        Hauz Khas
+                      </a>
+                    </li>
+                    <li>
+                      <a href="https://share.google/OEllDuOFBQkSiWfF6" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
+                        DLF Camellias
+                      </a>
+                    </li>
+                  </ul>
+                </div>
 
                 {/* Quick Links */}
                 {/* <div className="mt-8">

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { login } from "@/lib/auth-actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -51,7 +52,12 @@ export default function AdminLoginPage() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <div className="flex items-center justify-between">
+                <Label htmlFor="password">Password</Label>
+                <Link href="/admin/forgot-password" className="text-sm text-[#02066F] hover:underline">
+                  Forgot password?
+                </Link>
+              </div>
               <Input 
                 id="password" 
                 name="password" 

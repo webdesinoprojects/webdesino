@@ -15,7 +15,7 @@ export default async function ContactPage() {
   const hero = content.hero || {};
 
   const settings = await prisma.companySettings.findMany();
-  const getSetting = (key: string) => settings.find(s => s.key === key)?.value || "";
+  const getSetting = (key: string, fallback: string) => settings.find(s => s.key === key)?.value || fallback;
 
   return (
     <div className="min-h-screen">
@@ -44,7 +44,7 @@ export default async function ContactPage() {
                 <h2 className="text-2xl font-bold text-[#02066F] mb-6">Contact Information</h2>
                 <div className="space-y-6">
                   <a 
-                    href={`tel:${getSetting('phone').replace(/\s/g, '')}`}
+                    href={`tel:${getSetting('phone', '+91 93108 51557').replace(/\s/g, '')}`}
                     className="flex items-start gap-4 p-4 rounded-xl hover:bg-white/50 transition-all group"
                   >
                     <div className="w-12 h-12 rounded-full bg-[#02066F]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#02066F] group-hover:text-white transition-all">
@@ -52,12 +52,12 @@ export default async function ContactPage() {
                     </div>
                     <div>
                       <h3 className="font-bold text-gray-900 mb-1">Phone</h3>
-                      <p className="text-gray-600">{getSetting('phone')}</p>
+                      <p className="text-gray-600">{getSetting('phone', '+91 93108 51557')}</p>
                     </div>
                   </a>
 
                   <a 
-                    href={`mailto:${getSetting('email')}`}
+                    href={`mailto:${getSetting('email', 'info@webdesino.com')}`}
                     className="flex items-start gap-4 p-4 rounded-xl hover:bg-white/50 transition-all group"
                   >
                     <div className="w-12 h-12 rounded-full bg-[#02066F]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#02066F] group-hover:text-white transition-all">
@@ -65,7 +65,7 @@ export default async function ContactPage() {
                     </div>
                     <div>
                       <h3 className="font-bold text-gray-900 mb-1">Email</h3>
-                      <p className="text-gray-600">{getSetting('email')}</p>
+                      <p className="text-gray-600">{getSetting('email', 'info@webdesino.com')}</p>
                     </div>
                   </a>
 
@@ -76,7 +76,7 @@ export default async function ContactPage() {
                     <div>
                       <h3 className="font-bold text-gray-900 mb-1">Office Address</h3>
                       <p className="text-gray-600">
-                        {getSetting('address')}
+                        {getSetting('address', 'Delhi NCR, India')}
                       </p>
                     </div>
                   </div>
@@ -88,15 +88,15 @@ export default async function ContactPage() {
                 <div className="space-y-2 text-gray-600">
                   <div className="flex justify-between">
                     <span>Monday - Friday:</span>
-                    <span className="font-semibold">{getSetting('businessHours_weekdays')}</span>
+                    <span className="font-semibold">{getSetting('businessHours_weekdays', '9:00 AM - 6:00 PM')}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Saturday:</span>
-                    <span className="font-semibold">{getSetting('businessHours_saturday')}</span>
+                    <span className="font-semibold">{getSetting('businessHours_saturday', '10:00 AM - 4:00 PM')}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Sunday:</span>
-                    <span className="font-semibold">{getSetting('businessHours_sunday')}</span>
+                    <span className="font-semibold">{getSetting('businessHours_sunday', 'Closed')}</span>
                   </div>
                 </div>
                 <p className="mt-4 text-sm text-gray-500">
