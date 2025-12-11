@@ -1,15 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
-import "../globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BottomNav from "@/components/BottomNav";
-import {Analytics} from "@vercel/analytics/react";
-import { generateOrganizationSchema } from "@/lib/seo";
 import ContactWidget from "@/components/ContactWidget";
 import prisma from "@/lib/prisma";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const viewport: Viewport = {
   themeColor: '#ffffff',
@@ -75,13 +69,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
+export default async function WebsiteLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const jsonLd = generateOrganizationSchema();
-  
   const locations = await prisma.locationPage.findMany({
     select: {
       location: true,
@@ -98,22 +90,13 @@ export default async function RootLayout({
   }));
 
   return (
-    <html lang="en">
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-      </head>
-      <body className={inter.className}>
-        <Navbar />
-        {children}
-        <Analytics />
-        <Footer locations={footerLocations} />
-        <BottomNav />
-        <ContactWidget />
-      </body>
-    </html>
+    <>
+      <Navbar />
+      {children}
+      <Footer locations={footerLocations} />
+      <BottomNav />
+      <ContactWidget />
+    </>
   );
 }
 
