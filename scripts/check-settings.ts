@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 async function checkSettings() {
   const settings = await prisma.companySettings.findMany();
-  console.log('Current Settings:', settings);
+  //console.log('Current Settings:', settings);
 }
 
 checkSettings()

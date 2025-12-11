@@ -12,4 +12,4 @@ const locations = JSON.parse(fs.readFileSync(seedPath, 'utf8'));
 const tsContent = `export const footerLocations = ${JSON.stringify(locations, null, 2)};`;
 
 fs.writeFileSync(tsPath, tsContent);
-console.log('Updated lib/locations-data.ts');
+//console.log('Updated lib/locations-data.ts');

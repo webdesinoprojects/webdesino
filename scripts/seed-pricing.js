@@ -192,7 +192,7 @@ async function main() {
     },
   });
 
-  console.log('Pricing page seeded');
+  //console.log('Pricing page seeded');
 }
 
 main()

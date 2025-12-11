@@ -23,11 +23,11 @@ async function main() {
   const uploadsDir = path.join(process.cwd(), "public", "uploads");
   
   if (!fs.existsSync(uploadsDir)) {
-    console.log("Uploads directory not found");
+    //console.log("Uploads directory not found");
     return;
   }
 
-  console.log("Scanning uploads directory for migration...");
+  //console.log("Scanning uploads directory for migration...");
   
   const files: string[] = [];
 
@@ -47,7 +47,7 @@ async function main() {
   }
 
   scanDir(uploadsDir);
-  console.log(`Found ${files.length} files to migrate.`);
+  //console.log(`Found ${files.length} files to migrate.`);
 
   let successCount = 0;
   let errorCount = 0;
@@ -64,7 +64,7 @@ async function main() {
     // Note: Supabase storage paths shouldn't start with /
     const storagePath = normalizedPath.startsWith("/") ? normalizedPath.substring(1) : normalizedPath;
 
-    console.log(`Uploading: ${storagePath}`);
+    //console.log(`Uploading: ${storagePath}`);
 
     const { data, error } = await supabase.storage
       .from('images')
@@ -119,9 +119,9 @@ async function main() {
     }
   }
 
-  console.log(`Migration complete.`);
-  console.log(`Success: ${successCount}`);
-  console.log(`Errors: ${errorCount}`);
+  //console.log(`Migration complete.`);
+  //console.log(`Success: ${successCount}`);
+  //console.log(`Errors: ${errorCount}`);
 }
 
 function getMimeType(filename: string): string {

@@ -24,11 +24,11 @@ async function uploadImages() {
   const files = fs.readdirSync(publicDir);
   let uploadedCount = 0;
 
-  console.log(`Found ${files.length} files in public directory.`);
+  //console.log(`Found ${files.length} files in public directory.`);
 
   for (const file of files) {
     if (['.png', '.jpg', '.jpeg', '.svg', '.gif', '.webp'].includes(path.extname(file).toLowerCase())) {
-      console.log(`Uploading ${file}...`);
+      //console.log(`Uploading ${file}...`);
       const filePath = path.join(publicDir, file);
       const fileBuffer = fs.readFileSync(filePath);
 
@@ -42,12 +42,12 @@ async function uploadImages() {
       if (error) {
         console.error(`Error uploading ${file}:`, error.message);
       } else {
-        console.log(`Uploaded ${file}`);
+        //console.log(`Uploaded ${file}`);
         uploadedCount++;
       }
     }
   }
-  console.log(`Migration complete. Uploaded ${uploadedCount} images.`);
+  //console.log(`Migration complete. Uploaded ${uploadedCount} images.`);
 }
 
 function getContentType(filename) {

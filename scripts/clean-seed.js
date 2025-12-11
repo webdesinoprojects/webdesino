@@ -42,4 +42,4 @@ const cleanedLocations = locations.map(loc => {
 });
 
 fs.writeFileSync(seedPath, JSON.stringify(cleanedLocations, null, 2));
-console.log(`Cleaned locations_seed.json. Fixed ${fixedCount} entries.`);
+//console.log(`Cleaned locations_seed.json. Fixed ${fixedCount} entries.`);

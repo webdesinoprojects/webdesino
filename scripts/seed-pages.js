@@ -10,7 +10,7 @@ const pages = [
       hero: {
         title: "About Webdesino",
         subtitle: "Building Your Online Presence. Find a team of Web Developers you can rely on. Every day, we build trust through communication, transparency, and results.",
-        image: "https://vaeoynqqeaoyrgubusvk.supabase.co/storage/v1/object/public/images/rohittiwaribanner.png"
+        image: "/rohittiwaribanner.png"
       },
       sections: [
         {
@@ -67,7 +67,7 @@ async function main() {
       update: {}, // Don't overwrite if exists
       create: page
     });
-    console.log(`Seeded page: ${page.slug}`);
+    //console.log(`Seeded page: ${page.slug}`);
   }
 }
 

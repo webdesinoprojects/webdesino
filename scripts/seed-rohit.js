@@ -238,7 +238,7 @@ async function main() {
     },
   });
 
-  console.log('Rohit Tiwari page seeded');
+  //console.log('Rohit Tiwari page seeded');
 }
 
 main()

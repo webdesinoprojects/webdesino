@@ -110,7 +110,7 @@ async function main() {
     },
   });
 
-  console.log('Refund Policy page seeded');
+  //console.log('Refund Policy page seeded');
 }
 
 main()
