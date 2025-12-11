@@ -1,14 +1,13 @@
-import { cookies } from "next/headers";
-import { verifyToken } from "@/lib/jwt";
+import { createClient } from "@/lib/supabase/server";
 import { SidebarContent } from "@/components/admin/SidebarContent";
 import { MobileSidebar } from "@/components/admin/MobileSidebar";
 
 export default async function AdminDashboardLayout({ children }: { children: React.ReactNode }) {
-  const cookieStore = cookies();
-  const token = cookieStore.get("session")?.value;
-  const session = token ? await verifyToken(token) : null;
-  const userInitial = session?.name ? (session.name as string).charAt(0).toUpperCase() : "A";
-  const userName = session?.name ? (session.name as string) : "Admin";
+  const supabase = createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  
+  const userInitial = user?.email ? user.email.charAt(0).toUpperCase() : "A";
+  const userName = user?.email ? user.email.split('@')[0] : "Admin";
 
   return (
     <div className="flex min-h-screen bg-gray-100">

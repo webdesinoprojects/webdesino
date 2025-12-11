@@ -1,15 +1,16 @@
-import { cookies } from "next/headers";
-import { verifyToken } from "@/lib/jwt";
+import { createClient } from "@/lib/supabase/server";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { redirect } from "next/navigation";
 
 export default async function ProfilePage() {
-  const cookieStore = cookies();
-  const token = cookieStore.get("session")?.value;
-  const session = token ? await verifyToken(token) : null;
+  const supabase = createClient();
+  const { data: { user }, error } = await supabase.auth.getUser();
 
-  if (!session) return null;
+  if (error || !user) {
+    redirect("/admin");
+  }
 
   return (
     <div className="space-y-6">
@@ -21,16 +22,16 @@ export default async function ProfilePage() {
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label>Name</Label>
-            <Input value={session.name as string} disabled />
-          </div>
-          <div className="space-y-2">
             <Label>Email</Label>
-            <Input value={session.email as string} disabled />
+            <Input value={user.email || ""} disabled />
           </div>
           <div className="space-y-2">
             <Label>User ID</Label>
-            <Input value={session.id as string} disabled className="font-mono text-xs" />
+            <Input value={user.id} disabled className="font-mono text-xs" />
+          </div>
+           <div className="space-y-2">
+            <Label>Last Sign In</Label>
+            <Input value={user.last_sign_in_at ? new Date(user.last_sign_in_at).toLocaleString() : "N/A"} disabled />
           </div>
         </CardContent>
       </Card>

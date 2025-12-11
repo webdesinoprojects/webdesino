@@ -1,9 +1,6 @@
 "use server";
 
-import prisma from "@/lib/prisma";
-import { comparePassword } from "@/lib/auth";
-import { signToken } from "@/lib/jwt";
-import { cookies } from "next/headers";
+import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 
 export async function login(formData: FormData) {
@@ -14,49 +11,72 @@ export async function login(formData: FormData) {
     return { success: false, error: "Email and password are required" };
   }
 
-  // Basic validation
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return { success: false, error: "Invalid email format" };
+  const supabase = createClient();
+
+  const { error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
+
+  if (error) {
+    return { success: false, error: error.message };
   }
 
-  if (password.length < 6) {
-    return { success: false, error: "Invalid credentials" };
-  }
-
-  try {
-    const user = await prisma.admin.findUnique({
-      where: { email: email.toLowerCase().trim() },
-    });
-
-    if (!user) {
-      // Use same error message to prevent user enumeration
-      return { success: false, error: "Invalid credentials" };
-    }
-
-    const isValid = await comparePassword(password, user.password);
-
-    if (!isValid) {
-      return { success: false, error: "Invalid credentials" };
-    }
-
-    const token = await signToken({ id: user.id, email: user.email, name: user.name });
-
-    cookies().set("session", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      maxAge: 60 * 60 * 24, // 1 day
-      path: "/",
-    });
-
-    return { success: true };
-  } catch (error) {
-    console.error("Login error:", error);
-    return { success: false, error: "Failed to login. Please try again." };
-  }
+  return { success: true };
 }
 
 export async function logout() {
-  cookies().delete("session");
-  redirect("/admin/login");
+  const supabase = createClient();
+  await supabase.auth.signOut();
+  redirect("/admin");
 }
+
+export async function forgotPassword(formData: FormData) {
+  const email = formData.get("email") as string;
+
+  if (!email) {
+    return { success: false, error: "Email is required" };
+  }
+
+  const supabase = createClient();
+  
+  // Get the site URL from environment or default to localhost
+  const origin = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${origin}/auth/callback?next=/admin/reset-password`,
+  });
+
+  if (error) {
+    return { success: false, error: error.message };
+  }
+
+  return { success: true };
+}
+
+export async function updatePassword(formData: FormData) {
+  const password = formData.get("password") as string;
+  const confirmPassword = formData.get("confirmPassword") as string;
+
+  if (!password || !confirmPassword) {
+    return { success: false, error: "Password and confirm password are required" };
+  }
+
+  if (password !== confirmPassword) {
+    return { success: false, error: "Passwords do not match" };
+  }
+
+  if (password.length < 6) {
+    return { success: false, error: "Password must be at least 6 characters" };
+  }
+
+  const supabase = createClient();
+  const { error } = await supabase.auth.updateUser({ password });
+
+  if (error) {
+    return { success: false, error: error.message };
+  }
+
+  return { success: true };
+}
+
