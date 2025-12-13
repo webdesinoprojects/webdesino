@@ -22,8 +22,8 @@ export default function MaximizeSection() {
   return (
     <section className="py-10 lg:py-16 bg-gradient-to-br from-[#02066F]/5 via-white to-[#02066F]/5 relative overflow-hidden">
       {/* Animated background shapes */}
-      <div className="absolute top-10 left-10 w-72 h-72 bg-gradient-radial from-[#02066F]/10 to-transparent rounded-full blur-3xl animate-float" />
-      <div className="absolute bottom-10 right-10 w-96 h-96 bg-gradient-radial from-[#02066F]/10 to-transparent rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
+      <div className="absolute top-10 left-10 w-72 h-72 animate-float" />
+      <div className="absolute bottom-10 right-10 w-96 h-96 animate-float" style={{ animationDelay: '1s' }} />
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-7xl mx-auto">
