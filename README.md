@@ -6,7 +6,7 @@ A complete revamp of the Webdesino website built with Next.js 14, TypeScript, an
 
 - **Next.js 14** with App Router for optimal performance
 - **Server-Side Rendering (SSR)** for maximum SEO-friendliness
-- **Tailwind CSS** for modern, responsive design
+- **Tailwind CSS** for modern, responsive desig
 - **TypeScript** for type safety
 - **SEO Optimized** with:
   - Dynamic metadata per page
