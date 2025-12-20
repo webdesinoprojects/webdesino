@@ -11,7 +11,6 @@ import { ArrowLeft, Plus, Trash2 } from "lucide-react";
 import { createPage, updatePage } from "@/lib/actions";
 import ImageUpload from "@/components/admin/ImageUpload";
 import dynamic from 'next/dynamic';
-import 'react-quill/dist/quill.snow.css';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 

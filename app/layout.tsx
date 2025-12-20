@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import "react-quill/dist/quill.snow.css";
 import { generateOrganizationSchema } from "@/lib/seo";
 import {Analytics} from "@vercel/analytics/react";
 
