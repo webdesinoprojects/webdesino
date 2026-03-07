@@ -90,14 +90,14 @@ export default function Navbar() {
       <div className="bg-[#111184] text-white py-3">
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center gap-6">
-            <Link href="/" className="flex items-center gap-2 font-bold text-xl hover:text-gray-200 transition">
-              <span className="relative block w-[120px] h-10 overflow-hidden rounded">
+            <Link href="/" className="flex items-center hover:text-gray-200 transition">
+              <span className="relative block w-[160px] sm:w-[190px] h-10 sm:h-11">
                 <Image
                   src={getStorageUrl("/WebDesino.png")}
                   alt="Webdesino.com"
                   fill
-                  sizes="120px"
-                  className="object-cover object-left"
+                  sizes="(max-width: 640px) 160px, 190px"
+                  className="object-contain object-left"
                   priority
                 />
               </span>
