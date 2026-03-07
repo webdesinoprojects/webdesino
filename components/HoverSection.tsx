@@ -29,7 +29,7 @@ export default function HoverSection() {
         {particles.map((p, i) => (
           <div
             key={i}
-            className="absolute w-2 h-2 bg-[#02066F]/20 rounded-full animate-float"
+            className="absolute w-2 h-2 bg-[#111184]/20 rounded-full animate-float"
             style={{
               left: p.left,
               top: p.top,
@@ -47,7 +47,7 @@ export default function HoverSection() {
             {title.split("").map((char, idx) => (
               <span
                 key={idx}
-                className="inline-block transition-all duration-300 hover:scale-125 hover:-translate-y-3 hover:text-[#02066F] cursor-pointer animate-wave"
+                className="inline-block transition-all duration-300 hover:scale-125 hover:-translate-y-3 hover:text-[#111184] cursor-pointer animate-wave"
                 style={{
                   animationDelay: `${idx * 0.1}s`,
                 }}
@@ -64,7 +64,7 @@ export default function HoverSection() {
             {subtitle.split(" ").map((word, idx) => (
               <span
                 key={idx}
-                className="inline-block mx-2 transition-all duration-300 hover:scale-110 cursor-pointer hover:text-[#02066F]"
+                className="inline-block mx-2 transition-all duration-300 hover:scale-110 cursor-pointer hover:text-[#111184]"
                 style={{
                   animationDelay: `${0.5 + idx * 0.05}s`,
                 }}
@@ -90,10 +90,10 @@ export default function HoverSection() {
                 style={{ animationDelay: `${0.8 + idx * 0.1}s` }}
               >
                 {/* Animated background on hover */}
-                <div className="absolute inset-0 bg-[#02066F] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-[#111184] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 
                 <div className="relative z-10">
-                  <div className="text-4xl font-bold mb-2 text-[#02066F] group-hover:text-white transition-colors">
+                  <div className="text-4xl font-bold mb-2 text-[#111184] group-hover:text-white transition-colors">
                     {item.number}
                   </div>
                   <div className="text-sm font-semibold text-gray-700 group-hover:text-white transition-colors">
@@ -111,13 +111,13 @@ export default function HoverSection() {
           <div className="flex flex-wrap gap-4 justify-center animate-fade-in" style={{ animationDelay: '1.2s' }}>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 bg-[#02066F] text-white px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 transform hover:scale-105 hover-lift shadow-lg hover-glow"
+              className="inline-flex items-center gap-2 bg-[#111184] text-white px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 transform hover:scale-105 hover-lift shadow-lg hover-glow"
             >
               Start Your Project
             </Link>
             <Link
               href="/portfolio"
-              className="inline-flex items-center gap-2 glass-strong border-2 border-[#02066F] text-[#02066F] px-8 py-4 rounded-full text-base font-semibold hover:bg-[#02066F] hover:text-white transition-all duration-300 transform hover:scale-105"
+              className="inline-flex items-center gap-2 glass-strong border-2 border-[#111184] text-[#111184] px-8 py-4 rounded-full text-base font-semibold hover:bg-[#111184] hover:text-white transition-all duration-300 transform hover:scale-105"
             >
               See Our Work
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
@@ -127,11 +127,11 @@ export default function HoverSection() {
           {/* Floating stats */}
           <div className="mt-16 flex justify-center gap-8 flex-wrap animate-fade-in" style={{ animationDelay: '1.4s' }}>
             <div className="flex items-center gap-3 px-6 py-3 glass rounded-full hover-lift">
-              <div className="w-3 h-3 bg-[#02066F] rounded-full animate-pulse-glow" />
+              <div className="w-3 h-3 bg-[#111184] rounded-full animate-pulse-glow" />
               <span className="font-bold text-gray-700">30+ Specialists</span>
             </div>
             <div className="flex items-center gap-3 px-6 py-3 glass rounded-full hover-lift">
-              <div className="w-3 h-3 bg-[#02066F] rounded-full animate-pulse-glow" />
+              <div className="w-3 h-3 bg-[#111184] rounded-full animate-pulse-glow" />
               <span className="font-bold text-gray-700">Vision SiteKaro</span>
             </div>
           </div>

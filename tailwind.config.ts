@@ -35,10 +35,10 @@ const config: Config = {
   		},
   		colors: {
   			cream: '#FFFFFF',
-  			orange: '#02066F',
-  			teal: '#02066F',
+  			orange: '#111184',
+  			teal: '#111184',
   			blue: {
-  				'600': '#02066F'
+  				'600': '#111184'
   			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

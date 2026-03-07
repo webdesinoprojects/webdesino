@@ -20,7 +20,7 @@ export default function MaximizeSection() {
   const [hovered, setHovered] = useState(false);
 
   return (
-    <section className="py-10 lg:py-16 bg-gradient-to-br from-[#02066F]/5 via-white to-[#02066F]/5 relative overflow-hidden">
+    <section className="py-10 lg:py-16 bg-gradient-to-br from-[#111184]/5 via-white to-[#111184]/5 relative overflow-hidden">
       {/* Animated background shapes */}
       <div className="absolute top-10 left-10 w-72 h-72 animate-float" />
       <div className="absolute bottom-10 right-10 w-96 h-96 animate-float" style={{ animationDelay: '1s' }} />
@@ -30,20 +30,20 @@ export default function MaximizeSection() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
             {/* Main Heading with Animated Gradient Text */}
             <div className="mb-0 text-center lg:text-left">
-            <div className="inline-block px-4 py-2 bg-[#02066F]/10 rounded-full mb-6 animate-fade-in">
-              <span className="text-sm font-bold text-[#02066F] uppercase tracking-wide flex items-center gap-2">
+            <div className="inline-block px-4 py-2 bg-[#111184]/10 rounded-full mb-6 animate-fade-in">
+              <span className="text-sm font-bold text-[#111184] uppercase tracking-wide flex items-center gap-2">
                 <Rocket className="w-4 h-4" />
                 Why WebDesino Ranks #1 in Delhi NCR
               </span>
             </div>
             <h2 className="text-3xl lg:text-5xl xl:text-6xl font-bold mb-6">
-              <span className="block text-[#02066F] animate-slide-in-left" style={{ animationDelay: '0.1s' }}>
+              <span className="block text-[#111184] animate-slide-in-left" style={{ animationDelay: '0.1s' }}>
                 Web Design And Development
               </span>
               <span className="block animate-slide-in-left" style={{ animationDelay: '0.2s' }}>
                 Company In{" "}
                 <span
-                  className="text-[#02066F] inline-block cursor-pointer relative"
+                  className="text-[#111184] inline-block cursor-pointer relative"
                   onMouseEnter={() => setHovered(true)}
                   onMouseLeave={() => setHovered(false)}
                 >
@@ -51,7 +51,7 @@ export default function MaximizeSection() {
                     Delhi
                   </span>
                   {hovered && (
-                    <span className="absolute -bottom-2 left-0 right-0 h-1 bg-[#02066F] rounded-full animate-scale-in" />
+                    <span className="absolute -bottom-2 left-0 right-0 h-1 bg-[#111184] rounded-full animate-scale-in" />
                   )}
                 </span>
               </span>
@@ -63,14 +63,14 @@ export default function MaximizeSection() {
             <div className="flex flex-wrap gap-4 mt-8 justify-center lg:justify-start animate-fade-in" style={{ animationDelay: '0.5s' }}>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-[#02066F] text-white px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 transform hover:scale-105 hover-lift shadow-lg hover-glow"
+                className="inline-flex items-center gap-2 bg-[#111184] text-white px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 transform hover:scale-105 hover-lift shadow-lg hover-glow"
                 aria-label="Start Your Project - Web Development Services Delhi"
               >
                 Start Your Project
               </Link>
               <Link
                 href="/portfolio"
-                className="inline-flex items-center gap-2 glass-strong border-2 border-[#02066F] text-[#02066F] px-8 py-4 rounded-full text-base font-semibold hover:bg-[#02066F] hover:text-white transition-all duration-300 transform hover:scale-105"
+                className="inline-flex items-center gap-2 glass-strong border-2 border-[#111184] text-[#111184] px-8 py-4 rounded-full text-base font-semibold hover:bg-[#111184] hover:text-white transition-all duration-300 transform hover:scale-105"
                 aria-label="See Our Work - Portfolio Projects"
               >
                 See Our Work
@@ -90,7 +90,7 @@ export default function MaximizeSection() {
                 className="object-contain w-full h-auto transition-transform duration-700 group-hover:scale-105"
               />
             </div>
-            <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-[#02066F]/10 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-[#111184]/10 rounded-full blur-3xl animate-pulse"></div>
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-blue-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
           </div>
         </div>
@@ -98,7 +98,7 @@ export default function MaximizeSection() {
           {/* Trusted Certifications & Recognition */}
           <div className="relative animate-scale-in" style={{ animationDelay: '0.6s' }}>
             {/* <div className="text-center mb-6">
-              <h3 className="text-xl font-bold text-[#02066F] mb-2">Trusted Web Development Company in Delhi NCR</h3>
+              <h3 className="text-xl font-bold text-[#111184] mb-2">Trusted Web Development Company in Delhi NCR</h3>
               <p className="text-sm text-gray-600">Recognized by global leaders and trusted by 50+ clients</p>
             </div>
             
@@ -115,8 +115,8 @@ export default function MaximizeSection() {
                   rel="noopener noreferrer"
                   className="glass-strong rounded-2xl p-6 hover:shadow-xl transition-all duration-300 hover-lift group text-center border border-white/20"
                 >
-                  <div className="text-[#02066F] mb-3 group-hover:scale-110 transition-transform flex justify-center">{cert.icon}</div>
-                  <div className="font-bold text-[#02066F] text-sm mb-1 group-hover:text-[#02066F] transition-colors">{cert.name}</div>
+                  <div className="text-[#111184] mb-3 group-hover:scale-110 transition-transform flex justify-center">{cert.icon}</div>
+                  <div className="font-bold text-[#111184] text-sm mb-1 group-hover:text-[#111184] transition-colors">{cert.name}</div>
                   <div className="text-xs text-gray-600">{cert.description}</div>
                 </a>
               ))}
@@ -127,23 +127,23 @@ export default function MaximizeSection() {
               <p className="text-md text-gray-600 mb-3">Recognized for professional work and high-quality digital solutions</p>
               <div className="flex flex-wrap justify-center gap-6">
                 <div className="flex items-center gap-2">
-                  <Star className="w-10 h-10 text-[#02066F]" />
+                  <Star className="w-10 h-10 text-[#111184]" />
                   <div>
-                    <div className="font-bold text-[#02066F]">4.9/5</div>
+                    <div className="font-bold text-[#111184]">4.9/5</div>
                     <div className="text-xs text-gray-600">Client Rating</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Trophy className="w-10 h-10 text-[#02066F]" />
+                  <Trophy className="w-10 h-10 text-[#111184]" />
                   <div>
-                    <div className="font-bold text-[#02066F]">10+</div>
+                    <div className="font-bold text-[#111184]">10+</div>
                     <div className="text-xs text-gray-600">Certifications</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Rocket className="w-10 h-10 text-[#02066F]" />
+                  <Rocket className="w-10 h-10 text-[#111184]" />
                   <div>
-                    <div className="font-bold text-[#02066F]">100%</div>
+                    <div className="font-bold text-[#111184]">100%</div>
                     <div className="text-xs text-gray-600">Success Rate</div>
                   </div>
                 </div>

@@ -20,7 +20,7 @@ export default function GlobalError({
             </p>
             <button
               onClick={reset}
-              className="bg-[#02066F] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#02066F]/90 transition"
+              className="bg-[#111184] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#111184]/90 transition"
             >
               Refresh Page
             </button>

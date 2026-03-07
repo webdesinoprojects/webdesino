@@ -18,7 +18,7 @@ export default async function ServicesPage() {
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Our <span className="text-[#02066F]">Services</span>
+            Our <span className="text-[#111184]">Services</span>
           </h1>
           <p className="text-lg text-gray-600">
             We offer a full spectrum of digital solutions to help your business thrive in the online world. From stunning websites to results-driven marketing campaigns.
@@ -31,11 +31,11 @@ export default async function ServicesPage() {
             return (
               <div key={category.slug} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100">
                 <div className="p-8">
-                  <div className="w-14 h-14 bg-[#02066F]/10 rounded-xl flex items-center justify-center mb-6 text-[#02066F]">
+                  <div className="w-14 h-14 bg-[#111184]/10 rounded-xl flex items-center justify-center mb-6 text-[#111184]">
                     {Icon && <Icon size={32} />}
                   </div>
                   <h2 className="text-2xl font-bold text-gray-900 mb-3">
-                    <Link href={`/services/${category.slug}`} className="hover:text-[#02066F] transition-colors">
+                    <Link href={`/services/${category.slug}`} className="hover:text-[#111184] transition-colors">
                       {category.title}
                     </Link>
                   </h2>
@@ -48,9 +48,9 @@ export default async function ServicesPage() {
                       <Link 
                         key={subtype.slug}
                         href={`/services/${category.slug}/${subtype.slug}`}
-                        className="text-sm text-gray-700 hover:text-[#02066F] transition-colors flex items-center gap-2"
+                        className="text-sm text-gray-700 hover:text-[#111184] transition-colors flex items-center gap-2"
                       >
-                        <span className="w-1.5 h-1.5 bg-[#02066F] rounded-full"></span>
+                        <span className="w-1.5 h-1.5 bg-[#111184] rounded-full"></span>
                         {subtype.title}
                       </Link>
                     ))}
@@ -58,7 +58,7 @@ export default async function ServicesPage() {
 
                   <Link 
                     href={`/services/${category.slug}`}
-                    className="inline-flex items-center gap-2 text-[#02066F] font-semibold hover:text-black transition-colors"
+                    className="inline-flex items-center gap-2 text-[#111184] font-semibold hover:text-black transition-colors"
                   >
                     View All Services <ArrowRight size={16} />
                   </Link>

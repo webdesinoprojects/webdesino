@@ -31,7 +31,7 @@ export default async function PortfolioPage() {
     <main className="min-h-screen bg-cream py-16 lg:py-24">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-4xl lg:text-6xl font-bold text-center text-[#02066F] mb-4">
+          <h1 className="text-4xl lg:text-6xl font-bold text-center text-[#111184] mb-4">
             Our Portfolio & Case Studies
           </h1>
           <p className="text-xl text-center text-gray-700 mb-12 max-w-3xl mx-auto">
@@ -47,7 +47,7 @@ export default async function PortfolioPage() {
                 href={`/case-studies/${project.slug}`}
                 className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group"
               >
-                <div className="aspect-video bg-gradient-to-br from-[#02066F]/20 to-black/20 relative overflow-hidden">
+                <div className="aspect-video bg-gradient-to-br from-[#111184]/20 to-black/20 relative overflow-hidden">
                   {project.image ? (
                     <Image
                       src={getStorageUrl(project.image)}
@@ -58,15 +58,15 @@ export default async function PortfolioPage() {
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
-                      <GoalIcon className="w-12 h-12 text-[#02066F]" />
+                      <GoalIcon className="w-12 h-12 text-[#111184]" />
                     </div>
                   )}
-                  <div className="absolute top-4 left-4 bg-[#02066F] text-white px-3 py-1 rounded-full text-xs font-semibold">
+                  <div className="absolute top-4 left-4 bg-[#111184] text-white px-3 py-1 rounded-full text-xs font-semibold">
                     {project.industry}
                   </div>
                 </div>
                 <div className="p-6">
-                  <h2 className="text-xl font-bold text-[#02066F] mb-2 group-hover:text-[#02066F] transition">
+                  <h2 className="text-xl font-bold text-[#111184] mb-2 group-hover:text-[#111184] transition">
                     {project.title}
                   </h2>
                   <p className="text-gray-700 line-clamp-2">{project.description}</p>
@@ -77,14 +77,14 @@ export default async function PortfolioPage() {
 
           {/* Industries Served */}
           <div className="bg-white rounded-xl p-8 shadow-lg">
-            <h2 className="text-2xl font-bold text-[#02066F] mb-6 text-center">
+            <h2 className="text-2xl font-bold text-[#111184] mb-6 text-center">
               Industries We Serve
             </h2>
             <div className="flex flex-wrap justify-center gap-3">
               {industries.map((industry) => (
                 <span
                   key={industry}
-                  className="px-4 py-2 bg-gray-100 text-[#02066F] rounded-full font-semibold"
+                  className="px-4 py-2 bg-gray-100 text-[#111184] rounded-full font-semibold"
                 >
                   {industry}
                 </span>

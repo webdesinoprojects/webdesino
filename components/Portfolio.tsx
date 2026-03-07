@@ -25,7 +25,7 @@ export default function Portfolio({ projects }: PortfolioProps) {
     <section className="py-10 lg:py-16 bg-white" itemScope itemType="https://schema.org/ItemList">
       <div className="container mx-auto px-4">
         <div className="text-center mb-10 lg:mb-12">
-          <h2 className="text-3xl lg:text-5xl font-bold text-[#02066F] mb-4">
+          <h2 className="text-3xl lg:text-5xl font-bold text-[#111184] mb-4">
             Our Success Stories
           </h2>
           <p className="text-gray-600 text-lg mb-6">
@@ -33,7 +33,7 @@ export default function Portfolio({ projects }: PortfolioProps) {
           </p>
           <Link 
             href="/case-studies" 
-            className="inline-block bg-[#02066F] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#02066F]/90 transition"
+            className="inline-block bg-[#111184] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#111184]/90 transition"
           >
             View Detailed Case Studies →
           </Link>
@@ -50,7 +50,7 @@ export default function Portfolio({ projects }: PortfolioProps) {
               }}
               className={`px-5 py-2.5 rounded-full font-semibold text-sm transition ${
                 activeFilter === industry
-                  ? "bg-[#02066F] text-white shadow-md"
+                  ? "bg-[#111184] text-white shadow-md"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
@@ -82,12 +82,12 @@ export default function Portfolio({ projects }: PortfolioProps) {
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
-                        <GoalIcon className="w-12 h-12 text-[#02066F]" />
+                        <GoalIcon className="w-12 h-12 text-[#111184]" />
                       </div>
                     )}
                   </div>
                   <div className="p-6" itemScope itemType="https://schema.org/CreativeWork">
-                    <h3 className="text-xl font-bold text-[#02066F] mb-2 group-hover:text-[#02066F]/80 transition" itemProp="name">
+                    <h3 className="text-xl font-bold text-[#111184] mb-2 group-hover:text-[#111184]/80 transition" itemProp="name">
                       {project.title}
                     </h3>
                     <p className="text-gray-700" itemProp="description">{project.description}</p>

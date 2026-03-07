@@ -15,7 +15,7 @@ export default async function BlogSection() {
     <section className="py-10 bg-slate-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-10">
-          <span className="text-[#02066F] font-bold tracking-wider uppercase text-sm mb-2 block">
+          <span className="text-[#111184] font-bold tracking-wider uppercase text-sm mb-2 block">
             Our Blog
           </span>
           <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-6">
@@ -36,7 +36,7 @@ export default async function BlogSection() {
                   fill
                   className="object-contain group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-[#02066F]">
+                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-[#111184]">
                   {post.category}
                 </div>
               </div>
@@ -47,7 +47,7 @@ export default async function BlogSection() {
                     {format(new Date(post.createdAt), 'MMM d, yyyy')}
                   </span>
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3 line-clamp-2 group-hover:text-[#02066F] transition-colors">
+                <h3 className="text-xl font-bold text-slate-900 mb-3 line-clamp-2 group-hover:text-[#111184] transition-colors">
                   <Link href={`/blog/${post.slug}`}>
                     {post.title}
                   </Link>
@@ -57,7 +57,7 @@ export default async function BlogSection() {
                 </p>
                 <Link 
                   href={`/blog/${post.slug}`}
-                  className="inline-flex items-center gap-2 text-[#02066F] font-semibold hover:gap-3 transition-all"
+                  className="inline-flex items-center gap-2 text-[#111184] font-semibold hover:gap-3 transition-all"
                 >
                   Read More <ArrowRight size={16} />
                 </Link>

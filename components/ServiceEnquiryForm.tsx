@@ -30,16 +30,16 @@ export default function ServiceEnquiryForm({ serviceTitle }: { serviceTitle: str
   if (isSuccess) {
     return (
       <div className="bg-white rounded-2xl p-8 shadow-2xl border border-white/20 text-center animate-fade-in h-full flex flex-col items-center justify-center min-h-[400px]">
-        <div className="w-20 h-20 bg-[#02066F]/10 text-[#02066F] rounded-full flex items-center justify-center mb-6 animate-scale-in">
+        <div className="w-20 h-20 bg-[#111184]/10 text-[#111184] rounded-full flex items-center justify-center mb-6 animate-scale-in">
           <CheckCircle size={40} />
         </div>
         <h3 className="text-2xl font-bold text-gray-900 mb-2">Enquiry Received!</h3>
         <p className="text-gray-600 mb-8 max-w-xs mx-auto">
-          Thanks for your interest in <span className="font-semibold text-[#02066F]">{serviceTitle}</span>. Our team will get back to you within 24 hours.
+          Thanks for your interest in <span className="font-semibold text-[#111184]">{serviceTitle}</span>. Our team will get back to you within 24 hours.
         </p>
         <button 
           onClick={() => setIsSuccess(false)}
-          className="text-[#02066F] font-semibold hover:text-black transition-colors underline underline-offset-4"
+          className="text-[#111184] font-semibold hover:text-black transition-colors underline underline-offset-4"
         >
           Send another enquiry
         </button>
@@ -48,10 +48,10 @@ export default function ServiceEnquiryForm({ serviceTitle }: { serviceTitle: str
   }
 
   return (
-    <div className="bg-[#02066F] rounded-2xl p-6 lg:p-8 shadow-2xl shadow-[#02066F]/20 border border-white/10 relative overflow-hidden animate-fade-in-up">
+    <div className="bg-[#111184] rounded-2xl p-6 lg:p-8 shadow-2xl shadow-[#111184]/20 border border-white/10 relative overflow-hidden animate-fade-in-up">
       {/* Decorative elements */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#4F46E5]/20 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#111184]/20 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
       
       <div className="mb-8 relative z-10">
         <span className="inline-block px-3 py-1 bg-white/10 rounded-full text-xs font-medium text-white mb-3 border border-white/10">
@@ -124,7 +124,7 @@ export default function ServiceEnquiryForm({ serviceTitle }: { serviceTitle: str
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full py-4 bg-white text-[#02066F] rounded-xl font-bold hover:bg-gray-50 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-black/10 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+          className="w-full py-4 bg-white text-[#111184] rounded-xl font-bold hover:bg-gray-50 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-black/10 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
         >
           {isSubmitting ? (
             <>

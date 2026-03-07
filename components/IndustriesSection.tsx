@@ -73,13 +73,13 @@ export default function IndustriesSection() {
   return (
     <section className="py-10 lg:py-16 bg-white relative overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute top-10 right-0 w-96 h-96 bg-[#02066F]/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-10 left-0 w-96 h-96 bg-[#02066F]/5 rounded-full blur-3xl" />
+      <div className="absolute top-10 right-0 w-96 h-96 bg-[#111184]/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-10 left-0 w-96 h-96 bg-[#111184]/5 rounded-full blur-3xl" />
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 lg:mb-12">
-          <h2 className="text-3xl lg:text-5xl font-bold text-[#02066F] mb-4 animate-fade-in">
+          <h2 className="text-3xl lg:text-5xl font-bold text-[#111184] mb-4 animate-fade-in">
             Industries We Serve
           </h2>
           <p className="text-lg text-gray-600 animate-fade-in" style={{ animationDelay: '0.1s' }}>
@@ -92,18 +92,21 @@ export default function IndustriesSection() {
           {industries.map((industry, idx) => {
             const Icon = industry.icon;
             return (
-              <div
+              <Link
                 key={idx}
-                className="group p-6 lg:p-8 rounded-3xl glass hover:glass-strong transition-all duration-300 hover-lift animate-fade-in"
+                href={industry.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block p-6 lg:p-8 rounded-3xl glass hover:glass-strong transition-all duration-300 hover-lift animate-fade-in"
                 style={{ animationDelay: `${idx * 0.1}s` }}
               >
                 {/* Icon */}
                 <div className="flex items-center gap-4 mb-4">
-                  <Icon className="text-[#02066F] group-hover:text-[#02066F]/80 transition-colors duration-300" size={40} />
+                  <Icon className="text-[#111184] group-hover:text-[#111184]/80 transition-colors duration-300" size={40} />
                 </div>
 
                 {/* Content */}
-                <h3 className="text-xl font-bold text-[#02066F] mb-3 group-hover:text-[#02066F]/80 transition-all">
+                <h3 className="text-xl font-bold text-[#111184] mb-3 group-hover:text-[#111184]/80 transition-all">
                   {industry.title}
                 </h3>
                 <p className="text-gray-600 mb-4 leading-relaxed">
@@ -111,16 +114,13 @@ export default function IndustriesSection() {
                 </p>
 
                 {/* Example Link */}
-                <Link
-                  href={industry.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-[#02066F] font-semibold text-sm hover:gap-3 transition-all"
+                <div
+                  className="inline-flex items-center gap-2 text-[#111184] font-semibold text-sm hover:gap-3 transition-all"
                 >
                   View Example – {industry.example}
                   <span className="text-xl">→</span>
-                </Link>
-              </div>
+                </div>
+              </Link>
             );
           })}
         </div>

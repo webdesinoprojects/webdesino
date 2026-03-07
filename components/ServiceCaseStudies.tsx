@@ -24,7 +24,7 @@ export default function ServiceCaseStudies() {
           </div>
           <Link 
             href="/case-studies"
-            className="inline-flex items-center gap-2 text-[#02066F] font-bold hover:gap-3 transition-all"
+            className="inline-flex items-center gap-2 text-[#111184] font-bold hover:gap-3 transition-all"
           >
             View All Case Studies <ArrowRight size={20} />
           </Link>
@@ -47,11 +47,11 @@ export default function ServiceCaseStudies() {
                     className="object-contain group-hover:scale-105 transition-transform duration-700"
                   />
                 ) : (
-                  <div className="absolute inset-0 bg-[#02066F]/10 group-hover:scale-105 transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-[#111184]/10 group-hover:scale-105 transition-transform duration-700" />
                 )}
                 
                 <div className="absolute bottom-6 left-6 right-6 z-20">
-                  <span className="inline-block px-3 py-1 bg-[#02066F] text-white text-xs font-bold rounded-full mb-3">
+                  <span className="inline-block px-3 py-1 bg-[#111184] text-white text-xs font-bold rounded-full mb-3">
                     {study.industry}
                   </span>
                   <h3 className="text-xl font-bold text-white leading-tight mb-2">
@@ -65,7 +65,7 @@ export default function ServiceCaseStudies() {
                   {study.background}
                 </p>
                 
-                <div className="flex items-center gap-2 text-[#02066F] font-bold text-sm group-hover:translate-x-2 transition-transform">
+                <div className="flex items-center gap-2 text-[#111184] font-bold text-sm group-hover:translate-x-2 transition-transform">
                   Read Case Study <ArrowRight size={16} />
                 </div>
               </div>

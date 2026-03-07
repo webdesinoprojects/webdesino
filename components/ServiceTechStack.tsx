@@ -61,9 +61,9 @@ export default function ServiceTechStack({ categorySlug }: ServiceTechStackProps
     <section className="py-12 bg-white border-t border-gray-100">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-[#02066F] font-semibold text-sm uppercase tracking-wider mb-2 block">Technology First</span>
+          <span className="text-[#111184] font-semibold text-sm uppercase tracking-wider mb-2 block">Technology First</span>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-            Powered by <span className="text-[#02066F]">Modern Technology</span>
+            Powered by <span className="text-[#111184]">Modern Technology</span>
           </h2>
           <p className="text-gray-600 text-lg">
             We stay ahead of the curve by leveraging the most advanced frameworks, tools, and platforms to build secure, scalable, and high-performance solutions for your business.
@@ -76,7 +76,7 @@ export default function ServiceTechStack({ categorySlug }: ServiceTechStackProps
               key={idx}
               className="flex flex-col items-center justify-center p-6 bg-gray-50 rounded-xl hover:bg-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-gray-100 group"
             >
-              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-3 shadow-sm group-hover:shadow-md text-[#02066F] group-hover:text-[#02066F] transition-colors">
+              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-3 shadow-sm group-hover:shadow-md text-[#111184] group-hover:text-[#111184] transition-colors">
                 <tech.icon size={24} />
               </div>
               <span className="font-semibold text-gray-700 text-sm group-hover:text-gray-900">{tech.name}</span>

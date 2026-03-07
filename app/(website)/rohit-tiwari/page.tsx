@@ -120,8 +120,8 @@ export default async function FounderPage() {
       <section className="relative py-20 lg:py-28 bg-slate-50 overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#02066F]/20 to-transparent" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#02066F]/20 rounded-full blur-3xl animate-float" />
+          <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#111184]/20 to-transparent" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#111184]/20 rounded-full blur-3xl animate-float" />
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
@@ -129,7 +129,7 @@ export default async function FounderPage() {
             {/* Image Column */}
             <div className="w-full lg:w-1/3 order-2 lg:order-1">
               <div className="relative group mx-auto max-w-md lg:max-w-none">
-                <div className="absolute inset-0 bg-[#02066F] rounded-3xl blur-2xl opacity-50 group-hover:opacity-75 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-[#111184] rounded-3xl blur-2xl opacity-50 group-hover:opacity-75 transition-opacity duration-500" />
                 <div className="relative rounded-3xl overflow-hidden border-2 border-gray-800 group-hover:border-white transition-colors duration-300 aspect-[4/5]">
                   <Image
                     src={Rohit}
@@ -146,7 +146,7 @@ export default async function FounderPage() {
                   <>
                     <div className="absolute -right-6 top-10 bg-white p-4 rounded-xl shadow-xl hidden md:block animate-float" style={{ animationDelay: '1s' }}>
                       <div className="flex items-center gap-3">
-                        <div className="p-2 bg-gray-100 rounded-lg text-[#02066F]">
+                        <div className="p-2 bg-gray-100 rounded-lg text-[#111184]">
                           <Rocket size={24} />
                         </div>
                         <div>
@@ -158,7 +158,7 @@ export default async function FounderPage() {
 
                     <div className="absolute -left-6 bottom-20 bg-white p-4 rounded-xl shadow-xl hidden md:block animate-float" style={{ animationDelay: '2s' }}>
                       <div className="flex items-center gap-3">
-                        <div className="p-2 bg-gray-100 rounded-lg text-[#02066F]">
+                        <div className="p-2 bg-gray-100 rounded-lg text-[#111184]">
                           <Award size={24} />
                         </div>
                         <div>
@@ -174,17 +174,17 @@ export default async function FounderPage() {
 
             {/* Content Column */}
             <div className="w-full lg:w-2/3 order-1 lg:order-2 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full text-[#02066F] font-medium text-sm mb-6 border border-[#02066F]/20">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full text-[#111184] font-medium text-sm mb-6 border border-[#111184]/20">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#02066F]"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#111184]"></span>
                 </span>
                 Founder & CEO
               </div>
 
               <h1 className="text-4xl lg:text-6xl font-bold text-black mb-6 leading-tight">
                 {hero.title.includes("Rohit Tiwari") ? (
-                  <>Hi, I'm <span className="text-[#02066F]">Rohit Tiwari</span></>
+                  <>Hi, I'm <span className="text-[#111184]">Rohit Tiwari</span></>
                 ) : (
                   hero.title
                 )}
@@ -205,7 +205,7 @@ export default async function FounderPage() {
                 </Link>
                 <Link
                   href={hero.socials.contact}
-                  className="flex items-center gap-2 px-6 py-3 bg-[#02066F] text-white border border-[#02066F] rounded-full font-semibold hover:bg-[#02066F]/90 transition-all hover:-translate-y-1"
+                  className="flex items-center gap-2 px-6 py-3 bg-[#111184] text-white border border-[#111184] rounded-full font-semibold hover:bg-[#111184]/90 transition-all hover:-translate-y-1"
                 >
                   <Mail size={20} />
                   Work With Me
@@ -223,14 +223,14 @@ export default async function FounderPage() {
 
             {/* My Professional Approach */}
             <div>
-              <h2 className="text-3xl font-bold text-[#02066F] mb-6">{professionalApproach.title}</h2>
+              <h2 className="text-3xl font-bold text-[#111184] mb-6">{professionalApproach.title}</h2>
               <p className="text-lg text-slate-600 mb-6 leading-relaxed">
                 {professionalApproach.description}
               </p>
               <ul className="space-y-4">
                 {professionalApproach.points.map((item: string, idx: number) => (
                   <li key={idx} className="flex items-start gap-3 text-slate-700">
-                    <CheckCircle2 className="text-[#02066F] mt-1 flex-shrink-0" size={20} />
+                    <CheckCircle2 className="text-[#111184] mt-1 flex-shrink-0" size={20} />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -240,7 +240,7 @@ export default async function FounderPage() {
             {/* Expertise Grid */}
             <div>
               <div className=" mb-6">
-                <h2 className="text-3xl font-bold text-[#02066F] mb-3">{expertise.title}</h2>
+                <h2 className="text-3xl font-bold text-[#111184] mb-3">{expertise.title}</h2>
               </div>
 
               <div className="grid md:grid-cols-3 gap-8">
@@ -248,7 +248,7 @@ export default async function FounderPage() {
                   const IconComponent = getIcon(item.icon);
                   return (
                     <div key={idx} className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-all border border-slate-100">
-                      <div className="w-12 h-12 bg-gray-100 text-[#02066F] rounded-xl flex items-center justify-center mb-6">
+                      <div className="w-12 h-12 bg-gray-100 text-[#111184] rounded-xl flex items-center justify-center mb-6">
                         <IconComponent size={24} />
                       </div>
                       <h3 className="text-xl font-bold text-slate-900 mb-3">{item.title}</h3>
@@ -261,11 +261,11 @@ export default async function FounderPage() {
 
             {/* Achievements and Experience */}
             <div>
-              <h2 className="text-3xl font-bold text-[#02066F] mb-6">{achievements.title}</h2>
+              <h2 className="text-3xl font-bold text-[#111184] mb-6">{achievements.title}</h2>
               <ul className="space-y-4">
                 {achievements.points.map((item: string, idx: number) => (
                   <li key={idx} className="flex items-start gap-3 text-slate-700">
-                    <Award className="text-[#02066F] mt-1 flex-shrink-0" size={20} />
+                    <Award className="text-[#111184] mt-1 flex-shrink-0" size={20} />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -274,7 +274,7 @@ export default async function FounderPage() {
 
             {/* Vision */}
             <div>
-              <h2 className="text-3xl font-bold text-[#02066F] mb-6">{vision.title}</h2>
+              <h2 className="text-3xl font-bold text-[#111184] mb-6">{vision.title}</h2>
               <p className="text-lg text-slate-600 leading-relaxed">
                 {vision.description}
               </p>
@@ -285,7 +285,7 @@ export default async function FounderPage() {
       </section>
 
       {/* Connect Section */}
-      <section className="py-20 bg-slate-50 text-[#02066F] relative overflow-hidden">
+      <section className="py-20 bg-slate-50 text-[#111184] relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <h2 className="text-3xl lg:text-5xl font-bold mb-8">{cta.title}</h2>
@@ -300,8 +300,8 @@ export default async function FounderPage() {
                 target={btn.link.startsWith('http') ? "_blank" : undefined}
                 className={`px-8 py-4 rounded-full font-bold transition-all ${
                   btn.primary 
-                    ? "bg-white text-[#02066F] hover:bg-gray-50 shadow-lg" 
-                    : "bg-[#02066F] text-white border border-white hover:bg-black"
+                    ? "bg-white text-[#111184] hover:bg-gray-50 shadow-lg" 
+                    : "bg-[#111184] text-white border border-white hover:bg-black"
                 }`}
               >
                 {btn.label}

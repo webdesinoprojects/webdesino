@@ -111,6 +111,12 @@ export default function Footer({ locations = [] }: FooterProps) {
                   </a>
                 </li>
                 <li className="flex items-start gap-3">
+                  <Phone className="text-white mt-1 flex-shrink-0" size={16} />
+                  <a href="tel:+919350887828" className="hover:text-white transition-colors">
+                    +91 93508 87828
+                  </a>
+                </li>
+                <li className="flex items-start gap-3">
                   <Mail className="text-white mt-1 flex-shrink-0" size={16} />
                   <a href="mailto:info@webdesino.com" className="hover:text-white transition-colors">
                     info@webdesino.com
@@ -368,7 +374,7 @@ export default function Footer({ locations = [] }: FooterProps) {
             <Link href="/refund-policy" className="hover:text-white transition">Refund Policy</Link>
           </div>
           <p className="text-sm">
-            &copy; 2025 <span className="font-bold text-white">Webdesino</span>, All Rights Reserved
+            &copy; 2023 <span className="font-bold text-white">Webdesino</span>, All Rights Reserved
           </p>
           <p className="text-xs mt-2 text-gray-400 mb-8">
             Crafted with <span className="text-red-400">❤</span> in Delhi NCR

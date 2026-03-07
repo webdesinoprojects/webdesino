@@ -32,7 +32,7 @@ export default function SearchContent({ faqs }: SearchContentProps) {
     <main className="min-h-screen bg-gradient-to-br from-cream via-white to-cream pt-24 pb-16">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold text-[#02066F] mb-8 text-center">
+          <h1 className="text-4xl font-bold text-[#111184] mb-8 text-center">
             Search Results
           </h1>
 
@@ -42,7 +42,7 @@ export default function SearchContent({ faqs }: SearchContentProps) {
               placeholder="Search for services, blogs, or FAQs..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="w-full pl-12 py-6 text-lg rounded-full shadow-lg border-gray-200 focus:border-[#02066F] focus:ring-[#02066F]"
+              className="w-full pl-12 py-6 text-lg rounded-full shadow-lg border-gray-200 focus:border-[#111184] focus:ring-[#111184]"
             />
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-6 h-6" />
           </div>
@@ -52,7 +52,7 @@ export default function SearchContent({ faqs }: SearchContentProps) {
               {/* FAQ Results */}
               {filteredFaqs.length > 0 && (
                 <div>
-                  <h2 className="text-2xl font-bold text-[#02066F] mb-6">
+                  <h2 className="text-2xl font-bold text-[#111184] mb-6">
                     Frequently Asked Questions
                   </h2>
                   <FAQComponent faqs={filteredFaqs} />

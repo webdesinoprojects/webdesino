@@ -31,7 +31,7 @@ export default function ServiceFeatures({ serviceTitle, features }: ServiceFeatu
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
-            What do <span className="text-[#02066F]">{serviceTitle}</span> services include?
+            What do <span className="text-[#111184]">{serviceTitle}</span> services include?
           </h2>
           <p className="text-lg text-slate-600">
             From initial planning to final launch, we cover every aspect to ensure your success.
@@ -44,15 +44,15 @@ export default function ServiceFeatures({ serviceTitle, features }: ServiceFeatu
             return (
               <div 
                 key={idx} 
-                className="group p-8 bg-slate-50 rounded-2xl border border-slate-100 hover:border-[#02066F]/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative overflow-hidden"
+                className="group p-8 bg-slate-50 rounded-2xl border border-slate-100 hover:border-[#111184]/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative overflow-hidden"
               >
-                <div className="absolute top-0 right-0 w-32 h-32 bg-[#02066F]/5 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150 duration-500"></div>
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[#111184]/5 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150 duration-500"></div>
                 
-                <div className="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6 text-[#02066F] group-hover:bg-[#02066F] group-hover:text-white transition-all duration-300 relative z-10">
+                <div className="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6 text-[#111184] group-hover:bg-[#111184] group-hover:text-white transition-all duration-300 relative z-10">
                   <Icon size={28} />
                 </div>
                 
-                <h3 className="text-xl font-bold text-slate-900 mb-3 relative z-10 group-hover:text-[#02066F] transition-colors">
+                <h3 className="text-xl font-bold text-slate-900 mb-3 relative z-10 group-hover:text-[#111184] transition-colors">
                   {feature}
                 </h3>
                 

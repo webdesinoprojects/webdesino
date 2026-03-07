@@ -24,7 +24,7 @@ export default function FAQ({ faqs }: FAQProps) {
   return (
     <section className="py-10 lg:py-16 bg-white" itemScope itemType="https://schema.org/FAQPage">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl lg:text-5xl font-bold text-center text-[#02066F] mb-10 lg:mb-12">
+        <h2 className="text-3xl lg:text-5xl font-bold text-center text-[#111184] mb-10 lg:mb-12">
           Frequently Asked Questions
         </h2>
 
@@ -41,13 +41,13 @@ export default function FAQ({ faqs }: FAQProps) {
                 className="w-full flex items-center justify-between p-6 text-left bg-gray-50 hover:bg-gray-100 transition"
                 aria-expanded={openIndex === index}
               >
-                <span className="text-lg font-semibold text-[#02066F] pr-4" itemProp="name">
+                <span className="text-lg font-semibold text-[#111184] pr-4" itemProp="name">
                   {faq.question}
                 </span>
                 {openIndex === index ? (
-                  <ChevronUp className="text-[#02066F] flex-shrink-0" size={24} />
+                  <ChevronUp className="text-[#111184] flex-shrink-0" size={24} />
                 ) : (
-                  <ChevronDown className="text-[#02066F] flex-shrink-0" size={24} />
+                  <ChevronDown className="text-[#111184] flex-shrink-0" size={24} />
                 )}
               </button>
               {openIndex === index && (

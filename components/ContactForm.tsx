@@ -29,7 +29,7 @@ export default function ContactForm({ locationName }: { locationName?: string })
   if (isSuccess) {
     return (
       <div className="glass-strong rounded-3xl p-8 animate-fade-in h-full flex flex-col items-center justify-center min-h-[400px]">
-        <div className="w-20 h-20 bg-[#02066F]/10 text-[#02066F] rounded-full flex items-center justify-center mb-6 animate-scale-in">
+        <div className="w-20 h-20 bg-[#111184]/10 text-[#111184] rounded-full flex items-center justify-center mb-6 animate-scale-in">
           <CheckCircle size={40} />
         </div>
         <h3 className="text-2xl font-bold text-gray-900 mb-2">Message Sent!</h3>
@@ -38,7 +38,7 @@ export default function ContactForm({ locationName }: { locationName?: string })
         </p>
         <button 
           onClick={() => setIsSuccess(false)}
-          className="text-[#02066F] font-semibold hover:text-black transition-colors underline underline-offset-4"
+          className="text-[#111184] font-semibold hover:text-black transition-colors underline underline-offset-4"
         >
           Send another message
         </button>
@@ -48,7 +48,7 @@ export default function ContactForm({ locationName }: { locationName?: string })
 
   return (
     <div className="glass-strong rounded-3xl p-8 animate-fade-in">
-      <h2 className="text-2xl font-bold text-[#02066F] mb-6">
+      <h2 className="text-2xl font-bold text-[#111184] mb-6">
         {locationName ? `Get a Quote in ${locationName}` : "Send Us a Message"}
       </h2>
       <form action={handleSubmit} className="space-y-6">
@@ -61,7 +61,7 @@ export default function ContactForm({ locationName }: { locationName?: string })
             id="name"
             name="name"
             required
-            className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#02066F]/50 transition-all"
+            className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#111184]/50 transition-all"
             placeholder="Your name"
           />
         </div>
@@ -74,7 +74,7 @@ export default function ContactForm({ locationName }: { locationName?: string })
             id="email"
             name="email"
             required
-            className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#02066F]/50 transition-all"
+            className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#111184]/50 transition-all"
             placeholder="your@email.com"
           />
         </div>
@@ -86,7 +86,7 @@ export default function ContactForm({ locationName }: { locationName?: string })
             type="tel"
             id="phone"
             name="phone"
-            className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#02066F]/50 transition-all"
+            className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#111184]/50 transition-all"
             placeholder="+91 XXXXX XXXXX"
           />
         </div>
@@ -97,7 +97,7 @@ export default function ContactForm({ locationName }: { locationName?: string })
           <select
             id="service"
             name="service"
-            className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#02066F]/50 transition-all"
+            className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#111184]/50 transition-all"
           >
             <option value="">Select a service</option>
             <option value="web-development">Web Development</option>
@@ -117,7 +117,7 @@ export default function ContactForm({ locationName }: { locationName?: string })
             name="message"
             required
             rows={4}
-            className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#02066F]/50 transition-all resize-none"
+            className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#111184]/50 transition-all resize-none"
             placeholder="How can we help you?"
           />
         </div>
@@ -129,7 +129,7 @@ export default function ContactForm({ locationName }: { locationName?: string })
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-[#02066F] text-white py-4 rounded-xl font-semibold hover:bg-[#02066F]/90 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+          className="w-full bg-[#111184] text-white py-4 rounded-xl font-semibold hover:bg-[#111184]/90 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
         >
           {isSubmitting ? (
             <>

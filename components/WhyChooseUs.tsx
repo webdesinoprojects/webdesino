@@ -18,7 +18,7 @@ export default function WhyChooseUs({ features }: WhyChooseUsProps) {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-10">
           <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-6">
-            Why Choose <span className="text-[#02066F]">WebDesino?</span>
+            Why Choose <span className="text-[#111184]">WebDesino?</span>
           </h2>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
             We combine technical expertise with creative innovation to deliver digital solutions that stand out.
@@ -35,11 +35,11 @@ export default function WhyChooseUs({ features }: WhyChooseUsProps) {
                 style={{ animationDelay: `${idx * 0.15}s` }}
               >
                 <div className="flex items-start gap-4">
-                  <span className="text-4xl font-bold text-gray-200 group-hover:text-[#02066F] transition-colors duration-300 leading-none">
+                  <span className="text-4xl font-bold text-gray-200 group-hover:text-[#111184] transition-colors duration-300 leading-none">
                     {feature.number}
                   </span>
                   <div className="flex-1">
-                    <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-[#02066F] transition-colors">
+                    <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-[#111184] transition-colors">
                       {feature.title}
                     </h3>
                     <p className="text-slate-600 text-sm leading-relaxed">{feature.description}</p>
@@ -51,13 +51,13 @@ export default function WhyChooseUs({ features }: WhyChooseUsProps) {
 
           {/* Center - Vision Card */}
           <div className="flex flex-col items-center justify-center relative h-full">
-            <div className="w-full h-full min-h-[400px] bg-gradient-to-br from-[#02066F] to-[#000040] rounded-3xl flex items-center justify-center relative overflow-hidden shadow-2xl group hover:scale-[1.02] transition-transform duration-500">
+            <div className="w-full h-full min-h-[400px] bg-gradient-to-br from-[#111184] to-[#000040] rounded-3xl flex items-center justify-center relative overflow-hidden shadow-2xl group hover:scale-[1.02] transition-transform duration-500">
               {/* Animated Background Elements */}
               <div 
                 className="absolute inset-0 opacity-10"
                 style={{ backgroundImage: `url('${bgPattern}')` }}
               ></div>
-              <div className="absolute -top-20 -right-20 w-64 h-64 bg-[#4F46E5]/30 rounded-full blur-3xl animate-pulse"></div>
+              <div className="absolute -top-20 -right-20 w-64 h-64 bg-[#111184]/30 rounded-full blur-3xl animate-pulse"></div>
               <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-[#0EA5E9]/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
               
               <div className="relative z-10 text-center p-10 flex flex-col items-center justify-center h-full">
@@ -92,11 +92,11 @@ export default function WhyChooseUs({ features }: WhyChooseUsProps) {
                 style={{ animationDelay: `${(idx + 3) * 0.15}s` }}
               >
                 <div className="flex items-start gap-4">
-                  <span className="text-4xl font-bold text-gray-200 group-hover:text-[#02066F] transition-colors duration-300 leading-none">
+                  <span className="text-4xl font-bold text-gray-200 group-hover:text-[#111184] transition-colors duration-300 leading-none">
                     {feature.number}
                   </span>
                   <div className="flex-1">
-                    <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-[#02066F] transition-colors">
+                    <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-[#111184] transition-colors">
                       {feature.title}
                     </h3>
                     <p className="text-slate-600 text-sm leading-relaxed">{feature.description}</p>

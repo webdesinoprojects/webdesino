@@ -87,7 +87,7 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md">
       {/* Top Bar - Tier 1 */}
-      <div className="bg-[#02066F] text-white py-3">
+      <div className="bg-[#111184] text-white py-3">
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2 font-bold text-xl hover:text-gray-200 transition">
@@ -104,7 +104,7 @@ export default function Navbar() {
             <div className="hidden md:flex items-center gap-6 text-sm text-white/80">
               <a href="tel:+919310851557" className="flex items-center gap-2 hover:text-white transition">
                 <Phone size={16} />
-                <span>+91 93108 51557</span>
+                <span>+91 93108 51557, +91 93508 87828</span>
               </a>
               <a href="mailto:info@webdesino.com" className="flex items-center gap-2 hover:text-white transition">
                 <Mail size={16} />
@@ -114,7 +114,7 @@ export default function Navbar() {
           </div>
           <Link
             href="/contact"
-            className="bg-white text-[#02066F] px-5 py-2 rounded-full text-sm font-bold hover:bg-gray-100 transition flex items-center gap-2 hover-lift shadow-lg"
+            className="bg-white text-[#111184] px-5 py-2 rounded-full text-sm font-bold hover:bg-gray-100 transition flex items-center gap-2 hover-lift shadow-lg"
           >
             Get Proposal
             <ArrowRight size={14} />
@@ -130,14 +130,14 @@ export default function Navbar() {
             <div className="hidden lg:flex items-center gap-6 xl:gap-8">
               
               {/* Home */}
-              <Link href="/" className="flex items-center gap-2 text-slate-700 hover:text-[#02066F] transition font-medium">
+              <Link href="/" className="flex items-center gap-2 text-slate-700 hover:text-[#111184] transition font-medium">
                 <Home size={18} />
                 <span>Home</span>
               </Link>
 
               {/* Our Services */}
               <button
-                className={`flex items-center gap-2 transition font-medium ${activeDropdown === 'services' ? 'text-[#02066F]' : 'text-slate-700 hover:text-[#02066F]'}`}
+                className={`flex items-center gap-2 transition font-medium ${activeDropdown === 'services' ? 'text-[#111184]' : 'text-slate-700 hover:text-[#111184]'}`}
                 onClick={() => toggleDropdown('services')}
               >
                 <Code size={18} />
@@ -148,7 +148,7 @@ export default function Navbar() {
               {/* Our Work */}
               <div className="relative">
                 <button
-                  className={`flex items-center gap-2 transition font-medium ${activeDropdown === 'work' ? 'text-[#02066F]' : 'text-slate-700 hover:text-[#02066F]'}`}
+                  className={`flex items-center gap-2 transition font-medium ${activeDropdown === 'work' ? 'text-[#111184]' : 'text-slate-700 hover:text-[#111184]'}`}
                   onClick={() => toggleDropdown('work')}
                 >
                   <Briefcase size={18} />
@@ -158,15 +158,15 @@ export default function Navbar() {
                 {activeDropdown === 'work' && (
                    <div className="absolute top-full left-0 mt-4 w-64 bg-white shadow-xl border border-slate-100 z-50 rounded-2xl p-2 animate-fade-in-up">
                       {workDropdown.map((item, idx) => (
-                        <Link key={idx} href={item.href} className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 text-slate-600 hover:text-[#02066F] transition group">
-                          <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-500 group-hover:bg-[#02066F]/10 group-hover:text-[#02066F] transition">
+                        <Link key={idx} href={item.href} className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 text-slate-600 hover:text-[#111184] transition group">
+                          <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-500 group-hover:bg-[#111184]/10 group-hover:text-[#111184] transition">
                             {item.icon}
                           </div>
                           <span className="font-medium text-sm">{item.name}</span>
                         </Link>
                       ))}
                       <div className="mt-2 pt-2 border-t border-slate-100">
-                        <Link href="/portfolio" className="flex items-center justify-center gap-2 p-2 text-sm font-bold text-[#02066F] hover:bg-[#02066F]/5 rounded-lg transition">
+                        <Link href="/portfolio" className="flex items-center justify-center gap-2 p-2 text-sm font-bold text-[#111184] hover:bg-[#111184]/5 rounded-lg transition">
                           View All Work <ArrowRight size={14} />
                         </Link>
                       </div>
@@ -177,7 +177,7 @@ export default function Navbar() {
               {/* Our Clients */}
               <div className="relative">
                 <button
-                  className={`flex items-center gap-2 transition font-medium ${activeDropdown === 'clients' ? 'text-[#02066F]' : 'text-slate-700 hover:text-[#02066F]'}`}
+                  className={`flex items-center gap-2 transition font-medium ${activeDropdown === 'clients' ? 'text-[#111184]' : 'text-slate-700 hover:text-[#111184]'}`}
                   onClick={() => toggleDropdown('clients')}
                 >
                   <Users size={18} />
@@ -187,12 +187,12 @@ export default function Navbar() {
                 {activeDropdown === 'clients' && (
                    <div className="absolute top-full left-0 mt-4 w-64 bg-white shadow-xl border border-slate-100 z-50 rounded-2xl p-2 animate-fade-in-up">
                       {clientsDropdown.map((item, idx) => (
-                        <Link key={idx} href={item.href} className="block p-3 rounded-xl hover:bg-slate-50 text-slate-600 hover:text-[#02066F] transition font-medium text-sm">
+                        <Link key={idx} href={item.href} className="block p-3 rounded-xl hover:bg-slate-50 text-slate-600 hover:text-[#111184] transition font-medium text-sm">
                           {item.name}
                         </Link>
                       ))}
                       <div className="mt-2 pt-2 border-t border-slate-100">
-                        <Link href="/our-clients" className="flex items-center justify-center gap-2 p-2 text-sm font-bold text-[#02066F] hover:bg-[#02066F]/5 rounded-lg transition">
+                        <Link href="/our-clients" className="flex items-center justify-center gap-2 p-2 text-sm font-bold text-[#111184] hover:bg-[#111184]/5 rounded-lg transition">
                           View All Clients <ArrowRight size={14} />
                         </Link>
                       </div>
@@ -201,19 +201,19 @@ export default function Navbar() {
               </div>
 
               {/* Blog */}
-              <Link href="/blog" className="flex items-center gap-2 text-slate-700 hover:text-[#02066F] transition font-medium">
+              <Link href="/blog" className="flex items-center gap-2 text-slate-700 hover:text-[#111184] transition font-medium">
                 <BookOpen size={18} />
                 <span>Blog</span>
               </Link>
 
               {/* About */}
-              <Link href="/about" className="flex items-center gap-2 text-slate-700 hover:text-[#02066F] transition font-medium">
+              <Link href="/about" className="flex items-center gap-2 text-slate-700 hover:text-[#111184] transition font-medium">
                 <Info size={18} />
                 <span>About</span>
               </Link>
 
               {/* Contact */}
-              <Link href="/contact" className="flex items-center gap-2 text-slate-700 hover:text-[#02066F] transition font-medium">
+              <Link href="/contact" className="flex items-center gap-2 text-slate-700 hover:text-[#111184] transition font-medium">
                 <Phone size={18} />
                 <span>Contact Us</span>
               </Link>
@@ -229,7 +229,7 @@ export default function Navbar() {
                     {megaMenuItems.map((category, idx) => (
                       <div key={idx}>
                         <h3 className="font-bold text-slate-900 mb-4 text-lg border-b border-slate-100 pb-2">
-                          <Link href={`/services/${category.slug}`} className="hover:text-[#02066F] transition">
+                          <Link href={`/services/${category.slug}`} className="hover:text-[#111184] transition">
                             {category.title}
                           </Link>
                         </h3>
@@ -238,7 +238,7 @@ export default function Navbar() {
                             <li key={itemIdx}>
                               <Link
                                 href={`/services/${category.slug}/${item.slug}`}
-                                className="text-slate-600 hover:text-[#02066F] transition text-sm block hover:translate-x-1 transform duration-200"
+                                className="text-slate-600 hover:text-[#111184] transition text-sm block hover:translate-x-1 transform duration-200"
                               >
                                 {item.label}
                               </Link>
@@ -277,7 +277,7 @@ export default function Navbar() {
               <Link
                 key={idx}
                 href={category.href}
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-50 border border-slate-200 hover:border-[#02066F] hover:bg-[#02066F] hover:text-white text-slate-600 font-medium text-xs md:text-sm whitespace-nowrap transition-all flex-shrink-0 group"
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-50 border border-slate-200 hover:border-[#111184] hover:bg-[#111184] hover:text-white text-slate-600 font-medium text-xs md:text-sm whitespace-nowrap transition-all flex-shrink-0 group"
               >
                 {category.icon && <span className="group-hover:text-white transition-colors">{category.icon}</span>}
                 <span>{category.label}</span>

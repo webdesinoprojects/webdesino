@@ -96,8 +96,8 @@ export default async function OurClientsPage({
   return (
     <main className="bg-slate-50 min-h-screen">
       {/* Hero Section */}
-      <section className="bg-[#02066F] text-white py-20 lg:py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[#02066F]/10"></div>
+      <section className="bg-[#111184] text-white py-20 lg:py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[#111184]/10"></div>
         <div className="container mx-auto px-4 relative z-10 text-center">
           <h1 className="text-4xl lg:text-6xl font-bold mb-6 animate-fade-in uppercase">
             {content.title}
@@ -191,10 +191,10 @@ export default async function OurClientsPage({
                       unoptimized
                     />
                   </div>
-                  <h3 className="font-bold text-slate-900 group-hover:text-[#02066F] transition-colors">
+                  <h3 className="font-bold text-slate-900 group-hover:text-[#111184] transition-colors">
                     {client.name.replace(" Instagram", "")}
                   </h3>
-                  <span className="text-sm text-[#02066F] mt-2 font-medium">View Profile</span>
+                  <span className="text-sm text-[#111184] mt-2 font-medium">View Profile</span>
                 </a>
               ))}
             </div>
@@ -233,12 +233,12 @@ export default async function OurClientsPage({
                             className="object-contain object-top group-hover:scale-105 transition-transform duration-500"
                             unoptimized // Since we are using external microlink images
                           />
-                          <div className="absolute inset-0 bg-[#02066F]/0 group-hover:bg-[#02066F]/40 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                          <div className="absolute inset-0 bg-[#111184]/0 group-hover:bg-[#111184]/40 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
                             <a
                               href={client.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="bg-white text-[#02066F] px-6 py-3 rounded-full font-bold transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 flex items-center gap-2 hover:bg-white/90"
+                              className="bg-white text-[#111184] px-6 py-3 rounded-full font-bold transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 flex items-center gap-2 hover:bg-white/90"
                             >
                               View Project
                               <ArrowRight size={18} />
@@ -246,14 +246,14 @@ export default async function OurClientsPage({
                           </div>
                         </div>
                         <div className="p-6">
-                          <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-[#02066F] transition-colors">
+                          <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-[#111184] transition-colors">
                             {client.name}
                           </h3>
                           <a
                             href={client.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-sm text-slate-500 hover:text-[#02066F] transition-colors truncate block"
+                            className="text-sm text-slate-500 hover:text-[#111184] transition-colors truncate block"
                           >
                             {client.url}
                           </a>
@@ -277,7 +277,7 @@ export default async function OurClientsPage({
 
       {/* Why Choose Us for Graphic Designing */}
       {content.whyChooseUs.length > 0 && (
-        <section className="bg-[#02066F] text-white py-20">
+        <section className="bg-[#111184] text-white py-20">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl lg:text-4xl font-bold text-center mb-16 uppercase">Why Choose Us?</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">

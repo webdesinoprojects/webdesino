@@ -43,7 +43,7 @@ export default function SEOAuditSection() {
               <input
                 type="url"
                 placeholder="Enter your website URL (e.g., https://example.com)"
-                className="w-full pl-16 pr-48 py-6 rounded-full text-slate-900 text-lg focus:outline-none focus:ring-4 focus:ring-[#02066F]/20 shadow-xl border border-slate-200"
+                className="w-full pl-16 pr-48 py-6 rounded-full text-slate-900 text-lg focus:outline-none focus:ring-4 focus:ring-[#111184]/20 shadow-xl border border-slate-200"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 required
@@ -51,7 +51,7 @@ export default function SEOAuditSection() {
               <button
                 type="submit"
                 disabled={loading}
-                className="absolute right-2 top-2 bottom-2 bg-[#02066F] hover:bg-black text-white px-8 rounded-full font-bold transition-all hover:scale-105 disabled:opacity-70 disabled:hover:scale-100 flex items-center gap-2"
+                className="absolute right-2 top-2 bottom-2 bg-[#111184] hover:bg-black text-white px-8 rounded-full font-bold transition-all hover:scale-105 disabled:opacity-70 disabled:hover:scale-100 flex items-center gap-2"
               >
                 {loading ? <Loader2 className="animate-spin" /> : "Run Audit"}
                 {!loading && <ArrowRight size={20} />}

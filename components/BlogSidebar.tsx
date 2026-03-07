@@ -16,9 +16,9 @@ export default function BlogSidebar() {
           <input
             type="text"
             placeholder="Search..."
-            className="w-full pl-4 pr-10 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#02066F] transition-all"
+            className="w-full pl-4 pr-10 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#111184] transition-all"
           />
-          <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#02066F]">
+          <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#111184]">
             <Search size={20} />
           </button>
         </form>
@@ -30,7 +30,7 @@ export default function BlogSidebar() {
         <ul className="space-y-4">
           {recentPosts.map((post) => (
             <li key={post.id}>
-              <Link href={`/blog/${post.slug}`} className="text-slate-600 hover:text-[#02066F] transition-colors text-sm font-medium line-clamp-2">
+              <Link href={`/blog/${post.slug}`} className="text-slate-600 hover:text-[#111184] transition-colors text-sm font-medium line-clamp-2">
                 {post.title}
               </Link>
             </li>
@@ -50,7 +50,7 @@ export default function BlogSidebar() {
         <ul className="space-y-2">
           {archives.map((archive) => (
             <li key={archive}>
-              <Link href="#" className="text-slate-600 hover:text-[#02066F] transition-colors text-sm">
+              <Link href="#" className="text-slate-600 hover:text-[#111184] transition-colors text-sm">
                 {archive}
               </Link>
             </li>
@@ -64,7 +64,7 @@ export default function BlogSidebar() {
         <ul className="space-y-2">
           {categories.map((cat) => (
             <li key={cat}>
-              <Link href="#" className="text-slate-600 hover:text-[#02066F] transition-colors text-sm flex items-center justify-between group">
+              <Link href="#" className="text-slate-600 hover:text-[#111184] transition-colors text-sm flex items-center justify-between group">
                 <span>{cat}</span>
               </Link>
             </li>

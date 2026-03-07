@@ -756,14 +756,18 @@ const aboutPageContent = {
 // --- Main Seed Function ---
 
 async function main() {
-  const password = await hash('admin123', 12)
+  // Get admin credentials from environment variables
+  const adminEmail = process.env.ADMIN_EMAIL || 'admin@webdesino.com';
+  const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
+  
+  const password = await hash(adminPassword, 12)
   const admin = await prisma.admin.upsert({
-    where: { email: 'webdesino.com@gmail.com' },
+    where: { email: adminEmail },
     update: {
       password: password,
     },
     create: {
-      email: 'webdesino.com@gmail.com',
+      email: adminEmail,
       name: 'Admin',
       password,
     },

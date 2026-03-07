@@ -55,7 +55,7 @@ export default function BottomNav() {
     <>
       {/* Desktop Navigation */}
       <nav ref={navRef} className="hidden lg:block fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
-        <div className="bg-[#02066F]/90 backdrop-blur-md rounded-full shadow-2xl px-4 py-3 flex items-center gap-2 border border-white/10">
+        <div className="bg-[#111184]/90 backdrop-blur-md rounded-full shadow-2xl px-4 py-3 flex items-center gap-2 border border-white/10">
           {navItems.map((item, idx) => {
             const Icon = item.icon;
             return (
@@ -98,7 +98,7 @@ export default function BottomNav() {
                       {servicesData.map((category) => (
                         <div key={category.slug}>
                           <h3 className="font-bold text-slate-900 mb-3 text-sm uppercase tracking-wide border-b border-slate-100 pb-2">
-                            <Link href={`/services/${category.slug}`} className="hover:text-[#02066F] transition-colors">
+                            <Link href={`/services/${category.slug}`} className="hover:text-[#111184] transition-colors">
                               {category.title}
                             </Link>
                           </h3>
@@ -107,7 +107,7 @@ export default function BottomNav() {
                               <li key={subtype.slug}>
                                 <Link
                                   href={`/services/${category.slug}/${subtype.slug}`}
-                                  className="text-slate-600 hover:text-[#02066F] transition-colors text-sm block py-1 hover:translate-x-1 transform duration-200"
+                                  className="text-slate-600 hover:text-[#111184] transition-colors text-sm block py-1 hover:translate-x-1 transform duration-200"
                                 >
                                   {subtype.title}
                                 </Link>
@@ -131,7 +131,7 @@ export default function BottomNav() {
                         <li key={project.name}>
                           <Link
                             href={project.href}
-                            className="flex items-center gap-3 text-slate-600 hover:text-[#02066F] hover:bg-[#02066F]/5 transition-all text-sm p-2 rounded-lg group"
+                            className="flex items-center gap-3 text-slate-600 hover:text-[#111184] hover:bg-[#111184]/5 transition-all text-sm p-2 rounded-lg group"
                           >
                             <span className="text-slate-900 group-hover:scale-110 transition-transform">
                               {project.icon}
@@ -161,7 +161,7 @@ export default function BottomNav() {
                         <li key={client.name}>
                           <Link
                             href={client.href}
-                            className="block text-slate-600 hover:text-[#02066F] hover:bg-[#02066F]/5 transition-all text-sm p-2 rounded-lg"
+                            className="block text-slate-600 hover:text-[#111184] hover:bg-[#111184]/5 transition-all text-sm p-2 rounded-lg"
                           >
                             {client.name}
                           </Link>
@@ -180,7 +180,7 @@ export default function BottomNav() {
       <nav className="lg:hidden fixed bottom-6 right-6 z-50">
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="w-14 h-14 bg-[#02066F] text-white rounded-full shadow-2xl flex items-center justify-center hover-lift hover-glow transition-all border border-white/10"
+          className="w-14 h-14 bg-[#111184] text-white rounded-full shadow-2xl flex items-center justify-center hover-lift hover-glow transition-all border border-white/10"
           aria-label="Toggle menu"
         >
           {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -188,7 +188,7 @@ export default function BottomNav() {
 
         {/* Mobile Menu Overlay */}
         {mobileMenuOpen && (
-          <div className="fixed inset-0 bg-[#02066F]/60 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)} />
+          <div className="fixed inset-0 bg-[#111184]/60 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)} />
         )}
 
         {/* Mobile Menu Panel */}
@@ -200,7 +200,7 @@ export default function BottomNav() {
                   <div className="flex items-center justify-between">
                     <Link
                       href={item.href}
-                      className="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-[#02066F]/5 hover:text-[#02066F] transition-all font-medium flex-1 whitespace-nowrap"
+                      className="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-[#111184]/5 hover:text-[#111184] transition-all font-medium flex-1 whitespace-nowrap"
                       onClick={() => !item.hasDropdown && setMobileMenuOpen(false)}
                     >
                       {item.icon && <item.icon size={20} />}
@@ -209,7 +209,7 @@ export default function BottomNav() {
                     {item.hasDropdown && (
                       <button
                         onClick={() => setMobileExpandedItem(mobileExpandedItem === item.label ? null : item.label)}
-                        className="p-3 rounded-xl hover:bg-[#02066F]/5 text-slate-500 hover:text-[#02066F] transition-all"
+                        className="p-3 rounded-xl hover:bg-[#111184]/5 text-slate-500 hover:text-[#111184] transition-all"
                       >
                         <ChevronDown
                           size={20}
@@ -221,7 +221,7 @@ export default function BottomNav() {
 
                   {/* Mobile Services Dropdown */}
                   {item.label === "Our Services" && mobileExpandedItem === item.label && (
-                    <div className="ml-4 mt-2 space-y-4 pl-4 border-l-2 border-[#02066F]/10">
+                    <div className="ml-4 mt-2 space-y-4 pl-4 border-l-2 border-[#111184]/10">
                       {servicesData.map((category) => (
                         <div key={category.slug}>
                           <h4 className="font-bold text-slate-900 text-xs uppercase tracking-wide mb-2">
@@ -237,7 +237,7 @@ export default function BottomNav() {
                               <li key={subtype.slug}>
                                 <Link
                                   href={`/services/${category.slug}/${subtype.slug}`}
-                                  className="text-sm text-slate-600 hover:text-[#02066F] transition-colors block py-1"
+                                  className="text-sm text-slate-600 hover:text-[#111184] transition-colors block py-1"
                                   onClick={() => setMobileMenuOpen(false)}
                                 >
                                   {subtype.title}
@@ -252,12 +252,12 @@ export default function BottomNav() {
 
                   {/* Mobile Work Dropdown */}
                   {item.label === "Our Work" && mobileExpandedItem === item.label && (
-                    <div className="ml-4 mt-2 space-y-2 pl-4 border-l-2 border-[#02066F]/10">
+                    <div className="ml-4 mt-2 space-y-2 pl-4 border-l-2 border-[#111184]/10">
                       {workDropdown.map((project) => (
                         <Link
                           key={project.name}
                           href={project.href}
-                          className="flex items-center gap-3 text-slate-600 hover:text-[#02066F] transition-all text-sm p-2 rounded-lg"
+                          className="flex items-center gap-3 text-slate-600 hover:text-[#111184] transition-all text-sm p-2 rounded-lg"
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           <span className="text-slate-900">{project.icon}</span>
@@ -269,12 +269,12 @@ export default function BottomNav() {
 
                   {/* Mobile Clients Dropdown */}
                   {item.label === "Our Clients" && mobileExpandedItem === item.label && (
-                    <div className="ml-4 mt-2 space-y-2 pl-4 border-l-2 border-[#02066F]/10">
+                    <div className="ml-4 mt-2 space-y-2 pl-4 border-l-2 border-[#111184]/10">
                       {clientsDropdown.map((client) => (
                         <Link
                           key={client.name}
                           href={client.href}
-                          className="block text-slate-600 hover:text-[#02066F] transition-all text-sm p-2 rounded-lg"
+                          className="block text-slate-600 hover:text-[#111184] transition-all text-sm p-2 rounded-lg"
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           {client.name}

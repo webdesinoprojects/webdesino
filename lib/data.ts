@@ -870,7 +870,7 @@ export const getBlogPosts = (): BlogPost[] => {
       excerpt: "In today’s competitive world, small businesses need a strong digital presence to grow, attract customers, and stay ahead. That’s where WebDesino, a trusted name in...",
       image: "uploads/2025/11/affordable-seo-services.png",
       content: `
-        <p>In today’s competitive world, small businesses need a strong digital presence to grow, attract customers, and stay ahead. That’s where WebDesino, a trusted name in <a href="https://webdesino.com/digital-marketing-services/" class="text-[#02066F] hover:underline">affordable digital marketing services in Delhi</a>, comes in. With years of expertise and a passion for helping startups and local brands, WebDesino empowers small businesses to compete with big names online — all without breaking the bank.</p>
+        <p>In today’s competitive world, small businesses need a strong digital presence to grow, attract customers, and stay ahead. That’s where WebDesino, a trusted name in <a href="https://webdesino.com/digital-marketing-services/" class="text-[#111184] hover:underline">affordable digital marketing services in Delhi</a>, comes in. With years of expertise and a passion for helping startups and local brands, WebDesino empowers small businesses to compete with big names online — all without breaking the bank.</p>
 
         <h2 class="text-2xl font-bold mt-8 mb-4">Why Small Businesses Need Digital Marketing in Delhi</h2>
         <p>Delhi is one of the fastest-growing markets in India, filled with startups, local shops, and small enterprises. But standing out among thousands of competitors isn’t easy. Traditional marketing methods like pamphlets or posters no longer deliver the desired reach.</p>
@@ -1283,7 +1283,7 @@ export const getHeroShowcaseItems = (): HeroShowcaseItem[] => {
       stat: "₹25L+ Sales", 
       description: "Scaled from zero to ₹25L+ monthly sales in 3 months",
       iconName: "Store",
-      iconColor: "text-[#02066F]"
+      iconColor: "text-[#111184]"
     },
     { 
       name: "Fitness Pro", 
@@ -1291,7 +1291,7 @@ export const getHeroShowcaseItems = (): HeroShowcaseItem[] => {
       stat: "50k+ Downloads", 
       description: "Cross-platform fitness tracking app with real-time analytics",
       iconName: "Smartphone",
-      iconColor: "text-[#02066F]"
+      iconColor: "text-[#111184]"
     },
     { 
       name: "Growth Campaign", 
@@ -1299,7 +1299,7 @@ export const getHeroShowcaseItems = (): HeroShowcaseItem[] => {
       stat: "500% ROI", 
       description: "Data-driven ad campaigns delivering massive returns",
       iconName: "Megaphone",
-      iconColor: "text-[#02066F]"
+      iconColor: "text-[#111184]"
     },
     { 
       name: "Brand Identity", 
@@ -1307,7 +1307,7 @@ export const getHeroShowcaseItems = (): HeroShowcaseItem[] => {
       stat: "Viral Content", 
       description: "Stunning visuals and reels that captured millions of views",
       iconName: "Palette",
-      iconColor: "text-[#02066F]"
+      iconColor: "text-[#111184]"
     },
     { 
       name: "Meritshot", 
@@ -1315,7 +1315,7 @@ export const getHeroShowcaseItems = (): HeroShowcaseItem[] => {
       stat: "Global Rank #1", 
       description: "Ranked #1 globally for Investment Banking courses",
       iconName: "Globe",
-      iconColor: "text-[#02066F]"
+      iconColor: "text-[#111184]"
     },
     { 
       name: "Foodie Express", 
@@ -1323,7 +1323,7 @@ export const getHeroShowcaseItems = (): HeroShowcaseItem[] => {
       stat: "4.8 Star Rating", 
       description: "Seamless food ordering experience with live tracking",
       iconName: "Smartphone",
-      iconColor: "text-[#02066F]"
+      iconColor: "text-[#111184]"
     },
     { 
       name: "SEO Dominance", 
@@ -1331,7 +1331,7 @@ export const getHeroShowcaseItems = (): HeroShowcaseItem[] => {
       stat: "1st Page Rank", 
       description: "Ranking businesses on top for competitive keywords",
       iconName: "TrendingUp",
-      iconColor: "text-[#02066F]"
+      iconColor: "text-[#111184]"
     },
     { 
       name: "Social Reels", 
@@ -1339,7 +1339,7 @@ export const getHeroShowcaseItems = (): HeroShowcaseItem[] => {
       stat: "1M+ Views", 
       description: "High-retention video edits for social media growth",
       iconName: "Palette",
-      iconColor: "text-[#02066F]"
+      iconColor: "text-[#111184]"
     },
   ];
 };

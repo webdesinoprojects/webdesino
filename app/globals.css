@@ -54,12 +54,12 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #02066F;
+  background: #111184;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #02066F;
+  background: #111184;
 }
 
 /* Custom scrollbar for dark sections */
@@ -264,21 +264,21 @@ html {
 
 /* Gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, #02066F 0%, #0F172A 100%);
+  background: linear-gradient(135deg, #111184 0%, #0F172A 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-orange {
-  background: linear-gradient(135deg, #02066F 0%, #0F172A 100%);
+  background: linear-gradient(135deg, #111184 0%, #0F172A 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-teal {
-  background: linear-gradient(135deg, #0F172A 0%, #02066F 100%);
+  background: linear-gradient(135deg, #0F172A 0%, #111184 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -286,15 +286,15 @@ html {
 
 /* Gradient backgrounds */
 .bg-gradient-orange {
-  background: linear-gradient(135deg, #02066F 0%, #0F172A 100%);
+  background: linear-gradient(135deg, #111184 0%, #0F172A 100%);
 }
 
 .bg-gradient-teal {
-  background: linear-gradient(135deg, #0F172A 0%, #02066F 100%);
+  background: linear-gradient(135deg, #0F172A 0%, #111184 100%);
 }
 
 .bg-gradient-radial {
-  background: radial-gradient(circle at center, #02066F 0%, #0F172A 100%);
+  background: radial-gradient(circle at center, #111184 0%, #0F172A 100%);
 }
 
 /* Hover effects */

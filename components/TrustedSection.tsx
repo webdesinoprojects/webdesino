@@ -50,8 +50,8 @@ export default function TrustedSection() {
     <section className="py-12 lg:py-20 bg-white relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 opacity-50">
-        <div className="absolute top-10 right-10 w-72 h-72 bg-[#02066F]/5 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-10 left-10 w-96 h-96 bg-[#02066F]/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-10 right-10 w-72 h-72 bg-[#111184]/5 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-10 left-10 w-96 h-96 bg-[#111184]/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -72,10 +72,10 @@ export default function TrustedSection() {
             return (
               <div
                 key={idx}
-                className="p-8 rounded-3xl bg-white border border-slate-100 shadow-lg hover:shadow-xl hover:border-[#02066F]/20 text-center hover-lift transition-all duration-300 animate-fade-in"
+                className="p-8 rounded-3xl bg-white border border-slate-100 shadow-lg hover:shadow-xl hover:border-[#111184]/20 text-center hover-lift transition-all duration-300 animate-fade-in"
                 style={{ animationDelay: `${idx * 0.1 + 0.2}s` }}
               >
-                <Icon className="mx-auto mb-4 text-[#02066F]" size={48} />
+                <Icon className="mx-auto mb-4 text-[#111184]" size={48} />
                 <div className="text-4xl font-bold text-slate-900 mb-2">{stat.value}</div>
                 <div className="text-slate-600 font-medium">{stat.label}</div>
               </div>
@@ -83,8 +83,17 @@ export default function TrustedSection() {
           })}
         </div>
 
-        {/* Certifications */}
-        <div className="max-w-5xl mx-auto">
+        {/* Certifications Section */}
+        <div className="max-w-5xl mx-auto mb-16">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl lg:text-3xl font-bold text-slate-900 mb-3">
+              Certified Partners
+            </h3>
+            <p className="text-slate-600">
+              Recognized and certified by global industry leaders
+            </p>
+          </div>
+          
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 mb-8">
             {certifications.map((cert, idx) => (
               <Link
@@ -105,7 +114,7 @@ export default function TrustedSection() {
                     className="w-full h-auto object-contain max-w-[60px] sm:max-w-[70px] md:max-w-[80px] mx-auto"
                   />
                 </div>
-                <div className="text-xs text-gray-600 group-hover:text-[#02066F] transition-colors font-medium">
+                <div className="text-xs text-gray-600 group-hover:text-[#111184] transition-colors font-medium">
                   {cert.name.replace(" Delhi NCR", "")}
                 </div>
               </Link>
@@ -115,8 +124,8 @@ export default function TrustedSection() {
           {/* Optimize Your Marketing Badge */}
           <div className="text-center">
             <div className="inline-flex items-center gap-3 px-8 py-4 rounded-full glass-strong animate-fade-in" style={{ animationDelay: '1s' }}>
-              <Award className="text-[#02066F]" size={24} />
-              <span className="text-sm font-bold text-[#02066F] uppercase tracking-wider">
+              <Award className="text-[#111184]" size={24} />
+              <span className="text-sm font-bold text-[#111184] uppercase tracking-wider">
                 Optimize Your Marketing
               </span>
             </div>
@@ -124,7 +133,7 @@ export default function TrustedSection() {
         </div>
 
         {/* Trusted by Companies Worldwide Banner */}
-        <div className="bg-[#02066F] py-12 md:py-20 border-t border-slate-200">
+        <div className="bg-[#111184] py-12 md:py-20 border-t border-slate-200">
           <div className="container mx-auto text-center">
             <h2 className="text-3xl font-bold text-white mb-8">
               Trusted by leading brands

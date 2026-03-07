@@ -16,8 +16,8 @@ export default function ServicesPills() {
   return (
     <section className="py-10 lg:py-16 bg-slate-50 relative overflow-hidden">
       {/* Floating background elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#02066F]/5 rounded-full blur-3xl animate-float" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#02066F]/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[#111184]/5 rounded-full blur-3xl animate-float" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#111184]/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Horizontal scrolling ticker */}
@@ -27,7 +27,7 @@ export default function ServicesPills() {
               <Link
                 key={idx}
                 href={item.href}
-                className="flex-shrink-0 px-6 py-3 bg-white border border-slate-200 rounded-full shadow-sm text-slate-600 font-medium text-sm whitespace-nowrap hover:border-[#02066F] hover:text-[#02066F] transition-colors cursor-pointer"
+                className="flex-shrink-0 px-6 py-3 bg-white border border-slate-200 rounded-full shadow-sm text-slate-600 font-medium text-sm whitespace-nowrap hover:border-[#111184] hover:text-[#111184] transition-colors cursor-pointer"
               >
                 {item.title}
               </Link>
@@ -38,7 +38,7 @@ export default function ServicesPills() {
 
         {/* <h2 className="text-3xl lg:text-5xl font-bold text-center mb-10 animate-scale-in" style={{ animationDelay: '0.2s' }}>
           <span className="text-slate-900">What do you want to </span>
-          <span className="text-[#02066F]">achieve?</span>
+          <span className="text-[#111184]">achieve?</span>
         </h2>
 
         <div className="space-y-4 max-w-5xl mx-auto">
@@ -46,7 +46,7 @@ export default function ServicesPills() {
             <Link
               key={idx}
               href={`/services/${service.slug}`}
-              className="group block bg-white hover:bg-[#02066F] transition-all duration-300 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-xl border border-slate-100 hover:border-[#02066F] animate-slide-in-up"
+              className="group block bg-white hover:bg-[#111184] transition-all duration-300 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-xl border border-slate-100 hover:border-[#111184] animate-slide-in-up"
               style={{ animationDelay: `${0.1 * (idx + 1)}s` }}
             >
               <div className="flex items-center justify-between">
@@ -59,7 +59,7 @@ export default function ServicesPills() {
                   </p>
                 </div>
                 <div className="w-12 h-12 rounded-full bg-slate-50 group-hover:bg-white/20 flex items-center justify-center transition-all group-hover:scale-110 flex-shrink-0 ml-4">
-                  <ArrowRight className="text-[#02066F] group-hover:text-white transition-colors" size={20} />
+                  <ArrowRight className="text-[#111184] group-hover:text-white transition-colors" size={20} />
                 </div>
               </div>
             </Link>
@@ -69,7 +69,7 @@ export default function ServicesPills() {
         {/* Additional decorative element */}
         {/* <div className="mt-16 text-center animate-fade-in" style={{ animationDelay: '0.8s' }}>
           <div className="inline-flex items-center gap-3 px-6 py-3 bg-white border border-slate-200 rounded-full shadow-sm">
-            <div className="w-2 h-2 bg-[#02066F] rounded-full animate-pulse" />
+            <div className="w-2 h-2 bg-[#111184] rounded-full animate-pulse" />
             <span className="text-slate-600 font-medium text-sm">100+ Projects Delivered Successfully</span>
           </div>
         </div>

@@ -8,12 +8,6 @@ import { ArrowRight, Search, Award, Briefcase, BarChart, Store, Code, Star, Tren
 import { HeroShowcaseItem } from "@/lib/data";
 import { getStorageUrl } from "@/lib/utils";
 
-const Google = getStorageUrl("/google.jpg");
-const WordPress = getStorageUrl("/wordpress.jpg");
-const Shopify = getStorageUrl("/shopify.jpg");
-const SEMRush = getStorageUrl("/semrush.png");
-const DesignRush = getStorageUrl("/designrush.jpg");
-
 const iconMap = {
   Store: Store,
   Smartphone: Smartphone,
@@ -31,15 +25,6 @@ const rotatingWords = [
 	{ text: "E-commerce", href: "/services/website-solutions/ecommerce-development" },
 	{ text: "Mobile Apps", href: "/services/app-development" },
 	{ text: "Branding", href: "/services/branding" },
-];
-
-// Certification Badges
-const certifications = [
-	{ name: "Google Partner", logo: Google, icon: <Search />, url: "https://www.google.com/partners/" },
-	{ name: "WordPress Certified", logo: WordPress, icon: <Code />, url: "https://wordpress.org/" },
-	{ name: "Shopify Partner", logo: Shopify, icon: <Store />, url: "https://www.shopify.com/partners" },
-	{ name: "SEMRush Certified", logo: SEMRush, icon: <BarChart />, url: "https://www.semrush.com/" },
-	{ name: "DesignRush Accredited", logo: DesignRush, icon: <Award />, url: "https://www.designrush.com/" },
 ];
 
 interface HeroProps {
@@ -102,9 +87,9 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 		>
 			{/* Floating background elements */}
 			<div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-				<div className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] bg-[#02066F]/5 rounded-full blur-3xl animate-float" />
+				<div className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] bg-[#111184]/5 rounded-full blur-3xl animate-float" />
 				<div
-					className="absolute bottom-[-10%] right-[-5%] w-[600px] h-[600px] bg-[#02066F]/5 rounded-full blur-3xl animate-float"
+					className="absolute bottom-[-10%] right-[-5%] w-[600px] h-[600px] bg-[#111184]/5 rounded-full blur-3xl animate-float"
 					style={{ animationDelay: "1s" }}
 				/>
 			</div>
@@ -116,10 +101,10 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 						
 						{/* Rotating words ticker */}
 						<div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 shadow-sm mb-4 animate-fade-in">
-							<span className="w-2 h-2 rounded-full bg-[#02066F] animate-pulse"></span>
+							<span className="w-2 h-2 rounded-full bg-[#111184] animate-pulse"></span>
 							<Link 
 								href={rotatingWords[currentWordIndex].href}
-								className="text-sm font-medium text-slate-600 min-w-[140px] transition-all duration-300 hover:text-[#02066F]"
+								className="text-sm font-medium text-slate-600 min-w-[140px] transition-all duration-300 hover:text-[#111184]"
 							>
 								{rotatingWords[currentWordIndex].text}
 							</Link>
@@ -129,9 +114,9 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 							<span className="block">
 								Stunning Websites By Top
 							</span>
-							<span className="block text-[#02066F]">
+							<span className="block text-[#111184]">
 								{text}
-                                <span className="animate-pulse text-[#02066F]">|</span>
+                                <span className="animate-pulse text-[#111184]">|</span>
 							</span>
 						</h1>
 
@@ -147,11 +132,11 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 									placeholder="Search services (e.g., SEO, Web Design)..."
 									value={searchTerm}
 									onChange={(e) => setSearchTerm(e.target.value)}
-									className="w-full px-6 py-4 rounded-full bg-white border border-slate-200 focus:border-[#02066F] focus:ring-2 focus:ring-[#02066F]/20 outline-none transition-all shadow-sm pr-12 text-slate-700 placeholder:text-slate-400"
+									className="w-full px-6 py-4 rounded-full bg-white border border-slate-200 focus:border-[#111184] focus:ring-2 focus:ring-[#111184]/20 outline-none transition-all shadow-sm pr-12 text-slate-700 placeholder:text-slate-400"
 								/>
 								<button
 									type="submit"
-									className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-[#02066F] text-white rounded-full hover:bg-[#02066F]/90 transition-colors"
+									className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-[#111184] text-white rounded-full hover:bg-[#111184]/90 transition-colors"
 									aria-label="Search"
 								>
 									<Search size={20} />
@@ -162,7 +147,7 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 						<div className="flex flex-col sm:flex-row gap-4">
 							<Link
 								href="/contact"
-								className="px-8 py-4 bg-[#02066F] text-white rounded-full font-bold hover:bg-[#02066F]/90 transition-all hover:scale-105 shadow-lg shadow-[#02066F]/25 flex items-center justify-center gap-2 group"
+								className="px-8 py-4 bg-[#111184] text-white rounded-full font-bold hover:bg-[#111184]/90 transition-all hover:scale-105 shadow-lg shadow-[#111184]/25 flex items-center justify-center gap-2 group"
 							>
 								Start Your Project
 								<ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
@@ -175,40 +160,13 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 								<Briefcase size={20} className="text-slate-400" />
 							</Link>
 						</div>
-
-						{/* Trust Indicators */}
-						<div className="pt-8 border-t border-slate-200 lg:hidden">
-							<p className="text-sm text-slate-500 font-medium mb-4">Certified Partners</p>
-							<div className="grid grid-cols-3 gap-y-4 gap-x-4 md:flex md:gap-8 items-center">
-								{certifications.map((cert, idx) => (
-									<a
-										key={idx}
-										href={cert.url}
-										target="_blank"
-										rel="noopener noreferrer"
-										className="relative group flex justify-center md:block"
-										title={cert.name}
-									>
-										<div className="w-24 h-24 relative transition-all duration-300 hover:scale-105">
-											<NextImage
-												src={cert.logo}
-												alt={cert.name}
-												fill
-                                                sizes="(max-width: 768px) 100px, 100px"
-												className="object-contain object-center md:object-left"
-											/>
-										</div>
-									</a>
-								))}
-							</div>
-						</div>
 					</div>
 
 					{/* Right Column - Scrolling Cards */}
 					<div className="hidden lg:flex flex-col gap-8 h-full justify-center">
 						<div className="relative h-[500px] w-full">
 							{/* Background Blob for Depth */}
-							<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-[#02066F]/10 rounded-full blur-3xl" />
+							<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-[#111184]/10 rounded-full blur-3xl" />
 
 							{/* Gradient Overlays - Matching Section Background */}
 							<div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-slate-50 to-transparent z-10" />
@@ -223,22 +181,22 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 										return (
 											<div
 												key={`item-1-${idx}`}
-												className="relative bg-white/90 backdrop-blur-sm border border-slate-100 p-6 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(2,6,111,0.15)] hover:-translate-y-1 hover:border-[#02066F]/30 transition-all duration-300 group cursor-pointer"
+												className="relative bg-white/90 backdrop-blur-sm border border-slate-100 p-6 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(2,6,111,0.15)] hover:-translate-y-1 hover:border-[#111184]/30 transition-all duration-300 group cursor-pointer"
 												onClick={() => router.push('/portfolio')}
 											>
 												<div className="flex items-start justify-between mb-4">
 													<div className="p-3 bg-gray-50 rounded-xl border border-gray-200 group-hover:scale-110 transition-transform duration-300">
 														<Icon className={`${item.iconColor} w-6 h-6`} />
 													</div>
-													<div className="px-3 py-1 rounded-full bg-slate-50 border border-slate-100 text-slate-600 text-xs font-bold group-hover:bg-[#02066F]/5 group-hover:text-[#02066F] group-hover:border-[#02066F]/20 transition-colors">
+													<div className="px-3 py-1 rounded-full bg-slate-50 border border-slate-100 text-slate-600 text-xs font-bold group-hover:bg-[#111184]/5 group-hover:text-[#111184] group-hover:border-[#111184]/20 transition-colors">
 														{item.stat}
 													</div>
 												</div>
 												
-												<h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-[#02066F] transition-colors">
+												<h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-[#111184] transition-colors">
 													{item.name}
 												</h3>
-												<div className="text-sm font-medium text-slate-500 mb-3 group-hover:text-[#02066F] transition-colors">{item.category}</div>
+												<div className="text-sm font-medium text-slate-500 mb-3 group-hover:text-[#111184] transition-colors">{item.category}</div>
 												
 												<p className="text-slate-600 text-sm leading-relaxed">
 													{item.description}
@@ -253,22 +211,22 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 										return (
 											<div
 												key={`item-2-${idx}`}
-												className="relative bg-white/90 backdrop-blur-sm border border-slate-100 p-6 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(2,6,111,0.15)] hover:-translate-y-1 hover:border-[#02066F]/30 transition-all duration-300 group cursor-pointer"
+												className="relative bg-white/90 backdrop-blur-sm border border-slate-100 p-6 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(2,6,111,0.15)] hover:-translate-y-1 hover:border-[#111184]/30 transition-all duration-300 group cursor-pointer"
 												onClick={() => router.push('/portfolio')}
 											>
 												<div className="flex items-start justify-between mb-4">
 													<div className="p-3 bg-gray-50 rounded-xl border border-gray-200 group-hover:scale-110 transition-transform duration-300">
 														<Icon className={`${item.iconColor} w-6 h-6`} />
 													</div>
-													<div className="px-3 py-1 rounded-full bg-slate-50 border border-slate-100 text-slate-600 text-xs font-bold group-hover:bg-[#02066F]/5 group-hover:text-[#02066F] group-hover:border-[#02066F]/20 transition-colors">
+													<div className="px-3 py-1 rounded-full bg-slate-50 border border-slate-100 text-slate-600 text-xs font-bold group-hover:bg-[#111184]/5 group-hover:text-[#111184] group-hover:border-[#111184]/20 transition-colors">
 														{item.stat}
 													</div>
 												</div>
 												
-												<h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-[#02066F] transition-colors">
+												<h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-[#111184] transition-colors">
 													{item.name}
 												</h3>
-												<div className="text-sm font-medium text-slate-500 mb-3 group-hover:text-[#02066F] transition-colors">{item.category}</div>
+												<div className="text-sm font-medium text-slate-500 mb-3 group-hover:text-[#111184] transition-colors">{item.category}</div>
 												
 												<p className="text-slate-600 text-sm leading-relaxed">
 													{item.description}
@@ -277,33 +235,6 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 										);
 									})}
 								</div>
-							</div>
-						</div>
-
-						{/* Trust Indicators - Desktop Right Side */}
-						<div className="pt-4 border-t border-slate-200/50">
-							<p className="text-sm text-slate-500 font-medium mb-4 text-center">Certified Partners</p>
-							<div className="flex justify-between gap-8 items-center">
-								{certifications.map((cert, idx) => (
-									<a
-										key={idx}
-										href={cert.url}
-										target="_blank"
-										rel="noopener noreferrer"
-										className="relative group block"
-										title={cert.name}
-									>
-										<div className="w-24 h-24 relative transition-all duration-300 hover:scale-105">
-											<NextImage
-												src={cert.logo}
-												alt={cert.name}
-												fill
-                                                sizes="(max-width: 768px) 100px, 100px"
-												className="object-contain"
-											/>
-										</div>
-									</a>
-								))}
 							</div>
 						</div>
 					</div>

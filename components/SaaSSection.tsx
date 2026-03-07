@@ -15,7 +15,7 @@ export default function SaaSSection() {
   const bgPattern = getStorageUrl("/grid-pattern.svg");
 
   return (
-    <section className="py-20 bg-[#02066F] text-white relative overflow-hidden">
+    <section className="py-20 bg-[#111184] text-white relative overflow-hidden">
       {/* Background Pattern */}
       <div 
         className="absolute inset-0 opacity-10"
@@ -38,7 +38,7 @@ export default function SaaSSection() {
             
             <Link 
               href="/contact"
-              className="inline-flex items-center gap-2 bg-white text-[#02066F] px-8 py-4 rounded-full font-bold hover:bg-gray-100 transition-all hover:scale-105 shadow-lg shadow-black/20"
+              className="inline-flex items-center gap-2 bg-white text-[#111184] px-8 py-4 rounded-full font-bold hover:bg-gray-100 transition-all hover:scale-105 shadow-lg shadow-black/20"
             >
               Get Started Now <ArrowRight size={20} />
             </Link>
@@ -51,7 +51,7 @@ export default function SaaSSection() {
                 key={idx} 
                 className="border border-white/20 rounded-2xl p-8 bg-slate-50 hover:shadow-md transition-colors duration-300 flex flex-col justify-center min-h-[180px]"
               >
-                <div className="text-4xl font-bold text-[#02066F] mb-4">
+                <div className="text-4xl font-bold text-[#111184] mb-4">
                   {item.step}
                 </div>
                 <h3 className="text-2xl font-bold text-slate-800">
