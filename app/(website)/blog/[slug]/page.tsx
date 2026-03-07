@@ -61,8 +61,8 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       {/* Hero Section */}
-      <section className="bg-[#02066F] text-white py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[#02066F]/10"></div>
+      <section className="bg-[#111184] text-white py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[#111184]/10"></div>
         <div className="container mx-auto px-4 relative z-10">
           <Link href="/blog" className="inline-flex items-center gap-2 text-white/60 hover:text-white mb-8 transition-colors">
             <ArrowLeft size={20} />
@@ -78,7 +78,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
               {post.title}
             </h1>
             <div className="flex items-center gap-3 text-white/80">
-              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center font-bold text-[#02066F]">
+              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center font-bold text-[#111184]">
                 W
               </div>
               <div>
@@ -108,7 +108,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
               </div>
               
               {/* Article Body */}
-              <div className="p-8 lg:p-12 prose prose-lg max-w-none prose-headings:text-slate-900 prose-p:text-slate-600 prose-a:text-[#02066F] hover:prose-a:text-[#02066F] prose-img:rounded-xl">
+              <div className="p-8 lg:p-12 prose prose-lg max-w-none prose-headings:text-slate-900 prose-p:text-slate-600 prose-a:text-[#111184] hover:prose-a:text-[#111184] prose-img:rounded-xl">
                 {post.content ? (
                   <div dangerouslySetInnerHTML={{ __html: post.content }} />
                 ) : (

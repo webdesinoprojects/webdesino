@@ -1286,11 +1286,11 @@ export const getHeroShowcaseItems = (): HeroShowcaseItem[] => {
       iconColor: "text-[#111184]"
     },
     { 
-      name: "Fitness Pro", 
-      category: "Mobile App", 
-      stat: "50k+ Downloads", 
-      description: "Cross-platform fitness tracking app with real-time analytics",
-      iconName: "Smartphone",
+      name: "Agnishila", 
+      category: "Business Website", 
+      stat: "High Conversion UX", 
+      description: "Modern brand website focused on trust, speed, and lead generation",
+      iconName: "Globe",
       iconColor: "text-[#111184]"
     },
     { 
@@ -1315,14 +1315,6 @@ export const getHeroShowcaseItems = (): HeroShowcaseItem[] => {
       stat: "Global Rank #1", 
       description: "Ranked #1 globally for Investment Banking courses",
       iconName: "Globe",
-      iconColor: "text-[#111184]"
-    },
-    { 
-      name: "Foodie Express", 
-      category: "Food Delivery App", 
-      stat: "4.8 Star Rating", 
-      description: "Seamless food ordering experience with live tracking",
-      iconName: "Smartphone",
       iconColor: "text-[#111184]"
     },
     { 

@@ -12,13 +12,13 @@ const Shopify = getStorageUrl("/shopify.jpg");
 const SEMRush = getStorageUrl("/semrush.png");
 const DesignRush = getStorageUrl("/designrush.jpg");
 const Aadiva = getStorageUrl("/aadiva.png");
-const Bookbuzz = getStorageUrl("/bookbuzz.png");
 const Bulkwala = getStorageUrl("/bulkwala.jpg");
+const Bookbuzz = getStorageUrl("/bookbuzz.png");
 const BuyKhariBauli = getStorageUrl("/buykharibauli.png");
 const Landsaathi = getStorageUrl("/landsaathi.png");
+const Agnishila = getStorageUrl("/agnishila.png");
 const Maxlift = getStorageUrl("/maxlift.png");
-const AmbassadorPerk = getStorageUrl("/image.png");
-const Uag = getStorageUrl("/uag.png");
+const UAG = getStorageUrl("/uag.png");
 
 const stats = [
   { icon: Users, label: "Happy Clients", value: "100+" },
@@ -34,15 +34,55 @@ const certifications = [
   { name: "DesignRush Accredited Web Development Company Delhi NCR", logo: DesignRush, link: "https://designrush.com/" },
 ];
 
-const logos = [
-  { src: Aadiva, alt: "Company Logo 1" },
-  { src: Bookbuzz, alt: "Company Logo 2" },
-  { src: Bulkwala, alt: "Company Logo 3" },
-  { src: BuyKhariBauli, alt: "Company Logo 4" },
-  { src: AmbassadorPerk, alt: "Company Logo 5" },
-  { src: Landsaathi, alt: "Company Logo 6" },
-  { src: Maxlift, alt: "Company Logo 7" },
-  { src: Uag, alt: "Company Logo 8" },
+const clientSpotlights = [
+  {
+    src: UAG,
+    name: "UAG",
+    url: "https://www.urbanarmorgear.com/",
+    rating: 5
+  },
+  { 
+    src: Aadiva,
+    name: "Aadiva",
+    url: "https://aadiva.com/",
+    rating: 5
+  },
+  { 
+    src: Bulkwala,
+    name: "Bulkwala",
+    url: "https://bulkwala.com/",
+    rating: 5
+  },
+  { 
+    src: Bookbuzz,
+    name: "Bookbuzz",
+    url: "https://www.thebookbuzz.in/",
+    rating: 5
+  },
+  { 
+    src: BuyKhariBauli,
+    name: "BuyKhariBauli",
+    url: "https://buykharibaoli.com/",
+    rating: 5
+  },
+  { 
+    src: Landsaathi,
+    name: "Landsaathi",
+    url: "https://landsathi.com/",
+    rating: 5
+  },
+  { 
+    src: Agnishila,
+    name: "Agnishila",
+    url: "https://agnishila.in/",
+    rating: 5
+  },
+  { 
+    src: Maxlift,
+    name: "Maxlift",
+    url: "https://www.maxlift.in/",
+    rating: 5
+  },
 ];
 
 export default function TrustedSection() {
@@ -132,43 +172,141 @@ export default function TrustedSection() {
           </div>
         </div>
 
-        {/* Trusted by Companies Worldwide Banner */}
-        <div className="bg-[#111184] py-12 md:py-20 border-t border-slate-200">
-          <div className="container mx-auto text-center">
-            <h2 className="text-3xl font-bold text-white mb-8">
+        {/* Trusted by Leading Brands - Premium Carousel */}
+        <div className="py-16 md:py-24 border-t border-slate-200">
+          <div className="container mx-auto px-4">
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-12 text-center">
               Trusted by leading brands
             </h2>
-            <div className="relative overflow-hidden">
-              <div className="flex animate-infinite-scroll">
-                {logos.map((logo, index) => (
-                  <div key={index} className="flex-shrink-0 w-48 mx-6">
-                    <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
-                      <NextImage
-                        className="h-24 w-auto mx-auto object-contain transition-all duration-300"
-                        src={logo.src}
-                        alt={logo.alt}
-                        width={200}
-                        height={100}
-                        style={{ width: 'auto', height: 'auto' }}
-                      />
-                    </div>
-                  </div>
-                ))}
-                {logos.map((logo, index) => (
-                  <div key={`duplicate-${index}`} className="flex-shrink-0 w-48 mx-6">
-                    <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
-                      <NextImage
-                        className="h-24 w-auto mx-auto object-contain transition-all duration-300"
-                        src={logo.src}
-                        alt={logo.alt}
-                        width={200}
-                        height={100}
-                        style={{ width: 'auto', height: 'auto' }}
-                      />
-                    </div>
-                  </div>
-                ))}
+            
+            {/* Testimonial Cards Carousel */}
+            <div className="relative group/carousel">
+              <div className="overflow-hidden pb-4">
+                <div className="flex gap-6 md:gap-8 animate-carousel-scroll group-hover/carousel:pause-animation">
+                  {/* First Set */}
+                  {clientSpotlights.map((client, index) => (
+                    <Link
+                      key={`set1-${index}`}
+                      href={client.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Visit ${client.name}`}
+                      className="flex-shrink-0 w-[85vw] sm:w-[45%] lg:w-[30%] xl:w-[23%] group cursor-pointer"
+                    >
+                      {/* Card Container */}
+                      <div className="relative h-80 md:h-96 rounded-3xl overflow-hidden shadow-lg transition-all duration-500 group-hover:scale-[1.03] group-hover:-translate-y-1 group-hover:shadow-2xl border-2 border-[#111184]/30 group-hover:border-[#111184]/60 bg-white/85 group-hover:bg-white/95 backdrop-blur-md">
+                        {/* Client Image/Logo Background */}
+                        <div className="absolute inset-0 bg-white/90 backdrop-blur-sm transition-all duration-500 group-hover:bg-white/95">
+                          <NextImage
+                            src={client.src}
+                            alt={client.name}
+                            fill
+                            className="object-contain p-12 transition-transform duration-500 group-hover:scale-105"
+                          />
+                        </div>
+                        
+                        {/* Bottom Gradient Overlay for Readability */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#111184]/80 via-[#111184]/30 to-transparent" />
+                        
+                        {/* Glassmorphism Bottom Overlay */}
+                        <div className="absolute bottom-0 left-0 right-0 p-6 backdrop-blur-xl bg-[#111184]/90 border-t border-white/30">
+                          {/* 5 Star Rating */}
+                          <div className="flex gap-1 mb-3">
+                            {[...Array(client.rating)].map((_, i) => (
+                              <svg
+                                key={i}
+                                className="w-5 h-5 text-yellow-400 fill-current"
+                                viewBox="0 0 20 20"
+                              >
+                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                              </svg>
+                            ))}
+                          </div>
+                          
+                          {/* Client Info */}
+                          <h3 className="text-xl font-bold text-white mb-1">
+                            {client.name}
+                          </h3>
+                          
+                          {/* Arrow Icon with Animation */}
+                          <div className="absolute bottom-6 right-6 w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/35 transition-all duration-300 group-hover:translate-x-1 group-hover:scale-110">
+                            <svg
+                              className="w-4 h-4 text-white"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                  
+                  {/* Second Set (Duplicate for seamless loop) */}
+                  {clientSpotlights.map((client, index) => (
+                    <Link
+                      key={`set2-${index}`}
+                      href={client.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Visit ${client.name}`}
+                      className="flex-shrink-0 w-[85vw] sm:w-[45%] lg:w-[30%] xl:w-[23%] group cursor-pointer"
+                    >
+                      {/* Card Container */}
+                      <div className="relative h-80 md:h-96 rounded-3xl overflow-hidden shadow-lg transition-all duration-500 group-hover:scale-[1.03] group-hover:-translate-y-1 group-hover:shadow-2xl border-2 border-[#111184]/30 group-hover:border-[#111184]/60 bg-white/85 group-hover:bg-white/95 backdrop-blur-md">
+                        {/* Client Image/Logo Background */}
+                        <div className="absolute inset-0 bg-white/90 backdrop-blur-sm transition-all duration-500 group-hover:bg-white/95">
+                          <NextImage
+                            src={client.src}
+                            alt={client.name}
+                            fill
+                            className="object-contain p-12 transition-transform duration-500 group-hover:scale-105"
+                          />
+                        </div>
+                        
+                        {/* Bottom Gradient Overlay for Readability */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#111184]/80 via-[#111184]/30 to-transparent" />
+                        
+                        {/* Glassmorphism Bottom Overlay */}
+                        <div className="absolute bottom-0 left-0 right-0 p-6 backdrop-blur-xl bg-[#111184]/90 border-t border-white/30">
+                          {/* 5 Star Rating */}
+                          <div className="flex gap-1 mb-3">
+                            {[...Array(client.rating)].map((_, i) => (
+                              <svg
+                                key={i}
+                                className="w-5 h-5 text-yellow-400 fill-current"
+                                viewBox="0 0 20 20"
+                              >
+                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                              </svg>
+                            ))}
+                          </div>
+                          
+                          {/* Client Info */}
+                          <h3 className="text-xl font-bold text-white mb-1">
+                            {client.name}
+                          </h3>
+                          
+                          {/* Arrow Icon with Animation */}
+                          <div className="absolute bottom-6 right-6 w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/35 transition-all duration-300 group-hover:translate-x-1 group-hover:scale-110">
+                            <svg
+                              className="w-4 h-4 text-white"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
               </div>
+              
             </div>
           </div>
         </div>

@@ -27,6 +27,19 @@ const rotatingWords = [
 	{ text: "Branding", href: "/services/branding" },
 ];
 
+const HERO_CARD_IMAGES = [
+	"/images/home/hero/bookbuzz.jpg",
+	"/agnishila.png",
+	"/images/home/hero/growth-campaign.jpg",
+	"/images/home/hero/brand-identity.jpg",
+	"/images/home/hero/meritshot.jpg",
+	"/images/home/services/digital-marketing.jpg",
+	"/images/home/services/seo-services.jpg",
+];
+
+const getHeroImageByIndex = (index: number) =>
+	HERO_CARD_IMAGES[index % HERO_CARD_IMAGES.length];
+
 interface HeroProps {
   showcaseItems: HeroShowcaseItem[];
 }
@@ -160,6 +173,17 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 								<Briefcase size={20} className="text-slate-400" />
 							</Link>
 						</div>
+
+						<div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 lg:hidden">
+							<NextImage
+								src={getStorageUrl(getHeroImageByIndex(0))}
+								alt="Hero showcase image"
+								fill
+								className="object-cover"
+								sizes="100vw"
+								unoptimized
+							/>
+						</div>
 					</div>
 
 					{/* Right Column - Scrolling Cards */}
@@ -192,6 +216,17 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 														{item.stat}
 													</div>
 												</div>
+
+													<div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden bg-slate-100 border border-slate-200 mb-4">
+														<NextImage
+															src={getStorageUrl(getHeroImageByIndex(idx))}
+															alt={`${item.name} showcase image`}
+															fill
+															className="object-cover"
+															sizes="(max-width: 1024px) 100vw, 40vw"
+															unoptimized
+														/>
+													</div>
 												
 												<h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-[#111184] transition-colors">
 													{item.name}
@@ -222,6 +257,17 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 														{item.stat}
 													</div>
 												</div>
+
+													<div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden bg-slate-100 border border-slate-200 mb-4">
+														<NextImage
+															src={getStorageUrl(getHeroImageByIndex(idx + showcaseItems.length))}
+															alt={`${item.name} showcase image`}
+															fill
+															className="object-cover"
+															sizes="(max-width: 1024px) 100vw, 40vw"
+															unoptimized
+														/>
+													</div>
 												
 												<h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-[#111184] transition-colors">
 													{item.name}

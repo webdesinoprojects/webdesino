@@ -17,8 +17,8 @@ export default function BeforeAfterSection({ industries: propIndustries }: Befor
   return (
     <section className="py-10 lg:py-16 bg-white relative overflow-hidden">
       {/* Floating background elements */}
-      <div className="absolute top-20 left-10 w-96 h-96 bg-[#02066F]/5 rounded-full blur-3xl animate-float" />
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#02066F]/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+      <div className="absolute top-20 left-10 w-96 h-96 bg-[#111184]/5 rounded-full blur-3xl animate-float" />
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#111184]/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Animated scrolling ticker */}
@@ -37,7 +37,7 @@ export default function BeforeAfterSection({ industries: propIndustries }: Befor
               <Link
                 key={idx}
                 href={item.href}
-                className="flex-shrink-0 px-6 py-3 bg-slate-50 border border-slate-200 rounded-full text-[#02066F] font-bold text-lg whitespace-nowrap hover:shadow-md transition-all cursor-pointer hover:bg-slate-100"
+                className="flex-shrink-0 px-6 py-3 bg-slate-50 border border-slate-200 rounded-full text-[#111184] font-bold text-lg whitespace-nowrap hover:shadow-md transition-all cursor-pointer hover:bg-slate-100"
               >
                 {item.text}
               </Link>
@@ -47,7 +47,7 @@ export default function BeforeAfterSection({ industries: propIndustries }: Befor
 
         <h2 className="text-4xl lg:text-6xl font-bold text-center mb-6 tracking-tight text-slate-900">
           Transforming Digital <br/>
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#02066F] to-blue-600">Experiences</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#111184] to-blue-600">Experiences</span>
         </h2>
         <p className="text-center text-slate-600 text-lg mb-12 animate-fade-in" style={{ animationDelay: '0.2s' }}>
           See the transformation from outdated to outstanding
@@ -61,8 +61,8 @@ export default function BeforeAfterSection({ industries: propIndustries }: Befor
               onClick={() => setActiveFilter(industry)}
               className={`px-6 py-3 rounded-full font-semibold text-sm transition-all duration-300 ${
                 activeFilter === industry
-                  ? "bg-[#02066F] text-white shadow-lg shadow-[#02066F]/25"
-                  : "bg-slate-50 text-slate-600 border border-slate-200 hover:border-[#02066F]/50 hover:text-[#02066F]"
+                  ? "bg-[#111184] text-white shadow-lg shadow-[#111184]/25"
+                  : "bg-slate-50 text-slate-600 border border-slate-200 hover:border-[#111184]/50 hover:text-[#111184]"
               }`}
             >
               {industry}
@@ -107,7 +107,7 @@ export default function BeforeAfterSection({ industries: propIndustries }: Befor
             
             {/* After Image - Modern UI Overlay */}
             <div 
-              className="absolute inset-0 bg-[#02066F]"
+              className="absolute inset-0 bg-[#111184]"
               style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
             >
               <div className="w-full h-full p-8 relative overflow-hidden">
@@ -140,7 +140,7 @@ export default function BeforeAfterSection({ industries: propIndustries }: Befor
               </div>
 
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <div className="bg-[#02066F]/90 p-6 rounded-2xl shadow-2xl text-center border border-white/30 backdrop-blur-md">
+                <div className="bg-[#111184]/90 p-6 rounded-2xl shadow-2xl text-center border border-white/30 backdrop-blur-md">
                   <h3 className="text-2xl font-bold text-white mb-2">After</h3>
                   <p className="text-white/80 text-sm mb-4">Modern, Fast & Converting</p>
                   <div className="flex gap-4 text-sm">
@@ -156,7 +156,7 @@ export default function BeforeAfterSection({ industries: propIndustries }: Befor
               className="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize z-20 shadow-[0_0_20px_rgba(0,0,0,0.5)]"
               style={{ left: `${sliderPosition}%` }}
             >
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-xl flex items-center justify-center text-[#02066F] border-4 border-white/20">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-xl flex items-center justify-center text-[#111184] border-4 border-white/20">
                 <div className="flex gap-1">
                   <ArrowRight className="rotate-180 w-3 h-3" />
                   <ArrowRight className="w-3 h-3" />
@@ -179,17 +179,17 @@ export default function BeforeAfterSection({ industries: propIndustries }: Befor
         {/* Stats Grid */}
         <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto animate-fade-in" style={{ animationDelay: '0.8s' }}>
           <div className="bg-slate-50 p-8 rounded-3xl text-center hover-lift border border-slate-200 shadow-lg">
-            <TrendingUp className="w-12 h-12 mx-auto mb-4 text-[#02066F]" />
+            <TrendingUp className="w-12 h-12 mx-auto mb-4 text-[#111184]" />
             <div className="text-4xl font-bold text-slate-900 mb-2">532%</div>
             <div className="text-slate-600 font-medium">Average Growth Rate</div>
           </div>
           <div className="bg-slate-50 p-8 rounded-3xl text-center hover-lift border border-slate-200 shadow-lg">
-            <Users className="w-12 h-12 mx-auto mb-4 text-[#02066F]" />
+            <Users className="w-12 h-12 mx-auto mb-4 text-[#111184]" />
             <div className="text-4xl font-bold text-slate-900 mb-2">100+</div>
             <div className="text-slate-600 font-medium">Successful Transformations</div>
           </div>
           <div className="bg-slate-50 p-8 rounded-3xl text-center hover-lift border border-slate-200 shadow-lg">
-            <DollarSign className="w-12 h-12 mx-auto mb-4 text-[#02066F]" />
+            <DollarSign className="w-12 h-12 mx-auto mb-4 text-[#111184]" />
             <div className="text-4xl font-bold text-slate-900 mb-2">₹6.3 Cr+</div>
             <div className="text-slate-600 font-medium">Revenue Generated</div>
           </div>

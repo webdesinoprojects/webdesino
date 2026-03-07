@@ -10,7 +10,7 @@ interface FooterProps {
 
 export default function Footer({ locations = [] }: FooterProps) {
   return (
-    <footer className="relative bg-[#02066F] text-white overflow-hidden">
+    <footer className="relative bg-[#111184] text-white overflow-hidden">
       <div className="container mx-auto px-4 py-14 relative z-10">
         {/* Newsletter Section */}
         <div className="mb-10 text-center animate-fade-in">
@@ -34,7 +34,7 @@ export default function Footer({ locations = [] }: FooterProps) {
             />
             <button
               type="submit"
-              className="px-8 py-4 bg-white text-[#02066F] rounded-full font-semibold hover-lift hover-glow transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
+              className="px-8 py-4 bg-white text-[#111184] rounded-full font-semibold hover-lift hover-glow transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
             >
               Subscribe
               <ArrowRight size={18} />
@@ -49,14 +49,16 @@ export default function Footer({ locations = [] }: FooterProps) {
             {/* <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
               <span>Webdesino<span className="text-white">.com</span></span>
             </h3> */}
-            <Image 
-              src={getStorageUrl("/WebDesino.png")}
-              alt="Webdesino.com" 
-              width={150} 
-              height={40} 
-              className="object-contain mb-4" 
-              style={{ width: 'auto', height: 'auto' }}
-            />
+            <span className="relative block w-[150px] h-10 overflow-hidden rounded mb-4">
+              <Image
+                src={getStorageUrl("/WebDesino.png")}
+                alt="Webdesino.com"
+                fill
+                sizes="150px"
+                className="object-cover object-left"
+                priority
+              />
+            </span>
             <p className="text-gray-200 mb-6 leading-relaxed text-sm">
               Leading Digital Marketing Agency Delhi and web development
               company helping businesses grow online with creative websites, SEO, and digital marketing solutions.
@@ -66,7 +68,7 @@ export default function Footer({ locations = [] }: FooterProps) {
                 href="https://www.facebook.com/thewebdiseno/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-white hover:text-[#02066F] hover:scale-110 transition-all duration-300"
+                className="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-white hover:text-[#111184] hover:scale-110 transition-all duration-300"
                 aria-label="Facebook"
               >
                 <Facebook size={18} />
@@ -75,7 +77,7 @@ export default function Footer({ locations = [] }: FooterProps) {
                 href="https://www.linkedin.com/company/webdesino"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-white hover:text-[#02066F] hover:scale-110 transition-all duration-300"
+                className="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-white hover:text-[#111184] hover:scale-110 transition-all duration-300"
                 aria-label="LinkedIn"
               >
                 <Linkedin size={18} />
@@ -84,7 +86,7 @@ export default function Footer({ locations = [] }: FooterProps) {
                 href="https://www.instagram.com/the_webdesino/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-white hover:text-[#02066F] hover:scale-110 transition-all duration-300"
+                className="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-white hover:text-[#111184] hover:scale-110 transition-all duration-300"
                 aria-label="Instagram"
               >
                 <Instagram size={18} />
@@ -93,7 +95,7 @@ export default function Footer({ locations = [] }: FooterProps) {
                 href="https://www.youtube.com/@webdesino"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-white hover:text-[#02066F] hover:scale-110 transition-all duration-300"
+                className="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-white hover:text-[#111184] hover:scale-110 transition-all duration-300"
                 aria-label="Youtube"
               >
                 <Youtube size={18} />

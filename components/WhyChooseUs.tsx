@@ -1,6 +1,9 @@
 import type { Feature } from "@/lib/data";
+import Image from "next/image";
 import { Target } from "lucide-react";
 import { getStorageUrl } from "@/lib/utils";
+
+const WHY_CHOOSE_IMAGE = "/images/home/why-choose/vision.jpg";
 
 interface WhyChooseUsProps {
   features: Feature[];
@@ -69,6 +72,16 @@ export default function WhyChooseUs({ features }: WhyChooseUsProps) {
                 </div>
                 
                 <div className="w-16 h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent mb-8"></div>
+
+                <div className="relative w-full max-w-sm aspect-[4/3] rounded-2xl overflow-hidden bg-white/10 border border-white/20 mb-8">
+                  <Image
+                    src={WHY_CHOOSE_IMAGE}
+                    alt="Why choose WebDesino visual"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                  />
+                </div>
 
                 <p className="text-blue-100 text-lg lg:text-xl leading-relaxed font-light max-w-xs mx-auto">
                   "To empower businesses with <span className="text-white font-semibold">digital excellence</span> and <span className="text-white font-semibold">innovative technology</span> solutions."

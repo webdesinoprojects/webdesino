@@ -1,7 +1,19 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import * as LucideIcons from "lucide-react";
 import { ServiceCategory } from "@prisma/client";
+
+const SERVICES_CARD_IMAGES = [
+	"/images/home/services/website-solutions.jpg",
+	"/images/home/services/digital-marketing.jpg",
+	"/images/home/services/seo-services.jpg",
+	"/images/home/services/graphic-design.jpg",
+	"/images/home/services/content-writing.jpg",
+];
+
+const getServiceImageByIndex = (index: number) =>
+	SERVICES_CARD_IMAGES[index % SERVICES_CARD_IMAGES.length];
 
 interface ServicesOverviewProps {
   categories: ServiceCategory[];
@@ -46,6 +58,16 @@ export default function ServicesOverview({ categories }: ServicesOverviewProps) 
 							<h3 className="text-2xl font-bold text-gray-900 mb-4 relative z-10 group-hover:text-[#111184] transition-colors">
 								{category.title}
 							</h3>
+
+							<div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-slate-100 border border-slate-200 mb-5 z-10">
+								<Image
+									src={getServiceImageByIndex(idx)}
+									alt={`${category.title} service image`}
+									fill
+									className="object-cover"
+									sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+								/>
+							</div>
 
                                                        <p className="text-gray-600 mb-6 leading-relaxed relative z-10">
                                                                {category.description}

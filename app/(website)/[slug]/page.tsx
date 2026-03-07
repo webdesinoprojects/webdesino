@@ -177,7 +177,7 @@ export default async function LocationPage({ params }: PageProps) {
             />
 
             {/* 1. Hero Section */}
-            <section className="relative bg-[#02066F] text-white py-20 lg:py-32 overflow-hidden">
+            <section className="relative bg-[#111184] text-white py-20 lg:py-32 overflow-hidden">
                 <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `url(${getStorageUrl('/grid-pattern.svg')})` }}></div>
                 <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blue-500/20 to-transparent"></div>
                 <div className="container mx-auto px-4 relative z-10">
@@ -190,7 +190,7 @@ export default async function LocationPage({ params }: PageProps) {
                                 {content.hero?.subtitle || `Are you searching for a reliable website designer in ${locationName}? At WebDesino, we help local businesses create modern, fast, and SEO-friendly websites that generate genuine leads and rank well on Google.`}
                             </p>
                             <div className={`flex flex-col sm:flex-row gap-4 ${content.hero?.image ? 'justify-start' : 'justify-center'}`}>
-                                <Link href={content.hero?.ctaLink || "#contact"} className="px-8 py-4 bg-white text-[#02066F] rounded-full font-bold hover:bg-gray-100 transition-all transform hover:scale-105">
+                                <Link href={content.hero?.ctaLink || "#contact"} className="px-8 py-4 bg-white text-[#111184] rounded-full font-bold hover:bg-gray-100 transition-all transform hover:scale-105">
                                     {content.hero?.ctaText || "Get a Free Quote"}
                                 </Link>
                                 <Link href={content.hero?.secondaryCtaLink || "tel:+919310851557"} className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-full font-bold hover:bg-white/10 transition-all">
@@ -216,7 +216,7 @@ export default async function LocationPage({ params }: PageProps) {
                 <div className="container mx-auto px-4">
                     <div className="flex flex-col lg:flex-row items-center gap-12">
                         <div className="lg:w-1/2">
-                            <span className="text-[#02066F] font-bold tracking-wider text-sm uppercase mb-2 block">OUR STORY</span>
+                            <span className="text-[#111184] font-bold tracking-wider text-sm uppercase mb-2 block">OUR STORY</span>
                             <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">
                                 {content.story?.title || `Why Your ${locationName} Business Needs a Website Today`}
                             </h2>
@@ -241,7 +241,7 @@ export default async function LocationPage({ params }: PageProps) {
             {/* 3. Leading Company Section */}
             <section className="py-16 bg-slate-50">
                 <div className="container mx-auto px-4 text-center">
-                    <span className="text-[#02066F] font-bold tracking-wider text-sm uppercase mb-2 block">WHO ARE WE</span>
+                    <span className="text-[#111184] font-bold tracking-wider text-sm uppercase mb-2 block">WHO ARE WE</span>
                     <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6 max-w-3xl mx-auto">
                         {content.leadingCompany?.title || `The Leading Web Development Company in ${locationName}`}
                     </h2>
@@ -259,7 +259,7 @@ export default async function LocationPage({ params }: PageProps) {
             <section className="py-16 lg:py-24">
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-16">
-                        <span className="text-[#02066F] font-bold tracking-wider text-sm uppercase mb-2 block">WHAT WE DO</span>
+                        <span className="text-[#111184] font-bold tracking-wider text-sm uppercase mb-2 block">WHAT WE DO</span>
                         <h2 className="text-3xl lg:text-4xl font-bold text-slate-900">Our Service in {locationName}</h2>
                     </div>
 
@@ -273,7 +273,7 @@ export default async function LocationPage({ params }: PageProps) {
                                             <ul className="space-y-3 text-slate-600">
                                                 {service.items?.map((item: string, i: number) => (
                                                     <li key={i} className="flex items-start gap-3">
-                                                        <CheckCircle2 className="text-[#02066F] mt-1 flex-shrink-0" size={20} />
+                                                        <CheckCircle2 className="text-[#111184] mt-1 flex-shrink-0" size={20} />
                                                         <span>{item}</span>
                                                     </li>
                                                 ))}
@@ -301,7 +301,7 @@ export default async function LocationPage({ params }: PageProps) {
                                             <ul className="space-y-3 text-slate-600">
                                                 {service.items?.map((item: string, i: number) => (
                                                     <li key={i} className="flex items-start gap-3">
-                                                        <CheckCircle2 className="text-[#02066F] mt-1 flex-shrink-0" size={20} />
+                                                        <CheckCircle2 className="text-[#111184] mt-1 flex-shrink-0" size={20} />
                                                         <span>{item}</span>
                                                     </li>
                                                 ))}
@@ -323,7 +323,7 @@ export default async function LocationPage({ params }: PageProps) {
                         <p className="text-slate-600">Fill out this form and get a free consultation with the top web development agency in {locationName}.</p>
                     </div>
                     <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row">
-                        <div className="md:w-1/2 bg-[#02066F] p-8 lg:p-12 text-white flex flex-col justify-center relative overflow-hidden">
+                        <div className="md:w-1/2 bg-[#111184] p-8 lg:p-12 text-white flex flex-col justify-center relative overflow-hidden">
                             <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `url(${getStorageUrl('/grid-pattern.svg')})` }}></div>
                             <div className="relative z-10">
                                 <h3 className="text-2xl font-bold mb-6">Get In Touch</h3>
@@ -356,7 +356,7 @@ export default async function LocationPage({ params }: PageProps) {
             {/* 6. Why Choose Us (Stats) */}
             <section className="py-16 lg:py-24">
                 <div className="container mx-auto px-4">
-                    <h2 className="text-3xl lg:text-5xl font-bold text-center text-[#02066F] mb-16">Why Choose WebDesino?</h2>
+                    <h2 className="text-3xl lg:text-5xl font-bold text-center text-[#111184] mb-16">Why Choose WebDesino?</h2>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {[
                             { icon: Globe, title: "800+ Websites Delivered", desc: "Powering brands across India with 800+ custom WordPress & eCommerce sites. 90% built on Elementor & Divi for stunning, high-performance results." },
@@ -368,7 +368,7 @@ export default async function LocationPage({ params }: PageProps) {
                         ].map((stat, idx) => (
                             <div key={idx} className="border border-slate-200 rounded-xl p-6 hover:shadow-lg transition-all bg-white">
                                 <div className="flex items-start gap-4">
-                                    <div className="p-3 bg-blue-50 rounded-lg text-[#02066F]">
+                                    <div className="p-3 bg-blue-50 rounded-lg text-[#111184]">
                                         <stat.icon size={24} />
                                     </div>
                                     <div>
@@ -386,7 +386,7 @@ export default async function LocationPage({ params }: PageProps) {
             <section className="py-16 bg-slate-50">
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl lg:text-4xl font-bold text-[#02066F] mb-4">Our Proven Process</h2>
+                        <h2 className="text-3xl lg:text-4xl font-bold text-[#111184] mb-4">Our Proven Process</h2>
                         <p className="text-slate-600">A transparent workflow that delivers exceptional results every time</p>
                     </div>
                     <div className="grid md:grid-cols-3 gap-8">
@@ -399,7 +399,7 @@ export default async function LocationPage({ params }: PageProps) {
                             { step: "6", title: "Launch & Support", desc: "Deploying your project and providing ongoing maintenance and optimization." }
                         ].map((item, idx) => (
                             <div key={idx} className="bg-white p-8 rounded-xl shadow-sm relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
-                                <div className="absolute top-0 right-0 bg-[#02066F] text-white w-12 h-12 flex items-center justify-center rounded-bl-2xl font-bold text-lg">
+                                <div className="absolute top-0 right-0 bg-[#111184] text-white w-12 h-12 flex items-center justify-center rounded-bl-2xl font-bold text-lg">
                                     {item.step}
                                 </div>
                                 <h3 className="text-xl font-bold text-slate-900 mb-3 mt-2">{item.title}</h3>
@@ -415,22 +415,22 @@ export default async function LocationPage({ params }: PageProps) {
                 <div className="container mx-auto px-4">
                     <div className="flex flex-col lg:flex-row items-center gap-16">
                         <div className="lg:w-1/2">
-                            <span className="text-[#02066F] font-bold tracking-wider text-sm uppercase mb-2 block">OUR STORY</span>
+                            <span className="text-[#111184] font-bold tracking-wider text-sm uppercase mb-2 block">OUR STORY</span>
                             <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">
                                 Why {locationName} Businesses Choose WebDesino
                             </h2>
                             <p className="text-slate-600 mb-6">Our clients appreciate working with us because we deliver websites that:</p>
                             <ul className="space-y-4 mb-8">
                                 <li className="flex items-start gap-3">
-                                    <div className="w-2 h-2 bg-[#02066F] rounded-full mt-2.5"></div>
+                                    <div className="w-2 h-2 bg-[#111184] rounded-full mt-2.5"></div>
                                     <span className="text-slate-700">Convert visitors into paying customers through clear messaging and intuitive design</span>
                                 </li>
                                 <li className="flex items-start gap-3">
-                                    <div className="w-2 h-2 bg-[#02066F] rounded-full mt-2.5"></div>
+                                    <div className="w-2 h-2 bg-[#111184] rounded-full mt-2.5"></div>
                                     <span className="text-slate-700">Load quickly on all devices, improving bounce rates and SEO</span>
                                 </li>
                                 <li className="flex items-start gap-3">
-                                    <div className="w-2 h-2 bg-[#02066F] rounded-full mt-2.5"></div>
+                                    <div className="w-2 h-2 bg-[#111184] rounded-full mt-2.5"></div>
                                     <span className="text-slate-700">Align with local branding—we communicate in a way that resonates with your audience</span>
                                 </li>
                             </ul>
@@ -447,10 +447,10 @@ export default async function LocationPage({ params }: PageProps) {
                             <div className="bg-green-50 p-8 rounded-full w-80 h-80 flex items-center justify-center relative">
                                 <Globe size={100} className="text-green-600" />
                                 <div className="absolute -top-4 -right-4 bg-white p-4 rounded-xl shadow-lg">
-                                    <BarChart3 className="text-[#02066F]" size={32} />
+                                    <BarChart3 className="text-[#111184]" size={32} />
                                 </div>
                                 <div className="absolute -bottom-4 -left-4 bg-white p-4 rounded-xl shadow-lg">
-                                    <Users className="text-[#02066F]" size={32} />
+                                    <Users className="text-[#111184]" size={32} />
                                 </div>
                             </div>
                         </div>
@@ -470,7 +470,7 @@ export default async function LocationPage({ params }: PageProps) {
                             </div>
                         </div>
                         <div className="lg:w-1/2 order-1 lg:order-2">
-                            <span className="text-[#02066F] font-bold tracking-wider text-sm uppercase mb-2 block">WHO ARE WE</span>
+                            <span className="text-[#111184] font-bold tracking-wider text-sm uppercase mb-2 block">WHO ARE WE</span>
                             <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">
                                 Industries We Serve In {locationName}
                             </h2>
@@ -502,7 +502,7 @@ export default async function LocationPage({ params }: PageProps) {
                 <div className="container mx-auto px-4">
                     <div className="flex flex-col lg:flex-row items-center gap-16">
                         <div className="lg:w-1/2">
-                            <span className="text-[#02066F] font-bold tracking-wider text-sm uppercase mb-2 block">OUR STORY</span>
+                            <span className="text-[#111184] font-bold tracking-wider text-sm uppercase mb-2 block">OUR STORY</span>
                             <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">
                                 How We Help You Rank Locally
                             </h2>
@@ -538,7 +538,7 @@ export default async function LocationPage({ params }: PageProps) {
             {/* 11. Commitment */}
             <section className="py-16 bg-slate-50">
                 <div className="container mx-auto px-4 text-center">
-                    <span className="text-[#02066F] font-bold tracking-wider text-sm uppercase mb-2 block">WHAT WE PROMISE</span>
+                    <span className="text-[#111184] font-bold tracking-wider text-sm uppercase mb-2 block">WHAT WE PROMISE</span>
                     <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">
                         WebDesino's Commitment To {locationName} Clients
                     </h2>
@@ -556,18 +556,18 @@ export default async function LocationPage({ params }: PageProps) {
                 <div className="container mx-auto px-4">
                     <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
                         <div className="lg:w-1/2">
-                            <span className="text-[#02066F] font-bold tracking-wider text-sm uppercase mb-2 block">OUR STORY</span>
+                            <span className="text-[#111184] font-bold tracking-wider text-sm uppercase mb-2 block">OUR STORY</span>
                             <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">
                                 Ready To Transform Your Online Presence?
                             </h2>
                             <p className="text-slate-600 mb-8">Contact WebDesino today for a free consultation!</p>
                             <div className="space-y-2 text-sm text-slate-600">
                                 <div className="flex items-center gap-2">
-                                    <Globe size={16} className="text-[#02066F]" />
+                                    <Globe size={16} className="text-[#111184]" />
                                     <a href="https://www.webdesino.com" className="hover:underline">www.webdesino.com</a>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                    <Mail size={16} className="text-[#02066F]" />
+                                    <Mail size={16} className="text-[#111184]" />
                                     <a href="mailto:info@webdesino.com" className="hover:underline">info@webdesino.com</a>
                                 </div>
                             </div>
@@ -594,28 +594,28 @@ export default async function LocationPage({ params }: PageProps) {
                         <p className="text-slate-600 mb-8 text-sm">
                             Email, call, or WhatsApp—we're here to help. Coffee on us if we meet in person! ☕
                         </p>
-                        <Link href="#contact" className="inline-block bg-[#02066F] text-white px-8 py-3 rounded-lg font-bold mb-10 hover:bg-blue-900 transition-colors">
+                        <Link href="#contact" className="inline-block bg-[#111184] text-white px-8 py-3 rounded-lg font-bold mb-10 hover:bg-blue-900 transition-colors">
                             Schedule a Free Consultation
                         </Link>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
                             <div className="p-4 border border-slate-100 rounded-xl">
-                                <Mail className="text-[#02066F] mb-3" size={24} />
+                                <Mail className="text-[#111184] mb-3" size={24} />
                                 <h3 className="font-bold text-slate-900 text-sm mb-1">Email Us</h3>
                                 <p className="text-xs text-slate-500 mb-2">Have questions? Our team responds within 24 hours.</p>
-                                <a href="mailto:info@webdesino.com" className="text-[#02066F] font-bold text-sm">info@webdesino.com</a>
+                                <a href="mailto:info@webdesino.com" className="text-[#111184] font-bold text-sm">info@webdesino.com</a>
                             </div>
                             <div className="p-4 border border-slate-100 rounded-xl">
-                                <Phone className="text-[#02066F] mb-3" size={24} />
+                                <Phone className="text-[#111184] mb-3" size={24} />
                                 <h3 className="font-bold text-slate-900 text-sm mb-1">Call Us</h3>
                                 <p className="text-xs text-slate-500 mb-2">Mon-Sun, 9AM-9PM IST. Talk directly with our experts.</p>
-                                <a href="tel:+919310851557" className="text-[#02066F] font-bold text-sm">+91 93108 51557</a>
+                                <a href="tel:+919310851557" className="text-[#111184] font-bold text-sm">+91 93108 51557</a>
                             </div>
                             <div className="p-4 border border-slate-100 rounded-xl">
-                                <MessageCircleIcon className="text-[#02066F] mb-3" size={24} />
+                                <MessageCircleIcon className="text-[#111184] mb-3" size={24} />
                                 <h3 className="font-bold text-slate-900 text-sm mb-1">WhatsApp</h3>
                                 <p className="text-xs text-slate-500 mb-2">Instant replies for quick queries. Tap to chat!</p>
-                                <a href="https://wa.me/919310851557" className="text-[#02066F] font-bold text-sm">+91 93108 51557</a>
+                                <a href="https://wa.me/919310851557" className="text-[#111184] font-bold text-sm">+91 93108 51557</a>
                             </div>
                         </div>
                     </div>
@@ -626,7 +626,7 @@ export default async function LocationPage({ params }: PageProps) {
             <section className="py-12">
                 <div className="container mx-auto px-4">
                     {/* <div className="text-center mb-12">
-                        <span className="text-[#02066F] font-bold tracking-wider text-sm uppercase mb-2 block">FAQS</span>
+                        <span className="text-[#111184] font-bold tracking-wider text-sm uppercase mb-2 block">FAQS</span>
                         <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">Frequently Asked Questions</h2>
                         <p className="text-slate-600 max-w-2xl mx-auto">
                             Find a team of Web Designers you can rely on. Every day, we build trust through communication, transparency, and results.
@@ -642,12 +642,12 @@ export default async function LocationPage({ params }: PageProps) {
             <section className="py-16 bg-slate-50">
                 <div className="container mx-auto px-4">
                     <h2 className="text-2xl font-bold text-center text-red-500 mb-2">People also search us</h2>
-                    <p className="text-center text-slate-600 text-sm mb-8">Frequently searched queries about our <span className="text-[#02066F] font-bold">website design & development services in Delhi NCR.</span></p>
+                    <p className="text-center text-slate-600 text-sm mb-8">Frequently searched queries about our <span className="text-[#111184] font-bold">website design & development services in Delhi NCR.</span></p>
 
                     <div className="overflow-x-auto">
                         <table className="w-full max-w-4xl mx-auto bg-white border border-slate-200 text-sm">
                             <thead>
-                                <tr className="bg-[#02066F] text-white">
+                                <tr className="bg-[#111184] text-white">
                                     <th className="p-3 text-left border-r border-blue-800">Website Design in Delhi</th>
                                     <th className="p-3 text-left border-r border-blue-800">Website Design in South Delhi</th>
                                     <th className="p-3 text-left border-r border-blue-800">Web Development in Delhi NCR</th>
@@ -695,7 +695,7 @@ export default async function LocationPage({ params }: PageProps) {
             <section className="py-16 lg:py-24">
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-12">
-                        <h2 className="text-2xl lg:text-3xl font-bold text-[#02066F] mb-4">WebDesino Services by Location & Category</h2>
+                        <h2 className="text-2xl lg:text-3xl font-bold text-[#111184] mb-4">WebDesino Services by Location & Category</h2>
                         <p className="text-slate-600 text-sm max-w-2xl mx-auto">
                             Explore our web development, SEO, PPC, and digital marketing services across Delhi, NCR, and Gurgaon. Each service page is designed to help your business grow.
                         </p>
@@ -705,7 +705,7 @@ export default async function LocationPage({ params }: PageProps) {
                         {otherLocations.map((loc, idx) => (
                             <Link key={idx} href={`/${loc.slug}`} className="block p-4 border border-slate-100 rounded-lg hover:shadow-md transition-all bg-white group">
                                 <div className="text-[10px] font-bold text-slate-400 uppercase mb-1">Location</div>
-                                <h3 className="font-bold text-slate-900 text-sm group-hover:text-[#02066F] transition-colors line-clamp-2">
+                                <h3 className="font-bold text-slate-900 text-sm group-hover:text-[#111184] transition-colors line-clamp-2">
                                     {loc.title}
                                 </h3>
                                 <p className="text-xs text-slate-500 mt-2 line-clamp-2">
