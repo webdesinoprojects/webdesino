@@ -4,16 +4,16 @@ import { ArrowRight } from "lucide-react";
 import * as LucideIcons from "lucide-react";
 import { ServiceCategory } from "@prisma/client";
 
-const SERVICES_CARD_IMAGES = [
-	"/images/home/services/website-solutions.jpg",
-	"/images/home/services/digital-marketing.jpg",
-	"/images/home/services/seo-services.jpg",
-	"/images/home/services/graphic-design.jpg",
-	"/images/home/services/content-writing.jpg",
-];
+const SERVICE_CARD_IMAGE_BY_SLUG: Record<string, string> = {
+  "website-solutions": "/images/home/services/website-solutions.jpg",
+  "digital-marketing": "/images/home/services/digital-marketing.jpg",
+  "seo-services": "/images/home/services/seo-services.jpg",
+  "graphic-designing": "/images/home/services/graphic-design.jpg",
+  "content-writing": "/images/home/services/content-writing.jpg",
+};
 
-const getServiceImageByIndex = (index: number) =>
-	SERVICES_CARD_IMAGES[index % SERVICES_CARD_IMAGES.length];
+const getServiceImageBySlug = (slug: string) =>
+  SERVICE_CARD_IMAGE_BY_SLUG[slug] ?? "/images/home/services/website-solutions.jpg";
 
 interface ServicesOverviewProps {
   categories: ServiceCategory[];
@@ -37,9 +37,9 @@ export default function ServicesOverview({ categories }: ServicesOverviewProps) 
 				</div>
 
 				<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-					{categories.map((category, idx) => {
-            const Icon = category.icon ? (LucideIcons as any)[category.icon] : null;
-            return (
+					{categories.map((category) => {
+						const Icon = category.icon ? (LucideIcons as any)[category.icon] : null;
+						return (
 						<Link
 							key={category.id}
 							href={`/services/${category.slug}`}
@@ -61,7 +61,7 @@ export default function ServicesOverview({ categories }: ServicesOverviewProps) 
 
 							<div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-slate-100 border border-slate-200 mb-5 z-10">
 								<Image
-									src={getServiceImageByIndex(idx)}
+									src={getServiceImageBySlug(category.slug)}
 									alt={`${category.title} service image`}
 									fill
 									className="object-cover"
@@ -69,15 +69,17 @@ export default function ServicesOverview({ categories }: ServicesOverviewProps) 
 								/>
 							</div>
 
-                                                       <p className="text-gray-600 mb-6 leading-relaxed relative z-10">
-                                                               {category.description}
-                                                       </p>							<div
+							<p className="text-gray-600 mb-6 leading-relaxed relative z-10">
+								{category.description}
+							</p>
+							<div
 								className={`inline-flex items-center gap-2 font-semibold text-[#111184] group-hover:gap-3 transition-all relative z-10`}
 							>
 								Learn More <ArrowRight size={18} />
 							</div>
 						</Link>
-					)})}
+						);
+					})}
 				</div>
 			</div>
 		</section>
