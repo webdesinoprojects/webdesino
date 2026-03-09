@@ -16,6 +16,9 @@ export default async function EnquiryDetailsPage({ params }: PageProps) {
     where: { id: params.id },
   });
 
+  const isIntroCall = enquiry?.service === "15-minute Intro Call";
+  const formattedMessage = enquiry?.message.replace("[CALL ENQUIRY]\n\nLikely issue: ", "Likely issue: ");
+
   if (!enquiry) {
     notFound();
   }
@@ -68,6 +71,10 @@ export default async function EnquiryDetailsPage({ params }: PageProps) {
                 <span>Service: {enquiry.service || "General Enquiry"}</span>
               </div>
               <div className="flex items-center gap-3 text-gray-600">
+                <User className="h-4 w-4" />
+                <span>Type: {isIntroCall ? "Intro Call" : "General"}</span>
+              </div>
+              <div className="flex items-center gap-3 text-gray-600">
                 <Calendar className="h-4 w-4" />
                 <span>{new Date(enquiry.createdAt).toLocaleString()}</span>
               </div>
@@ -77,7 +84,7 @@ export default async function EnquiryDetailsPage({ params }: PageProps) {
           <div className="border-t pt-6">
             <h3 className="font-semibold mb-3">Message:</h3>
             <div className="bg-gray-50 p-4 rounded-lg whitespace-pre-wrap text-gray-700">
-              {enquiry.message}
+              {formattedMessage}
             </div>
           </div>
         </CardContent>

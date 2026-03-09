@@ -322,6 +322,65 @@ export async function createEnquiry(formData: FormData) {
   }
 }
 
+export async function createCallEnquiry(formData: FormData) {
+  const name = formData.get("name") as string;
+  const phone = formData.get("phone") as string;
+  const issue = formData.get("issue") as string;
+  const email = formData.get("email") as string;
+
+  if (!name || name.trim().length < 2) {
+    return { success: false, error: "Name must be at least 2 characters long" };
+  }
+
+  if (!phone || phone.trim().length < 7) {
+    return { success: false, error: "Please provide a valid phone number" };
+  }
+
+  if (!issue || issue.trim().length < 10) {
+    return { success: false, error: "Please share a bit more about the issue (minimum 10 characters)" };
+  }
+
+  const sanitizedName = name.trim().substring(0, 200);
+  const sanitizedPhone = phone.trim().substring(0, 50);
+  const sanitizedIssue = issue.trim().substring(0, 2000);
+  const sanitizedEmail = email && email.trim().length > 0
+    ? email.trim().toLowerCase().substring(0, 255)
+    : "not-provided@webdesino.local";
+
+  const message = `[CALL ENQUIRY]\n\nLikely issue: ${sanitizedIssue}`;
+  const service = "15-minute Intro Call";
+
+  try {
+    await prisma.enquiry.create({
+      data: {
+        name: sanitizedName,
+        email: sanitizedEmail,
+        phone: sanitizedPhone,
+        service,
+        message,
+      },
+    });
+
+    try {
+      await sendEnquiryEmail(
+        sanitizedName,
+        sanitizedEmail,
+        sanitizedPhone,
+        service,
+        message
+      );
+    } catch (emailError) {
+      console.error("Error sending call enquiry email:", emailError);
+    }
+
+    revalidatePath("/admin/enquiries");
+    return { success: true };
+  } catch (error) {
+    console.error("Error creating call enquiry:", error);
+    return { success: false, error: "Failed to submit request. Please try again later." };
+  }
+}
+
 export async function createLocation(formData: FormData) {
   const location = formData.get("location") as string;
   const slug = formData.get("slug") as string;

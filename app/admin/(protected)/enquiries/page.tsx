@@ -25,6 +25,7 @@ export default async function EnquiriesPage() {
             <TableRow>
               <TableHead>Name</TableHead>
               <TableHead>Email</TableHead>
+              <TableHead>Type</TableHead>
               <TableHead>Service</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Date</TableHead>
@@ -32,10 +33,22 @@ export default async function EnquiriesPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {enquiries.map((enquiry) => (
-              <TableRow key={enquiry.id}>
+            {enquiries.map((enquiry) => {
+              const enquiryType = enquiry.service === "15-minute Intro Call" ? "Intro Call" : "General";
+
+              return (
+                <TableRow key={enquiry.id}>
                 <TableCell className="font-medium">{enquiry.name}</TableCell>
                 <TableCell>{enquiry.email}</TableCell>
+                <TableCell>
+                  <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                    enquiryType === "Intro Call"
+                      ? "bg-amber-100 text-amber-800"
+                      : "bg-gray-100 text-gray-800"
+                  }`}>
+                    {enquiryType}
+                  </span>
+                </TableCell>
                 <TableCell>{enquiry.service || "-"}</TableCell>
                 <TableCell>
                   <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
@@ -54,11 +67,12 @@ export default async function EnquiriesPage() {
                     </Button>
                   </Link>
                 </TableCell>
-              </TableRow>
-            ))}
+                </TableRow>
+              );
+            })}
             {enquiries.length === 0 && (
               <TableRow>
-                <TableCell colSpan={6} className="text-center py-10 text-gray-500">
+                <TableCell colSpan={7} className="text-center py-10 text-gray-500">
                   No enquiries yet.
                 </TableCell>
               </TableRow>
