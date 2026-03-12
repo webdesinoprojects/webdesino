@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { replaceLocationPlaceholder } from "@/lib/utils";
 
 interface FAQItem {
   question: string;
@@ -10,16 +11,23 @@ interface FAQItem {
 
 interface FAQProps {
   faqs: FAQItem[];
+  location?: string;
 }
 
-export default function FAQ({ faqs }: FAQProps) {
+export default function FAQ({ faqs, location }: FAQProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  if (faqs.length === 0) return null;
+  const resolvedFaqs = faqs.map((faq) => ({
+    ...faq,
+    question: replaceLocationPlaceholder(faq.question, location),
+    answer: replaceLocationPlaceholder(faq.answer, location),
+  }));
+
+  if (resolvedFaqs.length === 0) return null;
 
   return (
     <section className="py-10 lg:py-16 bg-white" itemScope itemType="https://schema.org/FAQPage">
@@ -29,7 +37,7 @@ export default function FAQ({ faqs }: FAQProps) {
         </h2>
 
         <div className="max-w-3xl mx-auto space-y-4">
-          {faqs.map((faq, index) => (
+          {resolvedFaqs.map((faq, index) => (
             <div
               key={index}
               className="border border-gray-200 rounded-lg overflow-hidden"

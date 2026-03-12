@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { generateLocalBusinessSchema } from "@/lib/seo";
 import FAQ from "@/components/FAQ";
-import { getStorageUrl } from "@/lib/utils";
+import { getStorageUrl, replaceLocationPlaceholder } from "@/lib/utils";
 
 interface PageProps {
     params: {
@@ -99,8 +99,8 @@ export default async function LocationPage({ params }: PageProps) {
 
         processedFaqs = faqsData.map(faq => ({
             ...faq,
-            question: faq.question.replace(/{{location}}/g, locationName),
-            answer: faq.answer.replace(/{{location}}/g, locationName)
+            question: replaceLocationPlaceholder(faq.question, locationName),
+            answer: replaceLocationPlaceholder(faq.answer, locationName)
         }));
     } catch (error) {
         console.error("Error fetching FAQs:", error);
@@ -633,7 +633,7 @@ export default async function LocationPage({ params }: PageProps) {
                         </p>
                     </div> */}
                     {/* <div className="max-w-3xl mx-auto"> */}
-                        <FAQ faqs={processedFaqs} />
+                        <FAQ faqs={processedFaqs} location={locationName} />
                     </div>
                 {/* </div> */}
             </section>

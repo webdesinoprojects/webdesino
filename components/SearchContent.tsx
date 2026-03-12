@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Faq } from "@prisma/client";
 import FAQComponent from "@/components/FAQ";
+import { replaceLocationPlaceholder } from "@/lib/utils";
 
 interface SearchContentProps {
   faqs: Faq[];
@@ -23,8 +24,8 @@ export default function SearchContent({ faqs }: SearchContentProps) {
   // Filter FAQs based on search query
   const filteredFaqs = query 
     ? faqs.filter(faq => 
-        faq.question.toLowerCase().includes(query.toLowerCase()) || 
-        faq.answer.toLowerCase().includes(query.toLowerCase())
+        replaceLocationPlaceholder(faq.question).toLowerCase().includes(query.toLowerCase()) || 
+        replaceLocationPlaceholder(faq.answer).toLowerCase().includes(query.toLowerCase())
       )
     : [];
 
