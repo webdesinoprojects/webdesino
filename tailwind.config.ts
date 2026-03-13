@@ -29,7 +29,7 @@ const config: Config = {
   					transform: 'translateY(0)'
   				},
   				to: {
-  					transform: 'translateY(-33.33%)'
+  					transform: 'translateY(-50%)'
   				}
   			}
   		},

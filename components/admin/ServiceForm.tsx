@@ -27,10 +27,12 @@ interface ServiceFormProps {
     id: string;
     title: string;
   }[];
+  returnPath?: string;
 }
 
-export default function ServiceForm({ service, categories }: ServiceFormProps) {
+export default function ServiceForm({ service, categories, returnPath }: ServiceFormProps) {
   const router = useRouter();
+  const back = returnPath || "/admin/services";
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   
@@ -84,7 +86,7 @@ export default function ServiceForm({ service, categories }: ServiceFormProps) {
       } else {
         await createService(formData);
       }
-      router.push("/admin/services");
+      router.push(back);
       router.refresh();
     } catch (err) {
       setError("Something went wrong. Please try again.");
@@ -95,10 +97,10 @@ export default function ServiceForm({ service, categories }: ServiceFormProps) {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="admin-form-shell space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Link href="/admin/services">
+          <Link href={back}>
             <Button variant="ghost" size="icon">
               <ArrowLeft className="h-4 w-4" />
             </Button>
@@ -109,8 +111,8 @@ export default function ServiceForm({ service, categories }: ServiceFormProps) {
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-8">
-        <Card>
+      <form onSubmit={handleSubmit} className="admin-premium-form space-y-8">
+        <Card className="admin-form-card">
           <CardHeader>
             <CardTitle>Service Details</CardTitle>
           </CardHeader>
@@ -183,7 +185,7 @@ export default function ServiceForm({ service, categories }: ServiceFormProps) {
         </Card>
 
         <div className="grid gap-6 md:grid-cols-2">
-          <Card>
+          <Card className="admin-form-card">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-base font-medium">Features</CardTitle>
               <Button
@@ -218,7 +220,7 @@ export default function ServiceForm({ service, categories }: ServiceFormProps) {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="admin-form-card">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-base font-medium">Benefits</CardTitle>
               <Button

@@ -98,7 +98,7 @@ export default function BottomNav() {
                       {servicesData.map((category) => (
                         <div key={category.slug}>
                           <h3 className="font-bold text-slate-900 mb-3 text-sm uppercase tracking-wide border-b border-slate-100 pb-2">
-                            <Link href={`/services/${category.slug}`} className="hover:text-[#111184] transition-colors">
+                            <Link href={`/services/${category.slug}`} className="hover:text-[#111184] transition-colors" onClick={() => setHoveredItem(null)}>
                               {category.title}
                             </Link>
                           </h3>
@@ -108,6 +108,7 @@ export default function BottomNav() {
                                 <Link
                                   href={`/services/${category.slug}/${subtype.slug}`}
                                   className="text-slate-600 hover:text-[#111184] transition-colors text-sm block py-1 hover:translate-x-1 transform duration-200"
+                                  onClick={() => setHoveredItem(null)}
                                 >
                                   {subtype.title}
                                 </Link>
@@ -132,6 +133,7 @@ export default function BottomNav() {
                           <Link
                             href={project.href}
                             className="flex items-center gap-3 text-slate-600 hover:text-[#111184] hover:bg-[#111184]/5 transition-all text-sm p-2 rounded-lg group"
+                            onClick={() => setHoveredItem(null)}
                           >
                             <span className="text-slate-900 group-hover:scale-110 transition-transform">
                               {project.icon}
@@ -144,6 +146,7 @@ export default function BottomNav() {
                     <Link
                       href="/case-studies"
                       className="mt-4 block text-center text-slate-900 text-sm font-semibold hover:underline"
+                      onClick={() => setHoveredItem(null)}
                     >
                       View All Projects →
                     </Link>
@@ -162,6 +165,7 @@ export default function BottomNav() {
                           <Link
                             href={client.href}
                             className="block text-slate-600 hover:text-[#111184] hover:bg-[#111184]/5 transition-all text-sm p-2 rounded-lg"
+                            onClick={() => setHoveredItem(null)}
                           >
                             {client.name}
                           </Link>

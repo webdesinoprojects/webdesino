@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { createEnquiry } from "@/lib/actions";
 import { Send, CheckCircle, Loader2 } from "lucide-react";
 
@@ -9,20 +9,34 @@ export default function ContactForm({ locationName }: { locationName?: string })
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (formData: FormData) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
     if (locationName) {
       formData.append("location", locationName);
     }
+
     setIsSubmitting(true);
     setError(null);
-    
-    const result = await createEnquiry(formData);
-    
-    setIsSubmitting(false);
-    if (result.success) {
-      setIsSuccess(true);
-    } else {
-      setError(result.error || "Something went wrong. Please try again.");
+    setIsSuccess(false);
+
+    try {
+      const result = await createEnquiry(formData);
+
+      if (result?.success) {
+        setIsSuccess(true);
+        form.reset();
+        return;
+      }
+
+      setError(result?.error || "Failed to send message. Please try again.");
+    } catch (submitError) {
+      console.error("Contact form submit failed:", submitError);
+      setError("Failed to send message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -51,7 +65,7 @@ export default function ContactForm({ locationName }: { locationName?: string })
       <h2 className="text-2xl font-bold text-[#111184] mb-6">
         {locationName ? `Get a Quote in ${locationName}` : "Send Us a Message"}
       </h2>
-      <form action={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-6">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
             Full Name *
@@ -124,6 +138,12 @@ export default function ContactForm({ locationName }: { locationName?: string })
 
         {error && (
           <div className="text-red-500 text-sm">{error}</div>
+        )}
+
+        {isSuccess && (
+          <div className="text-green-600 text-sm font-medium">
+            Message sent successfully. Our team will contact you shortly.
+          </div>
         )}
 
         <button

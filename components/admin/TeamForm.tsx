@@ -19,10 +19,12 @@ interface TeamFormProps {
     image: string;
     order: number;
   };
+  returnPath?: string;
 }
 
-export default function TeamForm({ member }: TeamFormProps) {
+export default function TeamForm({ member, returnPath }: TeamFormProps) {
   const router = useRouter();
+  const back = returnPath || "/admin/team";
   const [loading, setLoading] = useState(false);
   
   const [formData, setFormData] = useState({
@@ -46,7 +48,7 @@ export default function TeamForm({ member }: TeamFormProps) {
       } else {
         await createTeamMember(formData);
       }
-      router.push("/admin/team");
+      router.push(back);
     } catch (error) {
       console.error("Error saving team member:", error);
     } finally {
@@ -55,9 +57,9 @@ export default function TeamForm({ member }: TeamFormProps) {
   };
 
   return (
-    <div className="space-y-6 max-w-2xl mx-auto">
+    <div className="admin-form-shell space-y-6 max-w-2xl mx-auto">
       <div className="flex items-center gap-4">
-        <Link href="/admin/team">
+        <Link href={back}>
           <Button variant="ghost" size="icon">
             <ArrowLeft className="h-4 w-4" />
           </Button>
@@ -67,8 +69,8 @@ export default function TeamForm({ member }: TeamFormProps) {
         </h1>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-8">
-        <Card>
+      <form onSubmit={handleSubmit} className="admin-premium-form space-y-8">
+        <Card className="admin-form-card">
           <CardHeader>
             <CardTitle>Member Details</CardTitle>
           </CardHeader>
@@ -119,7 +121,7 @@ export default function TeamForm({ member }: TeamFormProps) {
         </Card>
 
         <div className="flex justify-end gap-4">
-          <Link href="/admin/team">
+          <Link href={back}>
             <Button variant="outline" type="button">
               Cancel
             </Button>

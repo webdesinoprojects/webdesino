@@ -270,7 +270,13 @@ html {
 }
 
 .animate-carousel-scroll {
-  animation: carousel-scroll 26s linear infinite;
+  animation: carousel-scroll 12s linear infinite;
+}
+
+@media (max-width: 1023px) {
+  .animate-carousel-scroll {
+    animation: carousel-scroll 5s linear infinite;
+  }
 }
 
 .pause-animation {
@@ -362,6 +368,53 @@ html {
 /* Smooth transitions */
 * {
   transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+/* Admin form UI */
+.admin-form-shell {
+  background: linear-gradient(180deg, #f8fafc 0%, #eef3fb 100%) !important;
+  border: 1px solid rgba(148, 163, 184, 0.3) !important;
+  border-radius: 20px !important;
+  padding: 20px !important;
+  box-shadow: 0 12px 34px rgba(15, 23, 42, 0.08) !important;
+}
+
+.admin-form-shell .admin-form-card,
+.admin-form-shell .rounded-xl.border.bg-card {
+  border-radius: 16px !important;
+  border: 1px solid rgba(148, 163, 184, 0.24) !important;
+  background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%) !important;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08) !important;
+}
+
+.admin-premium-form input:not([type="hidden"]):not([type="file"]),
+.admin-premium-form textarea,
+.admin-premium-form button[role="combobox"] {
+  border-radius: 12px !important;
+  border-color: #dbe3f0 !important;
+  background: #ffffff !important;
+  min-height: 42px !important;
+}
+
+.admin-premium-form input:not([type="hidden"]):not([type="file"]):focus,
+.admin-premium-form textarea:focus,
+.admin-premium-form button[role="combobox"]:focus {
+  border-color: #7c9cf7 !important;
+  box-shadow: 0 0 0 4px rgba(76, 99, 255, 0.12) !important;
+}
+
+.admin-form-submit,
+.admin-premium-form button[type="submit"] {
+  border-radius: 12px !important;
+  background: linear-gradient(135deg, #335bff 0%, #4a41d5 100%) !important;
+  color: #fff !important;
+  box-shadow: 0 10px 24px rgba(51, 91, 255, 0.28) !important;
+}
+
+.admin-form-submit:hover,
+.admin-premium-form button[type="submit"]:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
 }
 
 @layer base {

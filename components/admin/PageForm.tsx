@@ -53,9 +53,10 @@ interface PageFormProps {
     description: string | null;
     content: any;
   };
+  returnPath?: string;
 }
 
-export default function PageForm({ page }: PageFormProps) {
+export default function PageForm({ page, returnPath }: PageFormProps) {
   const isEditing = !!page;
   const action = isEditing ? updatePage.bind(null, page.id) : createPage;
 
@@ -132,9 +133,9 @@ export default function PageForm({ page }: PageFormProps) {
   };
 
   return (
-    <div className="space-y-6 max-w-4xl mx-auto">
+    <div className="admin-form-shell space-y-6 max-w-4xl mx-auto">
       <div className="flex items-center gap-4">
-        <Link href="/admin/pages">
+        <Link href={returnPath || "/admin/pages"}>
           <Button variant="ghost" size="icon">
             <ArrowLeft className="h-4 w-4" />
           </Button>
@@ -144,10 +145,11 @@ export default function PageForm({ page }: PageFormProps) {
         </h1>
       </div>
 
-      <form action={action} className="space-y-8">
+      <form action={action} className="admin-premium-form space-y-8">
         <input type="hidden" name="content" value={JSON.stringify(content)} />
+        {returnPath && <input type="hidden" name="_returnPath" value={returnPath} />}
         
-        <Card>
+        <Card className="admin-form-card">
           <CardHeader>
             <CardTitle>General Information</CardTitle>
           </CardHeader>
@@ -189,7 +191,7 @@ export default function PageForm({ page }: PageFormProps) {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="admin-form-card">
           <CardHeader>
             <CardTitle>Custom HTML Content (Overrides Sections)</CardTitle>
           </CardHeader>
@@ -209,7 +211,7 @@ export default function PageForm({ page }: PageFormProps) {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="admin-form-card">
           <CardHeader>
             <CardTitle>Hero Section</CardTitle>
           </CardHeader>
@@ -259,7 +261,7 @@ export default function PageForm({ page }: PageFormProps) {
 
         {slug === "about" && (
           <>
-            <Card>
+            <Card className="admin-form-card">
               <CardHeader>
                 <CardTitle>Stats Section</CardTitle>
               </CardHeader>
@@ -287,7 +289,7 @@ export default function PageForm({ page }: PageFormProps) {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="admin-form-card">
               <CardHeader>
                 <CardTitle>Why Choose Us Features</CardTitle>
               </CardHeader>
@@ -313,7 +315,7 @@ export default function PageForm({ page }: PageFormProps) {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="admin-form-card">
               <CardHeader>
                 <CardTitle>Service Areas</CardTitle>
               </CardHeader>
@@ -331,7 +333,7 @@ export default function PageForm({ page }: PageFormProps) {
           </>
         )}
 
-        <Card>
+        <Card className="admin-form-card">
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle>Content Sections</CardTitle>
             <Button type="button" variant="outline" size="sm" onClick={addSection}>
@@ -384,7 +386,7 @@ export default function PageForm({ page }: PageFormProps) {
         </Card>
 
         <div className="flex justify-end gap-4">
-          <Link href="/admin/pages">
+          <Link href={returnPath || "/admin/pages"}>
             <Button variant="outline" type="button">
               Cancel
             </Button>

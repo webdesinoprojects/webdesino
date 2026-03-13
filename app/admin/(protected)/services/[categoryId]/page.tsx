@@ -32,7 +32,7 @@ export default async function ServiceCategoryDetailsPage({ params }: { params: {
           </Button>
         </Link>
         <div>
-          <h1 className="text-3xl font-bold text-blue-900">{category.title}</h1>
+          <h1 className="text-xl font-bold text-slate-800 tracking-tight">{category.title}</h1>
           <p className="text-gray-500">Manage service pages for this category</p>
         </div>
       </div>
@@ -45,7 +45,7 @@ export default async function ServiceCategoryDetailsPage({ params }: { params: {
         </Link>
       </div>
 
-      <div className="rounded-md border bg-white">
+      <div className="rounded-2xl border border-slate-200/70 shadow-[0_2px_12px_rgba(0,0,0,0.04)] overflow-hidden">
         <Table>
           <TableHeader>
             <TableRow>

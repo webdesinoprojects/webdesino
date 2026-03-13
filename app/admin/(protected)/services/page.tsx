@@ -24,7 +24,7 @@ export default async function ServicesPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-blue-900">Service Categories</h1>
+        <h1 className="text-xl font-bold text-slate-800 tracking-tight">Service Categories</h1>
         <Link href="/admin/services/new">
           <Button>
             <Plus className="mr-2 h-4 w-4" /> Add Category
@@ -32,7 +32,7 @@ export default async function ServicesPage() {
         </Link>
       </div>
 
-      <div className="rounded-md border bg-white">
+      <div className="rounded-2xl border border-slate-200/70 shadow-[0_2px_12px_rgba(0,0,0,0.04)] overflow-hidden">
         <Table>
           <TableHeader>
             <TableRow>

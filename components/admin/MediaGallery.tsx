@@ -3,21 +3,24 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Loader2, Trash2, Copy } from "lucide-react";
+import { Loader2, Trash2, Copy, Check } from "lucide-react";
 import Image from "next/image";
 import ImageUpload from "./ImageUpload";
 import { getMedia, deleteMedia } from "@/lib/media-actions";
+
+const PAGE_SIZE = 24;
 
 export default function MediaGallery() {
   const [images, setImages] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const fetchImages = async () => {
     setLoading(true);
     try {
-      const { media, total } = await getMedia(page, 50);
+      const { media, total } = await getMedia(page, PAGE_SIZE);
       setImages(media);
       setTotal(total);
     } catch (error) {
@@ -38,9 +41,10 @@ export default function MediaGallery() {
     fetchImages();
   };
 
-  const copyUrl = (url: string) => {
-    navigator.clipboard.writeText(url);
-    alert("URL copied to clipboard!");
+  const copyUrl = (id: string, url: string) => {
+    navigator.clipboard.writeText(url).catch(() => {});
+    setCopiedId(id);
+    setTimeout(() => setCopiedId(null), 2000);
   };
 
   return (
@@ -67,11 +71,13 @@ export default function MediaGallery() {
                       src={file.url} 
                       alt={file.filename} 
                       fill 
+                      sizes="(max-width: 640px) 25vw, 12.5vw"
+                      quality={60}
                       className="object-contain"
                     />
                     <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                      <Button size="icon" variant="secondary" onClick={() => copyUrl(file.url)} title="Copy URL">
-                        <Copy className="h-4 w-4" />
+                      <Button size="icon" variant="secondary" onClick={() => copyUrl(file.id, file.url)} title="Copy URL">
+                        {copiedId === file.id ? <Check className="h-4 w-4 text-green-400" /> : <Copy className="h-4 w-4" />}
                       </Button>
                       <Button size="icon" variant="destructive" onClick={() => handleDelete(file.id)} title="Delete">
                         <Trash2 className="h-4 w-4" />
@@ -100,7 +106,7 @@ export default function MediaGallery() {
             </Button>
             <Button 
                 variant="outline" 
-                disabled={page * 50 >= total} 
+                disabled={page * PAGE_SIZE >= total} 
                 onClick={() => setPage(p => p + 1)}
             >
                 Next

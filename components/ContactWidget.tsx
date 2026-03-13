@@ -34,7 +34,7 @@ export default function ContactWidget() {
   };
 
   return (
-    <div className="fixed bottom-24 lg:bottom-8 right-6 z-50 flex flex-col items-center gap-4">
+    <div className="fixed bottom-24 lg:bottom-8 right-6 z-50 flex flex-col items-end gap-4">
       {!isDismissed && !isCardOpen && (
         <button
           type="button"

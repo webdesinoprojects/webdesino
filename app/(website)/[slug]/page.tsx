@@ -18,14 +18,206 @@ interface PageProps {
     };
 }
 
+type GenericPageContent = {
+    html?: string;
+    hero?: {
+        title?: string;
+        subtitle?: string;
+        image?: string;
+        ctaText?: string;
+        ctaLink?: string;
+    };
+    sections?: Array<{
+        title?: string;
+        content?: string;
+        image?: string;
+    }>;
+    stats?: Array<{
+        value?: string;
+        label?: string;
+    }>;
+    features?: Array<{
+        title?: string;
+        description?: string;
+    }>;
+    serviceAreas?: string[];
+};
+
+function GenericWebsitePage({
+    page,
+}: {
+    page: {
+        title: string;
+        description: string | null;
+        slug: string;
+        content: any;
+    };
+}) {
+    const content = (page.content as GenericPageContent) || {};
+    const sections = content.sections || [];
+    const stats = content.stats || [];
+    const features = content.features || [];
+    const serviceAreas = content.serviceAreas || [];
+
+    return (
+        <main className="min-h-screen bg-white">
+            <section className="relative overflow-hidden bg-[#111184] text-white py-20 lg:py-28">
+                <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `url(${getStorageUrl('/grid-pattern.svg')})` }}></div>
+                <div className="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-blue-500/20 to-transparent"></div>
+                <div className="container mx-auto px-4 relative z-10">
+                    <div className={`flex flex-col lg:flex-row items-center gap-12 ${content.hero?.image ? '' : 'justify-center text-center'}`}>
+                        <div className={`w-full ${content.hero?.image ? 'lg:w-1/2' : 'max-w-4xl mx-auto'}`}>
+                            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                                {content.hero?.title || page.title}
+                            </h1>
+                            <p className="text-xl text-gray-200 mb-8 max-w-3xl">
+                                {content.hero?.subtitle || page.description || "Discover how WebDesino helps brands grow with high-performance websites and digital experiences."}
+                            </p>
+                            <div className={`flex flex-col sm:flex-row gap-4 ${content.hero?.image ? 'justify-start' : 'justify-center'}`}>
+                                <Link href={content.hero?.ctaLink || "/contact"} className="px-8 py-4 bg-white text-[#111184] rounded-full font-bold hover:bg-gray-100 transition-all transform hover:scale-105">
+                                    {content.hero?.ctaText || "Get Started"}
+                                </Link>
+                                <Link href="/portfolio" className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-full font-bold hover:bg-white/10 transition-all">
+                                    View Our Work
+                                </Link>
+                            </div>
+                        </div>
+                        {content.hero?.image && (
+                            <div className="w-full lg:w-1/2 flex justify-center">
+                                <img
+                                    src={getStorageUrl(content.hero.image)}
+                                    alt={page.title}
+                                    className="w-full max-w-lg h-auto object-contain rounded-lg"
+                                />
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </section>
+
+            {content.html ? (
+                <section className="py-16 lg:py-24">
+                    <div className="container mx-auto px-4">
+                        <div className="prose prose-slate max-w-none prose-headings:text-slate-900 prose-p:text-slate-600 prose-li:text-slate-600" dangerouslySetInnerHTML={{ __html: content.html }} />
+                    </div>
+                </section>
+            ) : (
+                <>
+                    {sections.length > 0 && (
+                        <section className="py-16 lg:py-24">
+                            <div className="container mx-auto px-4 space-y-16">
+                                {sections.map((section, index) => (
+                                    <div key={`${section.title || 'section'}-${index}`} className="grid lg:grid-cols-2 gap-10 items-center">
+                                        <div className={index % 2 === 1 ? 'lg:order-2' : ''}>
+                                            <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">
+                                                {section.title || `Section ${index + 1}`}
+                                            </h2>
+                                            <div className="text-lg text-slate-600 leading-relaxed whitespace-pre-line">
+                                                {section.content}
+                                            </div>
+                                        </div>
+                                        {section.image ? (
+                                            <div className={index % 2 === 1 ? 'lg:order-1' : ''}>
+                                                <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200">
+                                                    <img
+                                                        src={getStorageUrl(section.image)}
+                                                        alt={section.title || page.title}
+                                                        className="w-full h-auto object-contain rounded-xl"
+                                                    />
+                                                </div>
+                                            </div>
+                                        ) : null}
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+
+                    {stats.length > 0 && (
+                        <section className="py-16 bg-slate-50">
+                            <div className="container mx-auto px-4">
+                                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                                    {stats.map((stat, index) => (
+                                        <div key={`${stat.label || 'stat'}-${index}`} className="rounded-2xl bg-white border border-slate-200 p-6 text-center shadow-sm">
+                                            <div className="text-3xl font-bold text-[#111184] mb-2">{stat.value}</div>
+                                            <div className="text-sm text-slate-600">{stat.label}</div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+                    )}
+
+                    {features.length > 0 && (
+                        <section className="py-16 lg:py-24">
+                            <div className="container mx-auto px-4">
+                                <div className="max-w-3xl mx-auto text-center mb-12">
+                                    <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">Why Choose WebDesino</h2>
+                                    <p className="text-lg text-slate-600">Built for brands that want sharp design, strong performance, and real business outcomes.</p>
+                                </div>
+                                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    {features.map((feature, index) => (
+                                        <div key={`${feature.title || 'feature'}-${index}`} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                                            <div className="w-12 h-12 rounded-full bg-[#111184]/10 text-[#111184] flex items-center justify-center mb-4">
+                                                <CheckCircle2 size={22} />
+                                            </div>
+                                            <h3 className="text-xl font-bold text-slate-900 mb-2">{feature.title}</h3>
+                                            <p className="text-slate-600">{feature.description}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+                    )}
+
+                    {serviceAreas.length > 0 && (
+                        <section className="py-16 bg-slate-50">
+                            <div className="container mx-auto px-4">
+                                <div className="max-w-3xl mx-auto text-center mb-10">
+                                    <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">Service Areas</h2>
+                                    <p className="text-lg text-slate-600">Supporting businesses across these locations.</p>
+                                </div>
+                                <div className="flex flex-wrap justify-center gap-3">
+                                    {serviceAreas.map((area, index) => (
+                                        <span key={`${area}-${index}`} className="px-4 py-2 rounded-full bg-white border border-slate-200 text-slate-700 font-medium shadow-sm">
+                                            {area}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+                    )}
+                </>
+            )}
+
+            <section id="contact" className="py-16 lg:py-24 bg-slate-900 text-white">
+                <div className="container mx-auto px-4">
+                    <div className="max-w-2xl mx-auto text-center mb-10">
+                        <h2 className="text-3xl lg:text-4xl font-bold mb-4">Let&apos;s Build Something Great</h2>
+                        <p className="text-slate-300 text-lg">Tell us what you need and our team will get back to you shortly.</p>
+                    </div>
+                    <div className="max-w-2xl mx-auto">
+                        <ContactForm />
+                    </div>
+                </div>
+            </section>
+        </main>
+    );
+}
+
 // Allow static generation with fallback for missing pages
 export const dynamicParams = true; // Allow dynamic params not in generateStaticParams
 
 export async function generateStaticParams() {
     try {
-        const locations = await prisma.locationPage.findMany({
-            select: { slug: true },
-        });
+        const [locations, pages] = await Promise.all([
+            prisma.locationPage.findMany({
+                select: { slug: true },
+            }),
+            prisma.page.findMany({
+                select: { slug: true },
+            }),
+        ]);
 
         const reservedRoutes = [
             "about", "blog", "case-studies", "contact", "our-clients", 
@@ -34,10 +226,11 @@ export async function generateStaticParams() {
             "testimonials"
         ];
 
-        return locations
-            .filter((loc) => loc.slug && loc.slug !== "index" && loc.slug !== "" && !reservedRoutes.includes(loc.slug))
-            .map((loc) => ({
-                slug: loc.slug,
+        return [...locations, ...pages]
+            .filter((entry) => entry.slug && entry.slug !== "index" && entry.slug !== "" && !reservedRoutes.includes(entry.slug))
+            .filter((entry, index, array) => array.findIndex((item) => item.slug === entry.slug) === index)
+            .map((entry) => ({
+                slug: entry.slug,
             }));
     } catch (error) {
         console.error("Error generating static params for location pages:", error);
@@ -48,15 +241,26 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     try {
-        const page = await prisma.locationPage.findUnique({
+        const locationPage = await prisma.locationPage.findUnique({
             where: { slug: params.slug },
         });
 
-        if (!page) return { title: "Page Not Found" };
+        if (locationPage) {
+            return {
+                title: locationPage.title,
+                description: locationPage.description || `Best Web Development Services in ${locationPage.location}`,
+            };
+        }
+
+        const genericPage = await prisma.page.findUnique({
+            where: { slug: params.slug },
+        });
+
+        if (!genericPage) return { title: "Page Not Found" };
 
         return {
-            title: page.title,
-            description: page.description || `Best Web Development Services in ${page.location}`,
+            title: genericPage.title,
+            description: genericPage.description || genericPage.title,
         };
     } catch (error) {
         console.error("Error generating metadata for location page:", error);
@@ -76,6 +280,14 @@ export default async function LocationPage({ params }: PageProps) {
     }
 
     if (!page) {
+        const genericPage = await prisma.page.findUnique({
+            where: { slug: params.slug },
+        });
+
+        if (genericPage) {
+            return <GenericWebsitePage page={genericPage} />;
+        }
+
         notFound();
     }
 

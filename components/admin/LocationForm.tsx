@@ -47,9 +47,10 @@ interface LocationFormProps {
     description: string | null;
     content: any;
   };
+  returnPath?: string;
 }
 
-export default function LocationForm({ location }: LocationFormProps) {
+export default function LocationForm({ location, returnPath }: LocationFormProps) {
   const isEditing = !!location;
   const action = isEditing ? updateLocation.bind(null, location.id) : createLocation;
 
@@ -169,9 +170,9 @@ export default function LocationForm({ location }: LocationFormProps) {
   };
 
   return (
-    <div className="space-y-6 max-w-4xl mx-auto">
+    <div className="admin-form-shell space-y-6 max-w-4xl mx-auto">
       <div className="flex items-center gap-4">
-        <Link href="/admin/locations">
+        <Link href={returnPath || "/admin/locations"}>
           <Button variant="ghost" size="icon">
             <ArrowLeft className="h-4 w-4" />
           </Button>
@@ -181,14 +182,15 @@ export default function LocationForm({ location }: LocationFormProps) {
         </h1>
       </div>
 
-      <form action={action} className="space-y-8">
+      <form action={action} className="admin-premium-form space-y-8">
         <input type="hidden" name="content" value={JSON.stringify(content)} />
+        {returnPath && <input type="hidden" name="_returnPath" value={returnPath} />}
         
         <Card>
           <CardHeader>
             <CardTitle>General Information</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
+           <CardContent className="space-y-4 admin-form-card">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="location">Location Name</Label>
@@ -251,7 +253,7 @@ export default function LocationForm({ location }: LocationFormProps) {
           <CardHeader>
             <CardTitle>Hero Section</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
+           <CardContent className="space-y-4 admin-form-card">
             <div className="space-y-2">
               <Label>Subtitle / Intro Text</Label>
               <Textarea
@@ -308,7 +310,7 @@ export default function LocationForm({ location }: LocationFormProps) {
           <CardHeader>
             <CardTitle>Story Section</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
+           <CardContent className="space-y-4 admin-form-card">
             <div className="space-y-2">
               <Label>Section Title</Label>
               <Input
@@ -340,7 +342,7 @@ export default function LocationForm({ location }: LocationFormProps) {
           <CardHeader>
             <CardTitle>Leading Company Section</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
+           <CardContent className="space-y-4 admin-form-card">
             <div className="space-y-2">
               <Label>Section Title</Label>
               <Input
@@ -366,7 +368,7 @@ export default function LocationForm({ location }: LocationFormProps) {
               <Plus className="h-4 w-4 mr-2" /> Add Service
             </Button>
           </CardHeader>
-          <CardContent className="space-y-6">
+           <CardContent className="space-y-6 admin-form-card">
             {content.services?.map((service, index) => (
               <div key={index} className="border rounded-lg p-4 space-y-4 bg-slate-50 relative">
                 <Button 
@@ -411,7 +413,7 @@ export default function LocationForm({ location }: LocationFormProps) {
         </Card>
 
         <div className="flex justify-end gap-4">
-          <Link href="/admin/locations">
+          <Link href={returnPath || "/admin/locations"}>
             <Button variant="outline" type="button">
               Cancel
             </Button>

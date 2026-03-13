@@ -19,10 +19,12 @@ interface FAQFormProps {
     category: string;
     order: number;
   };
+  returnPath?: string;
 }
 
-export default function FAQForm({ faq }: FAQFormProps) {
+export default function FAQForm({ faq, returnPath }: FAQFormProps) {
   const router = useRouter();
+  const back = returnPath || "/admin/faqs";
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   
@@ -49,7 +51,7 @@ export default function FAQForm({ faq }: FAQFormProps) {
       } else {
         await createFAQ(formData);
       }
-      router.push("/admin/faqs");
+      router.push(back);
       router.refresh();
     } catch (err) {
       setError("Something went wrong. Please try again.");
@@ -60,10 +62,10 @@ export default function FAQForm({ faq }: FAQFormProps) {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="admin-form-shell space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Link href="/admin/faqs">
+          <Link href={back}>
             <Button variant="ghost" size="icon">
               <ArrowLeft className="h-4 w-4" />
             </Button>
@@ -74,8 +76,8 @@ export default function FAQForm({ faq }: FAQFormProps) {
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-8">
-        <Card>
+      <form onSubmit={handleSubmit} className="admin-premium-form space-y-8">
+        <Card className="admin-form-card">
           <CardHeader>
             <CardTitle>FAQ Details</CardTitle>
           </CardHeader>

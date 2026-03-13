@@ -4,6 +4,16 @@ import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { sendEnquiryEmail } from "@/lib/email";
+import { logEmployeeAction } from "@/lib/employee-logger";
+
+/** Safely read a return-path from FormData. Only allows known internal prefixes. */
+function safeReturnPath(formData: FormData, defaultPath: string): string {
+  const path = formData.get("_returnPath") as string | null;
+  if (path && (path.startsWith("/admin/") || path.startsWith("/employee/dashboard/"))) {
+    return path;
+  }
+  return defaultPath;
+}
 
 export async function createProject(data: any) {
   await prisma.project.create({
@@ -101,6 +111,7 @@ export async function deleteService(id: string) {
 
   revalidatePath("/admin/services");
   revalidatePath("/services");
+  await logEmployeeAction("services", `Deleted service (id: ${id})`);
 }
 
 export async function createFAQ(data: any) {
@@ -115,6 +126,7 @@ export async function createFAQ(data: any) {
 
   revalidatePath("/admin/faqs");
   revalidatePath("/");
+  await logEmployeeAction("faqs", `Created FAQ: "${data.question}"`);
 }
 
 export async function updateFAQ(id: string, data: any) {
@@ -130,6 +142,7 @@ export async function updateFAQ(id: string, data: any) {
 
   revalidatePath("/admin/faqs");
   revalidatePath("/");
+  await logEmployeeAction("faqs", `Updated FAQ: "${data.question}"`);
 }
 
 export async function deleteFAQ(id: string) {
@@ -139,6 +152,7 @@ export async function deleteFAQ(id: string) {
 
   revalidatePath("/admin/faqs");
   revalidatePath("/");
+  await logEmployeeAction("faqs", `Deleted FAQ (id: ${id})`);
 }
 
 export async function createBlogPost(data: any) {
@@ -156,6 +170,7 @@ export async function createBlogPost(data: any) {
 
   revalidatePath("/admin/blogs");
   revalidatePath("/blog");
+  await logEmployeeAction("blogs", `Created blog post: "${data.title}"`);
 }
 
 export async function updateBlogPost(id: string, data: any) {
@@ -174,6 +189,7 @@ export async function updateBlogPost(id: string, data: any) {
   revalidatePath("/admin/blogs");
   revalidatePath("/blog");
   revalidatePath(`/blog/${data.slug}`);
+  await logEmployeeAction("blogs", `Updated blog post: "${data.title}"`);
 }
 
 export async function deleteBlogPost(id: string) {
@@ -183,6 +199,7 @@ export async function deleteBlogPost(id: string) {
 
   revalidatePath("/admin/blogs");
   revalidatePath("/blog");
+  await logEmployeeAction("blogs", `Deleted blog post (id: ${id})`);
 }
 
 export async function createTestimonial(data: any) {
@@ -197,6 +214,7 @@ export async function createTestimonial(data: any) {
 
   revalidatePath("/admin/testimonials");
   revalidatePath("/"); // Testimonials might be on home page
+  await logEmployeeAction("testimonials", `Created testimonial from "${data.name}"`);
 }
 
 export async function updateTestimonial(id: string, data: any) {
@@ -212,6 +230,7 @@ export async function updateTestimonial(id: string, data: any) {
 
   revalidatePath("/admin/testimonials");
   revalidatePath("/");
+  await logEmployeeAction("testimonials", `Updated testimonial from "${data.name}"`);
 }
 
 export async function deleteTestimonial(id: string) {
@@ -221,6 +240,7 @@ export async function deleteTestimonial(id: string) {
 
   revalidatePath("/admin/testimonials");
   revalidatePath("/");
+  await logEmployeeAction("testimonials", `Deleted testimonial (id: ${id})`);
 }
 
 export async function createServiceCategory(formData: FormData) {
@@ -239,7 +259,7 @@ export async function createServiceCategory(formData: FormData) {
   });
 
   revalidatePath("/admin/services");
-  redirect("/admin/services");
+  redirect(safeReturnPath(formData, "/admin/services"));
 }
 
 
@@ -381,6 +401,19 @@ export async function createCallEnquiry(formData: FormData) {
   }
 }
 
+export async function updateEnquiryStatus(id: string, status: string) {
+  const allowed = ["new", "contacted", "closed"];
+  if (!allowed.includes(status)) return { success: false, error: "Invalid status." };
+
+  await prisma.enquiry.update({ where: { id }, data: { status } });
+  revalidatePath("/admin/enquiries");
+  revalidatePath(`/admin/enquiries/${id}`);
+  revalidatePath("/employee/dashboard/enquiries");
+  revalidatePath(`/employee/dashboard/enquiries/${id}`);
+  await logEmployeeAction("enquiries", `Updated enquiry status to ${status.toUpperCase()} (id: ${id})`);
+  return { success: true };
+}
+
 export async function createLocation(formData: FormData) {
   const location = formData.get("location") as string;
   const slug = formData.get("slug") as string;
@@ -407,7 +440,8 @@ export async function createLocation(formData: FormData) {
 
   revalidatePath("/admin/locations");
   revalidatePath("/", "layout");
-  redirect("/admin/locations");
+  await logEmployeeAction("locations", `Created location page: "${title}"`);
+  redirect(safeReturnPath(formData, "/admin/locations"));
 }
 
 export async function updateLocation(id: string, formData: FormData) {
@@ -438,7 +472,8 @@ export async function updateLocation(id: string, formData: FormData) {
   revalidatePath("/admin/locations");
   revalidatePath(`/${slug}`);
   revalidatePath("/", "layout");
-  redirect("/admin/locations");
+  await logEmployeeAction("locations", `Updated location page: "${title}"`);
+  redirect(safeReturnPath(formData, "/admin/locations"));
 }
 
 export async function deleteLocation(id: string) {
@@ -448,6 +483,7 @@ export async function deleteLocation(id: string) {
 
   revalidatePath("/admin/locations");
   revalidatePath("/", "layout");
+  await logEmployeeAction("locations", `Deleted location page (id: ${id})`);
   redirect("/admin/locations");
 }
 
@@ -476,7 +512,9 @@ export async function createPage(formData: FormData) {
   });
 
   revalidatePath("/admin/pages");
-  redirect("/admin/pages");
+  revalidatePath(`/${slug}`);
+  await logEmployeeAction("pages", `Created page: "${title}"`);
+  redirect(safeReturnPath(formData, "/admin/pages"));
 }
 
 export async function updatePage(id: string, formData: FormData) {
@@ -504,15 +542,24 @@ export async function updatePage(id: string, formData: FormData) {
 
   revalidatePath("/admin/pages");
   revalidatePath(`/${slug}`); // Revalidate the page itself
-  redirect("/admin/pages");
+  await logEmployeeAction("pages", `Updated page: "${title}"`);
+  redirect(safeReturnPath(formData, "/admin/pages"));
 }
 
 export async function deletePage(id: string) {
+  const existingPage = await prisma.page.findUnique({
+    where: { id },
+    select: { slug: true },
+  });
+
   await prisma.page.delete({
     where: { id },
   });
 
   revalidatePath("/admin/pages");
+  if (existingPage?.slug) {
+    revalidatePath(`/${existingPage.slug}`);
+  }
   redirect("/admin/pages");
 }
 
@@ -528,6 +575,7 @@ export async function createTeamMember(data: any) {
 
   revalidatePath("/admin/team");
   revalidatePath("/about");
+  await logEmployeeAction("team", `Added team member: "${data.name}"`);
 }
 
 export async function updateTeamMember(id: string, data: any) {
@@ -543,6 +591,7 @@ export async function updateTeamMember(id: string, data: any) {
 
   revalidatePath("/admin/team");
   revalidatePath("/about");
+  await logEmployeeAction("team", `Updated team member: "${data.name}"`);
 }
 
 export async function deleteTeamMember(id: string) {
@@ -552,6 +601,7 @@ export async function deleteTeamMember(id: string) {
 
   revalidatePath("/admin/team");
   revalidatePath("/about");
+  await logEmployeeAction("team", `Removed team member (id: ${id})`);
 }
 
 export async function createClient(formData: FormData) {
@@ -571,7 +621,8 @@ export async function createClient(formData: FormData) {
 
   revalidatePath("/admin/clients");
   revalidatePath("/our-clients");
-  redirect("/admin/clients");
+  await logEmployeeAction("clients", `Added client: "${name}"`);
+  redirect(safeReturnPath(formData, "/admin/clients"));
 }
 
 export async function updateClient(id: string, formData: FormData) {
@@ -592,7 +643,8 @@ export async function updateClient(id: string, formData: FormData) {
 
   revalidatePath("/admin/clients");
   revalidatePath("/our-clients");
-  redirect("/admin/clients");
+  await logEmployeeAction("clients", `Updated client: "${name}"`);
+  redirect(safeReturnPath(formData, "/admin/clients"));
 }
 
 export async function deleteClient(id: string) {
@@ -602,6 +654,7 @@ export async function deleteClient(id: string) {
 
   revalidatePath("/admin/clients");
   revalidatePath("/our-clients");
+  await logEmployeeAction("clients", `Deleted client (id: ${id})`);
 }
 
 

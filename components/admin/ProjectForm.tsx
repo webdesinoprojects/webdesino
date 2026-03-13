@@ -127,7 +127,7 @@ export default function ProjectForm({ project }: ProjectFormProps) {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="admin-form-shell space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <Link href="/admin/case-studies">
@@ -141,8 +141,8 @@ export default function ProjectForm({ project }: ProjectFormProps) {
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-8">
-        <Card>
+      <form onSubmit={handleSubmit} className="admin-premium-form space-y-8">
+        <Card className="admin-form-card">
           <CardHeader>
             <CardTitle>Case Study Details</CardTitle>
           </CardHeader>
@@ -212,7 +212,7 @@ export default function ProjectForm({ project }: ProjectFormProps) {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="admin-form-card">
           <CardHeader>
             <CardTitle>Results & Metrics</CardTitle>
           </CardHeader>
@@ -265,7 +265,7 @@ export default function ProjectForm({ project }: ProjectFormProps) {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="admin-form-card">
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle>Case Study FAQs</CardTitle>
             <Button type="button" variant="outline" size="sm" onClick={addFaq}>

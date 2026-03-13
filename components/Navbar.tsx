@@ -159,7 +159,7 @@ export default function Navbar() {
                 {activeDropdown === 'work' && (
                    <div className="absolute top-full left-0 mt-4 w-64 bg-white shadow-xl border border-slate-100 z-50 rounded-2xl p-2 animate-fade-in-up">
                       {workDropdown.map((item, idx) => (
-                        <Link key={idx} href={item.href} className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 text-slate-600 hover:text-[#111184] transition group">
+                        <Link key={idx} href={item.href} className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 text-slate-600 hover:text-[#111184] transition group" onClick={() => setActiveDropdown(null)}>
                           <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-500 group-hover:bg-[#111184]/10 group-hover:text-[#111184] transition">
                             {item.icon}
                           </div>
@@ -167,7 +167,7 @@ export default function Navbar() {
                         </Link>
                       ))}
                       <div className="mt-2 pt-2 border-t border-slate-100">
-                        <Link href="/portfolio" className="flex items-center justify-center gap-2 p-2 text-sm font-bold text-[#111184] hover:bg-[#111184]/5 rounded-lg transition">
+                        <Link href="/portfolio" className="flex items-center justify-center gap-2 p-2 text-sm font-bold text-[#111184] hover:bg-[#111184]/5 rounded-lg transition" onClick={() => setActiveDropdown(null)}>
                           View All Work <ArrowRight size={14} />
                         </Link>
                       </div>
@@ -188,12 +188,12 @@ export default function Navbar() {
                 {activeDropdown === 'clients' && (
                    <div className="absolute top-full left-0 mt-4 w-64 bg-white shadow-xl border border-slate-100 z-50 rounded-2xl p-2 animate-fade-in-up">
                       {clientsDropdown.map((item, idx) => (
-                        <Link key={idx} href={item.href} className="block p-3 rounded-xl hover:bg-slate-50 text-slate-600 hover:text-[#111184] transition font-medium text-sm">
+                        <Link key={idx} href={item.href} className="block p-3 rounded-xl hover:bg-slate-50 text-slate-600 hover:text-[#111184] transition font-medium text-sm" onClick={() => setActiveDropdown(null)}>
                           {item.name}
                         </Link>
                       ))}
                       <div className="mt-2 pt-2 border-t border-slate-100">
-                        <Link href="/our-clients" className="flex items-center justify-center gap-2 p-2 text-sm font-bold text-[#111184] hover:bg-[#111184]/5 rounded-lg transition">
+                        <Link href="/our-clients" className="flex items-center justify-center gap-2 p-2 text-sm font-bold text-[#111184] hover:bg-[#111184]/5 rounded-lg transition" onClick={() => setActiveDropdown(null)}>
                           View All Clients <ArrowRight size={14} />
                         </Link>
                       </div>
@@ -230,7 +230,7 @@ export default function Navbar() {
                     {megaMenuItems.map((category, idx) => (
                       <div key={idx}>
                         <h3 className="font-bold text-slate-900 mb-4 text-lg border-b border-slate-100 pb-2">
-                          <Link href={`/services/${category.slug}`} className="hover:text-[#111184] transition">
+                          <Link href={`/services/${category.slug}`} className="hover:text-[#111184] transition" onClick={() => setActiveDropdown(null)}>
                             {category.title}
                           </Link>
                         </h3>
@@ -240,6 +240,7 @@ export default function Navbar() {
                               <Link
                                 href={`/services/${category.slug}/${item.slug}`}
                                 className="text-slate-600 hover:text-[#111184] transition text-sm block hover:translate-x-1 transform duration-200"
+                                onClick={() => setActiveDropdown(null)}
                               >
                                 {item.label}
                               </Link>

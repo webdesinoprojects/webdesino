@@ -25,6 +25,7 @@ interface ClientFormProps {
     image: string;
     category: string;
   };
+  returnPath?: string;
 }
 
 const CATEGORIES = [
@@ -36,15 +37,16 @@ const CATEGORIES = [
   "Graphic Designing",
 ];
 
-export default function ClientForm({ client }: ClientFormProps) {
+export default function ClientForm({ client, returnPath }: ClientFormProps) {
   const isEditing = !!client;
   const action = isEditing ? updateClient.bind(null, client.id) : createClient;
   const [imageUrl, setImageUrl] = useState(client?.image || "");
+  const back = returnPath || "/admin/clients";
 
   return (
-    <div className="space-y-6">
+    <div className="admin-form-shell space-y-6">
       <div className="flex items-center space-x-4">
-        <Link href="/admin/clients">
+        <Link href={back}>
           <Button variant="ghost" size="icon">
             <ArrowLeft className="h-4 w-4" />
           </Button>
@@ -54,12 +56,13 @@ export default function ClientForm({ client }: ClientFormProps) {
         </h1>
       </div>
 
-      <Card>
+      <Card className="admin-form-card">
         <CardHeader>
           <CardTitle>Client Details</CardTitle>
         </CardHeader>
         <CardContent>
-          <form action={action} className="space-y-6">
+          <form action={action} className="admin-premium-form space-y-6">
+            {returnPath && <input type="hidden" name="_returnPath" value={returnPath} />}
             <div className="space-y-2">
               <Label htmlFor="name">Client Name</Label>
               <Input
@@ -109,7 +112,7 @@ export default function ClientForm({ client }: ClientFormProps) {
             </div>
 
             <div className="flex justify-end space-x-4">
-              <Link href="/admin/clients">
+              <Link href={back}>
                 <Button variant="outline" type="button">
                   Cancel
                 </Button>
