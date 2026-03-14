@@ -151,7 +151,7 @@ export default async function OurClientsPage({
               <div className="grid md:grid-cols-2 gap-8">
                 {clients.filter(c => c.category === "Digital Marketing" && c.name.includes("Google Ads")).map((client, idx) => (
                   <div key={idx} className="rounded-2xl overflow-hidden shadow-lg border border-slate-100">
-                    <div className="aspect-[16/9] relative bg-slate-100">
+                    <div className="relative aspect-[16/9] min-h-[220px] bg-slate-100">
                       <Image
                         src={getStorageUrl(client.image)}
                         alt={client.name}
@@ -223,9 +223,9 @@ export default async function OurClientsPage({
                     {categoryClients.map((client, idx) => (
                       <div
                         key={idx}
-                        className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100"
+                        className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col min-h-[360px]"
                       >
-                        <div className="aspect-video relative overflow-hidden bg-slate-100">
+                            <div className="relative aspect-[16/9] min-h-[220px] overflow-hidden bg-slate-100">
                           <Image
                             src={getStorageUrl(client.image)}
                             alt={`${client.name} Screenshot`}
@@ -245,7 +245,7 @@ export default async function OurClientsPage({
                             </a>
                           </div>
                         </div>
-                        <div className="p-6">
+                        <div className="p-6 flex-1">
                           <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-[#111184] transition-colors">
                             {client.name}
                           </h3>

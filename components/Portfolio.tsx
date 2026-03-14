@@ -69,9 +69,9 @@ export default function Portfolio({ projects }: PortfolioProps) {
                   href={`/case-studies/${project.slug}`}
                   className={`${
                     idx === activeProject ? "md:col-span-2" : "hidden md:block"
-                  } bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] group`}
+                  } bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] group flex flex-col min-h-[380px]`}
                 >
-                  <div className="aspect-video bg-gray-100 relative overflow-hidden">
+                  <div className="relative aspect-[16/9] min-h-[220px] bg-gray-100 overflow-hidden">
                     {project.image ? (
                       <Image
                         src={getStorageUrl(project.image)}
@@ -86,7 +86,7 @@ export default function Portfolio({ projects }: PortfolioProps) {
                       </div>
                     )}
                   </div>
-                  <div className="p-6" itemScope itemType="https://schema.org/CreativeWork">
+                  <div className="p-6 flex-1" itemScope itemType="https://schema.org/CreativeWork">
                     <h3 className="text-xl font-bold text-[#111184] mb-2 group-hover:text-[#111184]/80 transition" itemProp="name">
                       {project.title}
                     </h3>

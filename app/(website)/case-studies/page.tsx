@@ -93,7 +93,7 @@ export default async function CaseStudiesPage() {
             <Link 
               key={study.slug} 
               href={`/case-studies/${study.slug}`}
-              className="group glass-strong rounded-3xl hover:shadow-2xl transition-all duration-300 overflow-hidden hover-lift animate-fade-in"
+              className="group glass-strong rounded-3xl hover:shadow-2xl transition-all duration-300 overflow-hidden hover-lift animate-fade-in flex flex-col min-h-[540px]"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               {/* Card Header */}
@@ -102,7 +102,7 @@ export default async function CaseStudiesPage() {
                 index === 1 ? 'bg-gradient-to-br from-white to-[#111184]/5' :
                 index === 2 ? 'bg-gradient-to-br from-[#111184]/5 to-cream' :
                 'bg-gradient-to-br from-white to-cream'
-              }`}>
+              } min-h-[250px]`}>
                 <div className="absolute top-0 right-0 w-32 h-32 bg-white/20 rounded-full blur-2xl" />
                 <div className="flex items-center justify-between mb-4 relative z-10">
                   <span className="glass px-4 py-2 rounded-full text-sm font-semibold text-[#111184] shadow-md">
@@ -117,7 +117,7 @@ export default async function CaseStudiesPage() {
               </div>
 
               {/* Metrics */}
-              <div className="p-8 border-t border-gray-100">
+              <div className="p-8 border-t border-gray-100 flex-1">
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   <div className="glass rounded-2xl p-4">
                     <p className="text-sm text-gray-600 mb-1">Revenue Growth</p>

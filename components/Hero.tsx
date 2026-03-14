@@ -129,7 +129,7 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 							</span>
 							<span className="block text-[#111184]">
 								{text}
-                                <span className="animate-pulse text-[#111184]">|</span>
+								<span className="inline-block w-[0.6ch] animate-pulse text-[#111184]" aria-hidden="true">|</span>
 							</span>
 						</h1>
 

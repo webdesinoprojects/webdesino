@@ -45,9 +45,9 @@ export default async function PortfolioPage() {
               <Link
                 key={project.id}
                 href={`/case-studies/${project.slug}`}
-                className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group"
+                className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group flex flex-col min-h-[390px]"
               >
-                <div className="aspect-video bg-gradient-to-br from-[#111184]/20 to-black/20 relative overflow-hidden">
+                <div className="relative aspect-[16/9] min-h-[220px] bg-gradient-to-br from-[#111184]/20 to-black/20 overflow-hidden">
                   {project.image ? (
                     <Image
                       src={getStorageUrl(project.image)}
@@ -65,7 +65,7 @@ export default async function PortfolioPage() {
                     {project.industry}
                   </div>
                 </div>
-                <div className="p-6">
+                <div className="p-6 flex-1">
                   <h2 className="text-xl font-bold text-[#111184] mb-2 group-hover:text-[#111184] transition">
                     {project.title}
                   </h2>
