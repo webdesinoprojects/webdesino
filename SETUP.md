@@ -49,6 +49,8 @@ Before running the project, you need to add the following assets:
    - Update icon SVG if needed
 
 3. **Configure Environment** (if needed)
+   - Set `FRONTEND_URL` (example: `https://webdesino.com`) for auth/reset links
+   - Set `GA_MEASUREMENT_ID` (example: `G-XXXXXXXXXX`) for Google Analytics
    - Update contact information in `components/Navbar.tsx` and `components/Footer.tsx`
    - Update social media links in `components/Footer.tsx`
 

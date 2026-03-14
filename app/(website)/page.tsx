@@ -32,18 +32,33 @@ import {
 } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Webdesino | Stunning Websites by Top Web Development Agency",
+  title: "Top Web Development Company in Delhi NCR | Webdesino",
   description:
-    "Webdesino is a leading Digital Marketing Agency Delhi and web development company helping businesses grow online with creative websites, SEO, and digital marketing solutions. Trusted by 100+ businesses across Delhi NCR.",
+    "Webdesino is a leading web development and digital marketing agency in Delhi NCR offering SEO, website design and digital marketing services.",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
+    title: "Top Web Development Company in Delhi NCR | Webdesino",
+    description:
+      "Webdesino is a leading web development and digital marketing agency in Delhi NCR offering SEO, website design and digital marketing services.",
+    url: "https://webdesino.com",
+    type: "website",
     images: [
       {
         url: Logo,
         width: 1200,
         height: 630,
-        alt: "Webdesino Logo",
+        alt: "Webdesino - Top Web Development Company in Delhi NCR",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Top Web Development Company in Delhi NCR | Webdesino",
+    description:
+      "Webdesino is a leading web development and digital marketing agency in Delhi NCR offering SEO, website design and digital marketing services.",
+    images: [Logo],
   },
 };
 

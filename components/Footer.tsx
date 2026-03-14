@@ -56,7 +56,6 @@ export default function Footer({ locations = [] }: FooterProps) {
                 fill
                 sizes="150px"
                 className="object-cover object-left"
-                priority
               />
             </span>
             <p className="text-gray-200 mb-6 leading-relaxed text-sm">
@@ -116,6 +115,10 @@ export default function Footer({ locations = [] }: FooterProps) {
             {/* Get In Touch */}
             <div>
               <h4 className="text-lg font-bold mb-4 text-white">Get In Touch</h4>
+              <p className="text-sm text-gray-200 mb-3">
+                <span className="font-semibold text-white">Webdesino</span> 
+                <span className="ml-1">Serving Delhi NCR businesses</span>
+              </p>
               <ul className="space-y-2 text-sm text-gray-200">
                 <li className="flex items-start gap-3">
                   <Phone className="text-white mt-1 flex-shrink-0" size={16} />
@@ -137,7 +140,7 @@ export default function Footer({ locations = [] }: FooterProps) {
                 </li>
                 <li className="flex items-start gap-3">
                   <MapPin className="text-white mt-1 flex-shrink-0" size={16} />
-                  <span>Delhi NCR, India</span>
+                  <span>Service Area: Delhi NCR, India</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <FileText className="text-white mt-1 flex-shrink-0" size={16} />

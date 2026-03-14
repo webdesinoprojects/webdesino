@@ -1,4 +1,80 @@
+import type { Metadata } from "next";
+
 export const BASE_URL = 'https://webdesino.com';
+export const DEFAULT_OG_IMAGE = '/logo.png';
+export const DEFAULT_SEO_TITLE = 'Top Web Development Company in Delhi NCR | Webdesino';
+export const DEFAULT_SEO_DESCRIPTION =
+  'Webdesino is a leading web development and digital marketing agency in Delhi NCR offering SEO, website design and digital marketing services.';
+
+export function generateDefaultMetadata(overrides: Partial<Metadata> = {}): Metadata {
+  const title = (overrides.title as string) || DEFAULT_SEO_TITLE;
+  const description = overrides.description || DEFAULT_SEO_DESCRIPTION;
+
+  return {
+    metadataBase: new URL(BASE_URL),
+    title,
+    description,
+    keywords: [
+      'web development company delhi ncr',
+      'website design delhi',
+      'seo services delhi ncr',
+      'digital marketing agency delhi',
+      'ecommerce website development',
+    ],
+    authors: [{ name: 'Webdesino' }],
+    creator: 'Webdesino',
+    publisher: 'Webdesino',
+    alternates: {
+      canonical: '/',
+      ...overrides.alternates,
+    },
+    openGraph: {
+      title,
+      description,
+      url: BASE_URL,
+      siteName: 'Webdesino',
+      type: 'website',
+      locale: 'en_IN',
+      images: [
+        {
+          url: DEFAULT_OG_IMAGE,
+          width: 1200,
+          height: 630,
+          alt: 'Webdesino - Web Development and Digital Marketing Agency',
+        },
+      ],
+      ...overrides.openGraph,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [DEFAULT_OG_IMAGE],
+      ...overrides.twitter,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+      ...overrides.robots,
+    },
+    icons: {
+      icon: '/favicon.ico',
+      shortcut: '/favicon-16x16.png',
+      apple: '/apple-touch-icon.png',
+    },
+    verification: {
+      google: 'kq9IMLIo8C8VIGBSe6WnyRJtNULCKsmMFxWECkFhDl0',
+    },
+    ...overrides,
+  };
+}
 
 export function generateOrganizationSchema() {
   return {
@@ -27,6 +103,21 @@ export function generateOrganizationSchema() {
       addressRegion: 'Delhi',
       postalCode: '110086',
       addressCountry: 'IN',
+    },
+  };
+}
+
+export function generatePrimaryLocalBusinessSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: 'Webdesino',
+    url: BASE_URL,
+    telephone: '+91-9310851557',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Delhi',
+      addressCountry: 'India',
     },
   };
 }
