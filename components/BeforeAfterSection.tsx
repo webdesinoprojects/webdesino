@@ -190,7 +190,7 @@ export default function BeforeAfterSection({ industries: propIndustries }: Befor
           </div>
           <div className="bg-slate-50 p-8 rounded-3xl text-center hover-lift border border-slate-200 shadow-lg">
             <DollarSign className="w-12 h-12 mx-auto mb-4 text-[#111184]" />
-            <div className="text-4xl font-bold text-slate-900 mb-2">₹6.3 Cr+</div>
+            <div className="text-4xl font-bold text-slate-900 mb-2">₹16.8 Cr+</div>
             <div className="text-slate-600 font-medium">Revenue Generated</div>
           </div>
         </div>

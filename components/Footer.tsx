@@ -364,7 +364,7 @@ export default function Footer({ locations = [] }: FooterProps) {
             <div className="text-sm text-gray-300">Projects Delivered</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-white mb-1">₹6.3 Cr+</div>
+            <div className="text-3xl font-bold text-white mb-1">₹16.8 Cr+</div>
             <div className="text-sm text-gray-300">Revenue Generated</div>
           </div>
           <div className="text-center">
@@ -372,8 +372,8 @@ export default function Footer({ locations = [] }: FooterProps) {
             <div className="text-sm text-gray-300">Happy Clients</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-white mb-1">20k+</div>
-            <div className="text-sm text-gray-300">Specialists</div>
+            <div className="text-3xl font-bold text-white mb-1">24/7</div>
+            <div className="text-sm text-gray-300">Support</div>
           </div>
         </div>
 

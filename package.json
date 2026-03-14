@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "npx prisma generate && next build",
     "postinstall": "prisma generate",
+    "testimonial:gravolite": "node scripts/add-gravolite-testimonial.js",
     "start": "next start",
     "lint": "next lint"
   },

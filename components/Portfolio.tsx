@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Project } from "@prisma/client";
+import type { Project } from "@/lib/generated/prisma";
 import { GoalIcon } from "lucide-react";
 import { getStorageUrl } from "@/lib/utils";
 

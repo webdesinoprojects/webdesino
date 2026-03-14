@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Quote, Star, User } from "lucide-react";
-import { Testimonial } from "@prisma/client";
+import type { Testimonial } from "@/lib/generated/prisma";
 
 interface TestimonialsProps {
   testimonials: Testimonial[];

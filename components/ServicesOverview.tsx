@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import * as LucideIcons from "lucide-react";
-import { ServiceCategory } from "@prisma/client";
+import type { ServiceCategory } from "@/lib/generated/prisma";
 
 const SERVICE_CARD_IMAGE_BY_SLUG: Record<string, string> = {
   "website-solutions": "/images/home/services/website-solutions.jpg",

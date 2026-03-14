@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Project } from "@prisma/client";
+import type { Project } from "@/lib/generated/prisma";
 
 interface CaseStudiesListProps {
   caseStudies: Project[];

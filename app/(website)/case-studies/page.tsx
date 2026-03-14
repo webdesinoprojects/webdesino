@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { TrendingUp, ArrowRight, Award, Calendar } from 'lucide-react';
 import { prisma } from '@/lib/prisma';
-import { Project } from '@prisma/client';
+import type { Project } from '@/lib/generated/prisma';
 
 export const metadata: Metadata = {
   title: 'Case Studies | Proven Success Stories | WebDesino',

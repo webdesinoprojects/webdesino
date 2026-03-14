@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '../lib/generated/prisma'
 import { hash } from 'bcryptjs'
 import { footerLocations } from '../lib/locations-data'
 import { getClients, getBlogPosts, getFAQs } from '../lib/data'

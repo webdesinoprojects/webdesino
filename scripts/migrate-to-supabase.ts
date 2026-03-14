@@ -1,6 +1,6 @@
 
 import { createClient } from '@supabase/supabase-js';
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../lib/generated/prisma";
 import fs from "fs";
 import path from "path";
 import dotenv from "dotenv";

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Search, ArrowRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Faq } from "@prisma/client";
+import type { Faq } from "@/lib/generated/prisma";
 import FAQComponent from "@/components/FAQ";
 import { replaceLocationPlaceholder } from "@/lib/utils";
 

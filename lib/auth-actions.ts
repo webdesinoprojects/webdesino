@@ -38,10 +38,18 @@ export async function forgotPassword(formData: FormData) {
     return { success: false, error: "Email is required" };
   }
 
+  const frontendUrl = process.env.FRONTEND_URL;
+
+  if (!frontendUrl) {
+    return {
+      success: false,
+      error: "FRONTEND_URL is not configured. Please contact support.",
+    };
+  }
+
   const supabase = createClient();
-  
-  // Get the site URL from environment or default to localhost
-  const origin = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+
+  const origin = frontendUrl.replace(/\/$/, "");
 
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: `${origin}/auth/callback?next=/admin/reset-password`,

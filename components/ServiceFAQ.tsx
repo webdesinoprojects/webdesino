@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ChevronDown, ChevronUp, HelpCircle } from "lucide-react";
-import { Faq } from "@prisma/client";
+import type { Faq } from "@/lib/generated/prisma";
 
 interface ServiceFAQProps {
   serviceTitle: string;
