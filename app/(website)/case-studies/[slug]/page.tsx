@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 import { CaseStudy } from '@/lib/case-studies';
 import { getStorageUrl } from '@/lib/utils';
-import { generateArticleSchema, generateBreadcrumbSchema, BASE_URL } from '@/lib/seo';
+import { generateArticleSchema, generateBreadcrumbSchema, generateFAQSchema, BASE_URL } from '@/lib/seo';
 import { 
   ArrowLeft, 
   TrendingUp, 
@@ -122,11 +122,22 @@ export default async function CaseStudyPage({ params }: { params: { slug: string
     { name: caseStudy.title, item: `/case-studies/${params.slug}` },
   ]);
 
+  const faqSchema = generateFAQSchema(
+    (caseStudy.faqs || []).map((faq: { question?: string; answer?: string }) => ({
+      question: faq.question,
+      answer: faq.answer,
+    }))
+  );
+
+  const pageSchemas = faqSchema
+    ? [articleSchema, breadcrumbSchema, faqSchema]
+    : [articleSchema, breadcrumbSchema];
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([articleSchema, breadcrumbSchema]) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchemas) }}
       />
       
       <main className="min-h-screen bg-gradient-to-br from-cream via-white to-cream relative overflow-hidden">

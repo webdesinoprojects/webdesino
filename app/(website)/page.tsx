@@ -21,15 +21,33 @@ import {
   getHeroShowcaseItems,
 } from "@/lib/data";
 
-const LocalAreasSection = dynamic(() => import("@/components/LocalAreasSection"));
-const BlogSection = dynamic(() => import("@/components/BlogSection"));
-const AwardsSection = dynamic(() => import("@/components/AwardsSection"));
-const BeforeAfterSection = dynamic(() => import("@/components/BeforeAfterSection"));
-const SaaSSection = dynamic(() => import("@/components/SaaSSection"));
-const SEOAuditSection = dynamic(() => import("@/components/SEOAuditSection"));
-const ResultsSection = dynamic(() => import("@/components/ResultsSection"));
-const Testimonials = dynamic(() => import("@/components/Testimonials"));
-const FAQ = dynamic(() => import("@/components/FAQ"));
+const LocalAreasSection = dynamic(() => import("@/components/LocalAreasSection"), {
+  loading: () => <div className="min-h-[520px]" aria-hidden="true" />,
+});
+const BlogSection = dynamic(() => import("@/components/BlogSection"), {
+  loading: () => <div className="min-h-[520px]" aria-hidden="true" />,
+});
+const AwardsSection = dynamic(() => import("@/components/AwardsSection"), {
+  loading: () => <div className="min-h-[500px]" aria-hidden="true" />,
+});
+const BeforeAfterSection = dynamic(() => import("@/components/BeforeAfterSection"), {
+  loading: () => <div className="min-h-[560px]" aria-hidden="true" />,
+});
+const SaaSSection = dynamic(() => import("@/components/SaaSSection"), {
+  loading: () => <div className="min-h-[520px]" aria-hidden="true" />,
+});
+const SEOAuditSection = dynamic(() => import("@/components/SEOAuditSection"), {
+  loading: () => <div className="min-h-[280px]" aria-hidden="true" />,
+});
+const ResultsSection = dynamic(() => import("@/components/ResultsSection"), {
+  loading: () => <div className="min-h-[520px]" aria-hidden="true" />,
+});
+const Testimonials = dynamic(() => import("@/components/Testimonials"), {
+  loading: () => <div className="min-h-[500px]" aria-hidden="true" />,
+});
+const FAQ = dynamic(() => import("@/components/FAQ"), {
+  loading: () => <div className="min-h-[460px]" aria-hidden="true" />,
+});
 
 export const metadata: Metadata = {
   title: "Top Web Development Company in Delhi NCR | Webdesino",
@@ -83,30 +101,32 @@ export default async function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Hero showcaseItems={heroShowcaseItems} />
-      <TrustedSection />
-      <ServicesOverview categories={services} />
-      <ServicesPills />
-      <WhyChooseUs features={features} />
-      <IndustriesSection />
-      {/* <Suspense fallback={<div>Loading portfolio...</div>}>
-        <Portfolio projects={projects} />
-      </Suspense> */}
-      <MaximizeSection />
-      <HoverSection />
-      <SpecialistsSection />
-      <LocalAreasSection />
-      <BlogSection />
-      <AwardsSection />
-      <BeforeAfterSection />
-      <SaaSSection />
-      <SEOAuditSection />
-      <ResultsSection results={results} />
-      {/* <Suspense fallback={<div>Loading case studies...</div>}>
-        <CaseStudiesList caseStudies={caseStudies} />
-      </Suspense> */}
-      <Testimonials testimonials={testimonials} />
-      <FAQ faqs={faqs} />
+      <main>
+        <Hero showcaseItems={heroShowcaseItems} />
+        <TrustedSection />
+        <ServicesOverview categories={services} />
+        <ServicesPills />
+        <WhyChooseUs features={features} />
+        <IndustriesSection />
+        {/* <Suspense fallback={<div>Loading portfolio...</div>}>
+          <Portfolio projects={projects} />
+        </Suspense> */}
+        <MaximizeSection />
+        <HoverSection />
+        <SpecialistsSection />
+        <LocalAreasSection />
+        <BlogSection />
+        <AwardsSection />
+        <BeforeAfterSection />
+        <SaaSSection />
+        <SEOAuditSection />
+        <ResultsSection results={results} />
+        {/* <Suspense fallback={<div>Loading case studies...</div>}>
+          <CaseStudiesList caseStudies={caseStudies} />
+        </Suspense> */}
+        <Testimonials testimonials={testimonials} />
+        <FAQ faqs={faqs} />
+      </main>
     </>
   );
 }

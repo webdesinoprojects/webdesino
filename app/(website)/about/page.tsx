@@ -96,7 +96,7 @@ export default async function AboutPage() {
       <section className="py-16 lg:py-24 bg-slate-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h6 className="text-[#111184] font-bold tracking-wider uppercase mb-2">OUR FOUNDERS</h6>
+            <p className="text-[#111184] font-bold tracking-wider uppercase mb-2">OUR FOUNDERS</p>
             <h2 className="text-3xl lg:text-4xl font-bold text-slate-900">Meet the Leaders Who Started It All</h2>
             <p className="text-slate-600 max-w-2xl mx-auto">
               Driven by innovation and passion, our founders lead the company with a shared vision of excellence and growth.
@@ -130,7 +130,7 @@ export default async function AboutPage() {
           {/* Block 1 */}
           <div className="flex flex-col lg:flex-row items-center gap-12 mb-20">
              <div className="lg:w-1/2">
-                <h6 className="text-[#111184] font-bold uppercase mb-2">Our Story</h6>
+               <p className="text-[#111184] font-bold uppercase mb-2">Our Story</p>
                 <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">We Are The Best Web Development Agency</h2>
                 <p className="text-lg text-slate-600 leading-relaxed">
                    Our team combines cutting-edge technology with creative expertise to deliver custom web solutions that drive results. We turn your vision into a powerful online presence, ensuring your business stands out in the digital landscape.
@@ -146,7 +146,7 @@ export default async function AboutPage() {
           {/* Block 2 */}
           <div className="flex flex-col lg:flex-row-reverse items-center gap-12 mb-20">
              <div className="lg:w-1/2">
-                <h6 className="text-[#111184] font-bold uppercase mb-2">Who We Are</h6>
+               <p className="text-[#111184] font-bold uppercase mb-2">Who We Are</p>
                 <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">The Leading WEB DEVELOPMENT Company In INDIA</h2>
                 <p className="text-lg text-slate-600 leading-relaxed">
                    Delivering innovative and tailored web solutions, we specialize in creating dynamic, responsive websites that elevate your brand and drive success in the digital world. Trust us to bring your vision to life with cutting-edge technology and unmatched expertise.
@@ -162,7 +162,7 @@ export default async function AboutPage() {
           {/* Block 3 */}
           <div className="flex flex-col lg:flex-row items-center gap-12 mb-20">
              <div className="lg:w-1/2">
-                <h6 className="text-[#111184] font-bold uppercase mb-2">What We Do</h6>
+               <p className="text-[#111184] font-bold uppercase mb-2">What We Do</p>
                 <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">We Help You To 10X Your Business</h2>
                 <p className="text-lg text-slate-600 leading-relaxed">
                    Elevate your business to new heights with our cutting-edge web development solutions. We specialize in crafting high-performing websites and digital strategies that multiply your growth, ensuring your online presence is not just a website, but a powerful tool for success.

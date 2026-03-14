@@ -13,12 +13,16 @@ export default function BlogSidebar() {
       <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
         <h3 className="text-lg font-bold mb-4">Search</h3>
         <form className="relative">
+          <label htmlFor="blog-sidebar-search" className="sr-only">
+            Search blog posts
+          </label>
           <input
+            id="blog-sidebar-search"
             type="text"
             placeholder="Search..."
             className="w-full pl-4 pr-10 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#111184] transition-all"
           />
-          <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#111184]">
+          <button type="submit" aria-label="Submit blog search" className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#111184]">
             <Search size={20} />
           </button>
         </form>

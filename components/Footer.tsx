@@ -126,13 +126,13 @@ export default function Footer({ locations = [] }: FooterProps) {
               <ul className="space-y-2 text-sm text-gray-200">
                 <li className="flex items-start gap-3">
                   <Phone className="text-white mt-1 flex-shrink-0" size={16} />
-                  <a href="tel:+919310851557" className="hover:text-white transition-colors">
+                  <a href="tel:9310851557" aria-label="Call +91 93108 51557" className="hover:text-white transition-colors">
                     +91 93108 51557
                   </a>
                 </li>
                 <li className="flex items-start gap-3">
                   <Phone className="text-white mt-1 flex-shrink-0" size={16} />
-                  <a href="tel:+919350887828" className="hover:text-white transition-colors">
+                  <a href="tel:9350887828" aria-label="Call +91 93508 87828" className="hover:text-white transition-colors">
                     +91 93508 87828
                   </a>
                 </li>

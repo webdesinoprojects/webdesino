@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp, HelpCircle } from "lucide-react";
 import type { Faq } from "@/lib/generated/prisma";
+import { generateFAQSchema } from "@/lib/seo";
 
 interface ServiceFAQProps {
   serviceTitle: string;
@@ -40,9 +41,24 @@ export default function ServiceFAQ({ serviceTitle, faqs = [] }: ServiceFAQProps)
   ];
 
   const displayFaqs = faqs.length > 0 ? faqs : defaultFaqs;
+  const normalizedFaqs = displayFaqs
+    .map((faq) => ({
+      question: (faq.question || "").trim(),
+      answer: (faq.answer || "").trim(),
+    }))
+    .filter((faq) => faq.question && faq.answer);
+  const faqSchema = generateFAQSchema(normalizedFaqs);
+
+  if (normalizedFaqs.length === 0) return null;
 
   return (
-    <section className="py-20 bg-white" itemScope itemType="https://schema.org/FAQPage">
+    <section className="py-20 bg-white">
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row gap-12">
           <div className="md:w-1/3">
@@ -63,19 +79,17 @@ export default function ServiceFAQ({ serviceTitle, faqs = [] }: ServiceFAQProps)
           </div>
 
           <div className="md:w-2/3 space-y-4">
-            {displayFaqs.map((faq, index) => (
+            {normalizedFaqs.map((faq, index) => (
               <div
                 key={index}
                 className="border border-gray-200 rounded-xl overflow-hidden hover:border-[#111184]/30 transition-colors"
-                itemScope
-                itemType="https://schema.org/Question"
               >
                 <button
                   onClick={() => toggleFAQ(index)}
                   className="w-full flex items-center justify-between p-6 text-left bg-gray-50 hover:bg-white transition-colors duration-300"
                   aria-expanded={openIndex === index}
                 >
-                  <span className="text-lg font-semibold text-gray-900 pr-4" itemProp="name">
+                  <span className="text-lg font-semibold text-gray-900 pr-4">
                     {faq.question}
                   </span>
                   {openIndex === index ? (
@@ -86,12 +100,9 @@ export default function ServiceFAQ({ serviceTitle, faqs = [] }: ServiceFAQProps)
                 </button>
                 <div 
                   className={`overflow-hidden transition-all duration-300 ease-in-out ${openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
-                  itemScope 
-                  itemType="https://schema.org/Answer"
                 >
                   <div 
                     className="p-6 pt-0 bg-gray-50 text-gray-600 leading-relaxed" 
-                    itemProp="text"
                     dangerouslySetInnerHTML={{ __html: faq.answer }}
                   />
                 </div>

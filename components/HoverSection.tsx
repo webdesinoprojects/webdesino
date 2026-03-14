@@ -43,7 +43,7 @@ export default function HoverSection() {
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-6xl mx-auto text-center">
           {/* Main animated heading */}
-          <h1 className="text-5xl lg:text-7xl xl:text-8xl font-bold mb-6 leading-tight">
+          <h2 className="text-5xl lg:text-7xl xl:text-8xl font-bold mb-6 leading-tight">
             {title.split("").map((char, idx) => (
               <span
                 key={idx}
@@ -57,7 +57,7 @@ export default function HoverSection() {
                 {char === " " ? "\u00A0" : char}
               </span>
             ))}
-          </h1>
+          </h2>
 
           {/* Subtitle with gradient effect */}
           <p className="text-xl lg:text-3xl font-semibold mb-12 animate-fade-in" style={{ animationDelay: '0.5s' }}>

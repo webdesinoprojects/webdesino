@@ -259,18 +259,46 @@ export function generateBreadcrumbSchema(items: { name: string; item: string }[]
   };
 }
 
-export function generateFAQSchema(faqs: { question: string; answer: string }[]) {
+export function generateFAQSchema(
+  faqs: Array<{ question?: string | null; answer?: string | null }>
+) {
+  const stripHtml = (value: string) => value.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+
+  const mainEntity = faqs
+    .map((faq) => {
+      const question = (faq.question || '').trim();
+      const answer = stripHtml((faq.answer || '').trim());
+
+      if (!question || !answer) {
+        return null;
+      }
+
+      return {
+        '@type': 'Question',
+        name: question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: answer,
+        },
+      };
+    })
+    .filter((item): item is {
+      '@type': 'Question';
+      name: string;
+      acceptedAnswer: {
+        '@type': 'Answer';
+        text: string;
+      };
+    } => item !== null);
+
+  if (mainEntity.length === 0) {
+    return null;
+  }
+
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: faqs.map((faq) => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.answer,
-      },
-    })),
+    mainEntity,
   };
 }
 

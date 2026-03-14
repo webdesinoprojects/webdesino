@@ -87,6 +87,10 @@ function GenericWebsitePage({
                                 <img
                                     src={getStorageUrl(content.hero.image)}
                                     alt={page.title}
+                                    width={800}
+                                    height={600}
+                                    loading="lazy"
+                                    decoding="async"
                                     className="w-full max-w-lg h-auto object-contain rounded-lg"
                                 />
                             </div>
@@ -122,6 +126,10 @@ function GenericWebsitePage({
                                                     <img
                                                         src={getStorageUrl(section.image)}
                                                         alt={section.title || page.title}
+                                                        width={800}
+                                                        height={600}
+                                                        loading="lazy"
+                                                        decoding="async"
                                                         className="w-full h-auto object-contain rounded-xl"
                                                     />
                                                 </div>
@@ -415,6 +423,10 @@ export default async function LocationPage({ params }: PageProps) {
                                 <img 
                                     src={getStorageUrl(content.hero.image)} 
                                     alt={page.title} 
+                                    width={800}
+                                    height={600}
+                                    loading="lazy"
+                                    decoding="async"
                                     className="w-full max-w-lg h-auto object-contain rounded-lg"
                                 />
                             </div>
@@ -442,7 +454,7 @@ export default async function LocationPage({ params }: PageProps) {
                             <div className="relative">
                                 {/* Placeholder for illustration */}
                                 <div className="bg-blue-50 rounded-2xl p-8 flex items-center justify-center min-h-[400px]">
-                                    <img src={story.image} className="w-full h-auto object-contain" alt="Web Development" />
+                                    <img src={story.image} className="w-full h-auto object-contain" alt={`Website design and development services in ${locationName}`} width={800} height={600} loading="lazy" decoding="async" />
                                 </div>
                             </div>
                         </div>
@@ -494,7 +506,7 @@ export default async function LocationPage({ params }: PageProps) {
                                         <div className="md:w-1/2 order-1 md:order-2 flex justify-center">
                                             <div className="bg-blue-50 p-8 rounded-2xl w-full max-w-md flex items-center justify-center">
                                                 <div className="bg-blue-50 rounded-2xl p-8 flex items-center justify-center min-h-[400px]">
-                                                    <img src={service.image} className="w-full h-auto object-contain" alt={service.title} />
+                                                    <img src={service.image} className="w-full h-auto object-contain" alt={service.title} width={800} height={600} loading="lazy" decoding="async" />
                                                 </div>
                                             </div>
                                         </div>
@@ -504,7 +516,7 @@ export default async function LocationPage({ params }: PageProps) {
                                         <div className="md:w-1/2 flex justify-center">
                                             <div className="bg-blue-50 p-8 rounded-2xl w-full max-w-md flex items-center justify-center">
                                                 <div className="bg-blue-50 rounded-2xl p-8 flex items-center justify-center min-h-[400px]">
-                                                    <img src={service.image} className="w-full h-auto object-contain" alt={service.title} />
+                                                    <img src={service.image} className="w-full h-auto object-contain" alt={service.title} width={800} height={600} loading="lazy" decoding="async" />
                                                 </div>
                                             </div>
                                         </div>
@@ -677,7 +689,7 @@ export default async function LocationPage({ params }: PageProps) {
                         <div className="lg:w-1/2 flex justify-center order-2 lg:order-1">
                             <div className="bg-blue-50 p-8 rounded-2xl w-full max-w-md flex items-center justify-center">
                                 <div className="bg-blue-50 rounded-2xl p-8 flex items-center justify-center min-h-[400px]">
-                                    <img src={getStorageUrl("/location-service-3.png")} className="w-full h-auto object-contain" alt="Industries We Serve" />
+                                    <img src={getStorageUrl("/location-service-3.png")} className="w-full h-auto object-contain" alt={`Industries served by Webdesino in ${locationName}`} width={800} height={600} loading="lazy" decoding="async" />
                                 </div>
                             </div>
                         </div>
@@ -739,7 +751,7 @@ export default async function LocationPage({ params }: PageProps) {
                         <div className="lg:w-1/2 sticky top-24">
                             <div className="bg-blue-50 p-8 rounded-2xl w-full max-w-md flex items-center justify-center">
                                 <div className="bg-blue-50 rounded-2xl p-8 flex items-center justify-center min-h-[400px]">
-                                    <img src={getStorageUrl("/location-service-2.png")} className="w-full h-auto object-contain" alt="Local SEO Strategies" />
+                                    <img src={getStorageUrl("/location-service-2.png")} className="w-full h-auto object-contain" alt={`Local SEO strategies for ${locationName} businesses`} width={800} height={600} loading="lazy" decoding="async" />
                                 </div>
                             </div>
                         </div>
@@ -790,7 +802,7 @@ export default async function LocationPage({ params }: PageProps) {
                         <div className="lg:w-1/2 flex justify-center">
                             <div className="bg-blue-50 p-8 rounded-2xl w-full max-w-md flex items-center justify-center">
                                 <div className="bg-blue-50 rounded-2xl p-8 flex items-center justify-center min-h-[400px]">
-                                    <img src={getStorageUrl("/location-hero.png")} className="w-full h-auto object-contain" alt="Transform Your Online Presence" />
+                                    <img src={getStorageUrl("/location-hero.png")} className="w-full h-auto object-contain" alt={`Transform your online presence in ${locationName}`} width={800} height={600} loading="lazy" decoding="async" />
                                 </div>
                             </div>
                         </div>

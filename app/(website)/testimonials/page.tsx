@@ -47,9 +47,9 @@ export default async function TestimonialsPage() {
                   <User size={24} />
                 </div>
                 <div>
-                  <h4 className="font-bold text-[#111184] text-sm">
+                  <h3 className="font-bold text-[#111184] text-sm">
                     {testimonial.name}
-                  </h4>
+                  </h3>
                   {testimonial.company && (
                     <p className="text-xs text-gray-500 font-medium mt-0.5">
                       {testimonial.company}

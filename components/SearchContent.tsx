@@ -38,7 +38,11 @@ export default function SearchContent({ faqs }: SearchContentProps) {
           </h1>
 
           <div className="relative mb-12">
+            <label htmlFor="site-search" className="sr-only">
+              Search services, blogs, or FAQs
+            </label>
             <Input
+              id="site-search"
               type="text"
               placeholder="Search for services, blogs, or FAQs..."
               value={query}

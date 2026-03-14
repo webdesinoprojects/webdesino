@@ -65,10 +65,12 @@ export default function ServiceEnquiryForm({ serviceTitle }: { serviceTitle: str
 
       <form onSubmit={handleSubmit} className="space-y-5 relative z-10">
         <div className="relative group">
+          <label htmlFor="service-enquiry-name" className="sr-only">Your name</label>
           <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-white transition-colors">
             <User size={18} />
           </div>
           <input
+            id="service-enquiry-name"
             type="text"
             name="name"
             required
@@ -78,10 +80,12 @@ export default function ServiceEnquiryForm({ serviceTitle }: { serviceTitle: str
         </div>
 
         <div className="relative group">
+          <label htmlFor="service-enquiry-email" className="sr-only">Email address</label>
           <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-white transition-colors">
             <Mail size={18} />
           </div>
           <input
+            id="service-enquiry-email"
             type="email"
             name="email"
             required
@@ -91,10 +95,12 @@ export default function ServiceEnquiryForm({ serviceTitle }: { serviceTitle: str
         </div>
 
         <div className="relative group">
+          <label htmlFor="service-enquiry-phone" className="sr-only">Phone number</label>
           <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-white transition-colors">
             <Phone size={18} />
           </div>
           <input
+            id="service-enquiry-phone"
             type="tel"
             name="phone"
             required
@@ -104,10 +110,12 @@ export default function ServiceEnquiryForm({ serviceTitle }: { serviceTitle: str
         </div>
 
         <div className="relative group">
+          <label htmlFor="service-enquiry-message" className="sr-only">Project requirements</label>
           <div className="absolute left-3 top-4 text-gray-400 group-focus-within:text-white transition-colors">
             <MessageSquare size={18} />
           </div>
           <textarea
+            id="service-enquiry-message"
             name="message"
             rows={3}
             className="w-full pl-10 pr-4 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:border-white/30 focus:bg-white/10 focus:ring-1 focus:ring-white/30 outline-none transition-all resize-none"

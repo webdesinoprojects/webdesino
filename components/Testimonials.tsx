@@ -54,9 +54,9 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
                   <User size={24} />
                 </div>
                 <div itemProp="author" itemScope itemType="https://schema.org/Person">
-                  <h4 className="font-bold text-[#111184] text-sm" itemProp="name">
+                  <h3 className="font-bold text-[#111184] text-sm" itemProp="name">
                     {testimonial.name}
-                  </h4>
+                  </h3>
                   {testimonial.company && (
                     <p className="text-xs text-gray-500 font-medium mt-0.5">
                       {testimonial.company}

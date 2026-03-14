@@ -103,10 +103,16 @@ export default function Navbar() {
               </span>
             </Link>
             <div className="hidden md:flex items-center gap-6 text-sm text-white/80">
-              <a href="tel:+919310851557" className="flex items-center gap-2 hover:text-white transition">
+              <div className="flex items-center gap-3">
                 <Phone size={16} />
-                <span>+91 93108 51557, +91 93508 87828</span>
-              </a>
+                <a href="tel:9310851557" aria-label="Call +91 93108 51557" className="hover:text-white transition">
+                  +91 93108 51557
+                </a>
+                <span className="text-white/40" aria-hidden="true">|</span>
+                <a href="tel:9350887828" aria-label="Call +91 93508 87828" className="hover:text-white transition">
+                  +91 93508 87828
+                </a>
+              </div>
               <a href="mailto:info@webdesino.com" className="flex items-center gap-2 hover:text-white transition">
                 <Mail size={16} />
                 <span>info@webdesino.com</span>
@@ -124,7 +130,7 @@ export default function Navbar() {
       </div>
 
       {/* Main Navigation - Tier 2 */}
-      <nav ref={navRef} className="bg-white border-b border-slate-200 hidden md:block">
+      <nav ref={navRef} aria-label="Primary navigation" className="bg-white border-b border-slate-200 hidden md:block">
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             {/* Desktop Navigation */}
