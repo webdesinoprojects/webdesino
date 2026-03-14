@@ -1,24 +1,14 @@
 import { Metadata } from "next";
+import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
 import ServicesOverview from "@/components/ServicesOverview";
 import ServicesPills from "@/components/ServicesPills";
 import WhyChooseUs from "@/components/WhyChooseUs";
-import Portfolio from "@/components/Portfolio";
 import IndustriesSection from "@/components/IndustriesSection";
 import MaximizeSection from "@/components/MaximizeSection";
 import HoverSection from "@/components/HoverSection";
 import SpecialistsSection from "@/components/SpecialistsSection";
-import AwardsSection from "@/components/AwardsSection";
-import BeforeAfterSection from "@/components/BeforeAfterSection";
 import TrustedSection from "@/components/TrustedSection";
-import ResultsSection from "@/components/ResultsSection";
-import LocalAreasSection from "@/components/LocalAreasSection";
-import CaseStudiesList from "@/components/CaseStudiesList";
-import Testimonials from "@/components/Testimonials";
-import FAQ from "@/components/FAQ";
-import SaaSSection from "@/components/SaaSSection";
-import SEOAuditSection from "@/components/SEOAuditSection";
-import BlogSection from "@/components/BlogSection";
 import { generateWebSiteSchema } from "@/lib/seo";
 import { prisma } from "@/lib/prisma";
 import { getStorageUrl } from "@/lib/utils";
@@ -30,6 +20,16 @@ import {
   getResults,
   getHeroShowcaseItems,
 } from "@/lib/data";
+
+const LocalAreasSection = dynamic(() => import("@/components/LocalAreasSection"));
+const BlogSection = dynamic(() => import("@/components/BlogSection"));
+const AwardsSection = dynamic(() => import("@/components/AwardsSection"));
+const BeforeAfterSection = dynamic(() => import("@/components/BeforeAfterSection"));
+const SaaSSection = dynamic(() => import("@/components/SaaSSection"));
+const SEOAuditSection = dynamic(() => import("@/components/SEOAuditSection"));
+const ResultsSection = dynamic(() => import("@/components/ResultsSection"));
+const Testimonials = dynamic(() => import("@/components/Testimonials"));
+const FAQ = dynamic(() => import("@/components/FAQ"));
 
 export const metadata: Metadata = {
   title: "Top Web Development Company in Delhi NCR | Webdesino",

@@ -25,7 +25,11 @@ export default function Footer({ locations = [] }: FooterProps) {
             method="POST"
             className="flex gap-3 max-w-xl mx-auto"
           >
+            <label htmlFor="newsletter-email" className="sr-only">
+              Email address for newsletter updates
+            </label>
             <input
+              id="newsletter-email"
               type="email"
               name="email"
               required

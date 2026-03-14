@@ -140,7 +140,11 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 						{/* Search Bar */}
 						<form onSubmit={handleSearch} className="relative max-w-xl">
 							<div className="relative">
+								<label htmlFor="hero-service-search" className="sr-only">
+									Search web services
+								</label>
 								<input
+									id="hero-service-search"
 									type="text"
 									placeholder="Search services (e.g., SEO, Web Design)..."
 									value={searchTerm}
@@ -198,7 +202,6 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 														fill
 														className="object-cover"
 														sizes="64px"
-														unoptimized
 													/>
 												</div>
 												<div className="min-w-0">
@@ -228,7 +231,6 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 														fill
 														className="object-cover"
 														sizes="64px"
-														unoptimized
 													/>
 												</div>
 												<div className="min-w-0">
@@ -285,7 +287,6 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 															fill
 															className="object-cover"
 															sizes="(max-width: 1024px) 100vw, 40vw"
-															unoptimized
 														/>
 													</div>
 												
@@ -326,7 +327,6 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 															fill
 															className="object-cover"
 															sizes="(max-width: 1024px) 100vw, 40vw"
-															unoptimized
 														/>
 													</div>
 												

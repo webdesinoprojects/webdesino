@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { Goal, GoalIcon } from "lucide-react";
+import { GoalIcon } from "lucide-react";
 import { getStorageUrl } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -54,7 +54,7 @@ export default async function PortfolioPage() {
                       alt={`${project.title} - ${project.industry} Website Development`}
                       fill
                       className="object-contain group-hover:scale-110 transition-transform duration-300"
-                      unoptimized
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">

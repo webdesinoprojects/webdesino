@@ -40,7 +40,11 @@ export default function SEOAuditSection() {
           <form onSubmit={handleSubmit} className="relative max-w-2xl mx-auto">
             <div className="relative flex items-center">
               <Search className="absolute left-6 text-slate-400" size={24} />
+              <label htmlFor="seo-audit-url" className="sr-only">
+                Website URL for SEO audit
+              </label>
               <input
+                id="seo-audit-url"
                 type="url"
                 placeholder="Enter your website URL (e.g., https://example.com)"
                 className="w-full pl-16 pr-48 py-6 rounded-full text-slate-900 text-lg focus:outline-none focus:ring-4 focus:ring-[#111184]/20 shadow-xl border border-slate-200"
@@ -57,7 +61,7 @@ export default function SEOAuditSection() {
                 {!loading && <ArrowRight size={20} />}
               </button>
             </div>
-            <p className="mt-4 text-sm text-gray-300">
+            <p className="mt-4 text-sm text-slate-600">
               * We use Google PageSpeed Insights for accurate performance metrics
             </p>
           </form>

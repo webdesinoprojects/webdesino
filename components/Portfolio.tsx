@@ -78,7 +78,7 @@ export default function Portfolio({ projects }: PortfolioProps) {
                         alt={`${project.title} - Webdesino Portfolio Project - ${project.industry} Website Development`}
                         fill
                         className="object-contain group-hover:scale-110 transition-transform duration-300"
-                        unoptimized
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 33vw"
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">

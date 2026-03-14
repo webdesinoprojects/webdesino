@@ -18,15 +18,32 @@ export function replaceLocationPlaceholder(
 
 export function getStorageUrl(path: string | undefined | null) {
   if (!path) return "";
-  if (path.startsWith("http")) return path;
-  
-  // If it starts with /, assume it's a local public asset
-  if (path.startsWith("/")) return path;
-  
-  // If it's a relative path (not starting with /), assume it's uploaded to 'images' bucket
+
+  const normalizedPath = path.trim();
+  if (!normalizedPath) return "";
+
+  // Already absolute URLs (or data URIs) should pass through untouched.
+  if (
+    normalizedPath.startsWith("http://") ||
+    normalizedPath.startsWith("https://") ||
+    normalizedPath.startsWith("data:")
+  ) {
+    return normalizedPath;
+  }
+
+  // Public assets in /public.
+  if (normalizedPath.startsWith("/")) {
+    return normalizedPath;
+  }
+
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  if (!supabaseUrl) return path; // Fallback to local if no env var
-  
-  return `${supabaseUrl}/storage/v1/object/public/images/${path}`;
+  if (supabaseUrl) {
+    const base = supabaseUrl.replace(/\/$/, "");
+    const cleanPath = normalizedPath.replace(/^\/+/, "");
+    return `${base}/storage/v1/object/public/images/${cleanPath}`;
+  }
+
+  // Ensure Next/Image always gets a valid absolute local path, even without env config.
+  return `/${normalizedPath.replace(/^\/+/, "")}`;
 }
 

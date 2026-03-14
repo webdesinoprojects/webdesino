@@ -124,6 +124,7 @@ export default async function ContactPage() {
           <div className="w-full h-[450px] rounded-3xl overflow-hidden shadow-lg border border-gray-200">
             <iframe 
               src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d437.42263208577924!2d77.078731!3d28.708156!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d07a48393eb81%3A0x1ad6b22a2676a6e9!2sRohit%20Tiwari%20-%20Web%20Developer%20and%20designer!5e0!3m2!1sen!2sus!4v1763955823882!5m2!1sen!2sus" 
+              title="Map to Webdesino office"
               width="100%" 
               height="100%" 
               style={{ border: 0 }} 
