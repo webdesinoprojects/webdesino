@@ -9,6 +9,8 @@ export const DEFAULT_SEO_DESCRIPTION =
 export function generateDefaultMetadata(overrides: Partial<Metadata> = {}): Metadata {
   const title = (overrides.title as string) || DEFAULT_SEO_TITLE;
   const description = overrides.description || DEFAULT_SEO_DESCRIPTION;
+  const robotsOverride =
+    overrides.robots && typeof overrides.robots === 'object' ? overrides.robots : undefined;
 
   return {
     metadataBase: new URL(BASE_URL),
@@ -62,7 +64,7 @@ export function generateDefaultMetadata(overrides: Partial<Metadata> = {}): Meta
         'max-image-preview': 'large',
         'max-snippet': -1,
       },
-      ...overrides.robots,
+      ...(robotsOverride ?? {}),
     },
     icons: {
       icon: '/favicon.ico',
