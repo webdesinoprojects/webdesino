@@ -37,6 +37,14 @@ const HERO_CARD_IMAGES = [
 	"/images/home/services/seo-services.jpg",
 ];
 
+// Keep phrase list stable across renders to avoid unnecessary typing-effect resets.
+const HERO_TYPING_PHRASES = [
+	"Web Development Agency",
+	"SEO Company",
+	"Digital Marketing Agency",
+	"E-commerce Experts",
+];
+
 const getHeroImageByIndex = (index: number) =>
 	HERO_CARD_IMAGES[index % HERO_CARD_IMAGES.length];
 
@@ -54,8 +62,6 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
     const [isDeleting, setIsDeleting] = useState(false);
     const [loopNum, setLoopNum] = useState(0);
     const [typingSpeed, setTypingSpeed] = useState(150);
-    
-    const phrases = ["Web Development Agency", "SEO Company", "Digital Marketing Agency", "E-commerce Experts"];
 
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -66,8 +72,8 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 
     useEffect(() => {
         const handleTyping = () => {
-            const i = loopNum % phrases.length;
-            const fullText = phrases[i];
+			const i = loopNum % HERO_TYPING_PHRASES.length;
+			const fullText = HERO_TYPING_PHRASES[i];
 
             setText(isDeleting ? fullText.substring(0, text.length - 1) : fullText.substring(0, text.length + 1));
 
@@ -83,7 +89,7 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 
         const timer = setTimeout(handleTyping, typingSpeed);
         return () => clearTimeout(timer);
-    }, [text, isDeleting, loopNum, phrases, typingSpeed]);
+	}, [text, isDeleting, loopNum, typingSpeed]);
 
 	const handleSearch = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -128,7 +134,9 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 								Stunning Websites By Top
 							</span>
 							<span className="block text-[#111184]">
-								{text}
+								{/* CLS fix: reserve consistent inline width for rotating typed text. */}
+								<span className="inline-block min-w-[24ch]">{text}</span>
+								{/* CLS fix: cursor keeps fixed width so pulse animation doesn't reflow text. */}
 								<span className="inline-block w-[0.6ch] animate-pulse text-[#111184]" aria-hidden="true">|</span>
 							</span>
 						</h1>
@@ -184,6 +192,7 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 							<div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-slate-50 to-transparent z-10 pointer-events-none" />
 							<div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-slate-50 to-transparent z-10 pointer-events-none" />
 
+							{/* CLS fix: absolute scroller is wrapped by fixed-height parent (`h-[260px]`) to reserve layout space. */}
 							<div className="absolute inset-0 overflow-hidden">
 								<div className="animate-scroll-y space-y-4 py-2">
 									{/* First Set */}
@@ -192,16 +201,16 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 										return (
 											<div
 												key={`mobile-1-${idx}`}
-												className="relative bg-white/90 backdrop-blur-sm border border-slate-100 px-4 py-3 rounded-2xl shadow-md flex items-center gap-3 cursor-pointer"
+												className="relative min-h-[88px] bg-white/90 backdrop-blur-sm border border-slate-100 px-4 py-3 rounded-2xl shadow-md flex items-center gap-3 cursor-pointer"
 												onClick={() => router.push('/portfolio')}
 											>
-												<div className="relative w-16 h-16 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 shrink-0">
+												<div className="w-16 h-16 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 shrink-0">
 													<NextImage
 														src={getStorageUrl(getHeroImageByIndex(idx))}
 														alt={item.name}
-														fill
+														width={64}
+														height={64}
 														className="object-cover"
-														sizes="64px"
 													/>
 												</div>
 												<div className="min-w-0">
@@ -221,16 +230,16 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 										return (
 											<div
 												key={`mobile-2-${idx}`}
-												className="relative bg-white/90 backdrop-blur-sm border border-slate-100 px-4 py-3 rounded-2xl shadow-md flex items-center gap-3 cursor-pointer"
+												className="relative min-h-[88px] bg-white/90 backdrop-blur-sm border border-slate-100 px-4 py-3 rounded-2xl shadow-md flex items-center gap-3 cursor-pointer"
 												onClick={() => router.push('/portfolio')}
 											>
-												<div className="relative w-16 h-16 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 shrink-0">
+												<div className="w-16 h-16 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 shrink-0">
 													<NextImage
 														src={getStorageUrl(getHeroImageByIndex(idx + showcaseItems.length))}
 														alt={item.name}
-														fill
+														width={64}
+														height={64}
 														className="object-cover"
-														sizes="64px"
 													/>
 												</div>
 												<div className="min-w-0">
@@ -251,7 +260,8 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 
 					{/* Right Column - Scrolling Cards */}
 					<div className="hidden lg:flex flex-col gap-8 h-full justify-center">
-						<div className="relative h-[500px] w-full">
+						{/* CLS fix: desktop carousel keeps a fixed-height viewport before images and cards load. */}
+						<div className="relative h-[500px] min-h-[500px] w-full">
 							{/* Background Blob for Depth */}
 							<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-[#111184]/10 rounded-full blur-3xl" />
 
@@ -268,7 +278,7 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 										return (
 											<div
 												key={`item-1-${idx}`}
-												className="relative bg-white/90 backdrop-blur-sm border border-slate-100 p-6 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(2,6,111,0.15)] hover:-translate-y-1 hover:border-[#111184]/30 transition-all duration-300 group cursor-pointer"
+												className="relative min-h-[340px] bg-white/90 backdrop-blur-sm border border-slate-100 p-6 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(2,6,111,0.15)] hover:-translate-y-1 hover:border-[#111184]/30 transition-all duration-300 group cursor-pointer"
 												onClick={() => router.push('/portfolio')}
 											>
 												<div className="flex items-start justify-between mb-4">
@@ -308,7 +318,7 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 										return (
 											<div
 												key={`item-2-${idx}`}
-												className="relative bg-white/90 backdrop-blur-sm border border-slate-100 p-6 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(2,6,111,0.15)] hover:-translate-y-1 hover:border-[#111184]/30 transition-all duration-300 group cursor-pointer"
+												className="relative min-h-[340px] bg-white/90 backdrop-blur-sm border border-slate-100 p-6 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(2,6,111,0.15)] hover:-translate-y-1 hover:border-[#111184]/30 transition-all duration-300 group cursor-pointer"
 												onClick={() => router.push('/portfolio')}
 											>
 												<div className="flex items-start justify-between mb-4">
