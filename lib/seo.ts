@@ -27,7 +27,6 @@ export function generateDefaultMetadata(overrides: Partial<Metadata> = {}): Meta
     creator: 'Webdesino',
     publisher: 'Webdesino',
     alternates: {
-      canonical: '/',
       ...overrides.alternates,
     },
     openGraph: {

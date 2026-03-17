@@ -13,6 +13,9 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: page?.title || "About Us - Web Development Company in Delhi NCR | Webdesino",
     description: page?.description || "Learn about Webdesino - A leading web development and digital marketing company in Delhi NCR.",
+    alternates: {
+      canonical: "/about",
+    },
   };
 }
 

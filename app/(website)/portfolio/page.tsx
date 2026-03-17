@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: "Portfolio - Web Development Projects | Webdesino",
   description:
     "Explore Webdesino's portfolio of successful web development and digital marketing projects. See how we've helped businesses in Delhi NCR achieve remarkable growth through SEO, website development, and digital marketing strategies.",
+  alternates: {
+    canonical: "/portfolio",
+  },
   keywords:
     "web development portfolio, SEO case studies, digital marketing projects, website development delhi, portfolio projects",
   openGraph: {

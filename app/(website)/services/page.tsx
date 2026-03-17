@@ -6,6 +6,9 @@ import * as LucideIcons from "lucide-react";
 export const metadata = {
   title: "Our Services | Webdesino",
   description: "Explore our comprehensive range of web development, digital marketing, and SEO services designed to grow your business.",
+  alternates: {
+    canonical: "/services",
+  },
 };
 
 export default async function ServicesPage() {

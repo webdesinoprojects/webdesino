@@ -6,6 +6,9 @@ import { prisma } from '@/lib/prisma';
 export const metadata: Metadata = {
   title: 'Return & Refund Policy | WebDesino',
   description: 'Return and Refund Policy for WebDesino services.',
+  alternates: {
+    canonical: '/refund-policy',
+  },
 };
 
 export default async function RefundPolicy() {

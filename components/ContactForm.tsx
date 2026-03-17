@@ -65,7 +65,7 @@ export default function ContactForm({ locationName }: { locationName?: string })
       <h2 className="text-2xl font-bold text-[#111184] mb-6">
         {locationName ? `Get a Quote in ${locationName}` : "Send Us a Message"}
       </h2>
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} method="post" action="#" className="space-y-6">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
             Full Name *

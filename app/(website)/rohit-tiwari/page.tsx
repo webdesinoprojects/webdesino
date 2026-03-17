@@ -10,6 +10,9 @@ const Rohit = getStorageUrl("/rohittiwari2.jpeg");
 export const metadata = {
   title: "Rohit Tiwari | Founder & CEO of WebDesino | Top Web Developer in Delhi",
   description: "Meet Rohit Tiwari, the visionary founder of WebDesino. With 5+ years of experience, Rohit helps businesses in Delhi NCR grow with cutting-edge web development and SEO strategies.",
+  alternates: {
+    canonical: "/rohit-tiwari",
+  },
   openGraph: {
     title: "Rohit Tiwari | Founder & CEO of WebDesino",
     description: "Meet Rohit Tiwari, the visionary founder of WebDesino. Expert Web Developer and Digital Strategist.",

@@ -7,6 +7,9 @@ import { getStorageUrl } from "@/lib/utils";
 export const metadata = {
   title: "Our Clients | WebDesino - Trusted by Innovative Companies",
   description: "See the amazing websites we've built for our valued clients across various industries including Real Estate, E-commerce, Healthcare, and more.",
+  alternates: {
+    canonical: "/our-clients",
+  },
 };
 
 export default async function OurClientsPage({

@@ -8,6 +8,9 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: page?.title || 'Terms & Conditions | WebDesino',
     description: page?.description || 'Terms and Conditions for using WebDesino services and website.',
+    alternates: {
+      canonical: '/terms-conditions',
+    },
   };
 }
 

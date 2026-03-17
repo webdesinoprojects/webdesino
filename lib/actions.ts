@@ -334,7 +334,6 @@ export async function createEnquiry(formData: FormData) {
       // Continue even if email fails
     }
 
-    revalidatePath("/admin/enquiries");
     return { success: true };
   } catch (error) {
     console.error("Error creating enquiry:", error);

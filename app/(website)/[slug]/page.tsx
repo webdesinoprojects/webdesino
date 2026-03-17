@@ -257,6 +257,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             return {
                 title: locationPage.title,
                 description: locationPage.description || `Best Web Development Services in ${locationPage.location}`,
+                alternates: {
+                    canonical: `/${params.slug}`,
+                },
             };
         }
 
@@ -269,6 +272,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         return {
             title: genericPage.title,
             description: genericPage.description || genericPage.title,
+            alternates: {
+                canonical: `/${params.slug}`,
+            },
         };
     } catch (error) {
         console.error("Error generating metadata for location page:", error);

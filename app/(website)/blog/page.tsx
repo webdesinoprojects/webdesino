@@ -10,6 +10,9 @@ import { getStorageUrl } from "@/lib/utils";
 export const metadata = {
   title: "Blog | WebDesino - Insights on Web Design & Development",
   description: "Read our latest articles on web design trends, development best practices, SEO strategies, and digital marketing insights.",
+  alternates: {
+    canonical: "/blog",
+  },
 };
 
 export default async function BlogPage({ searchParams }: { searchParams: { page?: string } }) {

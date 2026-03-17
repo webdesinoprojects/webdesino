@@ -6,6 +6,9 @@ import FAQ from "@/components/FAQ";
 export const metadata: Metadata = {
   title: "Client Testimonials | WebDesino",
   description: "Read what our clients say about our web development, SEO, and digital marketing services in Delhi NCR.",
+  alternates: {
+    canonical: "/testimonials",
+  },
 };
 
 export default async function TestimonialsPage() {

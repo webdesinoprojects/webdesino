@@ -7,6 +7,9 @@ import ContactForm from "@/components/ContactForm";
 export const metadata: Metadata = {
   title: "Contact Us - Get Free Consultation | Webdesino",
   description: "Contact Webdesino for web development, SEO, and digital marketing services in Delhi NCR. Call +91 93108 51557 or email info@webdesino.com for a free consultation.",
+  alternates: {
+    canonical: "/contact",
+  },
 };
 
 export default async function ContactPage() {

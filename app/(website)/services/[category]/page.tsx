@@ -20,6 +20,9 @@ export async function generateMetadata({ params }: PageProps) {
   return {
     title: `${category.title} | Webdesino Services`,
     description: category.description,
+    alternates: {
+      canonical: `/services/${params.category}`,
+    },
   };
 }
 

@@ -15,7 +15,7 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
   const displayedTestimonials = testimonials.slice(0, 3);
 
   return (
-    <section className="py-12 bg-white relative overflow-hidden" itemScope itemType="https://schema.org/Review">
+    <section className="py-12 bg-white relative overflow-hidden">
       {/* Background Decoration */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-[#111184]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#111184]/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
@@ -35,8 +35,13 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
             <div 
               key={idx}
               className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 relative group"
-              itemProp="reviewBody"
+              itemScope
+              itemType="https://schema.org/Review"
             >
+              <div itemProp="itemReviewed" itemScope itemType="https://schema.org/Service" className="hidden">
+                <meta itemProp="name" content="Webdesino Web Development & Digital Marketing Services" />
+              </div>
+
               <Quote className="absolute top-6 right-6 text-[#111184]/20 w-10 h-10 group-hover:text-[#111184]/40 transition-colors" />
               
               <div className="flex gap-1 mb-6">
@@ -45,7 +50,7 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
                 ))}
               </div>
 
-              <p className="text-gray-700 mb-8 leading-relaxed italic relative z-10">
+              <p className="text-gray-700 mb-8 leading-relaxed italic relative z-10" itemProp="reviewBody">
                 "{testimonial.text}"
               </p>
 

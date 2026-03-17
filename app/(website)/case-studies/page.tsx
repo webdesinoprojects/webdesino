@@ -7,6 +7,9 @@ import type { Project } from '@/lib/generated/prisma';
 export const metadata: Metadata = {
   title: 'Case Studies | Proven Success Stories | WebDesino',
   description: 'Explore real client success stories. See how WebDesino helped businesses achieve 20x-330x growth through SEO, digital marketing, and web development.',
+  alternates: {
+    canonical: '/case-studies',
+  },
   openGraph: {
     title: 'WebDesino Case Studies - Real Results, Real Growth',
     description: 'From ₹3,000 to ₹10 lakh monthly. From zero to ₹25 lakh monthly. Discover proven digital marketing strategies that deliver measurable results.',

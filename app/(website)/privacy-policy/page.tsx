@@ -8,6 +8,9 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: page?.title || 'Privacy Policy | WebDesino',
     description: page?.description || 'Privacy Policy for WebDesino. Learn how we collect, use, and protect your personal information.',
+    alternates: {
+      canonical: '/privacy-policy',
+    },
   };
 }
 

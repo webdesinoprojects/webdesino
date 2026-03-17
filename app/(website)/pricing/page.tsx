@@ -6,6 +6,9 @@ import { prisma } from '@/lib/prisma';
 export const metadata: Metadata = {
   title: 'Pricing & Packages | WebDesino',
   description: 'Affordable web design and digital marketing packages tailored to your business needs.',
+  alternates: {
+    canonical: '/pricing',
+  },
 };
 
 export default async function Pricing() {
