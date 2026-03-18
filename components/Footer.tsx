@@ -191,7 +191,7 @@ export default function Footer({ locations = [] }: FooterProps) {
               <h4 className="text-lg font-bold mb-4 text-white">Our Clients</h4>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <Link href="/our-clients?category=Our%20Websites" className="text-gray-200 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
+                  <Link href="/our-websites" className="text-gray-200 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
                     Our Websites
                   </Link>
                 </li>

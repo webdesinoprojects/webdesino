@@ -15,7 +15,7 @@ const workDropdown = [
 
 // Clients dropdown content
 const clientsDropdown = [
-  { name: "Our Websites", href: "/our-clients?category=Our%20Websites" },
+  { name: "Our Websites", href: "/our-websites" },
   { name: "Our Apps", href: "/our-clients?category=Our%20Apps" },
   { name: "Digital Marketing", href: "/our-clients?category=Digital%20Marketing" },
   { name: "Graphic Designing", href: "/our-clients?category=Graphic%20Designing" },
