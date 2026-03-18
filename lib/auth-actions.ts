@@ -3,6 +3,8 @@
 import { createClient } from "@/lib/supabase/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import prisma from "@/lib/prisma";
+import { hash } from "bcryptjs";
 
 function normalizeOrigin(value?: string | null) {
   if (!value) return null;
@@ -85,11 +87,10 @@ export async function forgotPassword(formData: FormData) {
   }
 
   const supabase = createClient();
-  const origin = resolveAppOrigin();
-  const nextPath = encodeURIComponent("/admin/reset-password");
+  const origin = resolveAppOrigin().trim();
 
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${origin}/auth/callback?next=${nextPath}`,
+    redirectTo: `${origin}/admin/reset-password`,
   });
 
   if (error) {
@@ -116,10 +117,23 @@ export async function updatePassword(formData: FormData) {
   }
 
   const supabase = createClient();
-  const { error } = await supabase.auth.updateUser({ password });
+  const { data: { user }, error } = await supabase.auth.updateUser({ password });
 
   if (error) {
     return { success: false, error: error.message };
+  }
+
+  // Keep Prisma Admin table in sync
+  if (user?.email) {
+    try {
+      const hashedPassword = await hash(password, 12);
+      await prisma.admin.updateMany({
+        where: { email: user.email },
+        data: { password: hashedPassword },
+      });
+    } catch {
+      // Prisma sync failure is non-critical; Supabase Auth is the source of truth
+    }
   }
 
   return { success: true };

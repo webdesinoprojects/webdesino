@@ -17,6 +17,7 @@ import {
   HelpCircle,
   Layers,
   UserCog,
+  BarChart3,
 } from "lucide-react";
 import { logout } from "@/lib/auth-actions";
 
@@ -43,6 +44,7 @@ export function SidebarContent({ onNavigate }: SidebarContentProps) {
       <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-0.5 scrollbar-hide">
         <SectionLabel label="Main" />
         <NavItem href="/admin/dashboard" icon={<LayoutDashboard size={16} />} label="Dashboard" active={pathname === "/admin/dashboard"} onClick={onNavigate} />
+        <NavItem href="/admin/analytics" icon={<BarChart3 size={16} />} label="Analytics" active={pathname.startsWith("/admin/analytics")} onClick={onNavigate} />
         <NavItem href="/admin/enquiries" icon={<Mail size={16} />} label="Enquiries" active={pathname.startsWith("/admin/enquiries")} onClick={onNavigate} />
         <NavItem href="/admin/blogs" icon={<FileText size={16} />} label="Blogs" active={pathname.startsWith("/admin/blogs")} onClick={onNavigate} />
         <NavItem href="/admin/case-studies" icon={<Briefcase size={16} />} label="Case Studies" active={pathname.startsWith("/admin/case-studies")} onClick={onNavigate} />

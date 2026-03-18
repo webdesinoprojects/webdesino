@@ -61,7 +61,8 @@ export async function middleware(request: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser()
 
   const path = request.nextUrl.pathname;
-  const isProtectedPath = path.startsWith("/admin/") && path !== "/admin" && path !== "/admin/forgot-password";
+  const isAdminPublicPath = path === "/admin" || path === "/admin/forgot-password" || path === "/admin/reset-password" || path === "/admin/auth-error";
+  const isProtectedPath = path.startsWith("/admin/") && !isAdminPublicPath;
   const isAuthPath = path === "/admin";
   const isEmployeeProtectedPath = path.startsWith("/employee/dashboard");
   const isEmployeeAuthPath = path === "/employee/login";
