@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import OurClientsPage from "../our-clients/page";
 
-export default function OurWebsitesPage() {
-  redirect("/our-clients?category=Our%20Websites");
+export default async function OurWebsitesPage() {
+  return <OurClientsPage searchParams={{ category: "Our Websites" }} />;
 }
