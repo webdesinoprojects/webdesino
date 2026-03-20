@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
 import ServicesOverview from "@/components/ServicesOverview";
 import ServicesPills from "@/components/ServicesPills";
+import NewsTicker from "@/components/NewsTicker";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import IndustriesSection from "@/components/IndustriesSection";
 import MaximizeSection from "@/components/MaximizeSection";
@@ -103,6 +104,7 @@ export default async function Home() {
       />
       <main>
         <Hero showcaseItems={heroShowcaseItems} />
+        <NewsTicker />
         <TrustedSection />
         <ServicesOverview categories={services} />
         <ServicesPills />

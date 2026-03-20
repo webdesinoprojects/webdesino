@@ -107,22 +107,49 @@ export default async function AboutPage() {
           </div>
 
           <div className="grid grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {teamMembers.map((member, idx) => (
-              <div key={idx} className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100">
-                <div className="aspect-[4/5] relative bg-slate-200 overflow-hidden">
-                   <Image
+            {teamMembers.map((member, idx) => {
+              const isRohit = member.name?.trim().toLowerCase() === "rohit tiwari";
+
+              const card = (
+                <>
+                  <div className="aspect-[4/5] relative bg-slate-200 overflow-hidden">
+                    <Image
                       src={getStorageUrl(member.image)}
                       alt={member.name}
                       fill
                       className="object-contain group-hover:scale-105 transition-transform duration-500"
-                   />
+                    />
+                  </div>
+                  <div className="p-2 text-center">
+                    <h3 className="text-md font-bold text-slate-900">
+                      {member.name}
+                    </h3>
+                    <p className="text-[#111184] font-medium">{member.role}</p>
+                  </div>
+                </>
+              );
+
+              if (isRohit) {
+                return (
+                  <Link
+                    key={idx}
+                    href="/rohit-tiwari"
+                    className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 block"
+                  >
+                    {card}
+                  </Link>
+                );
+              }
+
+              return (
+                <div
+                  key={idx}
+                  className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100"
+                >
+                  {card}
                 </div>
-                <div className="p-2 text-center">
-                  <h3 className="text-md font-bold text-slate-900">{member.name}</h3>
-                  <p className="text-[#111184] font-medium">{member.role}</p>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

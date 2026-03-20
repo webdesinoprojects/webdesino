@@ -447,6 +447,9 @@ export const getClients = (): Client[] => {
     { name: "Chaufera", url: "https://chaufera.com/", image: "https://api.microlink.io/?url=https://chaufera.com/&screenshot=true&embed=screenshot.url", category: "Our Clients" },
     { name: "Ivory Quill", url: "https://ivoryquill.in/", image: "https://api.microlink.io/?url=https://ivoryquill.in/&screenshot=true&embed=screenshot.url", category: "Our Clients" },
     { name: "OnlyOnePercents", url: "https://onlyonepercents.com/", image: "https://api.microlink.io/?url=https://onlyonepercents.com/&screenshot=true&embed=screenshot.url", category: "Our Clients" },
+    // Featured client websites (needed on /our-websites)
+    { name: "Agnishila", url: "https://agnishila.in/", image: "https://api.microlink.io/?url=https://agnishila.in/&screenshot=true&embed=screenshot.url", category: "Our Clients" },
+    { name: "Meritshot", url: "https://meritshot.com/", image: "uploads/2025/10/68ce47b8847dda2fd5b1a6b9_Meritshot-Education-Logo.avif", category: "Our Clients" },
     
     // Querky
     { name: "Maris Gina", url: "https://maris-gina.vercel.app/", image: "https://api.microlink.io/?url=https://maris-gina.vercel.app/&screenshot=true&embed=screenshot.url", category: "Querky" },

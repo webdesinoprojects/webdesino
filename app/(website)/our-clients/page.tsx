@@ -160,7 +160,9 @@ export default async function OurClientsPage({
                         alt={client.name}
                         fill
                         className="object-contain"
-                        unoptimized
+                        loading="lazy"
+                        decoding="async"
+                        sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                       />
                     </div>
                   </div>
@@ -191,7 +193,9 @@ export default async function OurClientsPage({
                       alt="Instagram"
                       fill
                       className="object-contain"
-                      unoptimized
+                      loading="lazy"
+                      decoding="async"
+                      sizes="64px"
                     />
                   </div>
                   <h3 className="font-bold text-slate-900 group-hover:text-[#111184] transition-colors">
@@ -234,7 +238,9 @@ export default async function OurClientsPage({
                             alt={`${client.name} Screenshot`}
                             fill
                             className="object-contain object-top group-hover:scale-105 transition-transform duration-500"
-                            unoptimized // Since we are using external microlink images
+                            loading="lazy"
+                            decoding="async"
+                            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                           />
                           <div className="absolute inset-0 bg-[#111184]/0 group-hover:bg-[#111184]/40 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
                             <a
