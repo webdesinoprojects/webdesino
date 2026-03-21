@@ -418,6 +418,7 @@ export async function createLocation(formData: FormData) {
   const slug = formData.get("slug") as string;
   const title = formData.get("title") as string;
   const description = formData.get("description") as string;
+  const serviceFocus = formData.get("serviceFocus") as string;
   const contentRaw = formData.get("content") as string;
   
   let content = {};
@@ -433,6 +434,7 @@ export async function createLocation(formData: FormData) {
       slug,
       title,
       description,
+      serviceFocus,
       content,
     },
   });
@@ -448,6 +450,7 @@ export async function updateLocation(id: string, formData: FormData) {
   const slug = formData.get("slug") as string;
   const title = formData.get("title") as string;
   const description = formData.get("description") as string;
+  const serviceFocus = formData.get("serviceFocus") as string;
   const contentRaw = formData.get("content") as string;
 
   let content = {};
@@ -464,6 +467,7 @@ export async function updateLocation(id: string, formData: FormData) {
       slug,
       title,
       description,
+      serviceFocus,
       content,
     },
   });

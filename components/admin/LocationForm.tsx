@@ -7,9 +7,10 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
-import { ArrowLeft, Plus, Trash2, RefreshCw } from "lucide-react";
+import { ArrowLeft, Plus, Trash2, RefreshCw, Sparkles } from "lucide-react";
 import { createLocation, updateLocation } from "@/lib/actions";
 import ImageUpload from "@/components/admin/ImageUpload";
+import { generateLocationContent, SERVICE_FOCUS_OPTIONS } from "@/lib/location-templates";
 
 interface Service {
   title: string;
@@ -46,6 +47,7 @@ interface LocationFormProps {
     title: string;
     description: string | null;
     content: any;
+    serviceFocus?: string | null;
   };
   returnPath?: string;
 }
@@ -53,6 +55,17 @@ interface LocationFormProps {
 export default function LocationForm({ location, returnPath }: LocationFormProps) {
   const isEditing = !!location;
   const action = isEditing ? updateLocation.bind(null, location.id) : createLocation;
+
+  // Service focus state
+  const [serviceFocus, setServiceFocus] = useState<string>(
+    location?.serviceFocus || "all-services"
+  );
+
+  // Controlled input states for auto-generation
+  const [locationName, setLocationName] = useState(location?.location || "");
+  const [slug, setSlug] = useState(location?.slug || "");
+  const [title, setTitle] = useState(location?.title || "");
+  const [description, setDescription] = useState(location?.description || "");
 
   const generateContent = (locName: string): Content => ({
     hero: {
@@ -129,6 +142,26 @@ export default function LocationForm({ location, returnPath }: LocationFormProps
     }
   };
 
+  const handleAutoGenerate = () => {
+    if (!locationName.trim()) {
+      alert("Please enter a location name first");
+      return;
+    }
+
+    const generated = generateLocationContent(locationName, serviceFocus);
+    
+    // Update all form fields with generated content
+    setSlug(generated.slug);
+    setTitle(generated.title);
+    setDescription(generated.description);
+    setContent({
+      hero: generated.hero,
+      story: generated.story,
+      leadingCompany: generated.leadingCompany,
+      services: generated.services,
+    });
+  };
+
   const updateHero = (field: string, value: string) => {
     setContent(prev => ({
       ...prev,
@@ -184,6 +217,7 @@ export default function LocationForm({ location, returnPath }: LocationFormProps
 
       <form action={action} className="admin-premium-form space-y-8">
         <input type="hidden" name="content" value={JSON.stringify(content)} />
+        <input type="hidden" name="serviceFocus" value={serviceFocus} />
         {returnPath && <input type="hidden" name="_returnPath" value={returnPath} />}
         
         <Card>
@@ -191,38 +225,59 @@ export default function LocationForm({ location, returnPath }: LocationFormProps
             <CardTitle>General Information</CardTitle>
           </CardHeader>
            <CardContent className="space-y-4 admin-form-card">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="location">Location Name</Label>
-                <div className="flex gap-2">
-                  <Input
-                    id="location"
-                    name="location"
-                    placeholder="e.g. New Delhi"
-                    defaultValue={location?.location}
-                    required
-                  />
-                  <Button 
-                    type="button" 
-                    variant="outline" 
-                    size="icon" 
-                    onClick={handleRegenerate} 
-                    title="Regenerate Content from Location Name"
-                  >
-                    <RefreshCw className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="slug">Slug</Label>
-                <Input
-                  id="slug"
-                  name="slug"
-                  placeholder="e.g. best-web-developer-in-new-delhi"
-                  defaultValue={location?.slug}
-                  required
-                />
-              </div>
+            <div className="space-y-2">
+              <Label htmlFor="location">Location Name</Label>
+              <Input
+                id="location"
+                name="location"
+                placeholder="e.g. Karol Bagh"
+                value={locationName}
+                onChange={(e) => setLocationName(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="serviceFocus">Service Focus</Label>
+              <select
+                id="serviceFocus"
+                value={serviceFocus}
+                onChange={(e) => setServiceFocus(e.target.value)}
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {SERVICE_FOCUS_OPTIONS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="space-y-2">
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full"
+                onClick={handleAutoGenerate}
+              >
+                <Sparkles className="h-4 w-4 mr-2" />
+                Auto-Generate Content
+              </Button>
+              <p className="text-xs text-muted-foreground">
+                Generate SEO-optimized content based on location and service focus
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="slug">Slug</Label>
+              <Input
+                id="slug"
+                name="slug"
+                placeholder="e.g. best-web-development-company-in-karol-bagh"
+                value={slug}
+                onChange={(e) => setSlug(e.target.value)}
+                required
+              />
             </div>
 
             <div className="space-y-2">
@@ -230,8 +285,9 @@ export default function LocationForm({ location, returnPath }: LocationFormProps
               <Input
                 id="title"
                 name="title"
-                placeholder="e.g. Best Web Development Company in New Delhi"
-                defaultValue={location?.title}
+                placeholder="e.g. Best Web Development Company in Karol Bagh"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
                 required
               />
             </div>
@@ -242,7 +298,8 @@ export default function LocationForm({ location, returnPath }: LocationFormProps
                 id="description"
                 name="description"
                 placeholder="SEO Description..."
-                defaultValue={location?.description || ""}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
                 rows={3}
               />
             </div>

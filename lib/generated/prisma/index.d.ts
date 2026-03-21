@@ -10041,6 +10041,7 @@ export namespace Prisma {
     location: string | null
     title: string | null
     description: string | null
+    serviceFocus: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -10051,6 +10052,7 @@ export namespace Prisma {
     location: string | null
     title: string | null
     description: string | null
+    serviceFocus: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -10062,6 +10064,7 @@ export namespace Prisma {
     title: number
     description: number
     content: number
+    serviceFocus: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -10074,6 +10077,7 @@ export namespace Prisma {
     location?: true
     title?: true
     description?: true
+    serviceFocus?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -10084,6 +10088,7 @@ export namespace Prisma {
     location?: true
     title?: true
     description?: true
+    serviceFocus?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -10095,6 +10100,7 @@ export namespace Prisma {
     title?: true
     description?: true
     content?: true
+    serviceFocus?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -10179,6 +10185,7 @@ export namespace Prisma {
     title: string
     description: string | null
     content: JsonValue | null
+    serviceFocus: string | null
     createdAt: Date
     updatedAt: Date
     _count: LocationPageCountAggregateOutputType | null
@@ -10207,6 +10214,7 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     content?: boolean
+    serviceFocus?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["locationPage"]>
@@ -10218,6 +10226,7 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     content?: boolean
+    serviceFocus?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["locationPage"]>
@@ -10229,6 +10238,7 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     content?: boolean
+    serviceFocus?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
@@ -10244,6 +10254,7 @@ export namespace Prisma {
       title: string
       description: string | null
       content: Prisma.JsonValue | null
+      serviceFocus: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["locationPage"]>
@@ -10645,6 +10656,7 @@ export namespace Prisma {
     readonly title: FieldRef<"LocationPage", 'String'>
     readonly description: FieldRef<"LocationPage", 'String'>
     readonly content: FieldRef<"LocationPage", 'Json'>
+    readonly serviceFocus: FieldRef<"LocationPage", 'String'>
     readonly createdAt: FieldRef<"LocationPage", 'DateTime'>
     readonly updatedAt: FieldRef<"LocationPage", 'DateTime'>
   }
@@ -19284,6 +19296,7 @@ export namespace Prisma {
     title: 'title',
     description: 'description',
     content: 'content',
+    serviceFocus: 'serviceFocus',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -20154,6 +20167,7 @@ export namespace Prisma {
     title?: StringFilter<"LocationPage"> | string
     description?: StringNullableFilter<"LocationPage"> | string | null
     content?: JsonNullableFilter<"LocationPage">
+    serviceFocus?: StringNullableFilter<"LocationPage"> | string | null
     createdAt?: DateTimeFilter<"LocationPage"> | Date | string
     updatedAt?: DateTimeFilter<"LocationPage"> | Date | string
   }
@@ -20165,6 +20179,7 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrderInput | SortOrder
     content?: SortOrderInput | SortOrder
+    serviceFocus?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -20179,6 +20194,7 @@ export namespace Prisma {
     title?: StringFilter<"LocationPage"> | string
     description?: StringNullableFilter<"LocationPage"> | string | null
     content?: JsonNullableFilter<"LocationPage">
+    serviceFocus?: StringNullableFilter<"LocationPage"> | string | null
     createdAt?: DateTimeFilter<"LocationPage"> | Date | string
     updatedAt?: DateTimeFilter<"LocationPage"> | Date | string
   }, "id" | "slug">
@@ -20190,6 +20206,7 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrderInput | SortOrder
     content?: SortOrderInput | SortOrder
+    serviceFocus?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: LocationPageCountOrderByAggregateInput
@@ -20207,6 +20224,7 @@ export namespace Prisma {
     title?: StringWithAggregatesFilter<"LocationPage"> | string
     description?: StringNullableWithAggregatesFilter<"LocationPage"> | string | null
     content?: JsonNullableWithAggregatesFilter<"LocationPage">
+    serviceFocus?: StringNullableWithAggregatesFilter<"LocationPage"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"LocationPage"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"LocationPage"> | Date | string
   }
@@ -21497,6 +21515,7 @@ export namespace Prisma {
     title: string
     description?: string | null
     content?: NullableJsonNullValueInput | InputJsonValue
+    serviceFocus?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21508,6 +21527,7 @@ export namespace Prisma {
     title: string
     description?: string | null
     content?: NullableJsonNullValueInput | InputJsonValue
+    serviceFocus?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21519,6 +21539,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     content?: NullableJsonNullValueInput | InputJsonValue
+    serviceFocus?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21530,6 +21551,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     content?: NullableJsonNullValueInput | InputJsonValue
+    serviceFocus?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21541,6 +21563,7 @@ export namespace Prisma {
     title: string
     description?: string | null
     content?: NullableJsonNullValueInput | InputJsonValue
+    serviceFocus?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21552,6 +21575,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     content?: NullableJsonNullValueInput | InputJsonValue
+    serviceFocus?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21563,6 +21587,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     content?: NullableJsonNullValueInput | InputJsonValue
+    serviceFocus?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -22651,6 +22676,7 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     content?: SortOrder
+    serviceFocus?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22661,6 +22687,7 @@ export namespace Prisma {
     location?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    serviceFocus?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22671,6 +22698,7 @@ export namespace Prisma {
     location?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    serviceFocus?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
