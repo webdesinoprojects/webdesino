@@ -170,6 +170,7 @@ export async function createBlogPost(data: any) {
 
   revalidatePath("/admin/blogs");
   revalidatePath("/blog");
+  revalidatePath("/"); // Revalidate homepage to show new blog
   await logEmployeeAction("blogs", `Created blog post: "${data.title}"`);
 }
 
@@ -189,6 +190,7 @@ export async function updateBlogPost(id: string, data: any) {
   revalidatePath("/admin/blogs");
   revalidatePath("/blog");
   revalidatePath(`/blog/${data.slug}`);
+  revalidatePath("/"); // Revalidate homepage to show updated blog
   await logEmployeeAction("blogs", `Updated blog post: "${data.title}"`);
 }
 
@@ -199,6 +201,7 @@ export async function deleteBlogPost(id: string) {
 
   revalidatePath("/admin/blogs");
   revalidatePath("/blog");
+  revalidatePath("/"); // Revalidate homepage after deleting blog
   await logEmployeeAction("blogs", `Deleted blog post (id: ${id})`);
 }
 

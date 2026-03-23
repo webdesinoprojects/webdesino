@@ -14,7 +14,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Link from "next/link";
-import { ArrowLeft, FileText, ImageIcon, PenSquare } from "lucide-react";
+import { ArrowLeft, FileText, ImageIcon, PenSquare, Info } from "lucide-react";
 import { createBlogPost, updateBlogPost } from "@/lib/actions";
 import ImageUpload from "@/components/admin/ImageUpload";
 import RichTextEditor from "@/components/admin/RichTextEditor";
@@ -88,6 +88,7 @@ export default function BlogPostForm({ post, returnPath }: BlogPostFormProps) {
   const back = returnPath || "/admin/blogs";
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showSlugInfo, setShowSlugInfo] = useState(false);
   const initialContent = post?.content || "";
   const [galleryImages, setGalleryImages] = useState<string[]>(extractGalleryImages(initialContent));
   
@@ -199,7 +200,17 @@ export default function BlogPostForm({ post, returnPath }: BlogPostFormProps) {
             
             <div className="grid gap-4 md:grid-cols-2">
               <div className="space-y-2">
-                <Label htmlFor="slug">Slug</Label>
+                <div className="flex items-center gap-2">
+                  <Label htmlFor="slug">Slug</Label>
+                  <button
+                    type="button"
+                    onClick={() => setShowSlugInfo(!showSlugInfo)}
+                    className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-200 transition-colors"
+                    title="Slug formatting guidelines"
+                  >
+                    <Info size={14} />
+                  </button>
+                </div>
                 <Input
                   id="slug"
                   name="slug"
@@ -208,6 +219,22 @@ export default function BlogPostForm({ post, returnPath }: BlogPostFormProps) {
                   placeholder="e.g. top-seo-strategies-delhi"
                   required
                 />
+                {showSlugInfo && (
+                  <div className="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg text-sm">
+                    <p className="font-semibold text-blue-900 mb-2">✓ Slug Formatting Rules:</p>
+                    <ul className="space-y-1 text-blue-800">
+                      <li>• Use only lowercase letters (a-z)</li>
+                      <li>• Use hyphens (-) instead of spaces</li>
+                      <li>• No special characters (?, !, @, etc.)</li>
+                      <li>• No uppercase letters</li>
+                    </ul>
+                    <div className="mt-3 pt-2 border-t border-blue-200">
+                      <p className="text-xs text-blue-700 mb-1">Examples:</p>
+                      <p className="text-xs text-green-700">✓ what-is-seo-guide-2024</p>
+                      <p className="text-xs text-red-700">✗ What-is-SEO?-Guide-(2024)</p>
+                    </div>
+                  </div>
+                )}
               </div>
               <div className="space-y-2">
                 <Label htmlFor="category">Category</Label>
