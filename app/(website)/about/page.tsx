@@ -168,7 +168,13 @@ export default async function AboutPage() {
              </div>
              <div className="lg:w-1/2 flex justify-center">
                 <div className="w-full max-w-md aspect-video bg-[#111184]/5 rounded-2xl flex items-center justify-center relative overflow-hidden">
-                   <Image src={getStorageUrl("/location-service-1.png")} alt="Our Story" fill className="object-contain" />
+                   <Image
+                     src={getStorageUrl("/location-service-1.png")}
+                     alt="WebDesino — our story: custom web solutions and team collaboration"
+                     fill
+                     className="object-contain"
+                     sizes="(max-width: 1024px) 100vw, 50vw"
+                   />
                 </div>
              </div>
           </div>
@@ -184,7 +190,13 @@ export default async function AboutPage() {
              </div>
              <div className="lg:w-1/2 flex justify-center">
                 <div className="w-full max-w-md aspect-video bg-[#111184]/5 rounded-2xl flex items-center justify-center relative overflow-hidden">
-                   <Image src={getStorageUrl("/location-service-2.png")} alt="Who We Are" fill className="object-contain" />
+                   <Image
+                     src={getStorageUrl("/location-service-2.png")}
+                     alt="WebDesino — leading web development company in India"
+                     fill
+                     className="object-contain"
+                     sizes="(max-width: 1024px) 100vw, 50vw"
+                   />
                 </div>
              </div>
           </div>
@@ -200,7 +212,13 @@ export default async function AboutPage() {
              </div>
              <div className="lg:w-1/2 flex justify-center">
                 <div className="w-full max-w-md aspect-video bg-[#111184]/5 rounded-2xl flex items-center justify-center relative overflow-hidden">
-                   <Image src={getStorageUrl("/location-service-3.png")} alt="What We Do" fill className="object-contain" />
+                   <Image
+                     src={getStorageUrl("/location-service-3.png")}
+                     alt="WebDesino — websites and digital strategies that grow your business"
+                     fill
+                     className="object-contain"
+                     sizes="(max-width: 1024px) 100vw, 50vw"
+                   />
                 </div>
              </div>
           </div>
