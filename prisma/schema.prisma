@@ -125,8 +125,12 @@ model LocationPage {
   description  String?
   content      Json?
   serviceFocus String?  @default("all-services")
+  /// Region/UT for admin filters; defaults to Delhi for legacy and unassigned rows
+  state        String   @default("Delhi")
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+
+  @@index([state])
 }
 
 model Page {

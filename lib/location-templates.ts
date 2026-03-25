@@ -122,7 +122,7 @@ function generateWebDevelopmentContent(
       ctaLink: "/contact",
       secondaryCtaText: "View Our Work",
       secondaryCtaLink: "/portfolio",
-      image: "/images/web-development-hero.jpg",
+      image: "", // No image - will center the text
     },
     story: {
       title: `Your Trusted Web Development Partner in ${location}`,
@@ -186,7 +186,7 @@ function generateDigitalMarketingContent(
       ctaLink: "/contact",
       secondaryCtaText: "Our Services",
       secondaryCtaLink: "/services",
-      image: "/images/digital-marketing-hero.jpg",
+      image: "",
     },
     story: {
       title: `Your Digital Marketing Partner in ${location}`,
@@ -250,7 +250,7 @@ function generateSEOServicesContent(
       ctaLink: "/contact",
       secondaryCtaText: "SEO Packages",
       secondaryCtaLink: "/pricing",
-      image: "/images/seo-hero.jpg",
+      image: "",
     },
     story: {
       title: `Professional SEO Services in ${location}`,
@@ -314,7 +314,7 @@ function generateGraphicDesigningContent(
       ctaLink: "/contact",
       secondaryCtaText: "View Portfolio",
       secondaryCtaLink: "/portfolio",
-      image: "/images/graphic-design-hero.jpg",
+      image: "",
     },
     story: {
       title: `Creative Graphic Design Solutions in ${location}`,
@@ -378,7 +378,7 @@ function generateContentWritingContent(
       ctaLink: "/contact",
       secondaryCtaText: "Content Samples",
       secondaryCtaLink: "/blog",
-      image: "/images/content-writing-hero.jpg",
+      image: "",
     },
     story: {
       title: `Expert Content Writing Services in ${location}`,
@@ -442,7 +442,7 @@ function generateAllServicesContent(
       ctaLink: "/contact",
       secondaryCtaText: "Our Services",
       secondaryCtaLink: "/services",
-      image: "/images/all-services-hero.jpg",
+      image: "",
     },
     story: {
       title: `${location}'s Complete Digital Solutions Provider`,

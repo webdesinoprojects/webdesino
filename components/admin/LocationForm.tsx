@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,6 +11,7 @@ import { ArrowLeft, Plus, Trash2, RefreshCw, Sparkles } from "lucide-react";
 import { createLocation, updateLocation } from "@/lib/actions";
 import ImageUpload from "@/components/admin/ImageUpload";
 import { generateLocationContent, SERVICE_FOCUS_OPTIONS } from "@/lib/location-templates";
+import { DEFAULT_LOCATION_STATE, LOCATION_STATE_OPTIONS } from "@/lib/location-states";
 
 interface Service {
   title: string;
@@ -48,6 +49,7 @@ interface LocationFormProps {
     description: string | null;
     content: any;
     serviceFocus?: string | null;
+    state?: string | null;
   };
   returnPath?: string;
 }
@@ -60,6 +62,19 @@ export default function LocationForm({ location, returnPath }: LocationFormProps
   const [serviceFocus, setServiceFocus] = useState<string>(
     location?.serviceFocus || "all-services"
   );
+
+  const [state, setState] = useState<string>(
+    location?.state || DEFAULT_LOCATION_STATE
+  );
+
+  const stateSelectOptions = useMemo(() => {
+    const seen = new Set(LOCATION_STATE_OPTIONS.map((o) => o.value));
+    const out = [...LOCATION_STATE_OPTIONS];
+    if (location?.state && !seen.has(location.state)) {
+      out.push({ value: location.state, label: location.state });
+    }
+    return out;
+  }, [location?.state]);
 
   // Controlled input states for auto-generation
   const [locationName, setLocationName] = useState(location?.location || "");
@@ -218,6 +233,7 @@ export default function LocationForm({ location, returnPath }: LocationFormProps
       <form action={action} className="admin-premium-form space-y-8">
         <input type="hidden" name="content" value={JSON.stringify(content)} />
         <input type="hidden" name="serviceFocus" value={serviceFocus} />
+        <input type="hidden" name="state" value={state} />
         {returnPath && <input type="hidden" name="_returnPath" value={returnPath} />}
         
         <Card>
@@ -251,6 +267,26 @@ export default function LocationForm({ location, returnPath }: LocationFormProps
                   </option>
                 ))}
               </select>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="location-state">State / region</Label>
+              <select
+                id="location-state"
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {stateSelectOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+              <p className="text-xs text-muted-foreground">
+                New locations default to Delhi until you assign a state. Add more regions in{" "}
+                <code className="text-[11px]">lib/location-states.ts</code>.
+              </p>
             </div>
 
             <div className="space-y-2">

@@ -1,6 +1,7 @@
 "use server";
 
 import prisma from "@/lib/prisma";
+import { DEFAULT_LOCATION_STATE } from "@/lib/location-states";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { sendEnquiryEmail } from "@/lib/email";
@@ -422,6 +423,7 @@ export async function createLocation(formData: FormData) {
   const title = formData.get("title") as string;
   const description = formData.get("description") as string;
   const serviceFocus = formData.get("serviceFocus") as string;
+  const stateRaw = formData.get("state") as string | null;
   const contentRaw = formData.get("content") as string;
   
   let content = {};
@@ -431,6 +433,8 @@ export async function createLocation(formData: FormData) {
     console.error("Error parsing content JSON", e);
   }
 
+  const state = stateRaw?.trim() || DEFAULT_LOCATION_STATE;
+
   await prisma.locationPage.create({
     data: {
       location,
@@ -438,6 +442,7 @@ export async function createLocation(formData: FormData) {
       title,
       description,
       serviceFocus,
+      state,
       content,
     },
   });
@@ -454,6 +459,7 @@ export async function updateLocation(id: string, formData: FormData) {
   const title = formData.get("title") as string;
   const description = formData.get("description") as string;
   const serviceFocus = formData.get("serviceFocus") as string;
+  const stateRaw = formData.get("state") as string | null;
   const contentRaw = formData.get("content") as string;
 
   let content = {};
@@ -463,6 +469,8 @@ export async function updateLocation(id: string, formData: FormData) {
     console.error("Error parsing content JSON", e);
   }
 
+  const state = stateRaw?.trim() || DEFAULT_LOCATION_STATE;
+
   await prisma.locationPage.update({
     where: { id },
     data: {
@@ -471,6 +479,7 @@ export async function updateLocation(id: string, formData: FormData) {
       title,
       description,
       serviceFocus,
+      state,
       content,
     },
   });

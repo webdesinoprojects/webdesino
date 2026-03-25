@@ -29,10 +29,18 @@ export default async function WebsiteLayout({
     },
   });
 
-  const footerLocations = locations.map(loc => ({
-    name: loc.location,
-    slug: loc.slug,
-  }));
+  // Deduplicate locations - show each location only once
+  const uniqueLocationsMap = new Map<string, { name: string; slug: string }>();
+  locations.forEach(loc => {
+    if (!uniqueLocationsMap.has(loc.location)) {
+      uniqueLocationsMap.set(loc.location, {
+        name: loc.location,
+        slug: loc.slug,
+      });
+    }
+  });
+  
+  const footerLocations = Array.from(uniqueLocationsMap.values());
 
   return (
     <>
