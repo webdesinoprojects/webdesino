@@ -1,9 +1,9 @@
 /**
  * Shared location display names per state for bulk scripts and state backfill.
- * Keys must match lib/location-states.ts (e.g. "Jammu and Kashmir", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar").
+ * Keys must match lib/location-states.ts (e.g. "Jammu & Kashmir", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar").
  */
 export const LOCATIONS_BY_STATE: Record<string, string[]> = {
-  "Jammu and Kashmir": [
+  "Jammu & Kashmir": [
     "Srinagar", "Jammu", "Anantnag", "Baramulla", "Sopore", "Pulwama", "Budgam", "Kupwara", "Rajouri", "Poonch",
     "Kathua", "Udhampur", "Ramban", "Kishtwar", "Doda", "Shopian", "Kulgam", "Bandipora", "Ganderbal", "Reasi",
     "Samba", "Leh", "Gulmarg", "Pahalgam", "Sonamarg", "Patnitop", "Vaishno Devi", "Nathatop", "Banihal", "Bhaderwah",

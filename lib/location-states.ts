@@ -9,7 +9,7 @@ export const DEFAULT_LOCATION_STATE = "Delhi";
 
 export const LOCATION_STATE_OPTIONS: { value: string; label: string }[] = [
   { value: "Delhi", label: "Delhi (default / rest)" },
-  { value: "Jammu and Kashmir", label: "Jammu & Kashmir" },
+  { value: "Jammu & Kashmir", label: "Jammu & Kashmir" },
   { value: "Andhra Pradesh", label: "Andhra Pradesh" },
   { value: "Arunachal Pradesh", label: "Arunachal Pradesh" },
   { value: "Assam", label: "Assam" },

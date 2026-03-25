@@ -23,7 +23,7 @@ const prisma = new PrismaClient();
 
 // Same scope as before lib/location-seeds merged AP: J&K only (use bulk-insert-locations for AP).
 const LOCATIONS_BY_STATE: Record<string, string[]> = {
-  "Jammu and Kashmir": LOCATION_SEEDS["Jammu and Kashmir"] ?? [],
+  "Jammu & Kashmir": LOCATION_SEEDS["Jammu & Kashmir"] ?? [],
 };
 
 // Configuration
