@@ -213,39 +213,13 @@ function GenericWebsitePage({
     );
 }
 
-// Allow static generation with fallback for missing pages
-export const dynamicParams = true; // Allow dynamic params not in generateStaticParams
+// Do not pre-generate location/page slugs at build time.
+// Allow dynamic params so missing params are rendered on-demand.
+export const dynamicParams = true;
 
-export async function generateStaticParams() {
-    try {
-        const [locations, pages] = await Promise.all([
-            prisma.locationPage.findMany({
-                select: { slug: true },
-            }),
-            prisma.page.findMany({
-                select: { slug: true },
-            }),
-        ]);
-
-        const reservedRoutes = [
-            "about", "blog", "case-studies", "contact", "our-clients", 
-            "portfolio", "pricing", "privacy-policy", "refund-policy", 
-            "rohit-tiwari", "search", "services", "terms-conditions", 
-            "testimonials"
-        ];
-
-        return [...locations, ...pages]
-            .filter((entry) => entry.slug && entry.slug !== "index" && entry.slug !== "" && !reservedRoutes.includes(entry.slug))
-            .filter((entry, index, array) => array.findIndex((item) => item.slug === entry.slug) === index)
-            .map((entry) => ({
-                slug: entry.slug,
-            }));
-    } catch (error) {
-        console.error("Error generating static params for location pages:", error);
-        // Return empty array to prevent build failure, pages will be generated on-demand
-        return [];
-    }
-}
+// Revalidate cached data at most once per day (ISR-style).
+// Route stays dynamic because we removed generateStaticParams().
+export const revalidate = 86400;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     try {

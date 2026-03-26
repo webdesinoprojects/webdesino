@@ -15,6 +15,7 @@
     "seed:locations": "npm run bulk-insert-locations -- --execute && npm run backfill-location-states -- --execute",
     "seed:locations:dry": "npm run bulk-insert-locations",
     "seed:all-locations": "ts-node --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} scripts/seed-locations.ts",
+    "count:pages": "ts-node --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} scripts/count-pages.ts",
     "cleanup:duplicates": "ts-node --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} scripts/cleanup-duplicates.ts",
     "reseed:jk": "ts-node --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} scripts/reseed-jammu-kashmir.ts",
     "start": "next start",
