@@ -1,44 +1,44 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Loader2, Trash2, Copy, Check } from "lucide-react";
 import Image from "next/image";
 import ImageUpload from "./ImageUpload";
 import { getMedia, deleteMedia } from "@/lib/media-actions";
+import useSWR from "swr";
 
 const PAGE_SIZE = 24;
 
+const fetcher = async ([_, page]: [string, number]) => {
+  return await getMedia(page, PAGE_SIZE);
+};
+
 export default function MediaGallery() {
-  const [images, setImages] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
-  const [total, setTotal] = useState(0);
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
-  const fetchImages = async () => {
-    setLoading(true);
-    try {
-      const { media, total } = await getMedia(page, PAGE_SIZE);
-      setImages(media);
-      setTotal(total);
-    } catch (error) {
-      console.error("Error fetching images:", error);
-    } finally {
-      setLoading(false);
+  // CRITICAL FIX: Use SWR for caching and deduplication
+  const { data, error, mutate } = useSWR(
+    ['media', page],
+    fetcher,
+    {
+      revalidateOnFocus: false,
+      dedupingInterval: 60000, // 1 minute deduplication
+      revalidateOnReconnect: false,
     }
-  };
+  );
 
-  useEffect(() => {
-    fetchImages();
-  }, [page]);
+  const loading = !data && !error;
+  const images = data?.media || [];
+  const total = data?.total || 0;
 
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this image?")) return;
     
     await deleteMedia(id);
-    fetchImages();
+    mutate(); // Revalidate after delete
   };
 
   const copyUrl = (id: string, url: string) => {
@@ -47,12 +47,16 @@ export default function MediaGallery() {
     setTimeout(() => setCopiedId(null), 2000);
   };
 
+  const handleUploadComplete = () => {
+    mutate(); // Revalidate after upload
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-bold text-blue-900">Media Library</h2>
         <div className="w-auto">
-             <ImageUpload name="new_image" label="Upload New Image" onUploadComplete={() => fetchImages()} />
+             <ImageUpload name="new_image" label="Upload New Image" onUploadComplete={handleUploadComplete} />
         </div>
       </div>
 

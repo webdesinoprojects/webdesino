@@ -4,6 +4,9 @@ import { getAllCaseSlugs } from '@/lib/case-studies';
 import { servicesData } from '@/lib/services-data';
 import prisma from '@/lib/prisma';
 
+// CRITICAL FIX: Cache sitemap for 24 hours
+export const revalidate = 86400;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 1. Get all dynamic project routes
   const projects = getPortfolioProjects();
@@ -40,9 +43,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }))
   );
 
-  // 4. Get all location routes
+  // 4. Get all location routes - CRITICAL: Limit to 1000
   const locations = await prisma.locationPage.findMany({
     select: { slug: true },
+    take: 1000, // CRITICAL: Limit sitemap size
+    orderBy: { updatedAt: 'desc' }, // Most recently updated first
   });
   const locationEntries: MetadataRoute.Sitemap = locations.map((loc) => ({
     url: `https://webdesino.com/${loc.slug}`,

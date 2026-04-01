@@ -36,7 +36,16 @@ export function getStorageUrl(path: string | undefined | null) {
     return normalizedPath;
   }
 
+  // CRITICAL FIX: Use CDN URL if available, fallback to Supabase
+  const cdnUrl = process.env.NEXT_PUBLIC_CDN_URL;
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  
+  if (cdnUrl) {
+    const base = cdnUrl.replace(/\/$/, "");
+    const cleanPath = normalizedPath.replace(/^\/+/, "");
+    return `${base}/storage/v1/object/public/images/${cleanPath}`;
+  }
+  
   if (supabaseUrl) {
     const base = supabaseUrl.replace(/\/$/, "");
     const cleanPath = normalizedPath.replace(/^\/+/, "");

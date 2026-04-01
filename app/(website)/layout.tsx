@@ -14,6 +14,9 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = generateDefaultMetadata();
 
+// CRITICAL FIX: Cache layout for 1 hour to reduce database queries
+export const revalidate = 3600;
+
 export default async function WebsiteLayout({
   children,
 }: Readonly<{
@@ -27,6 +30,8 @@ export default async function WebsiteLayout({
     orderBy: {
       location: 'asc',
     },
+    take: 100, // CRITICAL: Limit to 100 locations
+    distinct: ['location'], // Only unique locations
   });
 
   // Deduplicate locations - show each location only once
@@ -40,7 +45,7 @@ export default async function WebsiteLayout({
     }
   });
   
-  const footerLocations = Array.from(uniqueLocationsMap.values());
+  const footerLocations = Array.from(uniqueLocationsMap.values()).slice(0, 50); // CRITICAL: Limit footer to 50
 
   return (
     <>
