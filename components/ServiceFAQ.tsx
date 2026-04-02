@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ChevronDown, ChevronUp, HelpCircle } from "lucide-react";
 import type { Faq } from "@/lib/generated/prisma";
 import { generateFAQSchema } from "@/lib/seo";
+import { transformBlogImagesInHtml } from "@/lib/transform-blog-html";
 
 interface ServiceFAQProps {
   serviceTitle: string;
@@ -103,7 +104,7 @@ export default function ServiceFAQ({ serviceTitle, faqs = [] }: ServiceFAQProps)
                 >
                   <div 
                     className="p-6 pt-0 bg-gray-50 text-gray-600 leading-relaxed" 
-                    dangerouslySetInnerHTML={{ __html: faq.answer }}
+                    dangerouslySetInnerHTML={{ __html: transformBlogImagesInHtml(faq.answer) }}
                   />
                 </div>
               </div>

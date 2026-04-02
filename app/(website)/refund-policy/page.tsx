@@ -2,6 +2,7 @@ import React from 'react';
 import LegalPageLayout from '@/components/LegalPageLayout';
 import { Metadata } from 'next';
 import { prisma } from '@/lib/prisma';
+import { transformBlogImagesInHtml } from '@/lib/transform-blog-html';
 
 export const metadata: Metadata = {
   title: 'Return & Refund Policy | WebDesino',
@@ -21,7 +22,7 @@ export default async function RefundPolicy() {
   return (
     <LegalPageLayout title={page?.title || "Refund Policy"}>
       {page?.content ? (
-        <div dangerouslySetInnerHTML={{ __html: content.html || '' }} />
+        <div dangerouslySetInnerHTML={{ __html: transformBlogImagesInHtml(content.html || '') }} />
       ) : (
         <>
       <p>

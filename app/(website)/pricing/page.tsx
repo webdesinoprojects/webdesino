@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { prisma } from '@/lib/prisma';
+import { transformBlogImagesInHtml } from '@/lib/transform-blog-html';
 
 export const metadata: Metadata = {
   title: 'Pricing & Packages | WebDesino',
@@ -19,7 +20,7 @@ export default async function Pricing() {
   const content = (page?.content as any) || {};
 
   if (page?.content) {
-    return <div dangerouslySetInnerHTML={{ __html: content.html || '' }} />;
+    return <div dangerouslySetInnerHTML={{ __html: transformBlogImagesInHtml(content.html || '') }} />;
   }
 
   return (

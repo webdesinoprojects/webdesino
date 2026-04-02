@@ -11,6 +11,7 @@ import {
 import { generateLocalBusinessSchema } from "@/lib/seo";
 import FAQ from "@/components/FAQ";
 import { getStorageUrl, replaceLocationPlaceholder } from "@/lib/utils";
+import { transformBlogImagesInHtml } from "@/lib/transform-blog-html";
 
 interface PageProps {
     params: {
@@ -102,7 +103,7 @@ function GenericWebsitePage({
             {content.html ? (
                 <section className="py-16 lg:py-24">
                     <div className="container mx-auto px-4">
-                        <div className="prose prose-slate max-w-none prose-headings:text-slate-900 prose-p:text-slate-600 prose-li:text-slate-600" dangerouslySetInnerHTML={{ __html: content.html }} />
+                        <div className="prose prose-slate max-w-none prose-headings:text-slate-900 prose-p:text-slate-600 prose-li:text-slate-600" dangerouslySetInnerHTML={{ __html: transformBlogImagesInHtml(content.html) }} />
                     </div>
                 </section>
             ) : (

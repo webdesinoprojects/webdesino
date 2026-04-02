@@ -2,6 +2,7 @@ import React from 'react';
 import LegalPageLayout from '@/components/LegalPageLayout';
 import { Metadata } from 'next';
 import { prisma } from "@/lib/prisma";
+import { transformBlogImagesInHtml } from "@/lib/transform-blog-html";
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await prisma.page.findUnique({ where: { slug: "privacy-policy" } });
@@ -29,7 +30,7 @@ export default async function PrivacyPolicy() {
           {sections.map((s: any, i: number) => (
              <div key={i}>
                {s.title && <h2 className="text-2xl font-bold mb-4">{s.title}</h2>}
-               <div dangerouslySetInnerHTML={{ __html: s.content }} />
+               <div dangerouslySetInnerHTML={{ __html: transformBlogImagesInHtml(s.content) }} />
              </div>
           ))}
         </div>
