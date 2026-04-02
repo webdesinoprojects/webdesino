@@ -6,6 +6,8 @@ import BlogSidebar from "@/components/BlogSidebar";
 import { notFound } from "next/navigation";
 import { generateBlogPostingSchema, BASE_URL } from "@/lib/seo";
 import { format } from "date-fns";
+import BlogHtmlContent from "@/components/BlogHtmlContent";
+import { getStorageUrl } from "@/lib/utils";
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const post = await prisma.blogPost.findUnique({
@@ -100,17 +102,23 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
               {/* Featured Image */}
               <div className="aspect-video relative bg-slate-100">
                 <Image
-                  src={post.image || "https://api.microlink.io/?url=https://webdesino.com&screenshot=true&meta=false&embed=screenshot.url"}
+                  src={
+                    getStorageUrl(post.image || "") ||
+                    "https://api.microlink.io/?url=https://webdesino.com&screenshot=true&meta=false&embed=screenshot.url"
+                  }
                   alt={post.title}
                   fill
                   className="object-contain"
+                  sizes="(max-width: 1024px) 100vw, 66vw"
+                  quality={75}
+                  priority
                 />
               </div>
               
               {/* Article Body */}
               <div className="p-8 lg:p-12 prose prose-lg max-w-none prose-headings:text-slate-900 prose-p:text-slate-600 prose-a:text-[#111184] hover:prose-a:text-[#111184] prose-img:rounded-xl">
                 {post.content ? (
-                  <div dangerouslySetInnerHTML={{ __html: post.content }} />
+                  <BlogHtmlContent html={post.content} />
                 ) : (
                   <div>
                     <p className="lead text-xl text-slate-600 mb-8">{post.excerpt}</p>

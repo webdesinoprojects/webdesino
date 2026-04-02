@@ -16,6 +16,8 @@
     "seed:locations:dry": "npm run bulk-insert-locations",
     "seed:all-locations": "ts-node --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} scripts/seed-locations.ts",
     "count:pages": "ts-node --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} scripts/count-pages.ts",
+    "check:db": "ts-node --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} scripts/check-db.ts",
+    "audit:supabase-bandwidth": "ts-node --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} scripts/audit-supabase-bandwidth-sources.ts",
     "cleanup:duplicates": "ts-node --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} scripts/cleanup-duplicates.ts",
     "reseed:jk": "ts-node --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} scripts/reseed-jammu-kashmir.ts",
     "start": "next start",

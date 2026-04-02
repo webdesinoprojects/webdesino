@@ -1,4 +1,19 @@
 /** @type {import('next').NextConfig} */
+function cdnRemotePattern() {
+  const raw = process.env.NEXT_PUBLIC_CDN_URL;
+  if (!raw || typeof raw !== "string") return null;
+  try {
+    const u = new URL(raw);
+    const protocol = u.protocol === "http:" ? "http" : "https";
+    if (!u.hostname) return null;
+    return { protocol, hostname: u.hostname };
+  } catch {
+    return null;
+  }
+}
+
+const cdnPattern = cdnRemotePattern();
+
 const nextConfig = {
   eslint: {
     // Temporarily ignore ESLint during builds due to Next.js internal config issues
@@ -48,7 +63,8 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'is1-ssl.mzstatic.com',
-      }
+      },
+      ...(cdnPattern ? [cdnPattern] : []),
     ],
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
