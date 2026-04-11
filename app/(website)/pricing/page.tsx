@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import { prisma } from '@/lib/prisma';
 import { transformBlogImagesInHtml } from '@/lib/transform-blog-html';
+import PayPalHostedButton from '@/components/PayPalHostedButton';
 
 export const metadata: Metadata = {
   title: 'Pricing & Packages | WebDesino',
@@ -18,9 +19,56 @@ export default async function Pricing() {
   });
 
   const content = (page?.content as any) || {};
+  const payOnlineSection = (
+    <section className="container mx-auto px-4 pb-16">
+      <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-50 via-white to-blue-50 shadow-[0_20px_60px_-30px_rgba(2,6,23,0.35)]">
+        <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-blue-100/60 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-cyan-100/60 blur-3xl" />
+
+        <div className="relative grid gap-8 p-6 md:grid-cols-2 md:gap-10 md:p-10">
+          <div className="flex flex-col justify-center">
+            <span className="mb-4 inline-flex w-fit items-center rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-[#111184]">
+              Secure Payment
+            </span>
+            <h2 className="text-3xl font-bold text-slate-900 md:text-4xl">
+              Pay Online
+            </h2>
+            <p className="mt-3 max-w-md text-base text-slate-600 md:text-lg">
+              Complete your payment securely through PayPal. You can pay with PayPal balance, cards, and multiple supported methods.
+            </p>
+
+            <div className="mt-6 grid gap-3 text-sm text-slate-700">
+              <div className="flex items-center gap-2 rounded-xl bg-white/70 px-3 py-2">
+                <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                End-to-end secure checkout
+              </div>
+              <div className="flex items-center gap-2 rounded-xl bg-white/70 px-3 py-2">
+                <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                Works with PayPal and major cards
+              </div>
+              <div className="flex items-center gap-2 rounded-xl bg-white/70 px-3 py-2">
+                <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                Instant payment confirmation
+              </div>
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-lg shadow-slate-200/60 md:p-6">
+            <p className="mb-4 text-sm font-medium text-slate-500">Checkout</p>
+            <PayPalHostedButton />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 
   if (page?.content) {
-    return <div dangerouslySetInnerHTML={{ __html: transformBlogImagesInHtml(content.html || '') }} />;
+    return (
+      <div className="bg-white">
+        <div dangerouslySetInnerHTML={{ __html: transformBlogImagesInHtml(content.html || '') }} />
+        {payOnlineSection}
+      </div>
+    );
   }
 
   return (
@@ -154,7 +202,9 @@ export default async function Pricing() {
               Get a Free Consultation
             </Link>
           </div>
+
         </div>
+        {payOnlineSection}
       </main>
     </div>
   );
