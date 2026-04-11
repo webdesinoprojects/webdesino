@@ -206,7 +206,7 @@ html {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-33.333%);
+    transform: translateX(-50%);
   }
 }
 
@@ -218,6 +218,7 @@ html {
     transform: translateX(-50%);
   }
 }
+
 
 .animate-fade-in {
   animation: fade-in 0.8s ease-out forwards;
@@ -270,18 +271,19 @@ html {
 }
 
 .animate-carousel-scroll {
-  animation: carousel-scroll 12s linear infinite;
+  animation: carousel-scroll 20s linear infinite;
 }
 
 @media (max-width: 1023px) {
   .animate-carousel-scroll {
-    animation: carousel-scroll 5s linear infinite;
+    animation: carousel-scroll 14s linear infinite;
   }
 }
 
 .pause-animation {
   animation-play-state: paused;
 }
+
 
 /* Glassmorphism */
 .glass {

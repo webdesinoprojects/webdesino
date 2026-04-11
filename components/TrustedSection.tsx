@@ -1,9 +1,6 @@
-"use client";
-
 import Link from "next/link";
 import NextImage from "next/image";
 import { Award, Users, Briefcase, Shield } from "lucide-react";
-import React from 'react';
 import { getStorageUrl } from "@/lib/utils";
 
 const Google = getStorageUrl("/google.jpg");
@@ -41,43 +38,43 @@ const clientSpotlights = [
     url: "https://www.urbanarmorgear.com/",
     rating: 5
   },
-  { 
+  {
     src: Aadiva,
     name: "Aadiva",
     url: "https://aadiva.com/",
     rating: 5
   },
-  { 
+  {
     src: Bulkwala,
     name: "Bulkwala",
     url: "https://bulkwala.com/",
     rating: 5
   },
-  { 
+  {
     src: Bookbuzz,
     name: "Bookbuzz",
     url: "https://www.thebookbuzz.in/",
     rating: 5
   },
-  { 
+  {
     src: BuyKhariBauli,
     name: "BuyKhariBauli",
     url: "https://buykharibaoli.com/",
     rating: 5
   },
-  { 
+  {
     src: Landsaathi,
     name: "Landsaathi",
     url: "https://landsathi.com/",
     rating: 5
   },
-  { 
+  {
     src: Agnishila,
     name: "Agnishila",
     url: "https://agnishila.in/",
     rating: 5
   },
-  { 
+  {
     src: Maxlift,
     name: "Maxlift",
     url: "https://www.maxlift.in/",
@@ -86,6 +83,66 @@ const clientSpotlights = [
 ];
 
 export default function TrustedSection() {
+  const renderSpotlightCard = (
+    client: (typeof clientSpotlights)[number],
+    keyPrefix: string,
+    index: number,
+    isDuplicate = false
+  ) => (
+    <Link
+      key={`${keyPrefix}-${index}`}
+      href={client.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Visit ${client.name}`}
+      aria-hidden={isDuplicate}
+      tabIndex={isDuplicate ? -1 : 0}
+      className="flex-shrink-0 w-[72vw] min-w-[240px] sm:w-[52vw] md:w-[280px] md:min-w-[280px] lg:w-[300px] lg:min-w-[300px] xl:w-[320px] xl:min-w-[320px] group cursor-pointer"
+    >
+      <div className="relative h-64 md:h-80 rounded-2xl overflow-hidden shadow-lg transition-all duration-500 group-hover:scale-[1.03] group-hover:-translate-y-1 group-hover:shadow-2xl border border-white/10 bg-white/85 group-hover:bg-white/95 backdrop-blur-md">
+        <div className="absolute inset-0 bg-white/90 backdrop-blur-sm transition-all duration-500 group-hover:bg-white/95">
+          <NextImage
+            src={client.src}
+            alt={client.name}
+            fill
+            className="object-contain p-10 md:p-12 transition-transform duration-500 group-hover:scale-105"
+          />
+        </div>
+
+        <div className="absolute inset-0 bg-gradient-to-t from-[#111184]/80 via-[#111184]/30 to-transparent" />
+
+        <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 backdrop-blur-xl bg-[#111184]/90 border-t border-white/30">
+          <div className="flex gap-1 mb-3">
+            {[...Array(client.rating)].map((_, i) => (
+              <svg
+                key={i}
+                className="w-5 h-5 text-yellow-400 fill-current"
+                viewBox="0 0 20 20"
+              >
+                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+              </svg>
+            ))}
+          </div>
+
+          <h3 className="text-lg md:text-xl font-bold text-white mb-1">
+            {client.name}
+          </h3>
+
+          <div className="absolute bottom-5 right-5 md:bottom-6 md:right-6 w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/35 transition-all duration-300 group-hover:translate-x-1 group-hover:scale-110">
+            <svg
+              className="w-4 h-4 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+
   return (
     <section className="py-12 lg:py-20 bg-white relative overflow-hidden">
       {/* Background elements */}
@@ -133,7 +190,7 @@ export default function TrustedSection() {
               Recognized and certified by global industry leaders
             </p>
           </div>
-          
+
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 mb-8">
             {certifications.map((cert, idx) => (
               <Link
@@ -178,135 +235,36 @@ export default function TrustedSection() {
             <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-12 text-center">
               Trusted by leading brands
             </h2>
-            
+
             {/* Testimonial Cards Carousel */}
             <div className="relative group/carousel">
-              <div className="overflow-hidden pb-4">
-                <div className="flex gap-6 md:gap-8 animate-carousel-scroll group-hover/carousel:pause-animation">
+              <div
+                className="overflow-hidden relative w-full pb-4 [--marquee-duration:18s] lg:[--marquee-duration:28s]"
+                style={{
+                  maskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
+                  WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
+                }}
+              >
+                <div
+                  className="flex w-max gap-4 md:gap-8 hover:[animation-play-state:paused]"
+                  style={{
+                    animation: "marquee var(--marquee-duration) linear infinite",
+                  }}
+                >
                   {/* First Set */}
-                  {clientSpotlights.map((client, index) => (
-                    <Link
-                      key={`set1-${index}`}
-                      href={client.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Visit ${client.name}`}
-                      className="flex-shrink-0 w-[85vw] sm:w-[45%] lg:w-[30%] xl:w-[23%] group cursor-pointer"
-                    >
-                      {/* Card Container */}
-                      <div className="relative h-80 md:h-96 rounded-3xl overflow-hidden shadow-lg transition-all duration-500 group-hover:scale-[1.03] group-hover:-translate-y-1 group-hover:shadow-2xl border-2 border-[#111184]/30 group-hover:border-[#111184]/60 bg-white/85 group-hover:bg-white/95 backdrop-blur-md">
-                        {/* Client Image/Logo Background */}
-                        <div className="absolute inset-0 bg-white/90 backdrop-blur-sm transition-all duration-500 group-hover:bg-white/95">
-                          <NextImage
-                            src={client.src}
-                            alt={client.name}
-                            fill
-                            className="object-contain p-12 transition-transform duration-500 group-hover:scale-105"
-                          />
-                        </div>
-                        
-                        {/* Bottom Gradient Overlay for Readability */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#111184]/80 via-[#111184]/30 to-transparent" />
-                        
-                        {/* Glassmorphism Bottom Overlay */}
-                        <div className="absolute bottom-0 left-0 right-0 p-6 backdrop-blur-xl bg-[#111184]/90 border-t border-white/30">
-                          {/* 5 Star Rating */}
-                          <div className="flex gap-1 mb-3">
-                            {[...Array(client.rating)].map((_, i) => (
-                              <svg
-                                key={i}
-                                className="w-5 h-5 text-yellow-400 fill-current"
-                                viewBox="0 0 20 20"
-                              >
-                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                              </svg>
-                            ))}
-                          </div>
-                          
-                          {/* Client Info */}
-                          <h3 className="text-xl font-bold text-white mb-1">
-                            {client.name}
-                          </h3>
-                          
-                          {/* Arrow Icon with Animation */}
-                          <div className="absolute bottom-6 right-6 w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/35 transition-all duration-300 group-hover:translate-x-1 group-hover:scale-110">
-                            <svg
-                              className="w-4 h-4 text-white"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
-                          </div>
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                  
+                  {clientSpotlights.map((client, index) =>
+                    renderSpotlightCard(client, "set1", index)
+                  )}
+
                   {/* Second Set (Duplicate for seamless loop) */}
-                  {clientSpotlights.map((client, index) => (
-                    <Link
-                      key={`set2-${index}`}
-                      href={client.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Visit ${client.name}`}
-                      className="flex-shrink-0 w-[85vw] sm:w-[45%] lg:w-[30%] xl:w-[23%] group cursor-pointer"
-                    >
-                      {/* Card Container */}
-                      <div className="relative h-80 md:h-96 rounded-3xl overflow-hidden shadow-lg transition-all duration-500 group-hover:scale-[1.03] group-hover:-translate-y-1 group-hover:shadow-2xl border-2 border-[#111184]/30 group-hover:border-[#111184]/60 bg-white/85 group-hover:bg-white/95 backdrop-blur-md">
-                        {/* Client Image/Logo Background */}
-                        <div className="absolute inset-0 bg-white/90 backdrop-blur-sm transition-all duration-500 group-hover:bg-white/95">
-                          <NextImage
-                            src={client.src}
-                            alt={client.name}
-                            fill
-                            className="object-contain p-12 transition-transform duration-500 group-hover:scale-105"
-                          />
-                        </div>
-                        
-                        {/* Bottom Gradient Overlay for Readability */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#111184]/80 via-[#111184]/30 to-transparent" />
-                        
-                        {/* Glassmorphism Bottom Overlay */}
-                        <div className="absolute bottom-0 left-0 right-0 p-6 backdrop-blur-xl bg-[#111184]/90 border-t border-white/30">
-                          {/* 5 Star Rating */}
-                          <div className="flex gap-1 mb-3">
-                            {[...Array(client.rating)].map((_, i) => (
-                              <svg
-                                key={i}
-                                className="w-5 h-5 text-yellow-400 fill-current"
-                                viewBox="0 0 20 20"
-                              >
-                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                              </svg>
-                            ))}
-                          </div>
-                          
-                          {/* Client Info */}
-                          <h3 className="text-xl font-bold text-white mb-1">
-                            {client.name}
-                          </h3>
-                          
-                          {/* Arrow Icon with Animation */}
-                          <div className="absolute bottom-6 right-6 w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/35 transition-all duration-300 group-hover:translate-x-1 group-hover:scale-110">
-                            <svg
-                              className="w-4 h-4 text-white"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
-                          </div>
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
+                  <div className="flex gap-4 md:gap-8" aria-hidden="true">
+                    {clientSpotlights.map((client, index) =>
+                      renderSpotlightCard(client, "set2", index, true)
+                    )}
+                  </div>
                 </div>
               </div>
-              
+
             </div>
           </div>
         </div>
