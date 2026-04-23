@@ -47,7 +47,7 @@ export default async function ServicesPage() {
                   </p>
                   
                   <div className="space-y-3 mb-8">
-                    {category.subtypes.map((subtype) => (
+                    {category.subtypes.map((subtype: any) => (
                       <Link 
                         key={subtype.slug}
                         href={`/services/${category.slug}/${subtype.slug}`}

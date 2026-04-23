@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: PageProps) {
   
   if (!category) return null;
 
-  const service = category.subtypes.find((s) => s.slug === params.slug);
+  const service = category.subtypes.find((s: any) => s.slug === params.slug);
 
   if (!service) return null;
 
@@ -62,7 +62,7 @@ export default async function ServicePage({ params }: PageProps) {
     notFound();
   }
 
-  const service = category.subtypes.find((s) => s.slug === params.slug);
+  const service = category.subtypes.find((s: any) => s.slug === params.slug);
 
   if (!service) {
     notFound();
@@ -233,7 +233,7 @@ export default async function ServicePage({ params }: PageProps) {
                 Why Choose Our <span className="text-white">{service.title}</span>?
               </h2>
               <div className="space-y-6">
-                {service.benefits.map((benefit, idx) => (
+                {service.benefits.map((benefit: any, idx: number) => (
                   <div key={idx} className="flex gap-4 group">
                     <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center shrink-0 mt-1 group-hover:bg-white group-hover:text-[#111184] transition-colors duration-300">
                       <Star size={20} className="text-white group-hover:text-[#111184]" />
@@ -298,9 +298,9 @@ export default async function ServicePage({ params }: PageProps) {
           <h2 className="text-3xl font-bold text-gray-900 mb-10 text-center">Other {category.title} Services</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {category.subtypes
-              .filter(s => s.slug !== service.slug)
+              .filter((s: any) => s.slug !== service.slug)
               .slice(0, 3)
-              .map((relatedService) => (
+              .map((relatedService: any) => (
                 <Link
                   key={relatedService.slug}
                   href={`/services/${category.slug}/${relatedService.slug}`}

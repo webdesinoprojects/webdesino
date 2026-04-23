@@ -1,5 +1,10 @@
-import { Enquiry } from "@/lib/generated/prisma";
 import { startOfDay, subDays, format, isWithinInterval, startOfWeek } from "date-fns";
+
+type Enquiry = {
+  createdAt: string | Date;
+  service?: string | null;
+  message: string;
+};
 
 export interface ServiceCount {
   service: string;

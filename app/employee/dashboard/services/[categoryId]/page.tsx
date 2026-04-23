@@ -59,7 +59,7 @@ export default async function EmployeeServiceCategoryDetailsPage({ params }: { p
             </TableRow>
           </TableHeader>
           <TableBody>
-            {category.subtypes.map((subtype) => (
+            {category.subtypes.map((subtype: any) => (
               <TableRow key={subtype.id}>
                 <TableCell className="font-medium flex items-center gap-2">
                   <FileText className="h-4 w-4 text-gray-500" />

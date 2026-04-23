@@ -61,7 +61,7 @@ export default async function CategoryPage({ params }: PageProps) {
       {/* Subtypes Grid */}
       <div className="container mx-auto px-4 py-24">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {category.subtypes.map((subtype, idx) => (
+          {category.subtypes.map((subtype: any, idx: number) => (
             <div 
               key={subtype.slug} 
               className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-100 group hover:-translate-y-1"
@@ -82,7 +82,7 @@ export default async function CategoryPage({ params }: PageProps) {
                 </p>
                 
                 <div className="space-y-4 mb-8 bg-gray-50 p-6 rounded-xl">
-                  {subtype.features.slice(0, 3).map((feature, idx) => (
+                  {subtype.features.slice(0, 3).map((feature: any, idx: number) => (
                     <div key={idx} className="flex items-start gap-3">
                       <CheckCircle2 size={18} className="text-[#111184] mt-1 shrink-0" />
                       <span className="text-sm text-gray-700 font-medium">{feature}</span>
