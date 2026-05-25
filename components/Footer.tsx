@@ -6,9 +6,20 @@ import { getStorageUrl } from "@/lib/utils";
 
 interface FooterProps {
   locations?: { name: string; slug: string }[];
+  phoneNumbers?: { display: string; href: string }[];
+  whatsappHref?: string;
 }
 
-export default function Footer({ locations = [] }: FooterProps) {
+const defaultPhoneNumbers = [
+  { display: "+91 93108 51557", href: "tel:9310851557" },
+  { display: "+91 93508 87828", href: "tel:9350887828" },
+];
+
+export default function Footer({
+  locations = [],
+  phoneNumbers = defaultPhoneNumbers,
+  whatsappHref = "https://wa.me/919310851557",
+}: FooterProps) {
   return (
     <footer className="relative bg-[#111184] text-white overflow-hidden">
       <div className="container mx-auto px-4 py-14 relative z-10">
@@ -104,7 +115,7 @@ export default function Footer({ locations = [] }: FooterProps) {
                 <Youtube size={18} />
               </a>
               <a
-                href="https://wa.me/919310851557"
+                href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-white hover:text-[#111184] hover:scale-110 transition-all duration-300"
@@ -124,18 +135,14 @@ export default function Footer({ locations = [] }: FooterProps) {
                 <span className="ml-1">Serving Delhi NCR businesses</span>
               </p>
               <ul className="space-y-2 text-sm text-gray-200">
-                <li className="flex items-start gap-3">
-                  <Phone className="text-white mt-1 flex-shrink-0" size={16} />
-                  <a href="tel:9310851557" aria-label="Call +91 93108 51557" className="hover:text-white transition-colors">
-                    +91 93108 51557
-                  </a>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Phone className="text-white mt-1 flex-shrink-0" size={16} />
-                  <a href="tel:9350887828" aria-label="Call +91 93508 87828" className="hover:text-white transition-colors">
-                    +91 93508 87828
-                  </a>
-                </li>
+                {phoneNumbers.map((phone) => (
+                  <li key={phone.href} className="flex items-start gap-3">
+                    <Phone className="text-white mt-1 flex-shrink-0" size={16} />
+                    <a href={phone.href} aria-label={`Call ${phone.display}`} className="hover:text-white transition-colors">
+                      {phone.display}
+                    </a>
+                  </li>
+                ))}
                 <li className="flex items-start gap-3">
                   <Mail className="text-white mt-1 flex-shrink-0" size={16} />
                   <a href="mailto:info@webdesino.com" className="hover:text-white transition-colors">

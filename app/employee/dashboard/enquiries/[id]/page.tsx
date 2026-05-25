@@ -14,7 +14,12 @@ interface PageProps {
 export default async function EmployeeEnquiryDetailPage({ params }: PageProps) {
   await requireEmployee("enquiries");
 
-  const enquiry = await prisma.enquiry.findUnique({ where: { id: params.id } });
+  const enquiry = await prisma.enquiry.findFirst({
+    where: {
+      id: params.id,
+      source: { not: "ads-landing" },
+    },
+  });
   if (!enquiry) notFound();
 
   const isIntroCall = enquiry.service === "15-minute Intro Call";

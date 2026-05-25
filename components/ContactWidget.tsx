@@ -6,7 +6,13 @@ import { FaWhatsapp } from "react-icons/fa";
 import Link from "next/link";
 import { createCallEnquiry } from "@/lib/actions";
 
-export default function ContactWidget() {
+interface ContactWidgetProps {
+  whatsappHref?: string;
+}
+
+export default function ContactWidget({
+  whatsappHref = "https://wa.me/919310851557",
+}: ContactWidgetProps) {
   const [isCardOpen, setIsCardOpen] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -124,7 +130,7 @@ export default function ContactWidget() {
       )}
 
       <Link
-        href="https://wa.me/919310851557"
+        href={whatsappHref}
         target="_blank"
         className="w-14 h-14 bg-[#25d366] text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
         title="WhatsApp"

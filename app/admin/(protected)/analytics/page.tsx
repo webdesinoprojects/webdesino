@@ -19,6 +19,7 @@ export const metadata: Metadata = {
 export default async function AnalyticsPage() {
   // Fetch all enquiries
   const enquiries = await prisma.enquiry.findMany({
+    where: { source: { not: "ads-landing" } },
     orderBy: { createdAt: "desc" },
   });
 

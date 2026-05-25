@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import {
   LayoutDashboard,
   Users,
@@ -18,6 +19,8 @@ import {
   Layers,
   UserCog,
   BarChart3,
+  ChevronDown,
+  Megaphone,
 } from "lucide-react";
 import { logout } from "@/lib/auth-actions";
 
@@ -27,6 +30,18 @@ interface SidebarContentProps {
 
 export function SidebarContent({ onNavigate }: SidebarContentProps) {
   const pathname = usePathname();
+  const isAdsEnquiriesPath = pathname.startsWith("/admin/enquiries/ads");
+  const isGeneralEnquiriesPath =
+    pathname.startsWith("/admin/enquiries") && !isAdsEnquiriesPath;
+  const [isEnquiriesExpanded, setIsEnquiriesExpanded] = useState(
+    pathname.startsWith("/admin/enquiries")
+  );
+
+  useEffect(() => {
+    if (pathname.startsWith("/admin/enquiries")) {
+      setIsEnquiriesExpanded(true);
+    }
+  }, [pathname]);
 
   return (
     <div className="flex flex-col h-full bg-[#0f1623] border-r border-white/[0.06]">
@@ -45,7 +60,27 @@ export function SidebarContent({ onNavigate }: SidebarContentProps) {
         <SectionLabel label="Main" />
         <NavItem href="/admin/dashboard" icon={<LayoutDashboard size={16} />} label="Dashboard" active={pathname === "/admin/dashboard"} onClick={onNavigate} />
         <NavItem href="/admin/analytics" icon={<BarChart3 size={16} />} label="Analytics" active={pathname.startsWith("/admin/analytics")} onClick={onNavigate} />
-        <NavItem href="/admin/enquiries" icon={<Mail size={16} />} label="Enquiries" active={pathname.startsWith("/admin/enquiries")} onClick={onNavigate} />
+        <div className="relative">
+          <div className="flex items-center gap-1">
+            <div className="min-w-0 flex-1">
+              <NavItem href="/admin/enquiries" icon={<Mail size={16} />} label="Enquiries" active={isGeneralEnquiriesPath} onClick={onNavigate} />
+            </div>
+            <button
+              type="button"
+              onClick={() => setIsEnquiriesExpanded((expanded) => !expanded)}
+              aria-label={isEnquiriesExpanded ? "Collapse enquiry queues" : "Expand enquiry queues"}
+              aria-expanded={isEnquiriesExpanded}
+              className="p-2 rounded-lg text-white/40 hover:text-white/80 hover:bg-white/[0.06] transition-all"
+            >
+              <ChevronDown size={14} className={`transition-transform ${isEnquiriesExpanded ? "rotate-180" : ""}`} />
+            </button>
+          </div>
+          {isEnquiriesExpanded && (
+            <div className="ml-5 pl-3 border-l border-white/15 mt-1">
+              <NavItem href="/admin/enquiries/ads" icon={<Megaphone size={15} />} label="Ads Enquiries" active={isAdsEnquiriesPath} onClick={onNavigate} />
+            </div>
+          )}
+        </div>
         <NavItem href="/admin/blogs" icon={<FileText size={16} />} label="Blogs" active={pathname.startsWith("/admin/blogs")} onClick={onNavigate} />
         <NavItem href="/admin/case-studies" icon={<Briefcase size={16} />} label="Case Studies" active={pathname.startsWith("/admin/case-studies")} onClick={onNavigate} />
 

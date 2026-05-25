@@ -268,6 +268,13 @@ export async function createServiceCategory(formData: FormData) {
 
 
 
+const ADS_LANDING_SERVICES = [
+  "web-development",
+  "google-ads",
+  "meta-ads",
+  "seo-optimization",
+] as const;
+
 export async function createEnquiry(formData: FormData) {
   const name = formData.get("name") as string;
   const email = formData.get("email") as string;
@@ -275,6 +282,18 @@ export async function createEnquiry(formData: FormData) {
   const service = formData.get("service") as string;
   let message = formData.get("message") as string;
   const location = formData.get("location") as string;
+  const source = formData.get("source");
+  const landingService = formData.get("landingService");
+
+  const hasClassificationInput = source !== null || landingService !== null;
+  const isAdsLandingEnquiry =
+    source === "ads-landing" &&
+    typeof landingService === "string" &&
+    ADS_LANDING_SERVICES.includes(landingService as (typeof ADS_LANDING_SERVICES)[number]);
+
+  if (hasClassificationInput && !isAdsLandingEnquiry) {
+    return { success: false, error: "Invalid enquiry source." };
+  }
 
   // Validation
   if (!name || name.trim().length < 2) {
@@ -327,6 +346,12 @@ export async function createEnquiry(formData: FormData) {
         phone: sanitizedPhone,
         service: sanitizedService,
         message,
+        ...(isAdsLandingEnquiry
+          ? {
+              source: "ads-landing",
+              landingService,
+            }
+          : {}),
       },
     });
 
@@ -338,6 +363,7 @@ export async function createEnquiry(formData: FormData) {
       // Continue even if email fails
     }
 
+    revalidatePath(isAdsLandingEnquiry ? "/admin/enquiries/ads" : "/admin/enquiries");
     return { success: true };
   } catch (error) {
     console.error("Error creating enquiry:", error);
@@ -411,8 +437,12 @@ export async function updateEnquiryStatus(id: string, status: string) {
   await prisma.enquiry.update({ where: { id }, data: { status } });
   revalidatePath("/admin/enquiries");
   revalidatePath(`/admin/enquiries/${id}`);
+  revalidatePath("/admin/enquiries/ads");
+  revalidatePath(`/admin/enquiries/ads/${id}`);
   revalidatePath("/employee/dashboard/enquiries");
   revalidatePath(`/employee/dashboard/enquiries/${id}`);
+  revalidatePath("/employee/dashboard/ads-enquiries");
+  revalidatePath(`/employee/dashboard/ads-enquiries/${id}`);
   await logEmployeeAction("enquiries", `Updated enquiry status to ${status.toUpperCase()} (id: ${id})`);
   return { success: true };
 }

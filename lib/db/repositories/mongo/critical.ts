@@ -200,6 +200,8 @@ const enquiryRepo: EnquiryRepository = {
       service: row.service ?? null,
       message: row.message,
       status: row.status,
+      source: row.source ?? null,
+      landingService: row.landingService ?? null,
       createdAt: row.createdAt,
       updatedAt: row.updatedAt,
     }));
@@ -213,6 +215,8 @@ const enquiryRepo: EnquiryRepository = {
       service: input.service ?? null,
       message: input.message,
       status: input.status,
+      source: input.source ?? null,
+      landingService: input.landingService ?? null,
     });
 
     const row = created.toObject() as any;
@@ -225,6 +229,8 @@ const enquiryRepo: EnquiryRepository = {
       service: row.service ?? null,
       message: row.message,
       status: row.status,
+      source: row.source ?? null,
+      landingService: row.landingService ?? null,
       createdAt: row.createdAt,
       updatedAt: row.updatedAt,
     };
@@ -234,7 +240,7 @@ const enquiryRepo: EnquiryRepository = {
     const updated = await EnquiryModel.findByIdAndUpdate(
       id,
       { status },
-      { new: true, projection: { _id: 1 } }
+      { returnDocument: "after", projection: { _id: 1 } }
     ).lean();
 
     if (!updated) {

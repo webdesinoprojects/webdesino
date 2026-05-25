@@ -188,6 +188,8 @@ const enquiryRepo: EnquiryRepository = {
       service: row.service ?? null,
       message: row.message,
       status: row.status,
+      source: row.source ?? null,
+      landingService: row.landingService ?? null,
       createdAt: row.createdAt,
       updatedAt: row.updatedAt,
     }));
@@ -201,6 +203,8 @@ const enquiryRepo: EnquiryRepository = {
         service: input.service,
         message: input.message,
         status: input.status,
+        source: input.source,
+        landingService: input.landingService,
       },
     });
     return {
@@ -212,6 +216,8 @@ const enquiryRepo: EnquiryRepository = {
       service: row.service ?? null,
       message: row.message,
       status: row.status,
+      source: row.source ?? null,
+      landingService: row.landingService ?? null,
       createdAt: row.createdAt,
       updatedAt: row.updatedAt,
     };

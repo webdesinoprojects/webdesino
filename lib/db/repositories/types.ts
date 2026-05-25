@@ -71,6 +71,8 @@ export interface EnquiryEntity {
   service: string | null;
   message: string;
   status: string;
+  source: string | null;
+  landingService: string | null;
   createdAt: Date;
   updatedAt: Date;
 }

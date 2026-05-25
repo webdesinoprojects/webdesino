@@ -13,7 +13,9 @@ export default async function DashboardPage() {
   try {
     const projectCount = await prisma.project.count();
     const blogCount = await prisma.blogPost.count();
-    const enquiryCount = await prisma.enquiry.count();
+    const enquiryCount = await prisma.enquiry.count({
+      where: { source: { not: "ads-landing" } },
+    });
     const locationCount = await prisma.locationPage.count();
 
     return (

@@ -16,6 +16,7 @@ export default async function EmployeeEnquiriesPage() {
   await requireEmployee("enquiries");
 
   const enquiries = await prisma.enquiry.findMany({
+    where: { source: { not: "ads-landing" } },
     orderBy: { createdAt: "desc" },
   });
 

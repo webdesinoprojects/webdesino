@@ -11,6 +11,8 @@ const enquirySchema = new Schema(
     service: { type: String, default: null, index: true },
     message: { type: String, required: true },
     status: { type: String, default: "new", index: true },
+    source: { type: String, default: null, index: true },
+    landingService: { type: String, default: null, index: true },
   },
   defaultSchemaOptions
 );

@@ -3,7 +3,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, FileText, Globe, Layers, MapPin, ImageIcon, Mail, MessageSquare, HelpCircle, Users, LogOut } from "lucide-react";
+import { LayoutDashboard, FileText, Globe, Layers, MapPin, ImageIcon, Mail, Megaphone, MessageSquare, HelpCircle, Users, LogOut } from "lucide-react";
 import { EMPLOYEE_PERMISSION_LABELS, EMPLOYEE_SECTION_PATHS, type EmployeePermissionKey } from "@/lib/employee-permissions";
 import { getEmployeeDashboardBase, getEmployeeSectionPath } from "@/lib/employee-paths";
 import { employeeLogout } from "@/lib/employee-auth-actions";
@@ -16,6 +16,7 @@ const ICONS: Record<EmployeePermissionKey, ReactNode> = {
   pages: <FileText size={16} />,
   media: <ImageIcon size={16} />,
   enquiries: <Mail size={16} />,
+  "ads-enquiries": <Megaphone size={16} />,
   testimonials: <MessageSquare size={16} />,
   faqs: <HelpCircle size={16} />,
   team: <Users size={16} />,

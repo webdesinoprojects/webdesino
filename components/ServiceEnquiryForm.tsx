@@ -4,7 +4,17 @@ import { useState } from "react";
 import { Send, CheckCircle, Loader2, User, Mail, Phone, MessageSquare, ShieldCheck} from "lucide-react";
 import { createEnquiry } from "@/lib/actions";
 
-export default function ServiceEnquiryForm({ serviceTitle }: { serviceTitle: string }) {
+interface ServiceEnquiryFormProps {
+  serviceTitle: string;
+  source?: "ads-landing";
+  landingService?: "web-development" | "google-ads" | "meta-ads" | "seo-optimization";
+}
+
+export default function ServiceEnquiryForm({
+  serviceTitle,
+  source,
+  landingService,
+}: ServiceEnquiryFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -16,6 +26,10 @@ export default function ServiceEnquiryForm({ serviceTitle }: { serviceTitle: str
     
     const formData = new FormData(e.currentTarget);
     formData.append("service", serviceTitle);
+    if (source && landingService) {
+      formData.append("source", source);
+      formData.append("landingService", landingService);
+    }
 
     const result = await createEnquiry(formData);
     

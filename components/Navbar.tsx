@@ -43,7 +43,25 @@ const megaMenuItems = servicesData.map(category => ({
   }))
 }));
 
-export default function Navbar() {
+interface ContactPhoneLink {
+  display: string;
+  href: string;
+}
+
+interface NavbarProps {
+  phoneNumbers?: ContactPhoneLink[];
+  proposalHref?: string;
+}
+
+const defaultPhoneNumbers: ContactPhoneLink[] = [
+  { display: "+91 93108 51557", href: "tel:9310851557" },
+  { display: "+91 93508 87828", href: "tel:9350887828" },
+];
+
+export default function Navbar({
+  phoneNumbers = defaultPhoneNumbers,
+  proposalHref = "/contact",
+}: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -105,13 +123,14 @@ export default function Navbar() {
             <div className="hidden md:flex items-center gap-6 text-sm text-white/80">
               <div className="flex items-center gap-3">
                 <Phone size={16} />
-                <a href="tel:9310851557" aria-label="Call +91 93108 51557" className="hover:text-white transition">
-                  +91 93108 51557
-                </a>
-                <span className="text-white/40" aria-hidden="true">|</span>
-                <a href="tel:9350887828" aria-label="Call +91 93508 87828" className="hover:text-white transition">
-                  +91 93508 87828
-                </a>
+                {phoneNumbers.map((phone, index) => (
+                  <span key={phone.href} className="contents">
+                    {index > 0 && <span className="text-white/40" aria-hidden="true">|</span>}
+                    <a href={phone.href} aria-label={`Call ${phone.display}`} className="hover:text-white transition">
+                      {phone.display}
+                    </a>
+                  </span>
+                ))}
               </div>
               <a href="mailto:info@webdesino.com" className="flex items-center gap-2 hover:text-white transition">
                 <Mail size={16} />
@@ -120,7 +139,7 @@ export default function Navbar() {
             </div>
           </div>
           <Link
-            href="/contact"
+            href={proposalHref}
             className="bg-white text-[#111184] px-5 py-2 rounded-full text-sm font-bold hover:bg-gray-100 transition flex items-center gap-2 hover-lift shadow-lg"
           >
             Get Proposal

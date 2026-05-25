@@ -6258,6 +6258,8 @@ export namespace Prisma {
     service: string | null
     message: string | null
     status: string | null
+    source: string | null
+    landingService: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -6270,6 +6272,8 @@ export namespace Prisma {
     service: string | null
     message: string | null
     status: string | null
+    source: string | null
+    landingService: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -6282,6 +6286,8 @@ export namespace Prisma {
     service: number
     message: number
     status: number
+    source: number
+    landingService: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -6296,6 +6302,8 @@ export namespace Prisma {
     service?: true
     message?: true
     status?: true
+    source?: true
+    landingService?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -6308,6 +6316,8 @@ export namespace Prisma {
     service?: true
     message?: true
     status?: true
+    source?: true
+    landingService?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -6320,6 +6330,8 @@ export namespace Prisma {
     service?: true
     message?: true
     status?: true
+    source?: true
+    landingService?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -6405,6 +6417,8 @@ export namespace Prisma {
     service: string | null
     message: string
     status: string
+    source: string | null
+    landingService: string | null
     createdAt: Date
     updatedAt: Date
     _count: EnquiryCountAggregateOutputType | null
@@ -6434,6 +6448,8 @@ export namespace Prisma {
     service?: boolean
     message?: boolean
     status?: boolean
+    source?: boolean
+    landingService?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["enquiry"]>
@@ -6446,6 +6462,8 @@ export namespace Prisma {
     service?: boolean
     message?: boolean
     status?: boolean
+    source?: boolean
+    landingService?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["enquiry"]>
@@ -6458,6 +6476,8 @@ export namespace Prisma {
     service?: boolean
     message?: boolean
     status?: boolean
+    source?: boolean
+    landingService?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
@@ -6474,6 +6494,8 @@ export namespace Prisma {
       service: string | null
       message: string
       status: string
+      source: string | null
+      landingService: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["enquiry"]>
@@ -6876,6 +6898,8 @@ export namespace Prisma {
     readonly service: FieldRef<"Enquiry", 'String'>
     readonly message: FieldRef<"Enquiry", 'String'>
     readonly status: FieldRef<"Enquiry", 'String'>
+    readonly source: FieldRef<"Enquiry", 'String'>
+    readonly landingService: FieldRef<"Enquiry", 'String'>
     readonly createdAt: FieldRef<"Enquiry", 'DateTime'>
     readonly updatedAt: FieldRef<"Enquiry", 'DateTime'>
   }
@@ -19255,6 +19279,8 @@ export namespace Prisma {
     service: 'service',
     message: 'message',
     status: 'status',
+    source: 'source',
+    landingService: 'landingService',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -19905,6 +19931,8 @@ export namespace Prisma {
     service?: StringNullableFilter<"Enquiry"> | string | null
     message?: StringFilter<"Enquiry"> | string
     status?: StringFilter<"Enquiry"> | string
+    source?: StringNullableFilter<"Enquiry"> | string | null
+    landingService?: StringNullableFilter<"Enquiry"> | string | null
     createdAt?: DateTimeFilter<"Enquiry"> | Date | string
     updatedAt?: DateTimeFilter<"Enquiry"> | Date | string
   }
@@ -19917,6 +19945,8 @@ export namespace Prisma {
     service?: SortOrderInput | SortOrder
     message?: SortOrder
     status?: SortOrder
+    source?: SortOrderInput | SortOrder
+    landingService?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -19932,6 +19962,8 @@ export namespace Prisma {
     service?: StringNullableFilter<"Enquiry"> | string | null
     message?: StringFilter<"Enquiry"> | string
     status?: StringFilter<"Enquiry"> | string
+    source?: StringNullableFilter<"Enquiry"> | string | null
+    landingService?: StringNullableFilter<"Enquiry"> | string | null
     createdAt?: DateTimeFilter<"Enquiry"> | Date | string
     updatedAt?: DateTimeFilter<"Enquiry"> | Date | string
   }, "id">
@@ -19944,6 +19976,8 @@ export namespace Prisma {
     service?: SortOrderInput | SortOrder
     message?: SortOrder
     status?: SortOrder
+    source?: SortOrderInput | SortOrder
+    landingService?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: EnquiryCountOrderByAggregateInput
@@ -19962,6 +19996,8 @@ export namespace Prisma {
     service?: StringNullableWithAggregatesFilter<"Enquiry"> | string | null
     message?: StringWithAggregatesFilter<"Enquiry"> | string
     status?: StringWithAggregatesFilter<"Enquiry"> | string
+    source?: StringNullableWithAggregatesFilter<"Enquiry"> | string | null
+    landingService?: StringNullableWithAggregatesFilter<"Enquiry"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Enquiry"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Enquiry"> | Date | string
   }
@@ -21219,6 +21255,8 @@ export namespace Prisma {
     service?: string | null
     message: string
     status?: string
+    source?: string | null
+    landingService?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21231,6 +21269,8 @@ export namespace Prisma {
     service?: string | null
     message: string
     status?: string
+    source?: string | null
+    landingService?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21243,6 +21283,8 @@ export namespace Prisma {
     service?: NullableStringFieldUpdateOperationsInput | string | null
     message?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    landingService?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21255,6 +21297,8 @@ export namespace Prisma {
     service?: NullableStringFieldUpdateOperationsInput | string | null
     message?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    landingService?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21267,6 +21311,8 @@ export namespace Prisma {
     service?: string | null
     message: string
     status?: string
+    source?: string | null
+    landingService?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21279,6 +21325,8 @@ export namespace Prisma {
     service?: NullableStringFieldUpdateOperationsInput | string | null
     message?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    landingService?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21291,6 +21339,8 @@ export namespace Prisma {
     service?: NullableStringFieldUpdateOperationsInput | string | null
     message?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    landingService?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -22559,6 +22609,8 @@ export namespace Prisma {
     service?: SortOrder
     message?: SortOrder
     status?: SortOrder
+    source?: SortOrder
+    landingService?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22571,6 +22623,8 @@ export namespace Prisma {
     service?: SortOrder
     message?: SortOrder
     status?: SortOrder
+    source?: SortOrder
+    landingService?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22583,6 +22637,8 @@ export namespace Prisma {
     service?: SortOrder
     message?: SortOrder
     status?: SortOrder
+    source?: SortOrder
+    landingService?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }

@@ -265,6 +265,30 @@ function prepareCreateData(delegate: string, data: AnyObject): AnyObject {
   return out;
 }
 
+function prepareUpdateData(delegate: string, data: AnyObject): AnyObject {
+  const out = { ...data };
+
+  if ("id" in out) {
+    out.legacyId = out.id;
+    delete out.id;
+  }
+
+  if (delegate === "serviceSubtype" && out.categoryId && !out.categoryLegacyId) {
+    out.categoryLegacyId = out.categoryId;
+  }
+  if (delegate === "employeeLog" && out.employeeId && !out.employeeLegacyId) {
+    out.employeeLegacyId = out.employeeId;
+  }
+  if (delegate === "serviceSubtype") {
+    delete out.categoryId;
+  }
+  if (delegate === "employeeLog") {
+    delete out.employeeId;
+  }
+
+  return out;
+}
+
 function createDelegate(delegateName: string) {
   const model = modelMap[delegateName];
 
@@ -321,7 +345,7 @@ function createDelegate(delegateName: string) {
       await connectToMongo();
       const where = toMongoWhere(args?.where ?? {});
       const updated = await model
-        .findOneAndUpdate(where, prepareCreateData(delegateName, args?.data ?? {}), { new: true })
+        .findOneAndUpdate(where, prepareUpdateData(delegateName, args?.data ?? {}), { returnDocument: "after" })
         .lean();
       const normalized = normalizeDoc(updated);
       if (!normalized) throw new Error(`Record not found for ${delegateName}.update`);
@@ -330,7 +354,7 @@ function createDelegate(delegateName: string) {
     async updateMany(args: AnyObject) {
       await connectToMongo();
       const where = toMongoWhere(args?.where ?? {});
-      const result = await model.updateMany(where, prepareCreateData(delegateName, args?.data ?? {}));
+      const result = await model.updateMany(where, prepareUpdateData(delegateName, args?.data ?? {}));
       return { count: result.modifiedCount ?? 0 };
     },
     async delete(args: AnyObject) {
