@@ -8,10 +8,12 @@ import { createCallEnquiry } from "@/lib/actions";
 
 interface ContactWidgetProps {
   whatsappHref?: string;
+  hideCallBooking?: boolean;
 }
 
 export default function ContactWidget({
   whatsappHref = "https://wa.me/919310851557",
+  hideCallBooking = false,
 }: ContactWidgetProps) {
   const [isCardOpen, setIsCardOpen] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
@@ -41,7 +43,7 @@ export default function ContactWidget({
 
   return (
     <div className="fixed bottom-24 lg:bottom-8 right-6 z-50 flex flex-col items-end gap-4">
-      {!isDismissed && !isCardOpen && (
+      {!hideCallBooking && !isDismissed && !isCardOpen && (
         <button
           type="button"
           onClick={() => setIsCardOpen(true)}
@@ -51,7 +53,7 @@ export default function ContactWidget({
         </button>
       )}
 
-      {!isDismissed && isCardOpen && (
+      {!hideCallBooking && !isDismissed && isCardOpen && (
         <div className="w-[320px] max-w-[88vw] rounded-2xl bg-white border border-gray-200 shadow-2xl p-4">
           <div className="flex items-start justify-between gap-3 mb-3">
             <div>

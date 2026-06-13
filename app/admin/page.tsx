@@ -7,11 +7,12 @@ import { login } from "@/lib/auth-actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Loader2, Lock, Mail, ShieldCheck } from "lucide-react";
+import { Eye, EyeOff, Loader2, Lock, Mail, ShieldCheck } from "lucide-react";
 
 export default function AdminLoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -93,11 +94,14 @@ export default function AdminLoginPage() {
                 <Input
                   id="password"
                   name="password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   required
                   disabled={isLoading}
-                  className="h-12 rounded-xl border border-white/20 bg-white/10 pl-11 text-white placeholder:text-blue-100/45 transition-all duration-200 focus:border-cyan-300/70 focus:bg-white/15 focus:ring-4 focus:ring-cyan-300/20"
+                  className="h-12 rounded-xl border border-white/20 bg-white/10 pl-11 pr-11 text-white placeholder:text-blue-100/45 transition-all duration-200 focus:border-cyan-300/70 focus:bg-white/15 focus:ring-4 focus:ring-cyan-300/20"
                 />
+                <button type="button" onClick={() => setShowPassword((v) => !v)} disabled={isLoading} className="absolute right-4 top-1/2 -translate-y-1/2 text-blue-100/60 hover:text-blue-100 transition-colors">
+                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
               </div>
             </div>
 

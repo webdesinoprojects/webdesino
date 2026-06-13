@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, PhoneCall } from "lucide-react";
 import AnimatedLandingWord from "@/components/landing/AnimatedLandingWord";
+import LandingHeroForm from "@/components/landing/LandingHeroForm";
+import LandingHeroBackground from "@/components/landing/LandingHeroBackground";
 import { landingContact, landingServices, type LandingServiceSlug } from "@/lib/landing-page-data";
 
 export const metadata: Metadata = {
@@ -62,66 +64,57 @@ const proofPoints = ["Free consultation", "Strategy built around leads", "Fast r
 export default function LandingPage() {
   return (
     <main className="min-h-screen overflow-hidden bg-[#fffdfa]">
-      <section className="relative min-h-[600px] overflow-hidden px-4 pb-24 pt-16 lg:min-h-[670px] lg:pt-20">
-        <div className="absolute -left-24 top-40 h-64 w-64 rounded-full bg-[#ece6ff]/70 blur-3xl" />
-        <div className="absolute -right-20 top-20 h-64 w-64 rounded-full bg-[#ffe1ec]/70 blur-3xl" />
+      <section id="hero-form" className="relative overflow-hidden px-4 pb-12 pt-8 lg:px-8 lg:pb-16 lg:pt-10">
+        <div className="absolute -left-24 top-40 h-72 w-72 rounded-full bg-[#ece6ff]/60 blur-3xl" />
+        <div className="absolute -right-20 top-20 h-72 w-72 rounded-full bg-[#ffe1ec]/60 blur-3xl" />
 
-        <div className="absolute left-[7%] top-[17%] hidden h-20 w-24 -rotate-6 items-center justify-center rounded-3xl bg-[#ffe1ec] shadow-sm lg:flex animate-float">
-          <Image src="/images/landing-page/Target-amico.svg" alt="" width={94} height={68} className="h-[68px] w-[94px] object-contain" />
-        </div>
-        <div className="absolute right-[9%] top-[15%] hidden h-[82px] w-[110px] rotate-6 items-center justify-center rounded-3xl bg-[#e9e3ff] shadow-sm lg:flex animate-float" style={{ animationDelay: "0.7s" }}>
-          <Image src="/images/landing-page/SEO-amico.svg" alt="" width={94} height={72} className="h-[74px] w-[98px] object-contain" />
-        </div>
-        <div className="absolute left-[3%] top-[47%] hidden h-40 w-52 -rotate-3 items-end justify-center rounded-[2rem] bg-[#e6f4ef]/65 p-2 shadow-sm lg:flex animate-float" style={{ animationDelay: "1.1s" }}>
-          <Image src="/images/landing-page/Marketing-pana.svg" alt="" width={750} height={500} className="h-[145px] w-[205px] object-contain" />
-        </div>
-        <div className="absolute right-[3%] top-[45%] hidden h-40 w-52 rotate-2 items-end justify-center rounded-[2rem] bg-[#fff0bf]/60 p-2 shadow-sm lg:flex animate-float" style={{ animationDelay: "1.5s" }}>
-          <Image src="/images/landing-page/Marketing-cuate.svg" alt="" width={750} height={500} className="h-[145px] w-[205px] object-contain" />
-        </div>
-        <div className="absolute bottom-[10%] left-[17%] hidden h-20 w-24 rotate-6 items-center justify-center rounded-3xl bg-[#fff0bf] shadow-sm xl:flex animate-float" style={{ animationDelay: "0.35s" }}>
-          <Image src="/images/landing-page/Website Creator-amico.svg" alt="" width={88} height={66} className="h-[68px] w-[90px] object-contain" />
-        </div>
-        <div className="absolute bottom-[12%] right-[17%] hidden h-20 w-24 -rotate-6 items-center justify-center rounded-3xl bg-[#ffe1ec] shadow-sm xl:flex animate-float" style={{ animationDelay: "1.8s" }}>
-          <Image src="/images/landing-page/Mobile Marketing-amico.svg" alt="" width={88} height={68} className="h-[68px] w-[90px] object-contain" />
-        </div>
+        <LandingHeroBackground />
 
-        <div className="relative z-10 mx-auto max-w-3xl text-center">
-          <p className="mb-8 inline-flex rounded-full border border-[#111184]/10 bg-white px-5 py-2 text-sm font-semibold text-[#111184] shadow-sm">
-            Digital growth for businesses ready to scale
-          </p>
-          <h1 className="text-balance text-4xl font-bold leading-[1.12] text-slate-900 sm:text-5xl md:text-6xl lg:text-[4.25rem]">
-            Turn attention into
-            <span className="block">
-              <AnimatedLandingWord />
-            </span>
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg">
-            Websites, Google Ads, Meta Ads and SEO working together to create qualified enquiries and measurable business growth.
-          </p>
+        <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-8 lg:grid-cols-[1fr_520px] lg:gap-12">
+          {/* Left — headline & trust */}
+          <div className="lg:py-4">
+            <p className="mb-7 inline-flex rounded-full border border-[#111184]/10 bg-white px-5 py-2 text-sm font-semibold text-[#111184] shadow-sm">
+              Digital growth for businesses ready to scale
+            </p>
+            <h1 className="text-balance text-4xl font-bold leading-[1.15] text-slate-900 sm:text-5xl lg:text-[3.75rem]">
+              Turn attention into
+              <span className="block mt-1">
+                <AnimatedLandingWord />
+              </span>
+            </h1>
+            <p className="mt-6 max-w-lg text-base leading-relaxed text-slate-600 sm:text-lg">
+              Websites, Google Ads, Meta Ads and SEO working together to create qualified enquiries and measurable business growth.
+            </p>
 
-          <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-            <Link
-              href="#services"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#111184] px-8 py-4 font-bold text-white shadow-xl shadow-[#111184]/15 transition hover:-translate-y-0.5 hover:bg-[#0b0b68]"
-            >
-              Explore Services <ArrowRight size={18} />
-            </Link>
-            <a
-              href={landingContact.phoneNumbers[0].href}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-[#111184]/15 bg-white px-8 py-4 font-semibold text-[#111184] transition hover:border-[#111184]/30"
-            >
-              <PhoneCall size={18} />
-              {landingContact.phoneNumbers[0].display}
-            </a>
+            <div className="mt-8 flex flex-wrap gap-x-7 gap-y-3 text-sm font-medium text-slate-500">
+              {proofPoints.map((point) => (
+                <span key={point} className="inline-flex items-center gap-2">
+                  <CheckCircle2 size={15} className="text-[#111184]" />
+                  {point}
+                </span>
+              ))}
+            </div>
+
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="#services"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#111184] px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#111184]/20 transition hover:-translate-y-0.5 hover:bg-[#0b0b68]"
+              >
+                Explore Services <ArrowRight size={17} />
+              </Link>
+              <a
+                href={landingContact.phoneNumbers[0].href}
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-[#111184]/15 bg-white px-7 py-3.5 text-sm font-semibold text-[#111184] transition hover:border-[#111184]/30"
+              >
+                <PhoneCall size={17} />
+                {landingContact.phoneNumbers[0].display}
+              </a>
+            </div>
           </div>
 
-          <div className="mt-8 flex flex-wrap justify-center gap-x-7 gap-y-3 text-sm font-medium text-slate-500">
-            {proofPoints.map((point) => (
-              <span key={point} className="inline-flex items-center gap-2">
-                <CheckCircle2 size={16} className="text-[#111184]" />
-                {point}
-              </span>
-            ))}
+          {/* Right — contact form */}
+          <div>
+            <LandingHeroForm />
           </div>
         </div>
       </section>
@@ -202,7 +195,7 @@ export default function LandingPage() {
             <p className="mt-3 text-white/75">Share your requirement and our team will guide you toward the most practical next step.</p>
           </div>
           <Link
-            href="/landing-page/google-ads#enquiry-form"
+            href="#hero-form"
             className="inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-7 py-4 font-bold text-[#111184] transition hover:bg-blue-50"
           >
             Request a Free Quote <ArrowRight size={18} />

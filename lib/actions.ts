@@ -273,6 +273,7 @@ const ADS_LANDING_SERVICES = [
   "google-ads",
   "meta-ads",
   "seo-optimization",
+  "general",
 ] as const;
 
 export async function createEnquiry(formData: FormData) {

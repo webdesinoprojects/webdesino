@@ -274,6 +274,15 @@ html {
   animation: carousel-scroll 20s linear infinite;
 }
 
+@keyframes svg-flow {
+  0%   { stroke-dashoffset: 900; }
+  100% { stroke-dashoffset: -900; }
+}
+.animate-svg-flow        { animation: svg-flow  9s linear infinite; }
+.animate-svg-flow-slow   { animation: svg-flow 14s linear infinite; }
+.animate-svg-flow-slower { animation: svg-flow 19s linear infinite; }
+
+
 @media (max-width: 1023px) {
   .animate-carousel-scroll {
     animation: carousel-scroll 14s linear infinite;

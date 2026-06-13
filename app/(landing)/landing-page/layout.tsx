@@ -52,7 +52,7 @@ export default async function LandingPageLayout({
         whatsappHref={landingContact.whatsappHref}
       />
       <BottomNav />
-      <ContactWidget whatsappHref={landingContact.whatsappHref} />
+      <ContactWidget whatsappHref={landingContact.whatsappHref} hideCallBooking />
     </>
   );
 }
