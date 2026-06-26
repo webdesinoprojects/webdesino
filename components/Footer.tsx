@@ -8,6 +8,7 @@ interface FooterProps {
   locations?: { name: string; slug: string }[];
   phoneNumbers?: { display: string; href: string }[];
   whatsappHref?: string;
+  disableServiceLinks?: boolean;
 }
 
 const defaultPhoneNumbers = [
@@ -19,6 +20,7 @@ export default function Footer({
   locations = [],
   phoneNumbers = defaultPhoneNumbers,
   whatsappHref = "https://wa.me/919310851557",
+  disableServiceLinks = false,
 }: FooterProps) {
   return (
     <footer className="relative bg-[#111184] text-white overflow-hidden">
@@ -233,17 +235,21 @@ export default function Footer({
                 {servicesData.slice(0, 2).map((category) => (
                   <div key={category.slug}>
                     <h5 className="font-semibold text-white mb-3 text-sm uppercase tracking-wider border-b border-white/10 pb-1">
-                      <Link href={`/services/${category.slug}`}>{category.title}</Link>
+                      {disableServiceLinks ? category.title : <Link href={`/services/${category.slug}`}>{category.title}</Link>}
                     </h5>
                     <ul className="space-y-1.5 text-sm">
                       {category.subtypes.map((subtype) => (
                         <li key={subtype.slug}>
-                          <Link
-                            href={`/services/${category.slug}/${subtype.slug}`}
-                            className="text-gray-300 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block"
-                          >
-                            {subtype.title}
-                          </Link>
+                          {disableServiceLinks ? (
+                            <span className="text-gray-300 inline-block">{subtype.title}</span>
+                          ) : (
+                            <Link
+                              href={`/services/${category.slug}/${subtype.slug}`}
+                              className="text-gray-300 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block"
+                            >
+                              {subtype.title}
+                            </Link>
+                          )}
                         </li>
                       ))}
                     </ul>
@@ -256,17 +262,21 @@ export default function Footer({
                 {servicesData.slice(2, 4).map((category) => (
                   <div key={category.slug}>
                     <h5 className="font-semibold text-white mb-3 text-sm uppercase tracking-wider border-b border-white/10 pb-1">
-                      <Link href={`/services/${category.slug}`}>{category.title}</Link>
+                      {disableServiceLinks ? category.title : <Link href={`/services/${category.slug}`}>{category.title}</Link>}
                     </h5>
                     <ul className="space-y-1.5 text-sm">
                       {category.subtypes.map((subtype) => (
                         <li key={subtype.slug}>
-                          <Link
-                            href={`/services/${category.slug}/${subtype.slug}`}
-                            className="text-gray-300 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block"
-                          >
-                            {subtype.title}
-                          </Link>
+                          {disableServiceLinks ? (
+                            <span className="text-gray-300 inline-block">{subtype.title}</span>
+                          ) : (
+                            <Link
+                              href={`/services/${category.slug}/${subtype.slug}`}
+                              className="text-gray-300 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block"
+                            >
+                              {subtype.title}
+                            </Link>
+                          )}
                         </li>
                       ))}
                     </ul>
@@ -279,17 +289,21 @@ export default function Footer({
                 {servicesData.slice(4).map((category) => (
                   <div key={category.slug}>
                     <h5 className="font-semibold text-white mb-3 text-sm uppercase tracking-wider border-b border-white/10 pb-1">
-                      <Link href={`/services/${category.slug}`}>{category.title}</Link>
+                      {disableServiceLinks ? category.title : <Link href={`/services/${category.slug}`}>{category.title}</Link>}
                     </h5>
                     <ul className="space-y-1.5 text-sm">
                       {category.subtypes.map((subtype) => (
                         <li key={subtype.slug}>
-                          <Link
-                            href={`/services/${category.slug}/${subtype.slug}`}
-                            className="text-gray-300 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block"
-                          >
-                            {subtype.title}
-                          </Link>
+                          {disableServiceLinks ? (
+                            <span className="text-gray-300 inline-block">{subtype.title}</span>
+                          ) : (
+                            <Link
+                              href={`/services/${category.slug}/${subtype.slug}`}
+                              className="text-gray-300 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block"
+                            >
+                              {subtype.title}
+                            </Link>
+                          )}
                         </li>
                       ))}
                     </ul>

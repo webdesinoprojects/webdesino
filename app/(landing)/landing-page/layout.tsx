@@ -50,6 +50,7 @@ export default async function LandingPageLayout({
         locations={footerLocations}
         phoneNumbers={landingContact.phoneNumbers}
         whatsappHref={landingContact.whatsappHref}
+        disableServiceLinks
       />
       <BottomNav />
       <ContactWidget whatsappHref={landingContact.whatsappHref} hideCallBooking />
