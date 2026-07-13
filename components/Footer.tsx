@@ -190,6 +190,11 @@ export default function Footer({
                   </Link>
                 </li>
                 <li>
+                  <Link href="/careers" className="text-gray-200 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
+                    Careers
+                  </Link>
+                </li>
+                <li>
                   <Link href="/privacy-policy" className="text-gray-200 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
                     Privacy Policy
                   </Link>

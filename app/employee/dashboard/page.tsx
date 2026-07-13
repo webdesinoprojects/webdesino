@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { LayoutDashboard, ArrowUpRight, FileText, Globe, Layers, MapPin, ImageIcon, Mail, Megaphone, MessageSquare, HelpCircle, Users } from "lucide-react";
+import { LayoutDashboard, ArrowUpRight, FileText, Globe, Layers, MapPin, ImageIcon, Mail, Megaphone, MessageSquare, HelpCircle, Users, Inbox } from "lucide-react";
 import prisma from "@/lib/prisma";
 import { requireEmployee } from "@/lib/employee-session";
 import { EMPLOYEE_PERMISSION_LABELS, type EmployeePermissionKey } from "@/lib/employee-permissions";
@@ -15,6 +15,7 @@ const ICONS: Record<EmployeePermissionKey, ReactNode> = {
   media: <ImageIcon size={18} />,
   enquiries: <Mail size={18} />,
   "ads-enquiries": <Megaphone size={18} />,
+  "careers-applications": <Inbox size={18} />,
   testimonials: <MessageSquare size={18} />,
   faqs: <HelpCircle size={18} />,
   team: <Users size={18} />,
@@ -36,6 +37,7 @@ export default async function EmployeeDashboardPage() {
     "ads-enquiries": await prisma.enquiry.count({
       where: { source: "ads-landing" },
     }),
+    "careers-applications": await prisma.careerApplication.count(),
     testimonials: await prisma.testimonial.count(),
     faqs: await prisma.faq.count(),
     team: await prisma.teamMember.count(),

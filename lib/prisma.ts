@@ -2,6 +2,9 @@ import { connectToMongo } from "./mongo/connection";
 import {
   AdminModel,
   BlogPostModel,
+  CareerApplicationModel,
+  CareerCategoryModel,
+  CareerFormFieldModel,
   CertificationModel,
   ClientModel,
   CompanySettingsModel,
@@ -55,6 +58,9 @@ type PrismaLikeClient = {
   legalPage: PrismaLikeDelegate;
   faq: PrismaLikeDelegate;
   media: PrismaLikeDelegate;
+  careerCategory: PrismaLikeDelegate;
+  careerFormField: PrismaLikeDelegate;
+  careerApplication: PrismaLikeDelegate;
   $connect: () => Promise<void>;
   $disconnect: () => Promise<void>;
   $transaction: (tx: any) => Promise<any>;
@@ -81,6 +87,9 @@ const modelMap: Record<string, any> = {
   legalPage: LegalPageModel,
   faq: FaqModel,
   media: MediaModel,
+  careerCategory: CareerCategoryModel,
+  careerFormField: CareerFormFieldModel,
+  careerApplication: CareerApplicationModel,
 };
 
 function mapKeyForModel(key: string): string {
@@ -255,11 +264,17 @@ function prepareCreateData(delegate: string, data: AnyObject): AnyObject {
   if (delegate === "employeeLog" && out.employeeId && !out.employeeLegacyId) {
     out.employeeLegacyId = out.employeeId;
   }
+  if (delegate === "careerApplication" && out.categoryId && !out.categoryLegacyId) {
+    out.categoryLegacyId = out.categoryId;
+  }
   if (delegate === "serviceSubtype") {
     delete out.categoryId;
   }
   if (delegate === "employeeLog") {
     delete out.employeeId;
+  }
+  if (delegate === "careerApplication") {
+    delete out.categoryId;
   }
 
   return out;
@@ -279,11 +294,17 @@ function prepareUpdateData(delegate: string, data: AnyObject): AnyObject {
   if (delegate === "employeeLog" && out.employeeId && !out.employeeLegacyId) {
     out.employeeLegacyId = out.employeeId;
   }
+  if (delegate === "careerApplication" && out.categoryId && !out.categoryLegacyId) {
+    out.categoryLegacyId = out.categoryId;
+  }
   if (delegate === "serviceSubtype") {
     delete out.categoryId;
   }
   if (delegate === "employeeLog") {
     delete out.employeeId;
+  }
+  if (delegate === "careerApplication") {
+    delete out.categoryId;
   }
 
   return out;
@@ -416,6 +437,9 @@ const prismaAdapter: any = {
   legalPage: createDelegate("legalPage"),
   faq: createDelegate("faq"),
   media: createDelegate("media"),
+  careerCategory: createDelegate("careerCategory"),
+  careerFormField: createDelegate("careerFormField"),
+  careerApplication: createDelegate("careerApplication"),
   async $connect() {
     await connectToMongo();
   },

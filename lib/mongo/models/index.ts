@@ -16,3 +16,6 @@ export { CompanySettingsModel } from "./company-settings.model";
 export { LegalPageModel } from "./legal-page.model";
 export { FaqModel } from "./faq.model";
 export { MediaModel } from "./media.model";
+export { CareerCategoryModel } from "./career-category.model";
+export { CareerFormFieldModel } from "./career-form-field.model";
+export { CareerApplicationModel } from "./career-application.model";

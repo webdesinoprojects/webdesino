@@ -21,6 +21,9 @@ import {
   BarChart3,
   ChevronDown,
   Megaphone,
+  GraduationCap,
+  Inbox,
+  SlidersHorizontal,
 } from "lucide-react";
 import { logout } from "@/lib/auth-actions";
 
@@ -36,10 +39,17 @@ export function SidebarContent({ onNavigate }: SidebarContentProps) {
   const [isEnquiriesExpanded, setIsEnquiriesExpanded] = useState(
     pathname.startsWith("/admin/enquiries")
   );
+  const isCareersPath = pathname.startsWith("/admin/careers");
+  const isCareersCmsPath = pathname.startsWith("/admin/careers/cms");
+  const isCareersApplicationsPath = pathname.startsWith("/admin/careers/applications");
+  const [isCareersExpanded, setIsCareersExpanded] = useState(isCareersPath);
 
   useEffect(() => {
     if (pathname.startsWith("/admin/enquiries")) {
       setIsEnquiriesExpanded(true);
+    }
+    if (pathname.startsWith("/admin/careers")) {
+      setIsCareersExpanded(true);
     }
   }, [pathname]);
 
@@ -93,6 +103,42 @@ export function SidebarContent({ onNavigate }: SidebarContentProps) {
         <NavItem href="/admin/media" icon={<ImageIcon size={16} />} label="Media" active={pathname.startsWith("/admin/media")} onClick={onNavigate} />
         <NavItem href="/admin/faqs" icon={<HelpCircle size={16} />} label="FAQs" active={pathname.startsWith("/admin/faqs")} onClick={onNavigate} />
         <NavItem href="/admin/testimonials" icon={<MessageSquare size={16} />} label="Testimonials" active={pathname.startsWith("/admin/testimonials")} onClick={onNavigate} />
+        <div className="relative">
+          <div className="flex items-center gap-1">
+            <div className="min-w-0 flex-1">
+              <button
+                type="button"
+                onClick={() => setIsCareersExpanded((expanded) => !expanded)}
+                className={`group relative flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 ${
+                  isCareersPath ? "bg-white/10 text-white" : "text-white/50 hover:bg-white/[0.06] hover:text-white/85"
+                }`}
+              >
+                {isCareersPath && (
+                  <span className="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-[3px] rounded-full bg-blue-400" />
+                )}
+                <span className={isCareersPath ? "text-blue-300" : "text-white/40 group-hover:text-white/70 transition-colors"}>
+                  <GraduationCap size={16} />
+                </span>
+                <span className="flex-1 text-left">Career</span>
+              </button>
+            </div>
+            <button
+              type="button"
+              onClick={() => setIsCareersExpanded((expanded) => !expanded)}
+              aria-label={isCareersExpanded ? "Collapse Career" : "Expand Career"}
+              aria-expanded={isCareersExpanded}
+              className="p-2 rounded-lg text-white/40 hover:text-white/80 hover:bg-white/[0.06] transition-all"
+            >
+              <ChevronDown size={14} className={`transition-transform ${isCareersExpanded ? "rotate-180" : ""}`} />
+            </button>
+          </div>
+          {isCareersExpanded && (
+            <div className="ml-5 pl-3 border-l border-white/15 mt-1 space-y-0.5">
+              <NavItem href="/admin/careers/cms" icon={<SlidersHorizontal size={15} />} label="CMS" active={isCareersCmsPath} onClick={onNavigate} />
+              <NavItem href="/admin/careers/applications" icon={<Inbox size={15} />} label="Applications" active={isCareersApplicationsPath} onClick={onNavigate} />
+            </div>
+          )}
+        </div>
         <NavItem href="/admin/employees" icon={<UserCog size={16} />} label="Employees" active={pathname.startsWith("/admin/employees")} onClick={onNavigate} />
 
         <SectionLabel label="Account" />

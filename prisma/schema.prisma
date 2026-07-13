@@ -223,3 +223,50 @@ model EmployeeLog {
 
   @@index([employeeId])
 }
+
+model CareerCategory {
+  id           String              @id @default(cuid())
+  name         String
+  slug         String              @unique
+  description  String?
+  active       Boolean             @default(true)
+  order        Int                 @default(0)
+  applications CareerApplication[]
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+}
+
+model CareerFormField {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  label       String
+  type        String
+  required    Boolean  @default(false)
+  order       Int      @default(0)
+  active      Boolean  @default(true)
+  options     Json?
+  placeholder String?
+  helpText    String?
+  system      Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model CareerApplication {
+  id         String          @id @default(cuid())
+  name       String
+  email      String
+  phone      String?
+  cvUrl      String?
+  cvName     String?
+  note       String?
+  data       Json
+  categoryId String?
+  category   CareerCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  status     String          @default("new")
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
+
+  @@index([status])
+  @@index([categoryId])
+}
