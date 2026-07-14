@@ -1,9 +1,12 @@
 import { z } from "zod";
 
+export const INDIAN_PHONE_DIGITS = 10;
+
 export const careerPhoneSchema = z
   .string()
   .trim()
-  .regex(/^[0-9]{6,}$/, "Phone number must contain only digits and be at least 6 digits");
+  .regex(/^[0-9]+$/, "Phone number must contain only digits")
+  .length(INDIAN_PHONE_DIGITS, `Phone number must be exactly ${INDIAN_PHONE_DIGITS} digits`);
 
 export const careerEmailSchema = z
   .string()
@@ -12,6 +15,17 @@ export const careerEmailSchema = z
 
 export function keepDigitsOnly(value: string) {
   return value.replace(/\D/g, "");
+}
+
+export function normalizeCareerPhone(value: string) {
+  const digits = keepDigitsOnly(value);
+  if (digits.length > INDIAN_PHONE_DIGITS && digits.startsWith("91")) {
+    return digits.slice(2, 2 + INDIAN_PHONE_DIGITS);
+  }
+  if (digits.length > INDIAN_PHONE_DIGITS && digits.startsWith("0")) {
+    return digits.slice(1, 1 + INDIAN_PHONE_DIGITS);
+  }
+  return digits.slice(0, INDIAN_PHONE_DIGITS);
 }
 
 export function removeEmailWhitespace(value: string) {
@@ -52,12 +66,13 @@ export function isCareerPhoneField(field: {
 }
 
 export function validateCareerPhone(value: string, label = "Phone number") {
+  const trimmed = value.trim();
   const result = careerPhoneSchema.safeParse(value);
   if (result.success) return null;
-  if (/[^0-9]/.test(value.trim())) {
+  if (/[^0-9]/.test(trimmed)) {
     return `${label} must contain only numbers`;
   }
-  return `${label} must be at least 6 digits`;
+  return `${label} must be exactly ${INDIAN_PHONE_DIGITS} digits`;
 }
 
 export function validateCareerEmail(value: string, label = "Email address") {

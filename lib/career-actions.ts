@@ -120,7 +120,7 @@ const DEFAULT_FIELDS: Array<{
 }> = [
   { key: "name", label: "Full Name", type: "text", required: true, order: 10, system: true, placeholder: "e.g. Priya Sharma" },
   { key: "email", label: "Email Address", type: "email", required: true, order: 20, system: true, placeholder: "you@example.com" },
-  { key: "phone", label: "Phone Number", type: "tel", required: true, order: 30, system: true, placeholder: "919000000000" },
+  { key: "phone", label: "Phone Number", type: "tel", required: true, order: 30, system: true, placeholder: "9876543210" },
   { key: "education", label: "Educational Qualification", type: "text", required: true, order: 40, system: false, placeholder: "e.g. B.Tech CSE, MBA in Marketing" },
   { key: "cv", label: "Upload CV", type: "file", required: true, order: 50, system: true, helpText: "PDF, DOC or DOCX. Max 5 MB." },
   { key: "note", label: "Note / Cover Letter", type: "textarea", required: false, order: 60, system: false, placeholder: "Tell us why you're a great fit..." },

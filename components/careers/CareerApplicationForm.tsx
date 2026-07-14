@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useTransition, useRef, useCallback } from "react";
-import { Loader2, XCircle, Upload } from "lucide-react";
+import { useState, useTransition, useRef } from "react";
+import { CheckCircle2, Loader2, XCircle, Upload } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -10,12 +10,11 @@ import { submitCareerApplication } from "@/lib/career-actions";
 import {
   isCareerEmailField,
   isCareerPhoneField,
-  keepDigitsOnly,
+  normalizeCareerPhone,
   removeEmailWhitespace,
   validateCareerEmail,
   validateCareerPhone,
 } from "@/lib/career-validation";
-import CareerToast, { type CareerToastState } from "@/components/careers/CareerToast";
 
 type FieldType =
   | "text"
@@ -55,7 +54,7 @@ export default function CareerApplicationForm({
 }) {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
-  const [toast, setToast] = useState<CareerToastState>(null);
+  const [submittedRole, setSubmittedRole] = useState<string | null>(null);
   const [fileName, setFileName] = useState<Record<string, string>>({});
   const [consent, setConsent] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>(
@@ -67,8 +66,6 @@ export default function CareerApplicationForm({
 
   const selectedCategoryName =
     categories.find((c) => c.slug === selectedCategory)?.name || "";
-
-  const dismissToast = useCallback(() => setToast(null), []);
 
   function clientValidate(formData: FormData): string | null {
     for (const f of fields) {
@@ -132,10 +129,7 @@ export default function CareerApplicationForm({
         const result = await submitCareerApplication(formData);
         if (result?.success) {
           const label = selectedCategoryName || "Webdesino";
-          setToast({
-            kind: "success",
-            message: `Thanks for applying to ${label}. We've emailed you a copy — we'll be in touch soon.`,
-          });
+          setSubmittedRole(label);
           formRef.current?.reset();
           setFileName({});
           setConsent(false);
@@ -147,19 +141,42 @@ export default function CareerApplicationForm({
         } else {
           const msg = result?.error || "Something went wrong. Please try again.";
           setError(msg);
-          setToast({ kind: "error", message: msg });
         }
       } catch (err: any) {
         const msg = err?.message || "Unexpected error. Please try again.";
         setError(msg);
-        setToast({ kind: "error", message: msg });
       }
     });
   }
 
+  function handleSubmitAnother() {
+    setSubmittedRole(null);
+    setError(null);
+  }
+
+  if (submittedRole) {
+    return (
+      <div className="rounded-2xl border border-emerald-100 bg-white px-6 py-8 text-center shadow-sm">
+        <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 ring-8 ring-emerald-50/50">
+          <CheckCircle2 className="h-9 w-9" strokeWidth={2.2} />
+        </div>
+        <h3 className="text-2xl font-bold text-slate-950">Application submitted</h3>
+        <p className="mx-auto mt-3 max-w-md text-sm leading-6 text-slate-600">
+          Thanks for applying to {submittedRole}. We have received your details and CV.
+          Our team will review your application and contact you soon.
+        </p>
+        <Button
+          type="button"
+          onClick={handleSubmitAnother}
+          className="mt-7 w-full md:w-auto"
+        >
+          Submit another application
+        </Button>
+      </div>
+    );
+  }
+
   return (
-    <>
-    <CareerToast toast={toast} onDismiss={dismissToast} />
     <form ref={formRef} onSubmit={handleSubmit} className="space-y-5" noValidate>
       {categories.length > 0 && (
         <div className="space-y-1.5">
@@ -256,7 +273,6 @@ export default function CareerApplicationForm({
         )}
       </div>
     </form>
-    </>
   );
 }
 
@@ -279,7 +295,7 @@ function FieldRow({
     required: field.required,
     placeholder:
       isPhoneField && field.placeholder
-        ? keepDigitsOnly(field.placeholder)
+        ? normalizeCareerPhone(field.placeholder)
         : field.placeholder ?? undefined,
   };
   const fieldErrorId = `${field.key}-error`;
@@ -349,6 +365,7 @@ function FieldRow({
           {...common}
           inputMode={isPhoneField ? "numeric" : isEmailField ? "email" : undefined}
           pattern={isPhoneField ? "[0-9]*" : undefined}
+          maxLength={isPhoneField ? 10 : undefined}
           aria-invalid={validatesInline && fieldError ? true : undefined}
           aria-describedby={validatesInline && fieldError ? fieldErrorId : undefined}
           onKeyDown={
@@ -373,7 +390,7 @@ function FieldRow({
               ? (e) => {
                   const rawValue = e.currentTarget.value;
                   if (isPhoneField) {
-                    const digitsOnly = keepDigitsOnly(rawValue);
+                    const digitsOnly = normalizeCareerPhone(rawValue);
                     e.currentTarget.value = digitsOnly;
 
                     if (rawValue !== digitsOnly) {
@@ -402,7 +419,7 @@ function FieldRow({
             validatesInline
               ? (e) => {
                   if (isPhoneField) {
-                    const digitsOnly = keepDigitsOnly(e.currentTarget.value);
+                    const digitsOnly = normalizeCareerPhone(e.currentTarget.value);
                     e.currentTarget.value = digitsOnly;
                     if (!digitsOnly) {
                       setFieldError(field.required ? `${field.label} is required` : null);
