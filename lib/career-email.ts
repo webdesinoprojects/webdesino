@@ -11,6 +11,34 @@ type SmtpConfig = {
   to: string;
 };
 
+type ResendConfig = {
+  apiKey: string;
+  from: string;
+};
+
+type EmailPayload = {
+  to: string;
+  subject: string;
+  html: string;
+  text: string;
+  replyTo?: string;
+};
+
+function careerInboxEmail(): string {
+  return process.env.CAREERS_EMAIL_TO?.trim() || process.env.SMTP_TO?.trim() || "info@webdesino.com";
+}
+
+function getResendConfig(): ResendConfig | null {
+  const apiKey = process.env.RESEND_API_KEY?.trim();
+  if (!apiKey) return null;
+
+  const from =
+    process.env.RESEND_FROM?.trim() ||
+    process.env.CAREERS_EMAIL_FROM?.trim() ||
+    "Webdesino Careers <onboarding@resend.dev>";
+  return { apiKey, from };
+}
+
 function getSmtpConfig(): SmtpConfig | null {
   const host = process.env.SMTP_HOST?.trim();
   const portRaw = process.env.SMTP_PORT?.trim() || "587";
@@ -45,6 +73,60 @@ function transport(cfg: SmtpConfig) {
   });
 }
 
+async function sendWithResend(cfg: ResendConfig, payload: EmailPayload) {
+  const body: Record<string, unknown> = {
+    from: cfg.from,
+    to: payload.to,
+    subject: payload.subject,
+    html: payload.html,
+    text: payload.text,
+  };
+
+  if (payload.replyTo) body.reply_to = payload.replyTo;
+
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${cfg.apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+
+  if (!response.ok) {
+    const details = await response.text().catch(() => "");
+    throw new Error(`Resend email failed with ${response.status}${details ? `: ${details}` : ""}`);
+  }
+}
+
+async function sendCareerEmail(payload: EmailPayload, context: string) {
+  const resend = getResendConfig();
+  if (resend) {
+    try {
+      await sendWithResend(resend, payload);
+      return;
+    } catch (err) {
+      console.error(`Failed to send ${context} with Resend:`, err);
+    }
+  }
+
+  const smtp = getSmtpConfig();
+  if (!smtp) return;
+
+  try {
+    await transport(smtp).sendMail({
+      from: smtp.from,
+      to: payload.to,
+      replyTo: payload.replyTo,
+      subject: payload.subject,
+      html: payload.html,
+      text: payload.text,
+    });
+  } catch (err) {
+    console.error(`Failed to send ${context} with SMTP:`, err);
+  }
+}
+
 function escapeHtml(s: string): string {
   return s
     .replace(/&/g, "&amp;")
@@ -58,10 +140,23 @@ function siteUrl(): string {
   return (process.env.NEXT_PUBLIC_SITE_URL || "https://webdesino.com").replace(/\/$/, "");
 }
 
+function emailAssetBaseUrl(): string {
+  const configured = (
+    process.env.EMAIL_ASSET_BASE_URL ||
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    "https://webdesino.com"
+  ).trim();
+  const normalized = configured.replace(/\/$/, "");
+
+  if (/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(normalized)) {
+    return "https://webdesino.com";
+  }
+
+  return normalized;
+}
+
 function logoImgTag(): string {
-  // WebDesino.png lives in Supabase storage (see components/Footer.tsx). We
-  // fall back to the site's public URL for compatibility with any mail client.
-  const url = `${siteUrl()}/WebDesino.png`;
+  const url = `${emailAssetBaseUrl()}/WebDesino.png`;
   return `<img src="${url}" alt="Webdesino" width="140" style="display:block;height:auto;max-width:140px;" />`;
 }
 
@@ -88,8 +183,8 @@ function rowsToHtml(rows: { label: string; value: string }[]): string {
     .map(
       (r) => `
       <tr>
-        <td style="padding:10px 14px;background:#f5f7fb;border-bottom:1px solid #e5e9f2;font-size:13px;color:#6b7280;width:35%;vertical-align:top;">${escapeHtml(r.label)}</td>
-        <td style="padding:10px 14px;background:#ffffff;border-bottom:1px solid #e5e9f2;font-size:14px;color:#111827;vertical-align:top;">${escapeHtml(r.value).replace(/\n/g, "<br/>")}</td>
+        <td style="padding:10px 14px;background:#f5f7fb;border-bottom:1px solid #e5e9f2;font-size:13px;color:#6b7280;width:35%;vertical-align:top;word-break:break-word;overflow-wrap:anywhere;">${escapeHtml(r.label)}</td>
+        <td style="padding:10px 14px;background:#ffffff;border-bottom:1px solid #e5e9f2;font-size:14px;color:#111827;vertical-align:top;word-break:break-word;overflow-wrap:anywhere;">${escapeHtml(r.value).replace(/\n/g, "<br/>")}</td>
       </tr>`
     )
     .join("");
@@ -109,9 +204,6 @@ export async function sendCareerApplicantEmail(args: {
   data: Record<string, any>;
   cvName: string | null;
 }) {
-  const cfg = getSmtpConfig();
-  if (!cfg) return;
-
   const rows = summariseFields(args.fields, args.data, args.cvName);
   const subject = args.categoryName
     ? `Thanks for applying to ${args.categoryName} — Webdesino`
@@ -133,7 +225,7 @@ export async function sendCareerApplicantEmail(args: {
       <p style="margin:0 0 24px;font-size:14px;line-height:1.6;color:#6b7280;">
         Here's a copy of what you submitted:
       </p>
-      <table role="presentation" style="width:100%;border-collapse:collapse;border-radius:10px;overflow:hidden;border:1px solid #e5e9f2;">
+      <table role="presentation" style="width:100%;max-width:100%;table-layout:fixed;border-collapse:collapse;border-radius:10px;overflow:hidden;border:1px solid #e5e9f2;">
         ${rowsToHtml(rows)}
       </table>
       <p style="margin:24px 0 0;font-size:13px;color:#6b7280;">
@@ -160,17 +252,15 @@ If you didn't submit this application, please contact us at info@webdesino.com.
 
 — Team Webdesino`;
 
-  try {
-    await transport(cfg).sendMail({
-      from: cfg.from,
+  await sendCareerEmail(
+    {
       to: args.to,
       subject,
       html,
       text,
-    });
-  } catch (err) {
-    console.error("Failed to send applicant email:", err);
-  }
+    },
+    "applicant career email"
+  );
 }
 
 export async function sendCareerAdminEmail(args: {
@@ -184,9 +274,6 @@ export async function sendCareerAdminEmail(args: {
   cvUrl: string | null;
   cvName: string | null;
 }) {
-  const cfg = getSmtpConfig();
-  if (!cfg) return;
-
   const rows = summariseFields(args.fields, args.data, args.cvName);
   const deepLink = `${siteUrl()}/admin/careers/applications/${args.applicationId}`;
   const subject = `New career application: ${args.name}${args.categoryName ? ` — ${args.categoryName}` : ""}`;
@@ -214,7 +301,7 @@ export async function sendCareerAdminEmail(args: {
         ${args.phone ? ` · <a href="tel:${escapeHtml(args.phone)}" style="color:#111184;">${escapeHtml(args.phone)}</a>` : ""}
       </p>
       ${cvBlock}
-      <table role="presentation" style="width:100%;border-collapse:collapse;border-radius:10px;overflow:hidden;border:1px solid #e5e9f2;margin-top:12px;">
+      <table role="presentation" style="width:100%;max-width:100%;table-layout:fixed;border-collapse:collapse;border-radius:10px;overflow:hidden;border:1px solid #e5e9f2;margin-top:12px;">
         ${rowsToHtml(rows)}
       </table>
       <p style="margin:20px 0 0;">
@@ -238,16 +325,14 @@ ${rowsToText(rows)}
 
 Open: ${deepLink}`;
 
-  try {
-    await transport(cfg).sendMail({
-      from: cfg.from,
-      to: cfg.to,
+  await sendCareerEmail(
+    {
+      to: careerInboxEmail(),
       replyTo: args.email,
       subject,
       html,
       text,
-    });
-  } catch (err) {
-    console.error("Failed to send admin career email:", err);
-  }
+    },
+    "admin career email"
+  );
 }
