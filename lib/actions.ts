@@ -6,6 +6,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { sendEnquiryEmail } from "@/lib/email";
 import { logEmployeeAction } from "@/lib/employee-logger";
+import { getHeroShowcaseItems } from "@/lib/data";
+import { getHomepageHeroContent, HOMEPAGE_HERO_PAGE_SLUG } from "@/lib/homepage-hero";
 
 /** Safely read a return-path from FormData. Only allows known internal prefixes. */
 function safeReturnPath(formData: FormData, defaultPath: string): string {
@@ -607,6 +609,40 @@ export async function deletePage(id: string) {
     revalidatePath(`/${existingPage.slug}`);
   }
   redirect("/admin/pages");
+}
+
+export async function updateHomepageHero(formData: FormData) {
+  const contentRaw = formData.get("content") as string;
+
+  let parsedContent = {};
+  try {
+    parsedContent = contentRaw ? JSON.parse(contentRaw) : {};
+  } catch (error) {
+    console.error("Error parsing homepage hero content JSON", error);
+  }
+
+  const hero = getHomepageHeroContent(parsedContent, getHeroShowcaseItems());
+
+  await prisma.page.upsert({
+    where: { slug: HOMEPAGE_HERO_PAGE_SLUG },
+    update: {
+      title: "Homepage Hero",
+      description: "Homepage hero section content and showcase configuration.",
+      content: { hero },
+    },
+    create: {
+      title: "Homepage Hero",
+      slug: HOMEPAGE_HERO_PAGE_SLUG,
+      description: "Homepage hero section content and showcase configuration.",
+      content: { hero },
+    },
+  });
+
+  revalidatePath("/");
+  revalidatePath("/admin/pages");
+  revalidatePath("/admin/pages/home-hero");
+  await logEmployeeAction("pages", "Updated homepage hero section");
+  redirect("/admin/pages/home-hero?saved=1");
 }
 
 export async function createTeamMember(data: any) {

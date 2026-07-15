@@ -8,12 +8,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Loader2, CheckCircle } from "lucide-react";
+import { AlertCircle, Loader2, CheckCircle } from "lucide-react";
 
 export default function ResetPasswordPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isPreparingRecovery, setIsPreparingRecovery] = useState(true);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -40,6 +41,7 @@ export default function ResetPasswordPage() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsLoading(true);
+    setErrorMessage(null);
 
     const formData = new FormData(event.currentTarget);
     const result = await updatePassword(formData);
@@ -52,7 +54,7 @@ export default function ResetPasswordPage() {
         router.push("/admin");
       }, 3000);
     } else {
-      alert(result?.error || "Something went wrong");
+      setErrorMessage(result?.error || "Something went wrong");
     }
   }
 
@@ -85,6 +87,12 @@ export default function ResetPasswordPage() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
+              {errorMessage && (
+                <div className="flex items-start gap-2 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+                  <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0" />
+                  <span>{errorMessage}</span>
+                </div>
+              )}
               <div className="space-y-2">
                 <Label htmlFor="password">New Password</Label>
                 <Input 

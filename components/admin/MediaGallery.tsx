@@ -18,6 +18,9 @@ const fetcher = async ([_, page]: [string, number]) => {
 export default function MediaGallery() {
   const [page, setPage] = useState(1);
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [deleteTargetId, setDeleteTargetId] = useState<string | null>(null);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
 
   // CRITICAL FIX: Use SWR for caching and deduplication
   const { data, error, mutate } = useSWR(
@@ -34,11 +37,23 @@ export default function MediaGallery() {
   const images = data?.media || [];
   const total = data?.total || 0;
 
+  const requestDelete = (id: string) => {
+    setDeleteError(null);
+    setDeleteTargetId(id);
+  };
+
   const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this image?")) return;
-    
-    await deleteMedia(id);
-    mutate(); // Revalidate after delete
+    setDeletingId(id);
+    setDeleteError(null);
+    try {
+      await deleteMedia(id);
+      setDeleteTargetId(null);
+      await mutate(); // Revalidate after delete
+    } catch (error) {
+      setDeleteError(error instanceof Error ? error.message : "Failed to delete image.");
+    } finally {
+      setDeletingId(null);
+    }
   };
 
   const copyUrl = (id: string, url: string) => {
@@ -79,13 +94,53 @@ export default function MediaGallery() {
                       quality={60}
                       className="object-contain"
                     />
-                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                      <Button size="icon" variant="secondary" onClick={() => copyUrl(file.id, file.url)} title="Copy URL">
-                        {copiedId === file.id ? <Check className="h-4 w-4 text-green-400" /> : <Copy className="h-4 w-4" />}
-                      </Button>
-                      <Button size="icon" variant="destructive" onClick={() => handleDelete(file.id)} title="Delete">
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
+                    <div
+                      className={`absolute inset-0 bg-black/60 transition-opacity flex items-center justify-center gap-2 p-2 ${
+                        deleteTargetId === file.id ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                      }`}
+                    >
+                      {deleteTargetId === file.id ? (
+                        <div className="w-full rounded-lg bg-white p-2 text-center shadow-lg">
+                          <p className="text-xs font-semibold text-slate-900">Delete image?</p>
+                          {deleteError && <p className="mt-1 text-[11px] text-red-600">{deleteError}</p>}
+                          <div className="mt-2 flex justify-center gap-1.5">
+                            <Button
+                              type="button"
+                              size="sm"
+                              variant="outline"
+                              className="h-7 px-2 text-[11px]"
+                              onClick={() => setDeleteTargetId(null)}
+                              disabled={deletingId === file.id}
+                            >
+                              Cancel
+                            </Button>
+                            <Button
+                              type="button"
+                              size="sm"
+                              variant="destructive"
+                              className="h-7 px-2 text-[11px]"
+                              onClick={() => handleDelete(file.id)}
+                              disabled={deletingId === file.id}
+                            >
+                              {deletingId === file.id ? (
+                                <Loader2 className="h-3 w-3 animate-spin" />
+                              ) : (
+                                <Trash2 className="h-3 w-3" />
+                              )}
+                              Delete
+                            </Button>
+                          </div>
+                        </div>
+                      ) : (
+                        <>
+                          <Button size="icon" variant="secondary" onClick={() => copyUrl(file.id, file.url)} title="Copy URL">
+                            {copiedId === file.id ? <Check className="h-4 w-4 text-green-400" /> : <Copy className="h-4 w-4" />}
+                          </Button>
+                          <Button size="icon" variant="destructive" onClick={() => requestDelete(file.id)} title="Delete">
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </>
+                      )}
                     </div>
                   </div>
                   <div className="p-2 text-xs truncate text-slate-500 bg-white border-t">

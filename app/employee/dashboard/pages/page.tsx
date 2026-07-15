@@ -5,13 +5,15 @@ import Link from "next/link";
 import { Plus } from "lucide-react";
 import { deletePage } from "@/lib/actions";
 import ActionsMenu from "@/components/admin/ActionsMenu";
+import { HOMEPAGE_HERO_PAGE_SLUG } from "@/lib/homepage-hero";
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
 
 export default async function EmployeePagesPage() {
   await requireEmployee("pages");
-  const pages = await prisma.page.findMany({ orderBy: { title: "asc" } });
+  const allPages = await prisma.page.findMany({ orderBy: { title: "asc" } });
+  const pages = allPages.filter((page) => page.slug !== HOMEPAGE_HERO_PAGE_SLUG);
 
   return (
     <div className="space-y-6">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CalendarClock, Loader2, X } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import Link from "next/link";
@@ -20,6 +20,25 @@ export default function ContactWidget({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const syncMenuState = () => {
+      setIsMobileMenuOpen(document.body.dataset.mobileMenuOpen === "true");
+    };
+
+    const handleMenuToggle = (event: Event) => {
+      const detail = (event as CustomEvent<{ open?: boolean }>).detail;
+      setIsMobileMenuOpen(Boolean(detail?.open));
+    };
+
+    syncMenuState();
+    window.addEventListener("webdesino:mobile-menu-toggle", handleMenuToggle);
+
+    return () => {
+      window.removeEventListener("webdesino:mobile-menu-toggle", handleMenuToggle);
+    };
+  }, []);
 
   const handleCallEnquirySubmit = async (formData: FormData) => {
     setIsSubmitting(true);
@@ -38,8 +57,12 @@ export default function ContactWidget({
       setIsCardOpen(false);
       setIsDismissed(true);
       setSuccessMessage(null);
-    }, 1800);
+    }, 5000);
   };
+
+  if (isMobileMenuOpen) {
+    return null;
+  }
 
   return (
     <div className="fixed bottom-24 lg:bottom-8 right-6 z-50 flex flex-col items-end gap-4">
@@ -47,7 +70,7 @@ export default function ContactWidget({
         <button
           type="button"
           onClick={() => setIsCardOpen(true)}
-          className="rounded-full bg-[#111184] text-white px-5 py-3 shadow-xl hover:bg-[#0b0b62] transition-colors text-sm font-semibold"
+          className="rounded-3xl bg-[#111184] text-white px-[12px] py-[9px] shadow-lg hover:bg-[#0b0b62] transition-colors text-[12px] leading-none font-semibold"
         >
           Book a 15-minute intro call
         </button>

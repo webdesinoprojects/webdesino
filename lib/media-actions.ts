@@ -5,13 +5,25 @@ import { revalidatePath } from "next/cache";
 import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-if (!supabaseUrl || !supabaseKey) {
-  throw new Error("Supabase environment variables (NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY) are required");
+if (!supabaseUrl) {
+  throw new Error("NEXT_PUBLIC_SUPABASE_URL is required for media storage");
 }
 
-const supabase = createClient(supabaseUrl, supabaseKey);
+function getSupabaseStorageClient() {
+  if (!supabaseUrl) {
+    throw new Error("NEXT_PUBLIC_SUPABASE_URL is required for media storage");
+  }
+
+  if (!supabaseServiceRoleKey) {
+    throw new Error("SUPABASE_SERVICE_ROLE_KEY is required for admin media uploads");
+  }
+
+  return createClient(supabaseUrl, supabaseServiceRoleKey, {
+    auth: { persistSession: false, autoRefreshToken: false },
+  });
+}
 
 export async function getMedia(page = 1, limit = 50) {
   const skip = (page - 1) * limit;
@@ -49,6 +61,7 @@ export async function uploadMedia(formData: FormData) {
   }
 
   try {
+    const supabase = getSupabaseStorageClient();
     const buffer = Buffer.from(await file.arrayBuffer());
     
     // Sanitize filename
@@ -116,6 +129,7 @@ export async function deleteMedia(id: string) {
   // URL format: https://[project].supabase.co/storage/v1/object/public/images/uploads/2024/05/file.jpg
   // We need: uploads/2024/05/file.jpg
   try {
+    const supabase = getSupabaseStorageClient();
     const urlObj = new URL(media.url);
     const pathParts = urlObj.pathname.split('/public/images/');
     if (pathParts.length > 1) {

@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
-import { ArrowLeft, Plus, Trash2, RefreshCw, Sparkles } from "lucide-react";
+import { AlertCircle, ArrowLeft, Plus, Trash2, Sparkles } from "lucide-react";
 import { createLocation, updateLocation } from "@/lib/actions";
 import ImageUpload from "@/components/admin/ImageUpload";
 import { generateLocationContent, SERVICE_FOCUS_OPTIONS } from "@/lib/location-templates";
@@ -81,6 +81,7 @@ export default function LocationForm({ location, returnPath }: LocationFormProps
   const [slug, setSlug] = useState(location?.slug || "");
   const [title, setTitle] = useState(location?.title || "");
   const [description, setDescription] = useState(location?.description || "");
+  const [formMessage, setFormMessage] = useState<string | null>(null);
 
   const generateContent = (locName: string): Content => ({
     hero: {
@@ -149,20 +150,13 @@ export default function LocationForm({ location, returnPath }: LocationFormProps
     };
   });
 
-  const handleRegenerate = () => {
-    const locInput = document.getElementById('location') as HTMLInputElement;
-    const locName = locInput?.value || "your area";
-    if (confirm(`Are you sure you want to regenerate all content for "${locName}"? This will overwrite current changes.`)) {
-      setContent(generateContent(locName));
-    }
-  };
-
   const handleAutoGenerate = () => {
     if (!locationName.trim()) {
-      alert("Please enter a location name first");
+      setFormMessage("Please enter a location name first.");
       return;
     }
 
+    setFormMessage(null);
     const generated = generateLocationContent(locationName, serviceFocus);
     
     // Update all form fields with generated content
@@ -229,6 +223,24 @@ export default function LocationForm({ location, returnPath }: LocationFormProps
           {isEditing ? "Edit Location" : "Add New Location"}
         </h1>
       </div>
+
+      {formMessage && (
+        <div className="flex items-start justify-between gap-3 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+          <div className="flex items-start gap-2">
+            <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0" />
+            <span>{formMessage}</span>
+          </div>
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            className="h-6 px-2 text-amber-800 hover:bg-amber-100"
+            onClick={() => setFormMessage(null)}
+          >
+            Dismiss
+          </Button>
+        </div>
+      )}
 
       <form action={action} className="admin-premium-form space-y-8">
         <input type="hidden" name="content" value={JSON.stringify(content)} />

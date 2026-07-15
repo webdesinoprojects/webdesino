@@ -50,6 +50,54 @@ export default function BottomNav() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+
+    const scrollY = window.scrollY;
+    const { body, documentElement } = document;
+    const previousBodyOverflow = body.style.overflow;
+    const previousBodyPosition = body.style.position;
+    const previousBodyTop = body.style.top;
+    const previousBodyWidth = body.style.width;
+    const previousBodyOverscroll = body.style.overscrollBehavior;
+    const previousHtmlOverscroll = documentElement.style.overscrollBehavior;
+
+    body.style.overflow = "hidden";
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.width = "100%";
+    body.style.overscrollBehavior = "none";
+    documentElement.style.overscrollBehavior = "none";
+
+    return () => {
+      body.style.overflow = previousBodyOverflow;
+      body.style.position = previousBodyPosition;
+      body.style.top = previousBodyTop;
+      body.style.width = previousBodyWidth;
+      body.style.overscrollBehavior = previousBodyOverscroll;
+      documentElement.style.overscrollBehavior = previousHtmlOverscroll;
+      window.scrollTo(0, scrollY);
+    };
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    document.body.dataset.mobileMenuOpen = mobileMenuOpen ? "true" : "false";
+    window.dispatchEvent(
+      new CustomEvent("webdesino:mobile-menu-toggle", {
+        detail: { open: mobileMenuOpen },
+      })
+    );
+
+    return () => {
+      delete document.body.dataset.mobileMenuOpen;
+      window.dispatchEvent(
+        new CustomEvent("webdesino:mobile-menu-toggle", {
+          detail: { open: false },
+        })
+      );
+    };
+  }, [mobileMenuOpen]);
+
   return (
 
     <>
@@ -197,7 +245,7 @@ export default function BottomNav() {
 
         {/* Mobile Menu Panel */}
         {mobileMenuOpen && (
-          <div className="fixed bottom-24 right-6 left-6 bg-white rounded-3xl shadow-2xl p-6 max-h-[70vh] overflow-y-auto border border-slate-100 animate-scale-in">
+          <div className="fixed bottom-24 right-6 left-6 bg-white rounded-3xl shadow-2xl p-6 max-h-[70vh] overflow-y-auto overscroll-contain border border-slate-100 animate-scale-in">
             <div className="space-y-2">
               {navItems.map((item, idx) => (
                 <div key={idx}>

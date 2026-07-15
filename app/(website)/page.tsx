@@ -13,6 +13,7 @@ import TrustedSection from "@/components/TrustedSection";
 import { generateWebSiteSchema } from "@/lib/seo";
 import { prisma } from "@/lib/prisma";
 import { getStorageUrl } from "@/lib/utils";
+import { getHomepageHeroContent, HOMEPAGE_HERO_PAGE_SLUG } from "@/lib/homepage-hero";
 
 const Logo = getStorageUrl("/logo.png");
 
@@ -86,6 +87,9 @@ export default async function Home() {
   const projects = await prisma.project.findMany();
   const testimonials = await prisma.testimonial.findMany();
   const services = await prisma.serviceCategory.findMany();
+  const homePage = await prisma.page.findUnique({
+    where: { slug: HOMEPAGE_HERO_PAGE_SLUG },
+  });
   const faqs = await prisma.faq.findMany({
     orderBy: { order: 'asc' },
   });
@@ -93,6 +97,7 @@ export default async function Home() {
   const features = getFeatures();
   const results = getResults();
   const heroShowcaseItems = getHeroShowcaseItems();
+  const homepageHeroContent = getHomepageHeroContent(homePage?.content, heroShowcaseItems);
   
   const jsonLd = generateWebSiteSchema();
 
@@ -103,7 +108,7 @@ export default async function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <main>
-        <Hero showcaseItems={heroShowcaseItems} />
+        <Hero showcaseItems={heroShowcaseItems} content={homepageHeroContent} />
         <NewsTicker />
         <TrustedSection />
         <ServicesOverview categories={services} />

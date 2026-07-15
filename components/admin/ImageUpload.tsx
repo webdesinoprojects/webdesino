@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
-import { ImagePlus, Loader2, UploadCloud, X } from "lucide-react";
+import { AlertCircle, ImagePlus, Loader2, UploadCloud, X } from "lucide-react";
 import { uploadMedia } from "@/lib/media-actions";
 
 interface ImageUploadProps {
@@ -33,12 +33,14 @@ export default function ImageUpload({
   const [imageUrl, setImageUrl] = useState(defaultValue || "");
   const [imageUrls, setImageUrls] = useState<string[]>(defaultValues);
   const [isUploading, setIsUploading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
 
     setIsUploading(true);
+    setErrorMessage(null);
     try {
       if (!multiple) {
         const formData = new FormData();
@@ -47,6 +49,7 @@ export default function ImageUpload({
         const media = await uploadMedia(formData);
 
         setImageUrl(media.url);
+        setErrorMessage(null);
         if (onUploadComplete) {
           onUploadComplete(media.url);
         }
@@ -63,13 +66,14 @@ export default function ImageUpload({
 
         const merged = [...imageUrls, ...uploadedUrls].slice(0, maxFiles);
         setImageUrls(merged);
+        setErrorMessage(null);
         if (onUploadCompleteMultiple) {
           onUploadCompleteMultiple(merged);
         }
       }
     } catch (error) {
       console.error("Error uploading image:", error);
-      alert("Error uploading image");
+      setErrorMessage(error instanceof Error ? error.message : "Image upload failed. Please try again.");
     } finally {
       setIsUploading(false);
       e.target.value = "";
@@ -78,6 +82,7 @@ export default function ImageUpload({
 
   const handleRemove = () => {
     setImageUrl("");
+    setErrorMessage(null);
     if (onUploadComplete) {
       onUploadComplete("");
     }
@@ -86,6 +91,7 @@ export default function ImageUpload({
   const handleRemoveAtIndex = (index: number) => {
     const next = imageUrls.filter((_, i) => i !== index);
     setImageUrls(next);
+    setErrorMessage(null);
     if (onUploadCompleteMultiple) {
       onUploadCompleteMultiple(next);
     }
@@ -95,6 +101,25 @@ export default function ImageUpload({
     <div className="space-y-2">
       <Label>{label}</Label>
       {!multiple && <Input type="hidden" name={name} value={imageUrl} />}
+
+      {errorMessage && (
+        <div className="flex items-start justify-between gap-3 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+          <div className="flex items-start gap-2">
+            <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0" />
+            <span>{errorMessage}</span>
+          </div>
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="h-6 w-6 flex-shrink-0 text-red-700 hover:bg-red-100 hover:text-red-800"
+            onClick={() => setErrorMessage(null)}
+            aria-label="Dismiss upload error"
+          >
+            <X className="h-3 w-3" />
+          </Button>
+        </div>
+      )}
 
       <Input
         id={inputId}

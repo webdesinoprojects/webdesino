@@ -1,9 +1,10 @@
 import prisma from "@/lib/prisma";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Plus } from "lucide-react";
+import { Home, Plus } from "lucide-react";
 import { deletePage } from "@/lib/actions";
 import ActionsMenu from "@/components/admin/ActionsMenu";
+import { HOMEPAGE_HERO_PAGE_SLUG } from "@/lib/homepage-hero";
 import {
   Table,
   TableBody,
@@ -14,9 +15,10 @@ import {
 } from "@/components/ui/table";
 
 export default async function PagesPage() {
-  const pages = await prisma.page.findMany({
+  const allPages = await prisma.page.findMany({
     orderBy: { title: "asc" },
   });
+  const pages = allPages.filter((page) => page.slug !== HOMEPAGE_HERO_PAGE_SLUG);
 
   type Page = typeof pages[number];
 
@@ -27,6 +29,25 @@ export default async function PagesPage() {
         <Link href="/admin/pages/new">
           <Button>
             <Plus className="mr-2 h-4 w-4" /> Add Page
+          </Button>
+        </Link>
+      </div>
+
+      <div className="rounded-2xl border border-blue-100 bg-blue-50/70 p-5 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div className="flex items-start gap-3">
+          <div className="mt-0.5 rounded-xl bg-[#111184] p-2 text-white">
+            <Home className="h-4 w-4" />
+          </div>
+          <div>
+            <h2 className="font-semibold text-slate-900">Homepage Hero</h2>
+            <p className="text-sm text-slate-600">
+              Edit the homepage title, description, CTAs, animated words, and showcase cards.
+            </p>
+          </div>
+        </div>
+        <Link href="/admin/pages/home-hero">
+          <Button variant="outline" className="bg-white">
+            Edit Homepage Hero
           </Button>
         </Link>
       </div>

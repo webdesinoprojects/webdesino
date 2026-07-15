@@ -19,7 +19,7 @@ export default async function AdminDashboardLayout({ children }: { children: Rea
       </aside>
 
       {/* MAIN CONTENT */}
-      <main className="flex-1 md:ml-60 w-full min-w-0">
+      <main className="flex-1 md:ml-60 w-full min-w-0 overflow-x-hidden">
         {/* TOP NAVBAR */}
         <header className="h-14 bg-white/80 backdrop-blur-md border-b border-slate-200/70 flex items-center justify-between px-4 md:px-8 sticky top-0 z-10 shadow-[0_1px_3px_rgba(0,0,0,0.05)]">
           <div className="flex items-center gap-3">

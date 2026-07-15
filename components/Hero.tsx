@@ -3,10 +3,11 @@
 import Link from "next/link";
 import NextImage from "next/image";
 import { useRouter } from "next/navigation";
-import { useState, useEffect, FormEvent } from "react";
+import { useState, useEffect, useMemo, FormEvent } from "react";
 import { ArrowRight, Search, Award, Briefcase, BarChart, Store, Code, Star, TrendingUp, Users, Globe, Smartphone, Palette, Megaphone } from "lucide-react";
 import { HeroShowcaseItem } from "@/lib/data";
 import { getStorageUrl } from "@/lib/utils";
+import { getHomepageHeroContent, type HomepageHeroContent } from "@/lib/homepage-hero";
 
 const iconMap = {
   Store: Store,
@@ -17,45 +18,24 @@ const iconMap = {
   TrendingUp: TrendingUp,
 };
 
-// Animated words that rotate - Web Development focused
-const rotatingWords = [
-	{ text: "Website Design", href: "/services/website-solutions" },
-	{ text: "SEO Services", href: "/services/seo-services" },
-	{ text: "Digital Marketing", href: "/services/digital-marketing" },
-	{ text: "E-commerce", href: "/services/website-solutions/ecommerce-development" },
-	{ text: "Mobile Apps", href: "/services/app-development" },
-	{ text: "Branding", href: "/services/branding" },
-];
-
-const HERO_CARD_IMAGES = [
-	"/images/home/hero/bookbuzz.jpg",
-	"/agnishila.png",
-	"/images/home/hero/growth-campaign.jpg",
-	"/images/home/hero/brand-identity.jpg",
-	"/images/home/hero/meritshot.jpg",
-	"/images/home/services/digital-marketing.jpg",
-	"/images/home/services/seo-services.jpg",
-];
-
-// Keep phrase list stable across renders to avoid unnecessary typing-effect resets.
-const HERO_TYPING_PHRASES = [
-	"Web Development Agency",
-	"SEO Company",
-	"Digital Marketing Agency",
-	"E-commerce Experts",
-];
-
-const getHeroImageByIndex = (index: number) =>
-	HERO_CARD_IMAGES[index % HERO_CARD_IMAGES.length];
-
 interface HeroProps {
   showcaseItems: HeroShowcaseItem[];
+  content?: HomepageHeroContent;
 }
 
-export default function Hero({ showcaseItems = [] }: HeroProps) {
+export default function Hero({ showcaseItems = [], content }: HeroProps) {
 	const router = useRouter();
 	const [searchTerm, setSearchTerm] = useState("");
 	const [currentWordIndex, setCurrentWordIndex] = useState(0);
+	const hero = useMemo(
+		() => content || getHomepageHeroContent(undefined, showcaseItems),
+		[content, showcaseItems]
+	);
+	const activeShowcaseItems = hero.showcaseItems.length ? hero.showcaseItems : showcaseItems;
+	const activeRotatingWords = hero.rotatingWords;
+	const activeTypingPhrases = hero.typingPhrases;
+	const getHeroImageByIndex = (index: number) =>
+		hero.showcaseImages[index % hero.showcaseImages.length];
 	
     // Typewriter state
     const [text, setText] = useState('');
@@ -65,15 +45,15 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 
 	useEffect(() => {
 		const interval = setInterval(() => {
-			setCurrentWordIndex((prev) => (prev + 1) % rotatingWords.length);
+			setCurrentWordIndex((prev) => (prev + 1) % activeRotatingWords.length);
 		}, 2000);
 		return () => clearInterval(interval);
-	}, []);
+	}, [activeRotatingWords.length]);
 
     useEffect(() => {
         const handleTyping = () => {
-			const i = loopNum % HERO_TYPING_PHRASES.length;
-			const fullText = HERO_TYPING_PHRASES[i];
+			const i = loopNum % activeTypingPhrases.length;
+			const fullText = activeTypingPhrases[i];
 
             setText(isDeleting ? fullText.substring(0, text.length - 1) : fullText.substring(0, text.length + 1));
 
@@ -89,7 +69,7 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 
         const timer = setTimeout(handleTyping, typingSpeed);
         return () => clearTimeout(timer);
-	}, [text, isDeleting, loopNum, typingSpeed]);
+	}, [text, isDeleting, loopNum, typingSpeed, activeTypingPhrases]);
 
 	const handleSearch = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -122,16 +102,16 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 						<div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 shadow-sm mb-4 animate-fade-in">
 							<span className="w-2 h-2 rounded-full bg-[#111184] animate-pulse"></span>
 							<Link 
-								href={rotatingWords[currentWordIndex].href}
+								href={activeRotatingWords[currentWordIndex % activeRotatingWords.length].href}
 								className="text-sm font-medium text-slate-600 min-w-[140px] transition-all duration-300 hover:text-[#111184]"
 							>
-								{rotatingWords[currentWordIndex].text}
+								{activeRotatingWords[currentWordIndex % activeRotatingWords.length].text}
 							</Link>
 						</div>
 
 						<h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight text-slate-900 min-h-[160px] sm:min-h-[200px] lg:min-h-[240px]">
 							<span className="block">
-								Stunning Websites By Top
+								{hero.titleLine1}
 							</span>
 							<span className="block text-[#111184] text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
 								<span className="inline-block">{text}</span>
@@ -140,7 +120,7 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 						</h1>
 
 						<p className="text-lg sm:text-xl text-slate-600 max-w-xl leading-relaxed">
-							We build high-performance websites and digital strategies that drive growth, engagement, and revenue for your business.
+							{hero.description}
 						</p>
 
 						{/* Search Bar */}
@@ -152,7 +132,7 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 								<input
 									id="hero-service-search"
 									type="text"
-									placeholder="Search services (e.g., SEO, Web Design)..."
+									placeholder={hero.searchPlaceholder}
 									value={searchTerm}
 									onChange={(e) => setSearchTerm(e.target.value)}
 									className="w-full px-6 py-4 rounded-full bg-white border border-slate-200 focus:border-[#111184] focus:ring-2 focus:ring-[#111184]/20 outline-none transition-all shadow-sm pr-12 text-slate-700 placeholder:text-slate-400"
@@ -169,17 +149,17 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 
 						<div className="flex flex-col sm:flex-row gap-4">
 							<Link
-								href="/contact"
+								href={hero.primaryCtaLink}
 								className="px-8 py-4 bg-[#111184] text-white rounded-full font-bold hover:bg-[#111184]/90 transition-all hover:scale-105 shadow-lg shadow-[#111184]/25 flex items-center justify-center gap-2 group"
 							>
-								Start Your Project
+								{hero.primaryCtaText}
 								<ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
 							</Link>
 							<Link
-								href="/portfolio"
+								href={hero.secondaryCtaLink}
 								className="px-8 py-4 bg-white text-slate-900 border border-slate-200 rounded-full font-bold hover:bg-slate-50 transition-all hover:border-slate-300 flex items-center justify-center gap-2"
 							>
-								View Our Work
+								{hero.secondaryCtaText}
 								<Briefcase size={20} className="text-slate-400" />
 							</Link>
 						</div>
@@ -194,7 +174,7 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 							<div className="absolute inset-0 overflow-hidden">
 								<div className="animate-scroll-y space-y-4 py-2">
 									{/* First Set */}
-									{showcaseItems.map((item, idx) => {
+									{activeShowcaseItems.map((item, idx) => {
 										const Icon = iconMap[item.iconName];
 										return (
 											<div
@@ -223,7 +203,7 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 										);
 									})}
 									{/* Duplicate Set for seamless loop */}
-									{showcaseItems.map((item, idx) => {
+									{activeShowcaseItems.map((item, idx) => {
 										const Icon = iconMap[item.iconName];
 										return (
 											<div
@@ -233,7 +213,7 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 											>
 												<div className="relative h-16 w-20 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 shrink-0">
 													<NextImage
-														src={getStorageUrl(getHeroImageByIndex(idx + showcaseItems.length))}
+														src={getStorageUrl(getHeroImageByIndex(idx + activeShowcaseItems.length))}
 														alt={item.name}
 														fill
 														sizes="80px"
@@ -271,7 +251,7 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 							<div className="absolute inset-0 overflow-hidden">
 								<div className="animate-scroll-y space-y-6 py-4">
 									{/* First Set */}
-									{showcaseItems.map((item, idx) => {
+									{activeShowcaseItems.map((item, idx) => {
 										const Icon = iconMap[item.iconName];
 										return (
 											<div
@@ -311,7 +291,7 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 									})}
 
 									{/* Duplicate Set for Seamless Loop */}
-									{showcaseItems.map((item, idx) => {
+									{activeShowcaseItems.map((item, idx) => {
 										const Icon = iconMap[item.iconName];
 										return (
 											<div
@@ -330,7 +310,7 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 
 													<div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden bg-slate-100 border border-slate-200 mb-4">
 														<NextImage
-															src={getStorageUrl(getHeroImageByIndex(idx + showcaseItems.length))}
+															src={getStorageUrl(getHeroImageByIndex(idx + activeShowcaseItems.length))}
 															alt={`${item.name} showcase image`}
 															fill
 															className="object-cover"
