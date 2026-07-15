@@ -202,12 +202,12 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 												className="relative min-h-[88px] bg-white/90 backdrop-blur-sm border border-slate-100 px-4 py-3 rounded-2xl shadow-md flex items-center gap-3 cursor-pointer"
 												onClick={() => router.push('/portfolio')}
 											>
-												<div className="w-16 h-16 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 shrink-0">
+												<div className="relative h-16 w-20 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 shrink-0">
 													<NextImage
 														src={getStorageUrl(getHeroImageByIndex(idx))}
 														alt={item.name}
-														width={64}
-														height={64}
+														fill
+														sizes="80px"
 														className="object-cover"
 													/>
 												</div>
@@ -231,12 +231,12 @@ export default function Hero({ showcaseItems = [] }: HeroProps) {
 												className="relative min-h-[88px] bg-white/90 backdrop-blur-sm border border-slate-100 px-4 py-3 rounded-2xl shadow-md flex items-center gap-3 cursor-pointer"
 												onClick={() => router.push('/portfolio')}
 											>
-												<div className="w-16 h-16 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 shrink-0">
+												<div className="relative h-16 w-20 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 shrink-0">
 													<NextImage
 														src={getStorageUrl(getHeroImageByIndex(idx + showcaseItems.length))}
 														alt={item.name}
-														width={64}
-														height={64}
+														fill
+														sizes="80px"
 														className="object-cover"
 													/>
 												</div>

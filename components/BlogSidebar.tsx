@@ -1,24 +1,79 @@
-import Link from "next/link";
-import { Search } from "lucide-react";
-import { getBlogPosts } from "@/lib/data";
+"use client";
 
-export default function BlogSidebar() {
-  const recentPosts = getBlogPosts().slice(0, 5);
+import { FormEvent, useCallback, useEffect, useState, useTransition } from "react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { Search } from "lucide-react";
+
+type SidebarPost = {
+  title: string;
+  slug: string;
+};
+
+interface BlogSidebarProps {
+  initialQuery?: string;
+  recentPosts: SidebarPost[];
+}
+
+export default function BlogSidebar({ initialQuery = "", recentPosts }: BlogSidebarProps) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const [query, setQuery] = useState(initialQuery);
+  const [isPending, startTransition] = useTransition();
+  const isBlogIndex = pathname === "/blog";
   const categories = ["Digital Marketing", "SEO", "Web Development", "Social Media"];
   const archives = ["November 2025", "October 2025", "September 2025"];
+  const trimmedQuery = query.trim();
+  const filteredRecentPosts = trimmedQuery
+    ? recentPosts.filter((post) => post.title.toLowerCase().includes(trimmedQuery.toLowerCase()))
+    : recentPosts;
+
+  const updateSearch = useCallback((value: string, method: "replace" | "push" = "replace") => {
+    const nextQuery = value.trim();
+    const nextUrl = nextQuery ? `/blog?q=${encodeURIComponent(nextQuery)}` : "/blog";
+
+    startTransition(() => {
+      if (method === "push") {
+        router.push(nextUrl);
+      } else {
+        router.replace(nextUrl, { scroll: false });
+      }
+    });
+  }, [router]);
+
+  useEffect(() => {
+    setQuery(initialQuery);
+  }, [initialQuery, pathname]);
+
+  useEffect(() => {
+    if (!isBlogIndex) return;
+
+    const timeout = window.setTimeout(() => {
+      updateSearch(query);
+    }, 300);
+
+    return () => window.clearTimeout(timeout);
+  }, [isBlogIndex, query, updateSearch]);
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    updateSearch(query, isBlogIndex ? "replace" : "push");
+  };
 
   return (
     <aside className="space-y-8">
       {/* Search */}
       <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
         <h3 className="text-lg font-bold mb-4">Search</h3>
-        <form className="relative">
+        <form className="relative" onSubmit={handleSubmit}>
           <label htmlFor="blog-sidebar-search" className="sr-only">
             Search blog posts
           </label>
           <input
             id="blog-sidebar-search"
             type="text"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
             placeholder="Search..."
             className="w-full pl-4 pr-10 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#111184] transition-all"
           />
@@ -26,19 +81,27 @@ export default function BlogSidebar() {
             <Search size={20} />
           </button>
         </form>
+        {trimmedQuery && (
+          <p className="mt-3 text-xs text-slate-500">
+            {isPending ? "Searching..." : `Showing results for "${trimmedQuery}"`}
+          </p>
+        )}
       </div>
 
       {/* Recent Posts */}
       <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
         <h3 className="text-lg font-bold mb-4 border-b border-slate-100 pb-2">Recent Posts</h3>
         <ul className="space-y-4">
-          {recentPosts.map((post) => (
-            <li key={post.id}>
+          {filteredRecentPosts.map((post) => (
+            <li key={post.slug}>
               <Link href={`/blog/${post.slug}`} className="text-slate-600 hover:text-[#111184] transition-colors text-sm font-medium line-clamp-2">
                 {post.title}
               </Link>
             </li>
           ))}
+          {filteredRecentPosts.length === 0 && (
+            <li className="text-sm text-slate-500">No recent posts match your search.</li>
+          )}
         </ul>
       </div>
 

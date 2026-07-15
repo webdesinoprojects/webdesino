@@ -230,9 +230,9 @@ export default async function OurClientsPage({
                     {categoryClients.map((client, idx) => (
                       <div
                         key={idx}
-                        className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col min-h-[360px]"
+                        className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col md:min-h-[360px]"
                       >
-                            <div className="relative aspect-[16/9] min-h-[220px] overflow-hidden bg-slate-100">
+                            <div className="relative aspect-[16/9] overflow-hidden bg-slate-100 md:min-h-[220px]">
                           <Image
                             src={getStorageUrl(client.image)}
                             alt={`${client.name} Screenshot`}

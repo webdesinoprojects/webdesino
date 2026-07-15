@@ -48,6 +48,15 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     notFound();
   }
 
+  const recentPosts = await prisma.blogPost.findMany({
+    orderBy: { date: 'desc' },
+    take: 5,
+    select: {
+      title: true,
+      slug: true,
+    },
+  });
+
   // Convert Date to string for schema
   const postForSchema = {
     ...post,
@@ -145,7 +154,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
           {/* Sidebar */}
           <div className="lg:w-1/3">
             <div className="sticky top-24">
-              <BlogSidebar />
+              <BlogSidebar recentPosts={recentPosts} />
             </div>
           </div>
 

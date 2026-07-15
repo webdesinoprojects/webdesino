@@ -23,7 +23,7 @@ export default async function ContactPage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-white py-16 lg:py-24 overflow-hidden">
+      <section className="relative bg-white pt-16 pb-10 lg:pt-24 lg:pb-14 overflow-hidden">
         <div className="absolute top-20 left-10 w-64 h-64 bg-[#111184]/5 rounded-full blur-3xl animate-float" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#111184]/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
         
@@ -107,9 +107,9 @@ export default async function ContactPage() {
                 </p>
               </div>
 
-              <div className="glass-strong rounded-3xl p-8 bg-[#111184] text-white">
-                <h3 className="text-xl font-bold mb-3">Quick Response Guarantee</h3>
-                <p className="opacity-90">
+              <div className="rounded-3xl bg-[#111184] p-8 text-white shadow-xl shadow-[#111184]/15 border border-[#111184]/20">
+                <h3 className="text-xl font-bold mb-3 text-white">Quick Response Guarantee</h3>
+                <p className="text-white/90">
                   We respond to all inquiries within 24 hours on business days. For urgent matters, call us directly.
                 </p>
               </div>
@@ -119,7 +119,7 @@ export default async function ContactPage() {
       </section>
 
       {/* Map Section */}
-      <section className="py-16 bg-white">
+      <section className="pt-8 pb-16 bg-white lg:pt-10">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl lg:text-4xl font-bold text-center text-[#111184] mb-12">
             Visit Our Office

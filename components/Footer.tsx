@@ -36,7 +36,7 @@ export default function Footer({
           <form
             action="https://webdesino.com/newsletter-subscribe"
             method="POST"
-            className="flex gap-3 max-w-xl mx-auto"
+            className="flex w-full max-w-xl flex-col gap-3 mx-auto sm:flex-row"
           >
             <label htmlFor="newsletter-email" className="sr-only">
               Email address for newsletter updates
@@ -47,11 +47,11 @@ export default function Footer({
               name="email"
               required
               placeholder="Enter your email address"
-              className="flex-1 px-6 py-4 rounded-full bg-white/10 backdrop-blur border border-white/20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all"
+              className="w-full min-w-0 flex-1 px-6 py-4 rounded-full bg-white/10 backdrop-blur border border-white/20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all"
             />
             <button
               type="submit"
-              className="px-8 py-4 bg-white text-[#111184] rounded-full font-semibold hover-lift hover-glow transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
+              className="w-full justify-center px-8 py-4 bg-white text-[#111184] rounded-full font-semibold hover-lift hover-glow transition-all duration-300 transform hover:scale-105 flex items-center gap-2 whitespace-nowrap sm:w-auto sm:flex-shrink-0"
             >
               Subscribe
               <ArrowRight size={18} />

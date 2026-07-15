@@ -15,18 +15,45 @@ export const metadata = {
   },
 };
 
-export default async function BlogPage({ searchParams }: { searchParams: { page?: string } }) {
+export default async function BlogPage({ searchParams }: { searchParams: { page?: string; q?: string } }) {
   const currentPage = Number(searchParams.page) || 1;
+  const searchQuery = typeof searchParams.q === "string" ? searchParams.q.trim() : "";
   const postsPerPage = 10;
+  const blogWhere = searchQuery
+    ? {
+        OR: [
+          { title: { contains: searchQuery, mode: "insensitive" } },
+          { category: { contains: searchQuery, mode: "insensitive" } },
+          { excerpt: { contains: searchQuery, mode: "insensitive" } },
+          { content: { contains: searchQuery, mode: "insensitive" } },
+        ],
+      }
+    : undefined;
   
-  const totalPosts = await prisma.blogPost.count();
+  const totalPosts = await prisma.blogPost.count({ where: blogWhere });
   const totalPages = Math.ceil(totalPosts / postsPerPage);
   
   const currentPosts = await prisma.blogPost.findMany({
+    where: blogWhere,
     orderBy: { date: 'desc' },
     skip: (currentPage - 1) * postsPerPage,
     take: postsPerPage,
   });
+  const recentPosts = await prisma.blogPost.findMany({
+    orderBy: { date: 'desc' },
+    take: 5,
+    select: {
+      title: true,
+      slug: true,
+    },
+  });
+  const pageHref = (page: number) => {
+    const params = new URLSearchParams();
+    if (searchQuery) params.set("q", searchQuery);
+    if (page > 1) params.set("page", String(page));
+    const queryString = params.toString();
+    return queryString ? `/blog?${queryString}` : "/blog";
+  };
 
   return (
     <main className="bg-white min-h-screen">
@@ -49,64 +76,78 @@ export default async function BlogPage({ searchParams }: { searchParams: { page?
           
           {/* Main Content */}
           <div className="lg:w-2/3">
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
-              {currentPosts.map((post, idx) => (
-                <article
-                  key={idx}
-                  className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col h-full"
-                >
-                  <Link href={`/blog/${post.slug}`} className="block aspect-[16/10] relative overflow-hidden bg-slate-100 group">
-                    <Image
-                      src={getStorageUrl(post.image || "/location-story.png")}
-                      alt={post.title}
-                      fill
-                      className="object-contain group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute top-4 left-4 bg-[#111184] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
-                      {post.category}
-                    </div>
-                  </Link>
-                  
-                  <div className="p-6 flex flex-col flex-grow">
-                    <div className="flex items-center gap-4 text-xs text-slate-500 mb-4">
-                      <div className="flex items-center gap-1">
-                        <Calendar size={14} />
-                        <span>{format(post.date, "MMM d, yyyy")}</span>
+            {searchQuery && (
+              <div className="mb-6 rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 text-sm text-slate-600">
+                Showing {totalPosts} result{totalPosts === 1 ? "" : "s"} for{" "}
+                <span className="font-semibold text-[#111184]">"{searchQuery}"</span>
+              </div>
+            )}
+
+            {currentPosts.length > 0 ? (
+              <div className="grid md:grid-cols-2 gap-8 mb-12">
+                {currentPosts.map((post) => (
+                  <article
+                    key={post.slug}
+                    className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col h-full"
+                  >
+                    <Link href={`/blog/${post.slug}`} className="block aspect-[16/10] relative overflow-hidden bg-slate-100 group">
+                      <Image
+                        src={getStorageUrl(post.image || "/location-story.png")}
+                        alt={post.title}
+                        fill
+                        className="object-contain group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute top-4 left-4 bg-[#111184] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+                        {post.category}
                       </div>
-                      <div className="flex items-center gap-1">
-                        <User size={14} />
-                        <span>WebDesino Team</span>
-                      </div>
-                    </div>
-
-                    <h2 className="text-xl font-bold text-slate-900 mb-3 line-clamp-2 hover:text-[#111184] transition-colors">
-                      <Link href={`/blog/${post.slug}`}>
-                        {post.title}
-                      </Link>
-                    </h2>
-
-                    <p className="text-slate-600 text-sm mb-6 line-clamp-3 flex-grow">
-                      {post.excerpt}
-                    </p>
-
-                    <Link
-                      href={`/blog/${post.slug}`}
-                      className="inline-flex items-center gap-2 text-[#111184] font-semibold text-sm hover:gap-3 transition-all group"
-                    >
-                      Read More 
-                      <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                     </Link>
-                  </div>
-                </article>
-              ))}
-            </div>
+                    
+                    <div className="p-6 flex flex-col flex-grow">
+                      <div className="flex items-center gap-4 text-xs text-slate-500 mb-4">
+                        <div className="flex items-center gap-1">
+                          <Calendar size={14} />
+                          <span>{format(post.date, "MMM d, yyyy")}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <User size={14} />
+                          <span>WebDesino Team</span>
+                        </div>
+                      </div>
+
+                      <h2 className="text-xl font-bold text-slate-900 mb-3 line-clamp-2 hover:text-[#111184] transition-colors">
+                        <Link href={`/blog/${post.slug}`}>
+                          {post.title}
+                        </Link>
+                      </h2>
+
+                      <p className="text-slate-600 text-sm mb-6 line-clamp-3 flex-grow">
+                        {post.excerpt}
+                      </p>
+
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        className="inline-flex items-center gap-2 text-[#111184] font-semibold text-sm hover:gap-3 transition-all group"
+                      >
+                        Read More 
+                        <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                      </Link>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <div className="mb-12 rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm">
+                <h2 className="text-xl font-bold text-slate-900 mb-2">No blog posts found</h2>
+                <p className="text-slate-600">Try searching with a different keyword.</p>
+              </div>
+            )}
 
             {/* Pagination */}
             {totalPages > 1 && (
               <div className="flex justify-center items-center gap-4">
                 {currentPage > 1 && (
                   <Link
-                    href={`/blog?page=${currentPage - 1}`}
+                    href={pageHref(currentPage - 1)}
                     className="flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 rounded-full text-slate-600 hover:bg-[#111184] hover:text-white hover:border-[#111184] transition-all"
                   >
                     <ChevronLeft size={18} />
@@ -118,7 +159,7 @@ export default async function BlogPage({ searchParams }: { searchParams: { page?
                   {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                     <Link
                       key={page}
-                      href={`/blog?page=${page}`}
+                      href={pageHref(page)}
                       className={`w-10 h-10 flex items-center justify-center rounded-full font-semibold transition-all ${
                         currentPage === page
                           ? "bg-[#111184] text-white"
@@ -132,7 +173,7 @@ export default async function BlogPage({ searchParams }: { searchParams: { page?
 
                 {currentPage < totalPages && (
                   <Link
-                    href={`/blog?page=${currentPage + 1}`}
+                    href={pageHref(currentPage + 1)}
                     className="flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 rounded-full text-slate-600 hover:bg-[#111184] hover:text-white hover:border-[#111184] transition-all"
                   >
                     Next
@@ -146,7 +187,7 @@ export default async function BlogPage({ searchParams }: { searchParams: { page?
           {/* Sidebar */}
           <div className="lg:w-1/3">
             <div className="sticky top-24">
-              <BlogSidebar />
+              <BlogSidebar initialQuery={searchQuery} recentPosts={recentPosts} />
             </div>
           </div>
 
