@@ -47,6 +47,25 @@ export default async function BlogPage({ searchParams }: { searchParams: { page?
       slug: true,
     },
   });
+  const recentComments = await prisma.blogComment.findMany({
+    where: { status: "approved" },
+    orderBy: { createdAt: "desc" },
+    take: 5,
+    select: {
+      id: true,
+      name: true,
+      comment: true,
+      postSlug: true,
+      createdAt: true,
+    },
+  });
+  const sidebarComments = recentComments.map((comment: any) => ({
+    id: comment.id,
+    name: comment.name,
+    comment: comment.comment,
+    postSlug: comment.postSlug,
+    createdAt: new Date(comment.createdAt).toISOString(),
+  }));
   const pageHref = (page: number) => {
     const params = new URLSearchParams();
     if (searchQuery) params.set("q", searchQuery);
@@ -187,7 +206,7 @@ export default async function BlogPage({ searchParams }: { searchParams: { page?
           {/* Sidebar */}
           <div className="lg:w-1/3">
             <div className="sticky top-24">
-              <BlogSidebar initialQuery={searchQuery} recentPosts={recentPosts} />
+              <BlogSidebar initialQuery={searchQuery} recentPosts={recentPosts} recentComments={sidebarComments} />
             </div>
           </div>
 

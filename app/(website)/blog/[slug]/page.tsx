@@ -8,6 +8,7 @@ import { generateBlogPostingSchema, BASE_URL } from "@/lib/seo";
 import { format } from "date-fns";
 import BlogHtmlContent from "@/components/BlogHtmlContent";
 import { getStorageUrl } from "@/lib/utils";
+import BlogComments, { BlogCommentItem } from "@/components/BlogComments";
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const post = await prisma.blogPost.findUnique({
@@ -48,14 +49,57 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     notFound();
   }
 
-  const recentPosts = await prisma.blogPost.findMany({
-    orderBy: { date: 'desc' },
-    take: 5,
-    select: {
-      title: true,
-      slug: true,
-    },
-  });
+  const [recentPosts, postComments, recentComments] = await Promise.all([
+    prisma.blogPost.findMany({
+      orderBy: { date: 'desc' },
+      take: 5,
+      select: {
+        title: true,
+        slug: true,
+      },
+    }),
+    prisma.blogComment.findMany({
+      where: {
+        blogPostId: post.id,
+        status: "approved",
+      },
+      orderBy: { createdAt: "desc" },
+      take: 20,
+      select: {
+        id: true,
+        name: true,
+        comment: true,
+        createdAt: true,
+      },
+    }),
+    prisma.blogComment.findMany({
+      where: { status: "approved" },
+      orderBy: { createdAt: "desc" },
+      take: 5,
+      select: {
+        id: true,
+        name: true,
+        comment: true,
+        postSlug: true,
+        createdAt: true,
+      },
+    }),
+  ]);
+
+  const comments: BlogCommentItem[] = postComments.map((comment: any) => ({
+    id: comment.id,
+    name: comment.name,
+    comment: comment.comment,
+    createdAt: new Date(comment.createdAt).toISOString(),
+  }));
+
+  const sidebarComments = recentComments.map((comment: any) => ({
+    id: comment.id,
+    name: comment.name,
+    comment: comment.comment,
+    postSlug: comment.postSlug,
+    createdAt: new Date(comment.createdAt).toISOString(),
+  }));
 
   // Convert Date to string for schema
   const postForSchema = {
@@ -149,12 +193,17 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                 )}
               </div>
             </article>
+            <BlogComments
+              postId={post.id}
+              postSlug={post.slug}
+              comments={comments}
+            />
           </div>
 
           {/* Sidebar */}
           <div className="lg:w-1/3">
             <div className="sticky top-24">
-              <BlogSidebar recentPosts={recentPosts} />
+              <BlogSidebar recentPosts={recentPosts} recentComments={sidebarComments} />
             </div>
           </div>
 

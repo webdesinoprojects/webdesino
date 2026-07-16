@@ -8,6 +8,7 @@ import { sendEnquiryEmail } from "@/lib/email";
 import { logEmployeeAction } from "@/lib/employee-logger";
 import { getHeroShowcaseItems } from "@/lib/data";
 import { getHomepageHeroContent, HOMEPAGE_HERO_PAGE_SLUG } from "@/lib/homepage-hero";
+import { z } from "zod";
 
 /** Safely read a return-path from FormData. Only allows known internal prefixes. */
 function safeReturnPath(formData: FormData, defaultPath: string): string {
@@ -206,6 +207,113 @@ export async function deleteBlogPost(id: string) {
   revalidatePath("/blog");
   revalidatePath("/"); // Revalidate homepage after deleting blog
   await logEmployeeAction("blogs", `Deleted blog post (id: ${id})`);
+}
+
+const blogCommentSchema = z.object({
+  blogPostId: z.string().trim().min(1),
+  postSlug: z.string().trim().min(1).max(220),
+  name: z.string().trim().min(2, "Name must be at least 2 characters").max(80, "Name is too long"),
+  email: z.string().trim().email("Please enter a valid email address").max(255, "Email is too long"),
+  comment: z
+    .string()
+    .trim()
+    .min(5, "Comment must be at least 5 characters")
+    .max(1500, "Comment must be 1500 characters or less"),
+  website: z.string().optional(),
+});
+
+export async function createBlogComment(formData: FormData) {
+  const parsed = blogCommentSchema.safeParse({
+    blogPostId: formData.get("blogPostId"),
+    postSlug: formData.get("postSlug"),
+    name: formData.get("name"),
+    email: formData.get("email"),
+    comment: formData.get("comment"),
+    website: formData.get("website") || "",
+  });
+
+  if (!parsed.success) {
+    return {
+      success: false,
+      error: parsed.error.issues[0]?.message || "Please check your comment details.",
+    };
+  }
+
+  const data = parsed.data;
+
+  if (data.website?.trim()) {
+    return { success: true };
+  }
+
+  const post = await prisma.blogPost.findUnique({
+    where: { id: data.blogPostId },
+    select: { id: true, slug: true, title: true },
+  });
+
+  if (!post || post.slug !== data.postSlug) {
+    return { success: false, error: "This blog post is no longer available." };
+  }
+
+  try {
+    await prisma.blogComment.create({
+      data: {
+        blogPostId: post.id,
+        postSlug: post.slug,
+        postTitle: post.title,
+        name: data.name,
+        email: data.email.toLowerCase(),
+        comment: data.comment,
+        status: "pending",
+      },
+    });
+
+    revalidatePath(`/blog/${post.slug}`);
+    revalidatePath("/blog");
+    return { success: true };
+  } catch (error) {
+    console.error("Error creating blog comment:", error);
+    return { success: false, error: "Failed to post comment. Please try again later." };
+  }
+}
+
+export async function updateBlogCommentStatus(id: string, status: string) {
+  const allowedStatuses = ["pending", "approved", "rejected"];
+  if (!allowedStatuses.includes(status)) {
+    return { success: false, error: "Invalid comment status." };
+  }
+
+  try {
+    const updated = await prisma.blogComment.update({
+      where: { id },
+      data: { status },
+    });
+
+    if (updated?.postSlug) {
+      revalidatePath(`/blog/${updated.postSlug}`);
+    }
+    revalidatePath("/blog");
+    revalidatePath("/admin/blog-comments");
+    return { success: true };
+  } catch (error) {
+    console.error("Error updating blog comment:", error);
+    return { success: false, error: "Failed to update comment." };
+  }
+}
+
+export async function deleteBlogComment(id: string) {
+  try {
+    const deleted = await prisma.blogComment.delete({ where: { id } });
+
+    if (deleted?.postSlug) {
+      revalidatePath(`/blog/${deleted.postSlug}`);
+    }
+    revalidatePath("/blog");
+    revalidatePath("/admin/blog-comments");
+    return { success: true };
+  } catch (error) {
+    console.error("Error deleting blog comment:", error);
+    return { success: false, error: "Failed to delete comment." };
+  }
 }
 
 export async function createTestimonial(data: any) {

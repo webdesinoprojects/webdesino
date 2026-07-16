@@ -10,12 +10,21 @@ type SidebarPost = {
   slug: string;
 };
 
+type SidebarComment = {
+  id: string;
+  name: string;
+  comment: string;
+  postSlug: string;
+  createdAt: string;
+};
+
 interface BlogSidebarProps {
   initialQuery?: string;
   recentPosts: SidebarPost[];
+  recentComments?: SidebarComment[];
 }
 
-export default function BlogSidebar({ initialQuery = "", recentPosts }: BlogSidebarProps) {
+export default function BlogSidebar({ initialQuery = "", recentPosts, recentComments = [] }: BlogSidebarProps) {
   const router = useRouter();
   const pathname = usePathname();
   const [query, setQuery] = useState(initialQuery);
@@ -108,7 +117,20 @@ export default function BlogSidebar({ initialQuery = "", recentPosts }: BlogSide
       {/* Recent Comments */}
       <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
         <h3 className="text-lg font-bold mb-4 border-b border-slate-100 pb-2">Recent Comments</h3>
-        <p className="text-slate-500 text-sm">No comments to show.</p>
+        {recentComments.length > 0 ? (
+          <ul className="space-y-4">
+            {recentComments.map((comment) => (
+              <li key={comment.id}>
+                <Link href={`/blog/${comment.postSlug}`} className="group block">
+                  <p className="text-xs font-semibold text-[#111184] group-hover:underline">{comment.name}</p>
+                  <p className="mt-1 line-clamp-2 text-sm text-slate-600">{comment.comment}</p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-slate-500 text-sm">No comments to show.</p>
+        )}
       </div>
 
       {/* Archives */}

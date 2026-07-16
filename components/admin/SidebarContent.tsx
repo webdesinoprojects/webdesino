@@ -92,6 +92,7 @@ export function SidebarContent({ onNavigate }: SidebarContentProps) {
           )}
         </div>
         <NavItem href="/admin/blogs" icon={<FileText size={16} />} label="Blogs" active={pathname.startsWith("/admin/blogs")} onClick={onNavigate} />
+        <NavItem href="/admin/blog-comments" icon={<MessageSquare size={16} />} label="Comments" active={pathname.startsWith("/admin/blog-comments")} onClick={onNavigate} />
         <NavItem href="/admin/case-studies" icon={<Briefcase size={16} />} label="Case Studies" active={pathname.startsWith("/admin/case-studies")} onClick={onNavigate} />
 
         <SectionLabel label="Content" />

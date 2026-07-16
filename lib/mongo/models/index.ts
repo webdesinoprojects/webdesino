@@ -3,6 +3,7 @@ export { EmployeeModel } from "./employee.model";
 export { EmployeeLogModel } from "./employee-log.model";
 export { ProjectModel } from "./project.model";
 export { BlogPostModel } from "./blog-post.model";
+export { BlogCommentModel } from "./blog-comment.model";
 export { EnquiryModel } from "./enquiry.model";
 export { TestimonialModel } from "./testimonial.model";
 export { ServiceCategoryModel } from "./service-category.model";

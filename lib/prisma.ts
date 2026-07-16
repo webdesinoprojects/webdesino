@@ -1,6 +1,7 @@
 import { connectToMongo } from "./mongo/connection";
 import {
   AdminModel,
+  BlogCommentModel,
   BlogPostModel,
   CareerApplicationModel,
   CareerCategoryModel,
@@ -45,6 +46,7 @@ type PrismaLikeClient = {
   employeeLog: PrismaLikeDelegate;
   project: PrismaLikeDelegate;
   blogPost: PrismaLikeDelegate;
+  blogComment: PrismaLikeDelegate;
   enquiry: PrismaLikeDelegate;
   testimonial: PrismaLikeDelegate;
   serviceCategory: PrismaLikeDelegate;
@@ -74,6 +76,7 @@ const modelMap: Record<string, any> = {
   employeeLog: EmployeeLogModel,
   project: ProjectModel,
   blogPost: BlogPostModel,
+  blogComment: BlogCommentModel,
   enquiry: EnquiryModel,
   testimonial: TestimonialModel,
   serviceCategory: ServiceCategoryModel,
@@ -96,6 +99,7 @@ function mapKeyForModel(key: string): string {
   if (key === "id") return "legacyId";
   if (key === "categoryId") return "categoryLegacyId";
   if (key === "employeeId") return "employeeLegacyId";
+  if (key === "blogPostId") return "blogPostLegacyId";
   return key;
 }
 
@@ -201,6 +205,7 @@ function normalizeDoc(doc: AnyObject | null): AnyObject | null {
   next.id = next.legacyId ?? next.id ?? null;
   if (next.categoryLegacyId) next.categoryId = next.categoryLegacyId;
   if (next.employeeLegacyId) next.employeeId = next.employeeLegacyId;
+  if (next.blogPostLegacyId) next.blogPostId = next.blogPostLegacyId;
 
   return next;
 }
@@ -267,6 +272,9 @@ function prepareCreateData(delegate: string, data: AnyObject): AnyObject {
   if (delegate === "careerApplication" && out.categoryId && !out.categoryLegacyId) {
     out.categoryLegacyId = out.categoryId;
   }
+  if (delegate === "blogComment" && out.blogPostId && !out.blogPostLegacyId) {
+    out.blogPostLegacyId = out.blogPostId;
+  }
   if (delegate === "serviceSubtype") {
     delete out.categoryId;
   }
@@ -275,6 +283,9 @@ function prepareCreateData(delegate: string, data: AnyObject): AnyObject {
   }
   if (delegate === "careerApplication") {
     delete out.categoryId;
+  }
+  if (delegate === "blogComment") {
+    delete out.blogPostId;
   }
 
   return out;
@@ -297,6 +308,9 @@ function prepareUpdateData(delegate: string, data: AnyObject): AnyObject {
   if (delegate === "careerApplication" && out.categoryId && !out.categoryLegacyId) {
     out.categoryLegacyId = out.categoryId;
   }
+  if (delegate === "blogComment" && out.blogPostId && !out.blogPostLegacyId) {
+    out.blogPostLegacyId = out.blogPostId;
+  }
   if (delegate === "serviceSubtype") {
     delete out.categoryId;
   }
@@ -305,6 +319,9 @@ function prepareUpdateData(delegate: string, data: AnyObject): AnyObject {
   }
   if (delegate === "careerApplication") {
     delete out.categoryId;
+  }
+  if (delegate === "blogComment") {
+    delete out.blogPostId;
   }
 
   return out;
@@ -424,6 +441,7 @@ const prismaAdapter: any = {
   employeeLog: createDelegate("employeeLog"),
   project: createDelegate("project"),
   blogPost: createDelegate("blogPost"),
+  blogComment: createDelegate("blogComment"),
   enquiry: createDelegate("enquiry"),
   testimonial: createDelegate("testimonial"),
   serviceCategory: createDelegate("serviceCategory"),
