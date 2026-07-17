@@ -3,6 +3,7 @@
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { isAllowedAdminEmail } from "@/lib/admin-auth";
 import { getEmployeeSession } from "@/lib/employee-session";
 import { logEmployeeAction } from "@/lib/employee-logger";
 import {
@@ -84,7 +85,7 @@ async function requireAdmin() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) {
+  if (!isAllowedAdminEmail(user?.email)) {
     throw new Error("Unauthorized");
   }
   return user;
@@ -95,7 +96,7 @@ async function requireApplicationsAccess() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (user) return { kind: "admin" as const, user };
+  if (isAllowedAdminEmail(user?.email)) return { kind: "admin" as const, user };
 
   const employee = await getEmployeeSession();
   if (employee && employee.permissions.includes("careers-applications")) {
@@ -491,7 +492,19 @@ export async function submitCareerApplication(formData: FormData) {
             cvName = uploaded.name;
           }
         } catch (err: any) {
-          return { success: false, error: err?.message || "File upload failed" };
+          const message = err instanceof Error ? err.message : "";
+          const safeUploadErrors = [
+            "CV file is empty",
+            "CV file exceeds the 5 MB limit",
+            "CV must be a PDF, DOC or DOCX file",
+          ];
+
+          if (safeUploadErrors.includes(message)) {
+            return { success: false, error: message };
+          }
+
+          console.error("Career CV upload failed:", message || err);
+          return { success: false, error: "File upload failed. Please try again later." };
         }
       } else if (field.required) {
         return { success: false, error: `${field.label} is required` };

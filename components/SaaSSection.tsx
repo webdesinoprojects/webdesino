@@ -3,15 +3,18 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { getStorageUrl } from "@/lib/utils";
+import {
+  defaultSaasSectionContent,
+  type SaasSectionContent,
+} from "@/lib/saas-section";
 
-export default function SaaSSection() {
-  const steps = [
-    { step: "01", title: "Signup" },
-    { step: "02", title: "Choose A Plan" },
-    { step: "03", title: "Implementation" },
-    { step: "04", title: "Final Result" }
-  ];
+interface SaaSSectionProps {
+  content?: SaasSectionContent;
+}
 
+export default function SaaSSection({
+  content = defaultSaasSectionContent,
+}: SaaSSectionProps) {
   const bgPattern = getStorageUrl("/grid-pattern.svg");
 
   return (
@@ -27,26 +30,26 @@ export default function SaaSSection() {
           {/* Left Content */}
           <div>
             <span className="text-yellow-500 font-bold tracking-wider text-sm uppercase mb-4 block">
-              OPTIMIZE YOUR MARKETING
+              {content.eyebrow}
             </span>
             <h2 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
-              Take Control Of Your Business Processes With Our SaaS
+              {content.title}
             </h2>
             <p className="text-lg text-gray-300 mb-10 leading-relaxed max-w-xl">
-              Streamline your business operations with our tailored SaaS solutions. Our platforms offer seamless integration and user-friendly interfaces, allowing you to manage tasks and optimize workflows efficiently. With real-time insights, customizable features, and scalable options, our tools empower you to stay ahead in a competitive market.
+              {content.description}
             </p>
             
             <Link 
-              href="/contact"
+              href={content.ctaHref}
               className="inline-flex items-center gap-2 bg-white text-[#111184] px-8 py-4 rounded-full font-bold hover:bg-gray-100 transition-all hover:scale-105 shadow-lg shadow-black/20"
             >
-              Get Started Now <ArrowRight size={20} />
+              {content.ctaText} <ArrowRight size={20} />
             </Link>
           </div>
           
           {/* Right Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {steps.map((item, idx) => (
+            {content.steps.map((item, idx) => (
               <div 
                 key={idx} 
                 className="border border-white/20 rounded-2xl p-8 bg-slate-50 hover:shadow-md transition-colors duration-300 flex flex-col justify-center min-h-[180px]"

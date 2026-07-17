@@ -5,6 +5,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import prisma from "@/lib/prisma";
 import { hash } from "bcryptjs";
+import { isAllowedAdminEmail, normalizeAdminEmail } from "@/lib/admin-auth";
 
 function normalizeOrigin(value?: string | null) {
   if (!value) return null;
@@ -52,22 +53,32 @@ function resolveAppOrigin() {
 }
 
 export async function login(formData: FormData) {
-  const email = formData.get("email") as string;
+  const email = normalizeAdminEmail(formData.get("email") as string);
   const password = formData.get("password") as string;
 
   if (!email || !password) {
     return { success: false, error: "Email and password are required" };
   }
 
+  if (!isAllowedAdminEmail(email)) {
+    return { success: false, error: "Invalid credentials. Please try again." };
+  }
+
   const supabase = createClient();
 
-  const { error } = await supabase.auth.signInWithPassword({
+  const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,
   });
 
   if (error) {
-    return { success: false, error: error.message };
+    console.error("Admin login failed:", error.message);
+    return { success: false, error: "Invalid credentials. Please try again." };
+  }
+
+  if (!isAllowedAdminEmail(data.user?.email)) {
+    await supabase.auth.signOut();
+    return { success: false, error: "Invalid credentials. Please try again." };
   }
 
   return { success: true };
@@ -80,10 +91,14 @@ export async function logout() {
 }
 
 export async function forgotPassword(formData: FormData) {
-  const email = formData.get("email") as string;
+  const email = normalizeAdminEmail(formData.get("email") as string);
 
   if (!email) {
     return { success: false, error: "Email is required" };
+  }
+
+  if (!isAllowedAdminEmail(email)) {
+    return { success: true };
   }
 
   const supabase = createClient();
@@ -94,7 +109,8 @@ export async function forgotPassword(formData: FormData) {
   });
 
   if (error) {
-    return { success: false, error: error.message };
+    console.error("Admin password reset email failed:", error.message);
+    return { success: false, error: "Unable to send reset instructions right now. Please try again later." };
   }
 
   return { success: true };
@@ -103,6 +119,15 @@ export async function forgotPassword(formData: FormData) {
 export async function updatePassword(formData: FormData) {
   const password = formData.get("password") as string;
   const confirmPassword = formData.get("confirmPassword") as string;
+  const supabase = createClient();
+  const {
+    data: { user: currentUser },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !isAllowedAdminEmail(currentUser?.email)) {
+    return { success: false, error: "This reset link is not authorized for admin access." };
+  }
 
   if (!password || !confirmPassword) {
     return { success: false, error: "Password and confirm password are required" };
@@ -116,11 +141,11 @@ export async function updatePassword(formData: FormData) {
     return { success: false, error: "Password must be at least 6 characters" };
   }
 
-  const supabase = createClient();
   const { data: { user }, error } = await supabase.auth.updateUser({ password });
 
   if (error) {
-    return { success: false, error: error.message };
+    console.error("Admin password update failed:", error.message);
+    return { success: false, error: "Unable to update password right now. Please request a new reset link." };
   }
 
   // Keep Prisma Admin table in sync

@@ -2,10 +2,16 @@ import { createClient } from "@/lib/supabase/server";
 import { SidebarContent } from "@/components/admin/SidebarContent";
 import { MobileSidebar } from "@/components/admin/MobileSidebar";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { isAllowedAdminEmail } from "@/lib/admin-auth";
 
 export default async function AdminDashboardLayout({ children }: { children: React.ReactNode }) {
   const supabase = createClient();
   const { data: { user } } = await supabase.auth.getUser();
+
+  if (!isAllowedAdminEmail(user?.email)) {
+    redirect("/admin?error=unauthorized");
+  }
 
   const userInitial = user?.email ? user.email.charAt(0).toUpperCase() : "A";
   const userName = user?.email ? user.email.split("@")[0] : "Admin";

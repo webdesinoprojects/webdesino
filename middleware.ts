@@ -2,6 +2,7 @@ import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 import { verifyToken } from '@/lib/jwt'
 import { employeeNameToSlug } from '@/lib/employee-paths'
+import { isAllowedAdminEmail } from '@/lib/admin-auth'
 
 const EMPLOYEE_SESSION_COOKIE = 'employee_token'
 
@@ -67,14 +68,19 @@ export async function middleware(request: NextRequest) {
   const isEmployeeProtectedPath = path.startsWith("/employee/dashboard");
   const isEmployeeAuthPath = path === "/employee/login";
   const employeeNamedMatch = path.match(/^\/employee\/([^/]+)\/dashboard(\/.*)?$/);
+  const hasAllowedAdminSession = Boolean(user && isAllowedAdminEmail(user.email));
 
   // If trying to access protected path without valid session
   if (isProtectedPath && !user) {
     return NextResponse.redirect(new URL("/admin", request.url));
   }
 
-  // If trying to access auth path with valid session
-  if (isAuthPath && user) {
+  if (isProtectedPath && user && !hasAllowedAdminSession) {
+    return NextResponse.redirect(new URL("/admin?error=unauthorized", request.url));
+  }
+
+  // If trying to access auth path with valid authorized admin session
+  if (isAuthPath && hasAllowedAdminSession) {
     return NextResponse.redirect(new URL("/admin/dashboard", request.url));
   }
 

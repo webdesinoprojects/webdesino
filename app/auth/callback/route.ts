@@ -1,6 +1,20 @@
 import { createClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 import type { EmailOtpType } from "@supabase/supabase-js";
+import { isAllowedAdminEmail } from "@/lib/admin-auth";
+
+async function redirectForAllowedAdmin(supabase: ReturnType<typeof createClient>, origin: string, next: string) {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!isAllowedAdminEmail(user?.email)) {
+    await supabase.auth.signOut();
+    return NextResponse.redirect(`${origin}/admin?error=unauthorized`);
+  }
+
+  return NextResponse.redirect(`${origin}${next}`);
+}
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
@@ -13,7 +27,7 @@ export async function GET(request: Request) {
   if (code) {
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (!error) {
-      return NextResponse.redirect(`${origin}${next}`);
+      return redirectForAllowedAdmin(supabase, origin, next);
     }
 
     return NextResponse.redirect(`${origin}/admin/forgot-password?error=invalid_or_expired_link`);
@@ -26,7 +40,7 @@ export async function GET(request: Request) {
     });
 
     if (!error) {
-      return NextResponse.redirect(`${origin}${next}`);
+      return redirectForAllowedAdmin(supabase, origin, next);
     }
 
     return NextResponse.redirect(`${origin}/admin/forgot-password?error=invalid_or_expired_link`);

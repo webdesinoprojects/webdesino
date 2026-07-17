@@ -3,12 +3,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { redirect } from "next/navigation";
+import { isAllowedAdminEmail } from "@/lib/admin-auth";
 
 export default async function ProfilePage() {
   const supabase = createClient();
   const { data: { user }, error } = await supabase.auth.getUser();
 
-  if (error || !user) {
+  if (error || !user || !isAllowedAdminEmail(user.email)) {
     redirect("/admin");
   }
 

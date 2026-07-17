@@ -1,16 +1,21 @@
 import type { Feature } from "@/lib/data";
 import Image from "next/image";
-import { Target } from "lucide-react";
 import { getStorageUrl } from "@/lib/utils";
-
-const WHY_CHOOSE_IMAGE = "/images/home/why-choose/vision.jpg";
+import { defaultWhyChooseContent, type WhyChooseContent } from "@/lib/why-choose";
 
 interface WhyChooseUsProps {
   features: Feature[];
+  content?: WhyChooseContent;
 }
 
-export default function WhyChooseUs({ features }: WhyChooseUsProps) {
-  if (features.length === 0) return null;
+export default function WhyChooseUs({ features, content }: WhyChooseUsProps) {
+  const section = content || {
+    ...defaultWhyChooseContent,
+    cards: features.slice(0, 6),
+  };
+  const cards = section.cards.slice(0, 6);
+
+  if (cards.length === 0) return null;
   const bgPattern = getStorageUrl("/grid-pattern.svg");
 
   return (
@@ -21,17 +26,17 @@ export default function WhyChooseUs({ features }: WhyChooseUsProps) {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-10">
           <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-6">
-            Why Choose <span className="text-[#111184]">WebDesino?</span>
+            {section.titlePrefix} <span className="text-[#111184]">{section.titleHighlight}</span>
           </h2>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            We combine technical expertise with creative innovation to deliver digital solutions that stand out.
+            {section.subtitle}
           </p>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8 lg:gap-12 items-center">
           {/* Left Column - 3 items */}
           <div className="space-y-8">
-            {features.slice(0, 3).map((feature, idx) => (
+            {cards.slice(0, 3).map((feature, idx) => (
               <div
                 key={idx}
                 className="group bg-white p-6 rounded-2xl border border-slate-100 hover:border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
@@ -67,7 +72,7 @@ export default function WhyChooseUs({ features }: WhyChooseUsProps) {
                 <div className="mb-8 relative">
                   <div className="absolute inset-0 bg-white/20 blur-xl rounded-full"></div>
                   <h3 className="text-4xl lg:text-5xl font-bold text-white relative z-10 tracking-tight">
-                    Our Vision
+                    {section.visionTitle}
                   </h3>
                 </div>
                 
@@ -75,8 +80,8 @@ export default function WhyChooseUs({ features }: WhyChooseUsProps) {
 
                 <div className="relative w-full max-w-sm aspect-[4/3] rounded-2xl overflow-hidden bg-white/10 border border-white/20 mb-8">
                   <Image
-                    src={WHY_CHOOSE_IMAGE}
-                    alt="Why choose WebDesino visual"
+                    src={getStorageUrl(section.visionImage)}
+                    alt={section.visionImageAlt}
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 33vw"
@@ -84,7 +89,7 @@ export default function WhyChooseUs({ features }: WhyChooseUsProps) {
                 </div>
 
                 <p className="text-blue-100 text-lg lg:text-xl leading-relaxed font-light max-w-xs mx-auto">
-                  "To empower businesses with <span className="text-white font-semibold">digital excellence</span> and <span className="text-white font-semibold">innovative technology</span> solutions."
+                  "{section.visionQuote}"
                 </p>
 
                 <div className="mt-10 flex gap-2">
@@ -98,7 +103,7 @@ export default function WhyChooseUs({ features }: WhyChooseUsProps) {
 
           {/* Right Column - 3 items */}
           <div className="space-y-8">
-            {features.slice(3, 6).map((feature, idx) => (
+            {cards.slice(3, 6).map((feature, idx) => (
               <div
                 key={idx + 3}
                 className="group bg-white p-6 rounded-2xl border border-slate-100 hover:border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"

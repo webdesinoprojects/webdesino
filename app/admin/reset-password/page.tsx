@@ -14,14 +14,27 @@ export default function ResetPasswordPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isPreparingRecovery, setIsPreparingRecovery] = useState(true);
+  const [isInvalidResetLink, setIsInvalidResetLink] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const router = useRouter();
   const searchParams = useSearchParams();
 
   useEffect(() => {
+    const resetError = searchParams.get("error") || searchParams.get("error_code");
+    const resetErrorDescription = searchParams.get("error_description");
     const code = searchParams.get("code");
     const tokenHash = searchParams.get("token_hash");
     const type = searchParams.get("type");
+
+    if (resetError) {
+      setIsInvalidResetLink(true);
+      setErrorMessage(
+        resetErrorDescription ||
+          "This reset link is invalid or has expired. Please request a new reset link."
+      );
+      setIsPreparingRecovery(false);
+      return;
+    }
 
     if (code) {
       router.replace(`/auth/callback?code=${encodeURIComponent(code)}&next=/admin/reset-password`);
@@ -84,6 +97,19 @@ export default function ResetPasswordPage() {
             <div className="flex items-center justify-center py-6 text-gray-600">
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               Verifying reset link...
+            </div>
+          ) : isInvalidResetLink ? (
+            <div className="space-y-4">
+              <div className="flex items-start gap-2 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+                <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0" />
+                <span>{errorMessage}</span>
+              </div>
+              <Button asChild className="w-full">
+                <Link href="/admin/forgot-password">Request New Reset Link</Link>
+              </Button>
+              <Button asChild variant="outline" className="w-full">
+                <Link href="/admin">Return to Login</Link>
+              </Button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">

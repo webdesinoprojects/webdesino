@@ -6,6 +6,14 @@ import { Plus } from "lucide-react";
 import { deletePage } from "@/lib/actions";
 import ActionsMenu from "@/components/admin/ActionsMenu";
 import { HOMEPAGE_HERO_PAGE_SLUG } from "@/lib/homepage-hero";
+import { TRUSTED_SECTION_PAGE_SLUG } from "@/lib/trusted-section";
+import { TRUSTED_BRANDS_PAGE_SLUG } from "@/lib/trusted-brands";
+import { WHY_CHOOSE_PAGE_SLUG } from "@/lib/why-choose";
+import { INDUSTRIES_PAGE_SLUG } from "@/lib/industries-section";
+import { MAXIMIZE_SECTION_PAGE_SLUG } from "@/lib/maximize-section";
+import { LOCAL_AREAS_PAGE_SLUG } from "@/lib/local-areas-section";
+import { AWARDS_SECTION_PAGE_SLUG } from "@/lib/awards-section";
+import { SAAS_SECTION_PAGE_SLUG } from "@/lib/saas-section";
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
@@ -13,7 +21,18 @@ import {
 export default async function EmployeePagesPage() {
   await requireEmployee("pages");
   const allPages = await prisma.page.findMany({ orderBy: { title: "asc" } });
-  const pages = allPages.filter((page) => page.slug !== HOMEPAGE_HERO_PAGE_SLUG);
+  const protectedPageSlugs = [
+    HOMEPAGE_HERO_PAGE_SLUG,
+    TRUSTED_SECTION_PAGE_SLUG,
+    TRUSTED_BRANDS_PAGE_SLUG,
+    WHY_CHOOSE_PAGE_SLUG,
+    INDUSTRIES_PAGE_SLUG,
+    MAXIMIZE_SECTION_PAGE_SLUG,
+    LOCAL_AREAS_PAGE_SLUG,
+    AWARDS_SECTION_PAGE_SLUG,
+    SAAS_SECTION_PAGE_SLUG,
+  ];
+  const pages = allPages.filter((page) => !protectedPageSlugs.includes(page.slug));
 
   return (
     <div className="space-y-6">

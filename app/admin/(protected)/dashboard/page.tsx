@@ -86,9 +86,6 @@ export default async function DashboardPage() {
       <div className="rounded-2xl bg-white border border-red-200 p-6 text-red-500">
         <h1 className="text-lg font-bold mb-1">Error Loading Dashboard</h1>
         <p className="text-sm">Please check the server logs for more details.</p>
-        <pre className="mt-4 bg-red-50 p-4 rounded-lg text-xs text-red-700 overflow-auto">
-          {JSON.stringify(error, null, 2)}
-        </pre>
       </div>
     );
   }

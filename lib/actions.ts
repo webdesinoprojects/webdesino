@@ -8,6 +8,14 @@ import { sendEnquiryEmail } from "@/lib/email";
 import { logEmployeeAction } from "@/lib/employee-logger";
 import { getHeroShowcaseItems } from "@/lib/data";
 import { getHomepageHeroContent, HOMEPAGE_HERO_PAGE_SLUG } from "@/lib/homepage-hero";
+import { getTrustedSectionContent, TRUSTED_SECTION_PAGE_SLUG } from "@/lib/trusted-section";
+import { getTrustedBrandsContent, TRUSTED_BRANDS_PAGE_SLUG } from "@/lib/trusted-brands";
+import { getWhyChooseContent, WHY_CHOOSE_PAGE_SLUG } from "@/lib/why-choose";
+import { getIndustriesContent, INDUSTRIES_PAGE_SLUG } from "@/lib/industries-section";
+import { getMaximizeSectionContent, MAXIMIZE_SECTION_PAGE_SLUG } from "@/lib/maximize-section";
+import { getLocalAreasContent, LOCAL_AREAS_PAGE_SLUG } from "@/lib/local-areas-section";
+import { AWARDS_SECTION_PAGE_SLUG, getAwardsSectionContent } from "@/lib/awards-section";
+import { getSaasSectionContent, SAAS_SECTION_PAGE_SLUG } from "@/lib/saas-section";
 import { z } from "zod";
 
 /** Safely read a return-path from FormData. Only allows known internal prefixes. */
@@ -708,6 +716,20 @@ export async function deletePage(id: string) {
     select: { slug: true },
   });
 
+  if (
+    existingPage?.slug === HOMEPAGE_HERO_PAGE_SLUG ||
+    existingPage?.slug === TRUSTED_SECTION_PAGE_SLUG ||
+    existingPage?.slug === TRUSTED_BRANDS_PAGE_SLUG ||
+    existingPage?.slug === WHY_CHOOSE_PAGE_SLUG ||
+    existingPage?.slug === INDUSTRIES_PAGE_SLUG ||
+    existingPage?.slug === MAXIMIZE_SECTION_PAGE_SLUG ||
+    existingPage?.slug === LOCAL_AREAS_PAGE_SLUG ||
+    existingPage?.slug === AWARDS_SECTION_PAGE_SLUG ||
+    existingPage?.slug === SAAS_SECTION_PAGE_SLUG
+  ) {
+    throw new Error("This protected CMS page cannot be deleted from the generic pages table.");
+  }
+
   await prisma.page.delete({
     where: { id },
   });
@@ -751,6 +773,278 @@ export async function updateHomepageHero(formData: FormData) {
   revalidatePath("/admin/pages/home-hero");
   await logEmployeeAction("pages", "Updated homepage hero section");
   redirect("/admin/pages/home-hero?saved=1");
+}
+
+export async function updateTrustedSection(formData: FormData) {
+  const contentRaw = formData.get("content") as string;
+
+  let parsedContent = {};
+  try {
+    parsedContent = contentRaw ? JSON.parse(contentRaw) : {};
+  } catch (error) {
+    console.error("Error parsing trusted section content JSON", error);
+  }
+
+  const trustedSection = getTrustedSectionContent(parsedContent);
+
+  await prisma.page.upsert({
+    where: { slug: TRUSTED_SECTION_PAGE_SLUG },
+    update: {
+      title: "Trusted Section",
+      description: "Homepage trusted company stats and certified partner content.",
+      content: { trustedSection },
+    },
+    create: {
+      title: "Trusted Section",
+      slug: TRUSTED_SECTION_PAGE_SLUG,
+      description: "Homepage trusted company stats and certified partner content.",
+      content: { trustedSection },
+    },
+  });
+
+  revalidatePath("/");
+  revalidatePath("/admin/pages");
+  revalidatePath("/admin/pages/trusted-section");
+  await logEmployeeAction("pages", "Updated trusted section content");
+  redirect("/admin/pages/trusted-section?saved=1");
+}
+
+export async function updateTrustedBrands(formData: FormData) {
+  const contentRaw = formData.get("content") as string;
+
+  let parsedContent = {};
+  try {
+    parsedContent = contentRaw ? JSON.parse(contentRaw) : {};
+  } catch (error) {
+    console.error("Error parsing trusted brands content JSON", error);
+  }
+
+  const trustedBrands = getTrustedBrandsContent(parsedContent);
+
+  await prisma.page.upsert({
+    where: { slug: TRUSTED_BRANDS_PAGE_SLUG },
+    update: {
+      title: "Trusted Brands",
+      description: "Homepage trusted brand carousel content.",
+      content: { trustedBrands },
+    },
+    create: {
+      title: "Trusted Brands",
+      slug: TRUSTED_BRANDS_PAGE_SLUG,
+      description: "Homepage trusted brand carousel content.",
+      content: { trustedBrands },
+    },
+  });
+
+  revalidatePath("/");
+  revalidatePath("/admin/pages");
+  revalidatePath("/admin/pages/trusted-brands");
+  await logEmployeeAction("pages", "Updated trusted brand carousel content");
+  redirect("/admin/pages/trusted-brands?saved=1");
+}
+
+export async function updateWhyChoose(formData: FormData) {
+  const contentRaw = formData.get("content") as string;
+
+  let parsedContent = {};
+  try {
+    parsedContent = contentRaw ? JSON.parse(contentRaw) : {};
+  } catch (error) {
+    console.error("Error parsing why choose content JSON", error);
+  }
+
+  const whyChoose = getWhyChooseContent(parsedContent);
+
+  await prisma.page.upsert({
+    where: { slug: WHY_CHOOSE_PAGE_SLUG },
+    update: {
+      title: "Why Choose WebDesino",
+      description: "Homepage why choose section content and vision card image.",
+      content: { whyChoose },
+    },
+    create: {
+      title: "Why Choose WebDesino",
+      slug: WHY_CHOOSE_PAGE_SLUG,
+      description: "Homepage why choose section content and vision card image.",
+      content: { whyChoose },
+    },
+  });
+
+  revalidatePath("/");
+  revalidatePath("/admin/pages");
+  revalidatePath("/admin/pages/why-choose");
+  await logEmployeeAction("pages", "Updated why choose section content");
+  redirect("/admin/pages/why-choose?saved=1");
+}
+
+export async function updateIndustriesSection(formData: FormData) {
+  const contentRaw = formData.get("content") as string;
+
+  let parsedContent = {};
+  try {
+    parsedContent = contentRaw ? JSON.parse(contentRaw) : {};
+  } catch (error) {
+    console.error("Error parsing industries content JSON", error);
+  }
+
+  const industries = getIndustriesContent(parsedContent);
+
+  await prisma.page.upsert({
+    where: { slug: INDUSTRIES_PAGE_SLUG },
+    update: {
+      title: "Industries Section",
+      description: "Homepage industries section content, icons, and example links.",
+      content: { industries },
+    },
+    create: {
+      title: "Industries Section",
+      slug: INDUSTRIES_PAGE_SLUG,
+      description: "Homepage industries section content, icons, and example links.",
+      content: { industries },
+    },
+  });
+
+  revalidatePath("/");
+  revalidatePath("/admin/pages");
+  revalidatePath("/admin/pages/industries");
+  await logEmployeeAction("pages", "Updated industries section content");
+  redirect("/admin/pages/industries?saved=1");
+}
+
+export async function updateMaximizeSection(formData: FormData) {
+  const contentRaw = formData.get("content") as string;
+
+  let parsedContent = {};
+  try {
+    parsedContent = contentRaw ? JSON.parse(contentRaw) : {};
+  } catch (error) {
+    console.error("Error parsing maximize section content JSON", error);
+  }
+
+  const maximizeSection = getMaximizeSectionContent(parsedContent);
+
+  await prisma.page.upsert({
+    where: { slug: MAXIMIZE_SECTION_PAGE_SLUG },
+    update: {
+      title: "Maximize Section",
+      description: "Homepage web design and development CTA section content.",
+      content: { maximizeSection },
+    },
+    create: {
+      title: "Maximize Section",
+      slug: MAXIMIZE_SECTION_PAGE_SLUG,
+      description: "Homepage web design and development CTA section content.",
+      content: { maximizeSection },
+    },
+  });
+
+  revalidatePath("/");
+  revalidatePath("/admin/pages");
+  revalidatePath("/admin/pages/maximize-section");
+  await logEmployeeAction("pages", "Updated maximize section content");
+  redirect("/admin/pages/maximize-section?saved=1");
+}
+
+export async function updateLocalAreasSection(formData: FormData) {
+  const contentRaw = formData.get("content") as string;
+
+  let parsedContent = {};
+  try {
+    parsedContent = contentRaw ? JSON.parse(contentRaw) : {};
+  } catch (error) {
+    console.error("Error parsing local areas content JSON", error);
+  }
+
+  const localAreas = getLocalAreasContent(parsedContent);
+
+  await prisma.page.upsert({
+    where: { slug: LOCAL_AREAS_PAGE_SLUG },
+    update: {
+      title: "Local Areas Section",
+      description: "Homepage local area copy, map embed, location links, and CTA.",
+      content: { localAreas },
+    },
+    create: {
+      title: "Local Areas Section",
+      slug: LOCAL_AREAS_PAGE_SLUG,
+      description: "Homepage local area copy, map embed, location links, and CTA.",
+      content: { localAreas },
+    },
+  });
+
+  revalidatePath("/");
+  revalidatePath("/admin/pages");
+  revalidatePath("/admin/pages/local-areas");
+  await logEmployeeAction("pages", "Updated local areas section content");
+  redirect("/admin/pages/local-areas?saved=1");
+}
+
+export async function updateAwardsSection(formData: FormData) {
+  const contentRaw = formData.get("content") as string;
+
+  let parsedContent = {};
+  try {
+    parsedContent = contentRaw ? JSON.parse(contentRaw) : {};
+  } catch (error) {
+    console.error("Error parsing awards section content JSON", error);
+  }
+
+  const awardsSection = getAwardsSectionContent(parsedContent);
+
+  await prisma.page.upsert({
+    where: { slug: AWARDS_SECTION_PAGE_SLUG },
+    update: {
+      title: "Awards Section",
+      description: "Homepage awards heading, background ticker word, and award cards.",
+      content: { awardsSection },
+    },
+    create: {
+      title: "Awards Section",
+      slug: AWARDS_SECTION_PAGE_SLUG,
+      description: "Homepage awards heading, background ticker word, and award cards.",
+      content: { awardsSection },
+    },
+  });
+
+  revalidatePath("/");
+  revalidatePath("/admin/pages");
+  revalidatePath("/admin/pages/awards-section");
+  await logEmployeeAction("pages", "Updated awards section content");
+  redirect("/admin/pages/awards-section?saved=1");
+}
+
+export async function updateSaasSection(formData: FormData) {
+  const contentRaw = formData.get("content") as string;
+
+  let parsedContent = {};
+  try {
+    parsedContent = contentRaw ? JSON.parse(contentRaw) : {};
+  } catch (error) {
+    console.error("Error parsing SaaS section content JSON", error);
+  }
+
+  const saasSection = getSaasSectionContent(parsedContent);
+
+  await prisma.page.upsert({
+    where: { slug: SAAS_SECTION_PAGE_SLUG },
+    update: {
+      title: "SaaS Section",
+      description: "Homepage SaaS/process copy, CTA, and process cards.",
+      content: { saasSection },
+    },
+    create: {
+      title: "SaaS Section",
+      slug: SAAS_SECTION_PAGE_SLUG,
+      description: "Homepage SaaS/process copy, CTA, and process cards.",
+      content: { saasSection },
+    },
+  });
+
+  revalidatePath("/");
+  revalidatePath("/admin/pages");
+  revalidatePath("/admin/pages/saas-section");
+  await logEmployeeAction("pages", "Updated SaaS section content");
+  redirect("/admin/pages/saas-section?saved=1");
 }
 
 export async function createTeamMember(data: any) {

@@ -14,6 +14,14 @@ import { generateWebSiteSchema } from "@/lib/seo";
 import { prisma } from "@/lib/prisma";
 import { getStorageUrl } from "@/lib/utils";
 import { getHomepageHeroContent, HOMEPAGE_HERO_PAGE_SLUG } from "@/lib/homepage-hero";
+import { getTrustedSectionContent, TRUSTED_SECTION_PAGE_SLUG } from "@/lib/trusted-section";
+import { getTrustedBrandsContent, TRUSTED_BRANDS_PAGE_SLUG } from "@/lib/trusted-brands";
+import { getWhyChooseContent, WHY_CHOOSE_PAGE_SLUG } from "@/lib/why-choose";
+import { getIndustriesContent, INDUSTRIES_PAGE_SLUG } from "@/lib/industries-section";
+import { getMaximizeSectionContent, MAXIMIZE_SECTION_PAGE_SLUG } from "@/lib/maximize-section";
+import { getLocalAreasContent, LOCAL_AREAS_PAGE_SLUG } from "@/lib/local-areas-section";
+import { AWARDS_SECTION_PAGE_SLUG, getAwardsSectionContent } from "@/lib/awards-section";
+import { getSaasSectionContent, SAAS_SECTION_PAGE_SLUG } from "@/lib/saas-section";
 
 const Logo = getStorageUrl("/logo.png");
 
@@ -90,6 +98,30 @@ export default async function Home() {
   const homePage = await prisma.page.findUnique({
     where: { slug: HOMEPAGE_HERO_PAGE_SLUG },
   });
+  const trustedSectionPage = await prisma.page.findUnique({
+    where: { slug: TRUSTED_SECTION_PAGE_SLUG },
+  });
+  const trustedBrandsPage = await prisma.page.findUnique({
+    where: { slug: TRUSTED_BRANDS_PAGE_SLUG },
+  });
+  const whyChoosePage = await prisma.page.findUnique({
+    where: { slug: WHY_CHOOSE_PAGE_SLUG },
+  });
+  const industriesPage = await prisma.page.findUnique({
+    where: { slug: INDUSTRIES_PAGE_SLUG },
+  });
+  const maximizeSectionPage = await prisma.page.findUnique({
+    where: { slug: MAXIMIZE_SECTION_PAGE_SLUG },
+  });
+  const localAreasPage = await prisma.page.findUnique({
+    where: { slug: LOCAL_AREAS_PAGE_SLUG },
+  });
+  const awardsSectionPage = await prisma.page.findUnique({
+    where: { slug: AWARDS_SECTION_PAGE_SLUG },
+  });
+  const saasSectionPage = await prisma.page.findUnique({
+    where: { slug: SAAS_SECTION_PAGE_SLUG },
+  });
   const faqs = await prisma.faq.findMany({
     orderBy: { order: 'asc' },
   });
@@ -98,6 +130,14 @@ export default async function Home() {
   const results = getResults();
   const heroShowcaseItems = getHeroShowcaseItems();
   const homepageHeroContent = getHomepageHeroContent(homePage?.content, heroShowcaseItems);
+  const trustedSectionContent = getTrustedSectionContent(trustedSectionPage?.content);
+  const trustedBrandsContent = getTrustedBrandsContent(trustedBrandsPage?.content);
+  const whyChooseContent = getWhyChooseContent(whyChoosePage?.content, features);
+  const industriesContent = getIndustriesContent(industriesPage?.content);
+  const maximizeSectionContent = getMaximizeSectionContent(maximizeSectionPage?.content);
+  const localAreasContent = getLocalAreasContent(localAreasPage?.content);
+  const awardsSectionContent = getAwardsSectionContent(awardsSectionPage?.content);
+  const saasSectionContent = getSaasSectionContent(saasSectionPage?.content);
   
   const jsonLd = generateWebSiteSchema();
 
@@ -110,22 +150,22 @@ export default async function Home() {
       <main>
         <Hero showcaseItems={heroShowcaseItems} content={homepageHeroContent} />
         <NewsTicker />
-        <TrustedSection />
+        <TrustedSection content={trustedSectionContent} brandsContent={trustedBrandsContent} />
         <ServicesOverview categories={services} />
         <ServicesPills />
-        <WhyChooseUs features={features} />
-        <IndustriesSection />
+        <WhyChooseUs features={features} content={whyChooseContent} />
+        <IndustriesSection content={industriesContent} />
         {/* <Suspense fallback={<div>Loading portfolio...</div>}>
           <Portfolio projects={projects} />
         </Suspense> */}
-        <MaximizeSection />
+        <MaximizeSection content={maximizeSectionContent} />
         <HoverSection />
         <SpecialistsSection />
-        <LocalAreasSection />
+        <LocalAreasSection content={localAreasContent} />
         <BlogSection />
-        <AwardsSection />
+        <AwardsSection content={awardsSectionContent} />
         <BeforeAfterSection />
-        <SaaSSection />
+        <SaaSSection content={saasSectionContent} />
         <SEOAuditSection />
         <ResultsSection results={results} />
         {/* <Suspense fallback={<div>Loading case studies...</div>}>

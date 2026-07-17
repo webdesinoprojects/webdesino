@@ -1,15 +1,53 @@
 "use client";
 
-import { Star, Award, Trophy, Medal } from "lucide-react";
+import {
+	Award,
+	BadgeCheck,
+	Crown,
+	Flag,
+	Gem,
+	Handshake,
+	Medal,
+	Rocket,
+	ShieldCheck,
+	Sparkles,
+	Star,
+	Target,
+	ThumbsUp,
+	Trophy,
+	Zap,
+} from "lucide-react";
+import {
+	defaultAwardsSectionContent,
+	type AwardsIconName,
+	type AwardsSectionContent,
+} from "@/lib/awards-section";
 
-const awards = [
-	{ title: "Best Web Development Agency 2024", org: "Delhi Business Awards", icon: Trophy },
-	{ title: "Top SEO Services Provider", org: "Digital India Awards", icon: Award },
-	{ title: "Excellence in Digital Marketing", org: "Marketing Excellence Awards", icon: Medal },
-	{ title: "Innovation in Web Design", org: "Design Excellence Awards", icon: Star },
-];
+const iconMap: Record<AwardsIconName, typeof Trophy> = {
+	Trophy,
+	Award,
+	Medal,
+	Star,
+	BadgeCheck,
+	Crown,
+	Sparkles,
+	ShieldCheck,
+	Gem,
+	Rocket,
+	Flag,
+	Target,
+	Zap,
+	ThumbsUp,
+	Handshake,
+};
 
-export default function AwardsSection() {
+interface AwardsSectionProps {
+	content?: AwardsSectionContent;
+}
+
+export default function AwardsSection({
+	content = defaultAwardsSectionContent,
+}: AwardsSectionProps) {
 	return (
 		<section className="py-2 lg:py-4 bg-slate-50 relative overflow-hidden">
 			{/* Animated background */}
@@ -26,7 +64,7 @@ export default function AwardsSection() {
 					{/* Animated scrolling ticker */}
 					<div className="my-6 overflow-hidden">
 						<div className="flex gap-8 animate-scroll-horizontal">
-							{["Awards", "Awards", "Awards", "Awards", "Awards", "Awards", "Awards", "Awards"].map((text, idx) => (
+							{Array.from({ length: 8 }, () => content.backgroundWord).map((text, idx) => (
 								<div
 									key={idx}
 									className="flex-shrink-0 text-6xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#111184] to-[#111184] opacity-5"
@@ -38,26 +76,25 @@ export default function AwardsSection() {
 					</div>
 
 					<h2 className="text-4xl lg:text-6xl font-bold text-center mb-4 animate-scale-in text-slate-900">
-						<span className="text-[#111184]">Our Work Speaks Louder</span>
+						<span className="text-[#111184]">{content.titleLineOne}</span>
 					</h2>
 					<h2
 						className="text-4xl lg:text-6xl font-bold text-center mb-6 animate-scale-in text-slate-900"
 						style={{ animationDelay: "0.1s" }}
 					>
-						<span className="text-[#111184]">with Awards</span>
+						<span className="text-[#111184]">{content.titleLineTwo}</span>
 					</h2>
 					<p
 						className="text-center text-slate-600 mb-10 text-lg max-w-3xl mx-auto animate-fade-in"
 						style={{ animationDelay: "0.2s" }}
 					>
-						Recognized for professional work and high-quality digital solutions that set industry benchmarks. Award-winning web
-						development and SEO services trusted by 100+ businesses in Delhi NCR.
+						{content.description}
 					</p>
 
 					{/* Awards Grid with 3D Effect */}
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-0">
-						{awards.map((award, idx) => {
-							const IconComponent = award.icon;
+						{content.cards.map((award, idx) => {
+							const IconComponent = iconMap[award.iconName] || Trophy;
 							return (
 								<div
 									key={idx}
@@ -79,7 +116,7 @@ export default function AwardsSection() {
 											</h3>
 											<div className="w-12 h-1 bg-gray-100 group-hover:bg-white/30 mx-auto my-3 rounded-full transition-colors" />
 											<p className="text-sm font-medium text-slate-500 group-hover:text-white/90 transition-colors uppercase tracking-wide">
-												{award.org}
+												{award.organization}
 											</p>
 										</div>
 									</div>
