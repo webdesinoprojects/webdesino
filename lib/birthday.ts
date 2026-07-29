@@ -22,6 +22,7 @@ export async function getBirthdayWish(slug: string): Promise<BirthdayWish | null
     recipientName: wish.recipientName,
     senderName: wish.senderName,
     message: wish.message,
+    copy: wish.copy && typeof wish.copy === "object" ? wish.copy : {},
     revealPhoto: wish.revealPhoto || null,
     memories: Array.isArray(wish.memories) ? wish.memories : [],
     music: wish.music || null,

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import DogScrapbookBirthdayExperience from "@/components/birthday/DogScrapbookBirthdayExperience";
+import HeartYearBirthdayExperience from "@/components/birthday/HeartYearBirthdayExperience";
 import KawaiiBirthdayExperience from "@/components/birthday/KawaiiBirthdayExperience";
+import RomanticBirthdayExperience from "@/components/birthday/RomanticBirthdayExperience";
 import { getBirthdayWish } from "@/lib/birthday";
 
 type BirthdayWishPageProps = {
@@ -31,6 +34,18 @@ export default async function BirthdayWishPage({ params }: BirthdayWishPageProps
 
   if (!wish) {
     notFound();
+  }
+
+  if (wish.templateId === "romantic-puzzle") {
+    return <RomanticBirthdayExperience wish={wish} />;
+  }
+
+  if (wish.templateId === "heart-year") {
+    return <HeartYearBirthdayExperience wish={wish} />;
+  }
+
+  if (wish.templateId === "dog-scrapbook") {
+    return <DogScrapbookBirthdayExperience wish={wish} />;
   }
 
   return <KawaiiBirthdayExperience wish={wish} />;

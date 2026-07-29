@@ -8,6 +8,9 @@ const birthdayPhotoSchema = new Schema(
     name: { type: String, default: null },
     size: { type: Number, default: null },
     mimeType: { type: String, default: null },
+    storageProvider: { type: String, default: null },
+    fileId: { type: String, default: null },
+    filePath: { type: String, default: null },
     message: { type: String, default: "" },
   },
   { _id: false }
@@ -19,6 +22,9 @@ const birthdayMediaSchema = new Schema(
     name: { type: String, default: null },
     size: { type: Number, default: null },
     mimeType: { type: String, default: null },
+    storageProvider: { type: String, default: null },
+    fileId: { type: String, default: null },
+    filePath: { type: String, default: null },
   },
   { _id: false }
 );
@@ -30,7 +36,8 @@ const birthdayWishSchema = new Schema(
     recipientName: { type: String, required: true },
     senderName: { type: String, required: true },
     message: { type: String, required: true },
-    passcode: { type: String, required: true },
+    copy: { type: Schema.Types.Mixed, default: {} },
+    passcode: { type: String, default: null },
     revealPhoto: { type: birthdayPhotoSchema, default: null },
     memories: { type: [birthdayPhotoSchema], default: [] },
     music: { type: birthdayMediaSchema, default: null },

@@ -20,26 +20,58 @@ const ALLOWED_AUDIO_TYPES = [
   "audio/webm",
   "audio/x-wav",
 ];
-const TEMPLATE_IDS = ["kawaii-unlock"] as const;
+const TEMPLATE_IDS = ["kawaii-unlock", "romantic-puzzle", "heart-year", "dog-scrapbook"] as const;
 const CAKE_THEMES = ["strawberry", "chocolate", "matcha", "taro"] as const;
 
 const birthdaySchema = z.object({
   templateId: z.enum(TEMPLATE_IDS),
   recipientName: z.string().trim().min(2, "Recipient name is required").max(60),
-  senderName: z.string().trim().min(2, "Sender name is required").max(60),
-  passcode: z.string().trim().regex(/^\d{4}$/, "Passcode must be exactly 4 numbers"),
-  message: z.string().trim().min(20, "Write at least 20 characters").max(1200),
+  senderName: z.string().trim().max(60).default(""),
+  passcode: z.string().trim().max(4).default(""),
+  message: z.string().trim().max(1200).default(""),
   cakeTheme: z.enum(CAKE_THEMES),
   finalMessage: z.string().trim().max(240),
+  copy: z
+    .record(z.string(), z.union([z.string().max(400), z.array(z.string().max(80)).max(24)]))
+    .default({}),
+}).superRefine((data, ctx) => {
+  if (data.senderName.length < 2) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["senderName"],
+      message: "Sender name is required",
+    });
+  }
+
+  if (data.templateId !== "kawaii-unlock" && data.templateId !== "dog-scrapbook") return;
+
+  if (!/^\d{4}$/.test(data.passcode)) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["passcode"],
+      message: "Passcode must be exactly 4 numbers",
+    });
+  }
+
+  if (data.message.length < 20) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["message"],
+      message: "Write at least 20 characters",
+    });
+  }
 });
+
+export type BirthdayTemplateId = (typeof TEMPLATE_IDS)[number];
 
 export type BirthdayWish = {
   id: string;
   slug: string;
-  templateId: "kawaii-unlock";
+  templateId: BirthdayTemplateId;
   recipientName: string;
   senderName: string;
   message: string;
+  copy: BirthdayCopy;
   revealPhoto: BirthdayPhoto | null;
   memories: BirthdayPhoto[];
   music: BirthdayMedia | null;
@@ -55,6 +87,9 @@ type BirthdayPhoto = {
   name: string | null;
   size: number | null;
   mimeType: string | null;
+  storageProvider?: "imagekit" | "supabase";
+  fileId?: string | null;
+  filePath?: string | null;
   message?: string;
 };
 
@@ -63,7 +98,12 @@ type BirthdayMedia = {
   name: string | null;
   size: number | null;
   mimeType: string | null;
+  storageProvider?: "imagekit" | "supabase";
+  fileId?: string | null;
+  filePath?: string | null;
 };
+
+export type BirthdayCopy = Record<string, string | string[]>;
 
 function sanitizeText(value: FormDataEntryValue | null, max: number) {
   if (value == null) return "";
@@ -90,6 +130,36 @@ function createSlugBase(value: string) {
   return slug || "birthday";
 }
 
+function parseCopy(value: FormDataEntryValue | null): BirthdayCopy {
+  if (!value) return {};
+
+  try {
+    const raw = JSON.parse(String(value));
+    if (!raw || typeof raw !== "object" || Array.isArray(raw)) return {};
+
+    return Object.entries(raw).reduce<BirthdayCopy>((copy, [key, item]) => {
+      const safeKey = key.replace(/[^a-zA-Z0-9_]/g, "").substring(0, 60);
+      if (!safeKey) return copy;
+
+      if (Array.isArray(item)) {
+        copy[safeKey] = item
+          .map((entry) => String(entry || "").trim().replace(/[<>]/g, "").substring(0, 80))
+          .filter(Boolean)
+          .slice(0, 24);
+        return copy;
+      }
+
+      if (typeof item === "string" || typeof item === "number") {
+        copy[safeKey] = String(item).trim().replace(/[<>]/g, "").substring(0, 400);
+      }
+
+      return copy;
+    }, {});
+  } catch {
+    return {};
+  }
+}
+
 async function generateUniqueSlug(recipientName: string) {
   await connectToMongo();
   const base = createSlugBase(recipientName);
@@ -114,6 +184,75 @@ function getSupabaseStorageClient() {
   return createClient(supabaseUrl, serviceRoleKey, {
     auth: { persistSession: false, autoRefreshToken: false },
   });
+}
+
+function getImageKitBirthdayConfig() {
+  const privateKey = process.env.IMAGEKIT_PRIVATE_KEY;
+  if (!privateKey) return null;
+
+  const rootFolder = process.env.IMAGEKIT_BIRTHDAY_FOLDER || "/birthday";
+
+  return {
+    privateKey,
+    rootFolder: rootFolder.startsWith("/") ? rootFolder : `/${rootFolder}`,
+  };
+}
+
+async function uploadBirthdayFileToImageKit({
+  file,
+  slug,
+  folder,
+  index,
+}: {
+  file: File;
+  slug: string;
+  folder: "reveal" | "memories" | "music" | "voice";
+  index: number;
+}): Promise<BirthdayMedia> {
+  const config = getImageKitBirthdayConfig();
+  if (!config) throw new Error("ImageKit birthday storage is not configured");
+
+  const buffer = Buffer.from(await file.arrayBuffer());
+  const safeName = sanitizeFilename(file.name) || `${folder}-${index + 1}`;
+  const uploadFolder = `${config.rootFolder}/${slug}/${folder}`.replace(/\/{2,}/g, "/");
+  const body = new FormData();
+
+  body.append("file", new Blob([new Uint8Array(buffer)], { type: file.type }), safeName);
+  body.append("fileName", `${index + 1}-${Date.now()}-${safeName}`);
+  body.append("folder", uploadFolder);
+  body.append("useUniqueFileName", "true");
+
+  const response = await fetch("https://upload.imagekit.io/api/v1/files/upload", {
+    method: "POST",
+    headers: {
+      Authorization: `Basic ${Buffer.from(`${config.privateKey}:`).toString("base64")}`,
+    },
+    body,
+  });
+
+  const data = (await response.json().catch(() => null)) as
+    | {
+        url?: string;
+        fileId?: string;
+        filePath?: string;
+        name?: string;
+        message?: string;
+      }
+    | null;
+
+  if (!response.ok || !data?.url) {
+    throw new Error(data?.message || "ImageKit upload failed");
+  }
+
+  return {
+    url: data.url,
+    name: data.name || file.name,
+    size: file.size,
+    mimeType: file.type,
+    storageProvider: "imagekit",
+    fileId: data.fileId || null,
+    filePath: data.filePath || null,
+  };
 }
 
 async function uploadBirthdayFile({
@@ -147,6 +286,11 @@ async function uploadBirthdayFile({
     );
   }
 
+  const imageKitConfig = getImageKitBirthdayConfig();
+  if (imageKitConfig) {
+    return uploadBirthdayFileToImageKit({ file, slug, folder, index });
+  }
+
   const supabase = getSupabaseStorageClient();
   const buffer = Buffer.from(await file.arrayBuffer());
   const storagePath = `birthday/${slug}/${folder}/${index + 1}-${Date.now()}-${sanitizeFilename(file.name)}`;
@@ -166,6 +310,8 @@ async function uploadBirthdayFile({
     name: file.name,
     size: file.size,
     mimeType: file.type,
+    storageProvider: "supabase",
+    filePath: storagePath,
   };
 }
 
@@ -179,6 +325,7 @@ export async function createBirthdayWish(formData: FormData) {
     cakeTheme: sanitizeText(formData.get("cakeTheme"), 40) || "strawberry",
     finalMessage:
       sanitizeText(formData.get("finalMessage"), 240) || "Thank you for celebrating with me!",
+    copy: parseCopy(formData.get("copy")),
   });
 
   if (!parsed.success) {
@@ -188,8 +335,12 @@ export async function createBirthdayWish(formData: FormData) {
     };
   }
 
+  const isKawaiiTemplate = parsed.data.templateId === "kawaii-unlock";
+  const isRomanticTemplate = parsed.data.templateId === "romantic-puzzle";
+  const isHeartTemplate = parsed.data.templateId === "heart-year";
+  const isDogTemplate = parsed.data.templateId === "dog-scrapbook";
   const revealFile = formData.get("revealPhoto");
-  if (!(revealFile instanceof File) || revealFile.size <= 0) {
+  if ((isKawaiiTemplate || isDogTemplate) && (!(revealFile instanceof File) || revealFile.size <= 0)) {
     return { success: false, error: "Main reveal photo is required" };
   }
 
@@ -197,6 +348,18 @@ export async function createBirthdayWish(formData: FormData) {
     .getAll("memories")
     .filter((file): file is File => file instanceof File && file.size > 0)
     .slice(0, MAX_MEMORIES);
+
+  if (isRomanticTemplate && memoryFiles.length < 4) {
+    return { success: false, error: "Please upload at least 4 photos for this template" };
+  }
+
+  if (isHeartTemplate && memoryFiles.length !== 3) {
+    return { success: false, error: "Please upload exactly 3 photos for the heart template" };
+  }
+
+  if (isDogTemplate && memoryFiles.length < 4) {
+    return { success: false, error: "Please upload at least 4 photos for the dog scrapbook template" };
+  }
 
   const memoryMessages = formData
     .getAll("memoryMessages")
@@ -209,30 +372,32 @@ export async function createBirthdayWish(formData: FormData) {
   try {
     slug = await generateUniqueSlug(parsed.data.recipientName);
 
-    let revealPhoto: BirthdayPhoto;
-    try {
-      revealPhoto = await uploadBirthdayFile({
-        file: revealFile,
-        slug,
-        folder: "reveal",
-        index: 0,
-        allowedTypes: ALLOWED_IMAGE_TYPES,
-        maxBytes: MAX_IMAGE_BYTES,
-      });
-    } catch (error) {
-      const message = error instanceof Error ? error.message : "";
-      const safeMessages = [
-        "File is empty",
-        "Each image must be under 3 MB",
-        "Only JPG, PNG, and WebP images are allowed",
-      ];
+    let revealPhoto: BirthdayPhoto | null = null;
+    if ((isKawaiiTemplate || isDogTemplate) && revealFile instanceof File) {
+      try {
+        revealPhoto = await uploadBirthdayFile({
+          file: revealFile,
+          slug,
+          folder: "reveal",
+          index: 0,
+          allowedTypes: ALLOWED_IMAGE_TYPES,
+          maxBytes: MAX_IMAGE_BYTES,
+        });
+      } catch (error) {
+        const message = error instanceof Error ? error.message : "";
+        const safeMessages = [
+          "File is empty",
+          "Each image must be under 3 MB",
+          "Only JPG, PNG, and WebP images are allowed",
+        ];
 
-      if (safeMessages.includes(message)) {
-        return { success: false, error: message };
+        if (safeMessages.includes(message)) {
+          return { success: false, error: message };
+        }
+
+        console.error("Birthday reveal upload failed:", message || error);
+        return { success: false, error: "Image upload failed. Please try again later." };
       }
-
-      console.error("Birthday reveal upload failed:", message || error);
-      return { success: false, error: "Image upload failed. Please try again later." };
     }
 
     const memories: BirthdayPhoto[] = [];
@@ -298,7 +463,7 @@ export async function createBirthdayWish(formData: FormData) {
     }
 
     let voiceRecording: BirthdayMedia | null = null;
-    if (voiceFile instanceof File && voiceFile.size > 0) {
+    if (isKawaiiTemplate && voiceFile instanceof File && voiceFile.size > 0) {
       try {
         voiceRecording = await uploadBirthdayFile({
           file: voiceFile,
@@ -328,11 +493,17 @@ export async function createBirthdayWish(formData: FormData) {
     await BirthdayWishModel.create({
       slug,
       ...parsed.data,
+      senderName: parsed.data.senderName || "Someone",
+      passcode: isKawaiiTemplate || isDogTemplate ? parsed.data.passcode : null,
+      message:
+        parsed.data.message ||
+        parsed.data.finalMessage ||
+        `Happy birthday, ${parsed.data.recipientName}!`,
       revealPhoto,
       memories,
       music,
       voiceRecording,
-      photos: [revealPhoto, ...memories],
+      photos: revealPhoto ? [revealPhoto, ...memories] : memories,
     });
 
     return { success: true, slug };

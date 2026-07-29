@@ -32,6 +32,7 @@ export default function KawaiiBirthdayExperience({ wish }: { wish: BirthdayWish 
 
   const revealPhoto = wish.revealPhoto?.url || wish.photos[0]?.url || "";
   const memories = wish.memories?.length ? wish.memories : wish.photos.slice(1);
+  const copyText = (key: string, fallback: string) => getCopyText(wish, key, fallback);
 
   useEffect(() => {
     if (step !== 4.5) return;
@@ -230,10 +231,11 @@ export default function KawaiiBirthdayExperience({ wish }: { wish: BirthdayWish 
           {step === 1 && (
             <Screen>
               <h1 className="text-center text-5xl font-black text-[#d35c82] drop-shadow-[2px_2px_0_#fff]">
-                A Special Surprise! <Sparkles className="inline h-9 w-9 fill-[#d35c82]" />
+                {copyText("entryTitle", "A Special Surprise!")}{" "}
+                <Sparkles className="inline h-9 w-9 fill-[#d35c82]" />
               </h1>
               <p className="mt-4 text-center text-lg font-black">
-                Are you ready to see it, {wish.recipientName}?
+                {copyText("entryQuestion", `Are you ready to see it, ${wish.recipientName}?`)}
               </p>
 
               <div className="mt-8 flex items-end justify-center gap-8">
@@ -247,7 +249,7 @@ export default function KawaiiBirthdayExperience({ wish }: { wish: BirthdayWish 
 
               {noMoved ? (
                 <p className="mt-4 text-center text-base font-black text-[#e63946]">
-                  Don't be mean. The gift is waiting.
+                  {copyText("noButtonMessage", "Don't be mean. The gift is waiting.")}
                 </p>
               ) : null}
 
@@ -260,7 +262,8 @@ export default function KawaiiBirthdayExperience({ wish }: { wish: BirthdayWish 
                     setStep(3);
                   }}
                 >
-                  Yes, open it! <Heart className="h-5 w-5 fill-[#5c3a21]" />
+                  {copyText("yesButton", "Yes, open it!")}{" "}
+                  <Heart className="h-5 w-5 fill-[#5c3a21]" />
                 </button>
                 <button
                   type="button"
@@ -269,7 +272,7 @@ export default function KawaiiBirthdayExperience({ wish }: { wish: BirthdayWish 
                   onClick={handleNoMove}
                   style={{ transform: `translate(${noOffset.x}px, ${noOffset.y}px)` }}
                 >
-                  No, go away
+                  {copyText("noButton", "No, go away")}
                 </button>
               </div>
             </Screen>
@@ -277,9 +280,12 @@ export default function KawaiiBirthdayExperience({ wish }: { wish: BirthdayWish 
 
           {step === 3 && (
             <Screen>
-              <h2 className="text-center text-4xl font-black">Enter the passcode</h2>
+              <h2 className="text-center text-4xl font-black">
+                {copyText("passcodeTitle", "Enter the passcode")}
+              </h2>
               <p className="mt-3 text-center text-base font-black">
-                Prove it is really you <KeyRound className="inline h-5 w-5 fill-[#5c3a21]" />
+                {copyText("passcodeSubtitle", "Prove it is really you")}{" "}
+                <KeyRound className="inline h-5 w-5 fill-[#5c3a21]" />
               </p>
 
               <div className="mt-7 flex justify-center gap-3">
@@ -318,25 +324,32 @@ export default function KawaiiBirthdayExperience({ wish }: { wish: BirthdayWish 
                 onClick={checkPasscode}
                 disabled={passcodeAttempt.length !== 4 || isPending}
               >
-                {isPending ? "Checking..." : "Unlock"} <Heart className="h-5 w-5 fill-[#5c3a21]" />
+                {isPending ? copyText("checkingText", "Checking...") : copyText("unlockButton", "Unlock")}{" "}
+                <Heart className="h-5 w-5 fill-[#5c3a21]" />
               </button>
             </Screen>
           )}
 
           {step === 4 && (
             <Screen>
-              <h2 className="text-center text-4xl font-black text-[#e63946]">Oops! Wrong Code!</h2>
+              <h2 className="text-center text-4xl font-black text-[#e63946]">
+                {copyText("wrongPasscodeTitle", "Oops! Wrong Code!")}
+              </h2>
               <img src={`${ASSET}/confused-cat.png`} alt="" className="sticker mt-6 h-56 w-56 object-contain" />
               <button type="button" className="kawaii-btn blue mt-7" onClick={() => setStep(3)}>
-                Try Again <RefreshCcw className="h-5 w-5" />
+                {copyText("tryAgainButton", "Try Again")} <RefreshCcw className="h-5 w-5" />
               </button>
             </Screen>
           )}
 
           {step === 3.5 && (
             <Screen>
-              <h2 className="text-center text-4xl font-black">Unwrap your gift!</h2>
-              <p className="mt-3 text-center text-base font-black">Keep tapping to open it.</p>
+              <h2 className="text-center text-4xl font-black">
+                {copyText("giftTitle", "Unwrap your gift!")}
+              </h2>
+              <p className="mt-3 text-center text-base font-black">
+                {copyText("giftSubtitle", "Keep tapping to open it.")}
+              </p>
               <button type="button" className="mt-8" onClick={handleGiftClick} aria-label="Tap gift">
                 <img src={`${ASSET}/closed-gift.png`} alt="" className="gift-shake sticker h-64 w-64 object-contain" />
               </button>
@@ -350,7 +363,8 @@ export default function KawaiiBirthdayExperience({ wish }: { wish: BirthdayWish 
             <Screen>
               <img src={`${ASSET}/happy-cat.png`} alt="" className="magic-spin sticker h-48 w-48 object-contain" />
               <h2 className="mt-5 text-center text-3xl font-black text-[#9b7cf3]">
-                Casting birthday magic... <Sparkles className="inline h-7 w-7 fill-[#9b7cf3]" />
+                {copyText("magicTitle", "Casting birthday magic...")}{" "}
+                <Sparkles className="inline h-7 w-7 fill-[#9b7cf3]" />
               </h2>
             </Screen>
           )}
@@ -373,7 +387,7 @@ export default function KawaiiBirthdayExperience({ wish }: { wish: BirthdayWish 
                 </div>
 
                 <h2 className="relative z-10 mt-6 text-center text-5xl font-black text-[#d35c82] drop-shadow-[2px_2px_0_#fff]">
-                  Happy Birthday, <br /> {wish.recipientName}!
+                  {copyText("revealTitle", "Happy Birthday,")} <br /> {wish.recipientName}!
                 </h2>
 
                 <div className="pointer-events-none absolute bottom-0 flex w-full justify-between px-4">
@@ -382,7 +396,7 @@ export default function KawaiiBirthdayExperience({ wish }: { wish: BirthdayWish 
                 </div>
 
                 <button type="button" className="kawaii-btn blue relative z-20 mt-7" onClick={() => setStep(5.5)}>
-                  Continue <ArrowRight className="h-5 w-5" />
+                  {copyText("continueButton", "Continue")} <ArrowRight className="h-5 w-5" />
                 </button>
               </div>
             </Screen>
@@ -391,15 +405,15 @@ export default function KawaiiBirthdayExperience({ wish }: { wish: BirthdayWish 
           {step === 5.5 && (
             <Screen>
               <h2 className="text-center text-4xl font-black">
-                Are you ready to cry from happiness?
+                {copyText("preLetterTitle", "Are you ready to cry from happiness?")}
               </h2>
               <img src={`${ASSET}/starry-eyed-cat.png`} alt="" className="sticker mt-7 h-56 w-56 object-contain" />
               <div className="mt-7 flex flex-col gap-4 sm:flex-row">
                 <button type="button" className="kawaii-btn pink" onClick={() => setStep(6)}>
-                  Yes, absolutely!
+                  {copyText("preLetterYes", "Yes, absolutely!")}
                 </button>
                 <button type="button" className="kawaii-btn mint" onClick={() => setStep(6)}>
-                  I already am!
+                  {copyText("preLetterAlt", "I already am!")}
                 </button>
               </div>
             </Screen>
@@ -411,7 +425,8 @@ export default function KawaiiBirthdayExperience({ wish }: { wish: BirthdayWish 
                 <div className="relative rounded-[32px] border-[8px] border-white bg-[#ffb7c5] p-5 shadow-[0_20px_40px_rgba(92,58,33,0.15)]">
                   <div className="relative flex min-h-[350px] flex-col items-center justify-center rounded-[20px] border-4 border-dashed border-[#ffb7c5] bg-[#fff9f0] px-5 py-12 sm:px-12">
                     <h3 className="mb-6 text-center text-4xl font-black text-[#d35c82]">
-                      <Heart className="inline h-8 w-8 fill-[#d35c82]" /> My wish for you{" "}
+                      <Heart className="inline h-8 w-8 fill-[#d35c82]" />{" "}
+                      {copyText("letterTitle", "My wish for you")}{" "}
                       <Heart className="inline h-8 w-8 fill-[#d35c82]" />
                     </h3>
                     <p className="max-w-2xl whitespace-pre-wrap text-center text-xl font-bold leading-9 text-[#5c3a21]">
@@ -427,7 +442,7 @@ export default function KawaiiBirthdayExperience({ wish }: { wish: BirthdayWish 
                     className="kawaii-btn yellow px-12 text-xl"
                     onClick={() => setStep(memories.length > 0 ? 7 : 8)}
                   >
-                    See Memories <ArrowRight className="h-5 w-5" />
+                    {copyText("memoriesButton", "See Memories")} <ArrowRight className="h-5 w-5" />
                   </button>
                 </div>
               </div>
@@ -480,14 +495,16 @@ export default function KawaiiBirthdayExperience({ wish }: { wish: BirthdayWish 
               <div className="relative z-10 mt-[5vh] flex min-h-[15vh] w-full items-center justify-center text-center">
                 {blown ? (
                   <h2 className="text-[clamp(2rem,8vw,3rem)] font-black text-white drop-shadow-[0_0_18px_#ff8da1]">
-                    Happy Birthday to youuuuuuuuuu{" "}
+                    {copyText("finaleTitle", "Happy Birthday to youuuuuuuuuu")}{" "}
                     <Heart className="inline h-10 w-10 fill-white text-white" />
                   </h2>
                 ) : (
                   <h3 className="birthday-pulse text-center text-2xl font-black text-white">
-                    Blow out the candle
+                    {copyText("cakePromptTitle", "Blow out the candle")}
                     <br />
-                    <span className="text-sm opacity-70">(Click the cake)</span>
+                    <span className="text-sm opacity-70">
+                      ({copyText("cakePromptSubtitle", "Click the cake")})
+                    </span>
                   </h3>
                 )}
               </div>
@@ -547,7 +564,7 @@ export default function KawaiiBirthdayExperience({ wish }: { wish: BirthdayWish 
                       )}
                     </div>
                     <button type="button" className="kawaii-btn blue" onClick={() => setStep(9)}>
-                      Next <ArrowRight className="h-5 w-5" />
+                      {copyText("nextButton", "Next")} <ArrowRight className="h-5 w-5" />
                     </button>
                   </>
                 ) : null}
@@ -574,7 +591,7 @@ export default function KawaiiBirthdayExperience({ wish }: { wish: BirthdayWish 
                   setStep(1);
                 }}
               >
-                Play Again <RefreshCcw className="h-5 w-5" />
+                {copyText("playAgainButton", "Play Again")} <RefreshCcw className="h-5 w-5" />
               </button>
             </Screen>
           )}
@@ -974,6 +991,11 @@ function getCakeFilter(theme: string) {
     default:
       return "none";
   }
+}
+
+function getCopyText(wish: BirthdayWish, key: string, fallback: string) {
+  const value = wish.copy?.[key];
+  return typeof value === "string" && value.trim() ? value : fallback;
 }
 
 function Screen({ children, wide = false }: { children: React.ReactNode; wide?: boolean }) {
