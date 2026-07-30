@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
+import { RotateCw, Smartphone } from "lucide-react";
 import * as THREE from "three";
 
 type Memory = {
@@ -151,6 +152,8 @@ export default function Gallery3D({
 }) {
   const [selectedMemory, setSelectedMemory] = useState<Memory | null>(null);
   const [mounted, setMounted] = useState(false);
+  const [portraitPhone, setPortraitPhone] = useState(false);
+  const [orientationHintDismissed, setOrientationHintDismissed] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -159,6 +162,14 @@ export default function Gallery3D({
       document.body.style.overflow = "";
       document.body.style.cursor = "auto";
     };
+  }, []);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px) and (orientation: portrait)");
+    const updateOrientation = () => setPortraitPhone(media.matches);
+    updateOrientation();
+    media.addEventListener("change", updateOrientation);
+    return () => media.removeEventListener("change", updateOrientation);
   }, []);
 
   if (!memories || memories.length === 0) return null;
@@ -170,10 +181,33 @@ export default function Gallery3D({
         <PhotoWall memories={memories} onImageClick={setSelectedMemory} />
       </Canvas>
 
+      {portraitPhone && !orientationHintDismissed ? (
+        <div className="absolute inset-0 z-[300] flex items-center justify-center bg-[#ffdae0]/95 px-6 text-center backdrop-blur-sm">
+          <div className="flex max-w-sm flex-col items-center">
+            <div className="relative h-28 w-28">
+              <Smartphone className="absolute left-1/2 top-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 rotate-90 text-[#9b7cf3]" />
+              <RotateCw className="absolute right-0 top-0 h-9 w-9 text-[#d35c82]" />
+            </div>
+            <h2 className="mt-4 text-3xl font-black text-[#5c3a21]">Turn your phone sideways</h2>
+            <p className="mt-3 text-base font-bold leading-6 text-[#5c3a21]/75">
+              The 3D memory wall is easier to explore in landscape mode.
+            </p>
+            <button
+              type="button"
+              onClick={() => setOrientationHintDismissed(true)}
+              className="mt-7 rounded-full bg-[#a2d2ff] px-7 py-3 font-black text-[#5c3a21] shadow-[0_6px_0_rgba(92,58,33,0.1)]"
+            >
+              Continue anyway
+            </button>
+          </div>
+        </div>
+      ) : null}
+
       <div className="pointer-events-none absolute left-1/2 top-8 z-10 w-full -translate-x-1/2 px-4 text-center text-[clamp(2rem,8vw,2.5rem)] font-black text-[#c8b6ff] drop-shadow-[2px_2px_0_#fff]">
         Your 3D Memory Wall
         <div className="mt-2 text-sm font-black uppercase tracking-[0.18em] text-[#5c3a21]">
-          Move mouse to explore
+          <span className="hidden sm:inline">Move mouse to explore</span>
+          <span className="sm:hidden">Drag to explore</span>
         </div>
       </div>
 

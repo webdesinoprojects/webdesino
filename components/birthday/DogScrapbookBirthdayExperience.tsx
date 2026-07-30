@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { createPortal } from "react-dom";
 import { ArrowRight, Camera, Mic, RotateCcw, Search, Volume2, VolumeX, X } from "lucide-react";
 import { verifyBirthdayPasscode, type BirthdayWish } from "@/lib/birthday-actions";
 
@@ -362,12 +363,24 @@ function NextButton({ onClick, label }: { onClick: () => void; label: string }) 
 }
 
 function PhotoLightbox({ photo, onClose }: { photo: BirthdayWish["memories"][number]; onClose: () => void }) {
-  return (
-    <div className="photo-lightbox" role="dialog" aria-modal="true" aria-label="Memory photo">
-      <button type="button" onClick={onClose} aria-label="Close photo"><X /></button>
-      <img src={photo.url} alt={photo.message || "Birthday memory"} />
+  useEffect(() => {
+    function closeOnEscape(event: KeyboardEvent) {
+      if (event.key === "Escape") onClose();
+    }
+
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [onClose]);
+
+  if (typeof document === "undefined") return null;
+
+  return createPortal(
+    <div className="photo-lightbox" role="dialog" aria-modal="true" aria-label="Memory photo" onClick={onClose}>
+      <button type="button" onClick={onClose} aria-label="Close photo" title="Close photo"><X /></button>
+      <img src={photo.url} alt={photo.message || "Birthday memory"} onClick={(event) => event.stopPropagation()} />
       {photo.message ? <p>{photo.message}</p> : null}
-    </div>
+    </div>,
+    document.body,
   );
 }
 
@@ -526,8 +539,8 @@ function DogStyles() {
     .next-button svg { width: 1.2rem; }
     .dog-audio { position: fixed; top: 1rem; right: 1rem; z-index: 40; display: grid; width: 3rem; height: 3rem; place-items: center; border: 2px solid #fff; border-radius: 50%; background: #08767c; color: #fff; box-shadow: 0 7px 20px rgba(0,0,0,.16); }
     .dog-audio svg { width: 1.25rem; }
-    .photo-lightbox { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 2rem; background: rgba(15, 30, 29, .9); }
-    .photo-lightbox > button { position: absolute; top: 1.2rem; right: 1.2rem; display: grid; width: 3rem; height: 3rem; place-items: center; border: 0; border-radius: 50%; background: #fff; color: #8f2731; }
+    .photo-lightbox { position: fixed; inset: 0; z-index: 10000; display: grid; place-items: center; padding: 2rem; background: rgba(15, 30, 29, .9); cursor: zoom-out; }
+    .photo-lightbox > button { position: absolute; top: 1.2rem; right: 1.2rem; z-index: 10001; display: grid; width: 3rem; height: 3rem; place-items: center; border: 0; border-radius: 50%; background: #fff; color: #8f2731; box-shadow: 0 8px 24px rgba(0,0,0,.28); cursor: pointer; }
     .photo-lightbox img { max-width: min(90vw, 80rem); max-height: 82dvh; object-fit: contain; border: 10px solid #fff; box-shadow: 0 25px 70px rgba(0,0,0,.4); }
     .photo-lightbox p { position: absolute; bottom: 1rem; max-width: 80vw; margin: 0; color: #fff; font-weight: 800; text-align: center; }
     .dog-confetti { position: fixed; inset: 0; z-index: 80; overflow: hidden; pointer-events: none; }

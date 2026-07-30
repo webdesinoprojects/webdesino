@@ -15,6 +15,7 @@
     "seed:locations": "npm run bulk-insert-locations -- --execute && npm run backfill-location-states -- --execute",
     "seed:locations:dry": "npm run bulk-insert-locations",
     "seed:all-locations": "ts-node --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} scripts/seed-locations.ts",
+    "seed:birthday-demos": "ts-node --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} scripts/seed-birthday-demos.ts",
     "count:pages": "ts-node --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} scripts/count-pages.ts",
     "check:db": "ts-node --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} scripts/check-db.ts",
     "audit:supabase-bandwidth": "ts-node --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} scripts/audit-supabase-bandwidth-sources.ts",

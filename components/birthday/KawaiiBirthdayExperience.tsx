@@ -371,31 +371,31 @@ export default function KawaiiBirthdayExperience({ wish }: { wish: BirthdayWish 
 
           {step === 5 && (
             <Screen wide>
-              <div className="relative flex min-h-[620px] w-full flex-col items-center justify-center overflow-hidden rounded-[32px] px-4 py-8">
-                <img src={`${ASSET}/balloons.png`} alt="" className="sticker absolute -left-8 top-0 h-36 w-36 object-contain sm:h-44 sm:w-44" />
-                <img src={`${ASSET}/balloons.png`} alt="" className="sticker absolute -right-8 top-0 h-36 w-36 scale-x-[-1] object-contain sm:h-44 sm:w-44" />
-                <img src={`${ASSET}/ribbons-tapes.png`} alt="" className="sticker absolute top-2 h-24 w-72 object-contain" />
+              <div className="relative flex min-h-[calc(100svh-2rem)] w-full flex-col items-center justify-center overflow-hidden rounded-[32px] px-3 py-4 sm:min-h-[620px] sm:px-4 sm:py-8">
+                <img src={`${ASSET}/balloons.png`} alt="" className="sticker absolute -left-5 top-1 h-24 w-24 object-contain sm:-left-8 sm:top-0 sm:h-44 sm:w-44" />
+                <img src={`${ASSET}/balloons.png`} alt="" className="sticker absolute -right-5 top-1 h-24 w-24 scale-x-[-1] object-contain sm:-right-8 sm:top-0 sm:h-44 sm:w-44" />
+                <img src={`${ASSET}/ribbons-tapes.png`} alt="" className="sticker absolute top-1 h-16 w-44 object-contain sm:top-2 sm:h-24 sm:w-72" />
 
-                <div className="sticker relative z-10 mt-14 rotate-[-3deg] rounded-lg bg-white p-4 pb-11 shadow-[0_10px_20px_rgba(92,58,33,0.15)]">
+                <div className="sticker relative z-10 mt-8 rotate-[-3deg] rounded-lg bg-white p-2 pb-7 shadow-[0_10px_20px_rgba(92,58,33,0.15)] sm:mt-14 sm:p-4 sm:pb-11">
                   {revealPhoto ? (
-                    <img src={revealPhoto} alt="" className="h-[250px] w-[250px] rounded object-cover" />
+                    <img src={revealPhoto} alt="" className="h-[min(52vw,220px)] w-[min(52vw,220px)] rounded object-cover sm:h-[250px] sm:w-[250px]" />
                   ) : (
-                    <div className="flex h-[250px] w-[250px] items-center justify-center rounded bg-[#fff3b0]">
+                    <div className="flex h-[min(52vw,220px)] w-[min(52vw,220px)] items-center justify-center rounded bg-[#fff3b0] sm:h-[250px] sm:w-[250px]">
                       <img src={`${ASSET}/happy-cat.png`} alt="" className="h-32 w-32 object-contain" />
                     </div>
                   )}
                 </div>
 
-                <h2 className="relative z-10 mt-6 text-center text-5xl font-black text-[#d35c82] drop-shadow-[2px_2px_0_#fff]">
+                <h2 className="relative z-10 mt-4 text-center text-4xl font-black leading-tight text-[#d35c82] drop-shadow-[2px_2px_0_#fff] sm:mt-6 sm:text-5xl">
                   {copyText("revealTitle", "Happy Birthday,")} <br /> {wish.recipientName}!
                 </h2>
 
-                <div className="pointer-events-none absolute bottom-0 flex w-full justify-between px-4">
-                  <img src={`${ASSET}/open-gift.png`} alt="" className="sticker h-28 w-28 object-contain sm:h-36 sm:w-36" />
-                  <img src={`${ASSET}/birthday-cake.png`} alt="" className="sticker h-28 w-28 object-contain sm:h-36 sm:w-36" />
+                <div className="pointer-events-none absolute bottom-0 flex w-full justify-between px-2 sm:px-4">
+                  <img src={`${ASSET}/open-gift.png`} alt="" className="sticker h-20 w-20 object-contain sm:h-36 sm:w-36" />
+                  <img src={`${ASSET}/birthday-cake.png`} alt="" className="sticker h-20 w-20 object-contain sm:h-36 sm:w-36" />
                 </div>
 
-                <button type="button" className="kawaii-btn blue relative z-20 mt-7" onClick={() => setStep(5.5)}>
+                <button type="button" className="kawaii-btn blue relative z-20 mt-5 max-w-[280px] sm:mt-7" onClick={() => setStep(5.5)}>
                   {copyText("continueButton", "Continue")} <ArrowRight className="h-5 w-5" />
                 </button>
               </div>

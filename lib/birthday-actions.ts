@@ -5,6 +5,7 @@ import { createClient } from "@supabase/supabase-js";
 import { z } from "zod";
 import { connectToMongo } from "@/lib/mongo/connection";
 import { BirthdayWishModel } from "@/lib/mongo/models/birthday-wish.model";
+import { getDefaultBirthdayTrack } from "@/lib/birthday-music";
 
 const MAX_MEMORIES = 15;
 const MAX_IMAGE_BYTES = 3 * 1024 * 1024;
@@ -87,7 +88,7 @@ type BirthdayPhoto = {
   name: string | null;
   size: number | null;
   mimeType: string | null;
-  storageProvider?: "imagekit" | "supabase";
+  storageProvider?: "imagekit" | "supabase" | "local";
   fileId?: string | null;
   filePath?: string | null;
   message?: string;
@@ -98,7 +99,7 @@ type BirthdayMedia = {
   name: string | null;
   size: number | null;
   mimeType: string | null;
-  storageProvider?: "imagekit" | "supabase";
+  storageProvider?: "imagekit" | "supabase" | "local";
   fileId?: string | null;
   filePath?: string | null;
 };
@@ -366,6 +367,11 @@ export async function createBirthdayWish(formData: FormData) {
     .map((message) => sanitizeText(message, 180));
 
   const musicFile = formData.get("music");
+  const defaultMusicId = sanitizeText(formData.get("defaultMusic"), 60);
+  const defaultMusic = defaultMusicId ? getDefaultBirthdayTrack(defaultMusicId) : null;
+  if (defaultMusicId && !defaultMusic) {
+    return { success: false, error: "Please choose a valid included birthday song" };
+  }
   const voiceFile = formData.get("voiceRecording");
 
   let slug = "";
@@ -460,6 +466,16 @@ export async function createBirthdayWish(formData: FormData) {
         console.error("Birthday music upload failed:", message || error);
         return { success: false, error: "Music upload failed. Please try again later." };
       }
+    } else if (defaultMusic) {
+      music = {
+        url: defaultMusic.url,
+        name: `${defaultMusic.label} - ${defaultMusic.artist}`,
+        size: null,
+        mimeType: "audio/mpeg",
+        storageProvider: "local",
+        fileId: null,
+        filePath: defaultMusic.url,
+      };
     }
 
     let voiceRecording: BirthdayMedia | null = null;

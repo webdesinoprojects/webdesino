@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { createPortal } from "react-dom";
 import {
   Award,
   Cake,
@@ -13,12 +14,15 @@ import {
   Loader2,
   Mic,
   Music,
+  Pause,
+  Play,
   Sparkles,
   Upload,
   Wand2,
   X,
 } from "lucide-react";
 import { createBirthdayWish, type BirthdayTemplateId } from "@/lib/birthday-actions";
+import { DEFAULT_BIRTHDAY_TRACKS, getDefaultBirthdayTrack } from "@/lib/birthday-music";
 
 const MAX_MEMORIES = 15;
 const MAX_IMAGE_MB = 3;
@@ -35,6 +39,25 @@ const AUDIO_TYPES = [
   "audio/x-wav",
 ];
 const ASSET = "/birthday/assets";
+
+const TEMPLATE_PREVIEWS: Record<BirthdayTemplateId, { title: string; url: string }> = {
+  "kawaii-unlock": {
+    title: "Kawaii Birthday Unlock",
+    url: "https://ik.imagekit.io/8ej6glgpj/WhatsApp%20Video%202026-07-30%20at%2016.56.46.mp4",
+  },
+  "romantic-puzzle": {
+    title: "Romantic Puzzle Birthday",
+    url: "https://ik.imagekit.io/8ej6glgpj/WhatsApp%20Video%202026-07-30%20at%2016.56.45.mp4",
+  },
+  "heart-year": {
+    title: "Heart Year Birthday",
+    url: "https://ik.imagekit.io/8ej6glgpj/WhatsApp%20Video%202026-07-30%20at%2016.56.42%20(1).mp4",
+  },
+  "dog-scrapbook": {
+    title: "Dog Scrapbook Birthday",
+    url: "https://ik.imagekit.io/8ej6glgpj/WhatsApp%20Video%202026-07-30%20at%2016.56.42.mp4",
+  },
+};
 
 const KAWAII_COPY_DEFAULTS = {
   entryTitle: "A Special Surprise!",
@@ -183,6 +206,7 @@ function getTemplateLabel(templateId: BirthdayTemplateId) {
 
 export default function BirthdayBuilder() {
   const [templateId, setTemplateId] = useState<BirthdayTemplateId>("kawaii-unlock");
+  const [previewTemplateId, setPreviewTemplateId] = useState<BirthdayTemplateId | null>(null);
   const [recipientName, setRecipientName] = useState("");
   const [senderName, setSenderName] = useState("");
   const [passcode, setPasscode] = useState("");
@@ -190,6 +214,9 @@ export default function BirthdayBuilder() {
   const [revealPhoto, setRevealPhoto] = useState<File | null>(null);
   const [memories, setMemories] = useState<MemoryFile[]>([]);
   const [music, setMusic] = useState<File | null>(null);
+  const [musicMode, setMusicMode] = useState<"included" | "upload">("included");
+  const [defaultMusicId, setDefaultMusicId] = useState("");
+  const [isMusicPreviewPlaying, setIsMusicPreviewPlaying] = useState(false);
   const [voiceRecording, setVoiceRecording] = useState<File | null>(null);
   const [cakeTheme, setCakeTheme] = useState("strawberry");
   const [finalMessage, setFinalMessage] = useState("Thank you for celebrating with me!");
@@ -202,8 +229,12 @@ export default function BirthdayBuilder() {
   const [isPending, startTransition] = useTransition();
   const formRef = useRef<HTMLFormElement>(null);
   const memoryInputRef = useRef<HTMLInputElement>(null);
+  const musicPreviewRef = useRef<HTMLAudioElement>(null);
 
   const revealPreview = useObjectUrl(revealPhoto);
+  const uploadedMusicPreview = useObjectUrl(music);
+  const includedMusic = getDefaultBirthdayTrack(defaultMusicId);
+  const musicPreviewUrl = musicMode === "upload" ? uploadedMusicPreview : includedMusic?.url || "";
   const memoryPreviews = useMemo(
     () =>
       memories.map((memory) => ({
@@ -218,6 +249,14 @@ export default function BirthdayBuilder() {
       memoryPreviews.forEach((preview) => URL.revokeObjectURL(preview.url));
     };
   }, [memoryPreviews]);
+
+  useEffect(() => {
+    const audio = musicPreviewRef.current;
+    if (!audio) return;
+    audio.pause();
+    audio.currentTime = 0;
+    setIsMusicPreviewPlaying(false);
+  }, [musicPreviewUrl]);
 
   function validateImage(file: File) {
     if (!IMAGE_TYPES.includes(file.type)) return "Only JPG, PNG, and WebP images are allowed.";
@@ -283,7 +322,26 @@ export default function BirthdayBuilder() {
       return;
     }
     setError(null);
+    setMusicMode("upload");
+    setDefaultMusicId("");
     setMusic(file);
+  }
+
+  async function toggleMusicPreview() {
+    const audio = musicPreviewRef.current;
+    if (!audio || !musicPreviewUrl) return;
+
+    if (audio.paused) {
+      try {
+        await audio.play();
+        setIsMusicPreviewPlaying(true);
+      } catch {
+        setError("The song preview could not be played in this browser.");
+      }
+    } else {
+      audio.pause();
+      setIsMusicPreviewPlaying(false);
+    }
   }
 
   function handleVoiceFile(file: File | undefined) {
@@ -344,6 +402,9 @@ export default function BirthdayBuilder() {
     setRevealPhoto(null);
     setMemories([]);
     setMusic(null);
+    setMusicMode("included");
+    setDefaultMusicId("");
+    setIsMusicPreviewPlaying(false);
     setVoiceRecording(null);
     setCakeTheme("strawberry");
     setLoveItems(ROMANTIC_LOVE_ITEMS);
@@ -403,7 +464,11 @@ export default function BirthdayBuilder() {
         formData.append("memoryMessages", memory.message);
       }
     });
-    if (music) formData.append("music", music);
+    if (musicMode === "upload" && music) {
+      formData.append("music", music);
+    } else if (musicMode === "included" && defaultMusicId) {
+      formData.append("defaultMusic", defaultMusicId);
+    }
     if (templateId === "kawaii-unlock" && voiceRecording) {
       formData.append("voiceRecording", voiceRecording);
     }
@@ -434,20 +499,18 @@ export default function BirthdayBuilder() {
   }
 
   return (
-    <main className="birthday-kawaii min-h-screen overflow-x-hidden bg-[#ffdae0] text-[#5c3a21]">
+    <main className="birthday-kawaii min-h-screen overflow-x-clip bg-[#ffdae0] text-[#5c3a21] lg:h-screen lg:overflow-hidden">
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_10%_20%,rgba(255,183,197,0.8)_0%,transparent_40%),radial-gradient(circle_at_90%_80%,rgba(162,210,255,0.6)_0%,transparent_40%),radial-gradient(circle_at_50%_50%,rgba(255,243,176,0.5)_0%,transparent_60%)]" />
 
-      <section className="relative mx-auto grid min-h-screen w-full max-w-[1420px] gap-8 px-4 py-6 sm:px-6 sm:py-8 lg:grid-cols-[0.85fr_1.25fr] lg:px-8">
-        <aside className="flex flex-col justify-start pt-2 lg:sticky lg:top-0 lg:h-screen lg:pt-4">
+      <section className="relative mx-auto grid min-h-screen w-full max-w-[1420px] gap-8 px-4 py-6 sm:px-6 sm:py-8 lg:h-screen lg:min-h-0 lg:grid-cols-[0.85fr_1.25fr] lg:overflow-hidden lg:px-8">
+        <aside className="birthday-scroll-panel flex flex-col justify-start pt-2 lg:h-full lg:overflow-y-auto lg:pt-4 lg:pr-2">
           <div className="inline-flex w-fit items-center gap-2 rounded-full border-2 border-[#ffb7c5]/60 bg-white/60 px-4 py-2 text-sm font-black text-[#d35c82] shadow-sm">
             <Sparkles className="h-4 w-4 fill-[#d35c82]" />
             Build a birthday surprise
           </div>
 
-          <h1 className="mt-5 text-[clamp(3rem,9vw,4.6rem)] font-black leading-none text-[#5c3a21]">
-            Pick a cute <br />
-            template and <br />
-            make it yours
+          <h1 className="mt-5 max-w-[560px] text-[clamp(2.6rem,5vw,3.6rem)] font-black leading-[1.05] text-[#5c3a21]">
+            Pick a cute template and make it yours
           </h1>
 
           <p className="mt-5 max-w-[470px] text-lg font-semibold leading-7 text-[#5c3a21]/90">
@@ -462,6 +525,7 @@ export default function BirthdayBuilder() {
               description="Cats, passcode, gift reveal, 3D memories, cake finale."
               icon={<Gift className="h-5 w-5" />}
               onClick={() => setTemplate("kawaii-unlock")}
+              onPreview={() => setPreviewTemplateId("kawaii-unlock")}
             />
             <TemplateCard
               active={templateId === "romantic-puzzle"}
@@ -469,6 +533,7 @@ export default function BirthdayBuilder() {
               description="Drag gift, love jar, letter puzzle, award, and gallery."
               icon={<Award className="h-5 w-5" />}
               onClick={() => setTemplate("romantic-puzzle")}
+              onPreview={() => setPreviewTemplateId("romantic-puzzle")}
             />
             <TemplateCard
               active={templateId === "heart-year"}
@@ -476,6 +541,7 @@ export default function BirthdayBuilder() {
               description="Milk-and-Mocha style screens with a 3-photo final heart."
               icon={<Heart className="h-5 w-5" />}
               onClick={() => setTemplate("heart-year")}
+              onPreview={() => setPreviewTemplateId("heart-year")}
             />
             <TemplateCard
               active={templateId === "dog-scrapbook"}
@@ -483,11 +549,12 @@ export default function BirthdayBuilder() {
               description="Secret code, gift choice, birthday reveal, memories, facts, and letter."
               icon={<Cake className="h-5 w-5" />}
               onClick={() => setTemplate("dog-scrapbook")}
+              onPreview={() => setPreviewTemplateId("dog-scrapbook")}
             />
           </div>
         </aside>
 
-        <div className="w-full">
+        <div className="birthday-scroll-panel w-full lg:h-full lg:overflow-y-auto lg:pr-2">
           {saved ? (
             <div className="flex min-h-[640px] flex-col items-center justify-center rounded-[32px] bg-white p-6 text-center shadow-[0_20px_50px_rgba(92,58,33,0.08)] sm:p-12">
               <img src={`${ASSET}/open-gift.png`} alt="" className="sticker h-44 w-44 object-contain" />
@@ -639,17 +706,84 @@ export default function BirthdayBuilder() {
                     <label className="mb-2 block text-sm font-black text-[#5c3a21]">
                       Background Music (optional)
                     </label>
-                    <label className="upload-zone border-[#c8b6ff]/60 bg-[#c8b6ff]/10">
-                      <input
-                        type="file"
-                        accept="audio/*"
-                        onChange={(event) => handleMusicFile(event.currentTarget.files?.[0])}
+                    <div className="rounded-[20px] border-2 border-[#c8b6ff]/45 bg-[#c8b6ff]/10 p-3">
+                      <div className="grid grid-cols-2 gap-2 rounded-2xl bg-white/80 p-1.5">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setMusicMode("included");
+                            setMusic(null);
+                          }}
+                          className={`music-mode-button ${musicMode === "included" ? "active" : ""}`}
+                        >
+                          Included songs
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setMusicMode("upload");
+                            setDefaultMusicId("");
+                          }}
+                          className={`music-mode-button ${musicMode === "upload" ? "active" : ""}`}
+                        >
+                          Upload your own
+                        </button>
+                      </div>
+
+                      {musicMode === "included" ? (
+                        <div className="mt-3 flex gap-2">
+                          <select
+                            value={defaultMusicId}
+                            onChange={(event) => setDefaultMusicId(event.currentTarget.value)}
+                            className="kawaii-input min-w-0 flex-1 py-3"
+                            aria-label="Choose an included birthday song"
+                          >
+                            <option value="">No background music</option>
+                            {DEFAULT_BIRTHDAY_TRACKS.map((track) => (
+                              <option key={track.id} value={track.id}>
+                                {track.label} - {track.artist}
+                              </option>
+                            ))}
+                          </select>
+                          <MusicPreviewButton
+                            disabled={!musicPreviewUrl}
+                            playing={isMusicPreviewPlaying}
+                            onClick={toggleMusicPreview}
+                          />
+                        </div>
+                      ) : (
+                        <div className="mt-3 flex items-stretch gap-2">
+                          <label className="upload-zone min-h-[82px] flex-1 border-[#c8b6ff]/60 bg-white/70 p-3">
+                            <input
+                              type="file"
+                              accept="audio/*"
+                              onChange={(event) => handleMusicFile(event.currentTarget.files?.[0])}
+                            />
+                            <Music className="h-5 w-5 text-[#9b7cf3]" />
+                            <span className="break-all text-xs font-bold">
+                              {music ? music.name : "Choose an audio file"}
+                            </span>
+                          </label>
+                          <MusicPreviewButton
+                            disabled={!musicPreviewUrl}
+                            playing={isMusicPreviewPlaying}
+                            onClick={toggleMusicPreview}
+                          />
+                        </div>
+                      )}
+
+                      <audio
+                        ref={musicPreviewRef}
+                        src={musicPreviewUrl || undefined}
+                        preload="metadata"
+                        onEnded={() => setIsMusicPreviewPlaying(false)}
+                        onPause={() => setIsMusicPreviewPlaying(false)}
+                        className="hidden"
                       />
-                      <Music className="h-6 w-6 text-[#9b7cf3]" />
-                      <span className="text-sm font-bold">
-                        {music ? `Music uploaded: ${music.name}` : "Click to add music"}
-                      </span>
-                    </label>
+                      <p className="mt-2 text-xs font-bold text-[#5c3a21]/65">
+                        Preview the song before creating the birthday page.
+                      </p>
+                    </div>
                   </div>
 
                   {templateId === "kawaii-unlock" ? (
@@ -754,6 +888,13 @@ export default function BirthdayBuilder() {
         </div>
       </section>
 
+      {previewTemplateId && (
+        <TemplatePreviewModal
+          preview={TEMPLATE_PREVIEWS[previewTemplateId]}
+          onClose={() => setPreviewTemplateId(null)}
+        />
+      )}
+
       <KawaiiStyles />
       <BuilderStyles />
     </main>
@@ -766,23 +907,99 @@ function TemplateCard({
   description,
   icon,
   onClick,
+  onPreview,
 }: {
   active: boolean;
   title: string;
   description: string;
   icon: React.ReactNode;
   onClick: () => void;
+  onPreview: () => void;
 }) {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`template-card ${active ? "active" : ""}`}
+    <div className={`template-card ${active ? "active" : ""}`}>
+      <button type="button" onClick={onClick} className="template-card-select">
+        <span>{icon}</span>
+        <strong>{title}</strong>
+        <small>{description}</small>
+      </button>
+      <button type="button" onClick={onPreview} className="template-preview-button">
+        <Play className="h-4 w-4 fill-current" />
+        See Template
+      </button>
+    </div>
+  );
+}
+
+function TemplatePreviewModal({
+  preview,
+  onClose,
+}: {
+  preview: { title: string; url: string };
+  onClose: () => void;
+}) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose]);
+
+  if (!mounted) return null;
+
+  return createPortal(
+    <div
+      className="birthday-template-preview"
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${preview.title} preview`}
     >
-      <span>{icon}</span>
-      <strong>{title}</strong>
-      <small>{description}</small>
-    </button>
+      <button
+        type="button"
+        className="birthday-template-preview-backdrop"
+        onClick={onClose}
+        aria-label="Close template preview"
+      />
+      <div className="birthday-template-preview-dialog">
+        <div className="birthday-template-preview-header">
+          <div>
+            <span>Template preview</span>
+            <h2>{preview.title}</h2>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="birthday-template-preview-close"
+            aria-label="Close preview"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+        <video
+          key={preview.url}
+          src={preview.url}
+          controls
+          autoPlay
+          playsInline
+          preload="metadata"
+          className="birthday-template-preview-video"
+        >
+          Your browser does not support video playback.
+        </video>
+      </div>
+    </div>,
+    document.body
   );
 }
 
@@ -792,6 +1009,29 @@ function SectionTitle({ title, className = "" }: { title: string; className?: st
       <Heart className="h-5 w-5 fill-[#d35c82] text-[#d35c82]" />
       {title}
     </div>
+  );
+}
+
+function MusicPreviewButton({
+  disabled,
+  playing,
+  onClick,
+}: {
+  disabled: boolean;
+  playing: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      className="flex w-[54px] shrink-0 items-center justify-center rounded-2xl bg-[#9b7cf3] text-white shadow-sm transition hover:bg-[#8667df] disabled:cursor-not-allowed disabled:opacity-35"
+      aria-label={playing ? "Pause song preview" : "Play song preview"}
+      title={playing ? "Pause preview" : "Play preview"}
+    >
+      {playing ? <Pause className="h-5 w-5 fill-current" /> : <Play className="h-5 w-5 fill-current" />}
+    </button>
   );
 }
 
@@ -1338,19 +1578,25 @@ export function KawaiiStyles() {
 function BuilderStyles() {
   return (
     <style jsx global>{`
+      .birthday-kawaii .birthday-scroll-panel {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
+      .birthday-kawaii .birthday-scroll-panel::-webkit-scrollbar {
+        display: none;
+        width: 0;
+        height: 0;
+      }
+
       .birthday-kawaii .template-card {
-        display: grid;
-        grid-template-columns: 46px 1fr;
-        gap: 4px 14px;
-        align-items: center;
         border: 2px solid rgba(255, 255, 255, 0.72);
         border-radius: 22px;
         background: rgba(255, 255, 255, 0.6);
-        padding: 16px;
-        text-align: left;
         color: #5c3a21;
         box-shadow: 0 10px 24px rgba(92, 58, 33, 0.06);
         transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+        overflow: hidden;
       }
 
       .birthday-kawaii .template-card:hover,
@@ -1360,7 +1606,20 @@ function BuilderStyles() {
         background: #fff;
       }
 
-      .birthday-kawaii .template-card span {
+      .birthday-kawaii .template-card-select {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 46px 1fr;
+        gap: 4px 14px;
+        align-items: center;
+        border: 0;
+        background: transparent;
+        padding: 16px 16px 11px;
+        text-align: left;
+        color: inherit;
+      }
+
+      .birthday-kawaii .template-card-select span {
         display: flex;
         grid-row: span 2;
         height: 46px;
@@ -1372,15 +1631,128 @@ function BuilderStyles() {
         color: #9d3b5b;
       }
 
-      .birthday-kawaii .template-card strong {
+      .birthday-kawaii .template-card-select strong {
         font-size: 1rem;
         font-weight: 900;
       }
 
-      .birthday-kawaii .template-card small {
+      .birthday-kawaii .template-card-select small {
         color: rgba(92, 58, 33, 0.72);
         font-weight: 800;
         line-height: 1.4;
+      }
+
+      .birthday-kawaii .template-preview-button {
+        display: flex;
+        width: max-content;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        margin: 0 16px 13px 76px;
+        border: 0;
+        background: transparent;
+        padding: 3px 0;
+        color: #9d3b5b;
+        font-size: 0.82rem;
+        font-weight: 900;
+        transition: color 0.18s ease, transform 0.18s ease;
+      }
+
+      .birthday-kawaii .template-preview-button:hover {
+        color: #d35c82;
+        transform: translateX(2px);
+      }
+
+      .birthday-template-preview {
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+      }
+
+      .birthday-template-preview-backdrop {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        background: rgba(31, 20, 27, 0.82);
+        backdrop-filter: blur(8px);
+      }
+
+      .birthday-template-preview-dialog {
+        position: relative;
+        z-index: 1;
+        width: min(1080px, 94vw);
+        max-height: 92vh;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 18px;
+        background: #171217;
+        box-shadow: 0 28px 90px rgba(0, 0, 0, 0.48);
+      }
+
+      .birthday-template-preview-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 16px;
+        color: #fff;
+      }
+
+      .birthday-template-preview-header span {
+        display: block;
+        color: #ffb7c5;
+        font-size: 0.72rem;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .birthday-template-preview-header h2 {
+        margin: 2px 0 0;
+        font-size: clamp(1rem, 2vw, 1.25rem);
+        font-weight: 900;
+      }
+
+      .birthday-template-preview-close {
+        display: grid;
+        width: 40px;
+        height: 40px;
+        flex: 0 0 40px;
+        place-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+      }
+
+      .birthday-template-preview-video {
+        display: block;
+        width: 100%;
+        max-height: calc(92vh - 72px);
+        aspect-ratio: 16 / 9;
+        background: #000;
+        object-fit: contain;
+      }
+
+      @media (max-width: 640px) {
+        .birthday-template-preview {
+          padding: 10px;
+        }
+
+        .birthday-template-preview-dialog {
+          width: 100%;
+          max-height: 94vh;
+          border-radius: 14px;
+        }
+
+        .birthday-template-preview-video {
+          max-height: calc(94vh - 68px);
+        }
       }
 
       .birthday-kawaii .cake-choice {
@@ -1406,6 +1778,24 @@ function BuilderStyles() {
         display: block;
         font-size: 0.9rem;
         font-weight: 900;
+      }
+
+      .birthday-kawaii .music-mode-button {
+        min-height: 42px;
+        border: 0;
+        border-radius: 12px;
+        background: transparent;
+        padding: 0.55rem 0.75rem;
+        color: rgba(92, 58, 33, 0.72);
+        font-size: 0.82rem;
+        font-weight: 900;
+        transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+      }
+
+      .birthday-kawaii .music-mode-button.active {
+        background: #9b7cf3;
+        color: #fff;
+        box-shadow: 0 5px 12px rgba(112, 83, 191, 0.2);
       }
     `}</style>
   );
